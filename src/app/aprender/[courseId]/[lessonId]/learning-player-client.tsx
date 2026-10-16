@@ -220,132 +220,226 @@ export default function LearningPlayerClient({
           />
         )}
 
-        {/* Sidebar de Módulos e Aulas - Retrátil tanto no mobile quanto no desktop */}
+        {/* Sidebar de Módulos e Aulas - Retrátil no mobile e minimizável no desktop */}
         <aside
           className={`
             fixed lg:static top-14 bottom-0 left-0 z-30
             bg-white dark:bg-slate-900 border-r border-slate-200/80 dark:border-slate-800/80
             flex flex-col transition-all duration-300 ease-in-out shrink-0
             ${sidebarOpen ? "translate-x-0 w-72 sm:w-80" : "-translate-x-full lg:translate-x-0"}
-            ${sidebarCollapsed ? "lg:w-0 lg:border-r-0 lg:overflow-hidden lg:opacity-0" : "lg:w-72 xl:w-80 lg:opacity-100"}
+            ${sidebarCollapsed ? "lg:w-16" : "lg:w-72 xl:w-80"}
           `}
         >
-          {/* Header do Menu com botão de recolher rápido */}
-          <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800/80 flex items-center justify-between min-w-[18rem]">
-            <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
-              {t.learning.tableOfContents}
-            </span>
-            <div className="flex items-center gap-2">
-              <span className="text-2xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold">
-                {metrics.progressPercent}%
-              </span>
+          {sidebarCollapsed ? (
+            /* Modo Minimizado (Apenas Desktop) - Mostra números das aulas e botão para reabrir */
+            <div className="hidden lg:flex flex-col h-full w-16 items-center py-3 select-none">
+              {/* Botão de abrir/expandir sidebar */}
               <button
-                onClick={() => setSidebarCollapsed(true)}
-                className="hidden lg:flex p-1 rounded-md text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                title={t.learning.closeSidebar}
+                type="button"
+                onClick={() => setSidebarCollapsed(false)}
+                className="w-10 h-10 rounded-xl flex items-center justify-center text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 hover:bg-blue-100 dark:hover:bg-blue-900/40 border border-blue-200 dark:border-blue-900 transition-colors shadow-2xs group mb-3 shrink-0"
+                title={t.learning.expandSidebar}
+                aria-label={t.learning.expandSidebar}
               >
-                <PanelLeftClose className="w-3.5 h-3.5" />
+                <PanelLeft className="w-5 h-5 group-hover:scale-110 transition-transform" />
               </button>
-            </div>
-          </div>
 
-          {/* Lista com Scroll */}
-          <div className="flex-1 overflow-y-auto p-3 space-y-4 min-w-[18rem]">
-            {allModules.map((moduleItem, modIdx) => {
-              const modTitle = moduleItem.title[langKey] || moduleItem.title["pt-BR"];
-              return (
-                <div key={moduleItem.id} className="space-y-1">
-                  <div className="text-2xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 px-2 pt-1 pb-0.5">
-                    {modIdx + 1}. {modTitle.replace(/^Módulo \d+\s*—\s*/i, "")}
-                  </div>
+              {/* Divisor */}
+              <div className="w-8 h-px bg-slate-200 dark:bg-slate-800 mb-2 shrink-0" />
 
-                  <div className="space-y-0.5">
-                    {moduleItem.lessons.map((les) => {
+              {/* Lista dos números das aulas com status */}
+              <div className="flex-1 overflow-y-auto w-full px-2 space-y-2 py-1 scrollbar-none flex flex-col items-center">
+                {allModules.map((moduleItem, modIdx) => (
+                  <div key={moduleItem.id} className="w-full flex flex-col items-center gap-1.5">
+                    {/* Indicador sutil de módulo quando há múltiplos módulos */}
+                    {allModules.length > 1 && (
+                      <span className="text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase">
+                        M{modIdx + 1}
+                      </span>
+                    )}
+
+                    {moduleItem.lessons.map((les, lesIdx) => {
                       const isCurrent = les.id === lessonId;
                       const isDone = progressRecord.completedLessonIds.includes(les.id);
                       const lesTitle = les.title[langKey] || les.title["pt-BR"];
+                      const lessonNumber = `${modIdx + 1}.${lesIdx + 1}`;
 
                       return (
                         <button
                           key={les.id}
+                          type="button"
                           onClick={() => {
                             setSidebarOpen(false);
                             router.push(`/aprender/${courseId}/${les.id}`);
                           }}
-                          className={`w-full text-left px-2.5 py-2 rounded-lg text-xs font-medium transition-colors flex items-center gap-2.5 ${
+                          className={`w-9 h-9 rounded-xl flex items-center justify-center text-xs font-bold transition-all relative group ${
                             isCurrent
-                              ? "bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-semibold border-l-2 border-blue-600 dark:border-blue-400 pl-2"
-                              : "hover:bg-slate-50 dark:hover:bg-slate-800/50 text-slate-600 dark:text-slate-300"
+                              ? "bg-blue-600 text-white shadow-sm ring-2 ring-blue-400 dark:ring-blue-500"
+                              : isDone
+                              ? "bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/80 hover:bg-emerald-100 dark:hover:bg-emerald-900/60"
+                              : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white"
                           }`}
+                          title={`${lessonNumber} — ${lesTitle}`}
                         >
-                          <div className="shrink-0">
-                            {isDone ? (
-                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                            ) : isCurrent ? (
-                              <div className="w-3.5 h-3.5 rounded-full border-2 border-blue-600 flex items-center justify-center">
-                                <div className="w-1 h-1 rounded-full bg-blue-600" />
-                              </div>
-                            ) : (
-                              <Circle className="w-3.5 h-3.5 text-slate-300 dark:text-slate-700" />
-                            )}
-                          </div>
+                          <span>{lesIdx + 1}</span>
 
-                          <span className="truncate flex-1">
-                            {lesTitle.replace(/^Aula \d+(\.\d+)?:\s*/i, "")}
-                          </span>
-
-                          <span className="text-3xs text-slate-400 dark:text-slate-500 shrink-0">
-                            {les.durationMinutes}m
-                          </span>
+                          {/* Marcador de concluído */}
+                          {isDone && !isCurrent && (
+                            <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-slate-900" />
+                          )}
                         </button>
                       );
                     })}
                   </div>
-                </div>
-              );
-            })}
+                ))}
 
-            {/* AVALIAÇÃO / PROVA DO CURSO SEPARADA NO CURRÍCULO */}
-            {course.finalAssessment && (
-              <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 space-y-1.5">
-                <div className="text-3xs font-bold uppercase tracking-wider text-slate-400 px-2 flex items-center justify-between">
-                  <span>{t.learning.examBadge}</span>
-                  <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Nota mínima: {course.finalAssessment.passingScorePercent}%</span>
-                </div>
-
-                {course.finalAssessment.isAvailable && course.finalAssessment.questions ? (
-                  <Link
-                    href={`/aprender/${course.id}/prova`}
-                    className="p-2.5 rounded-lg border border-blue-200 dark:border-blue-900/60 bg-blue-50/50 dark:bg-blue-950/40 hover:bg-blue-100/60 flex items-center gap-2.5 transition-colors group cursor-pointer"
-                  >
-                    <Award className="w-4 h-4 text-orange-500 shrink-0" />
-                    <div className="flex-1 min-w-0">
-                      <div className="font-semibold text-xs text-blue-900 dark:text-blue-200 truncate group-hover:underline">
-                        {course.finalAssessment.title[langKey] || course.finalAssessment.title["pt-BR"]}
+                {/* Ícone da prova final na barra minimizada */}
+                {course.finalAssessment && (
+                  <div className="pt-2 w-full flex flex-col items-center border-t border-slate-200 dark:border-slate-800 mt-1">
+                    {course.finalAssessment.isAvailable && course.finalAssessment.questions ? (
+                      <Link
+                        href={`/aprender/${course.id}/prova`}
+                        className="w-9 h-9 rounded-xl bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800 text-orange-600 dark:text-orange-400 flex items-center justify-center hover:bg-orange-100 transition-colors"
+                        title={course.finalAssessment.title[langKey] || course.finalAssessment.title["pt-BR"]}
+                      >
+                        <Award className="w-4 h-4" />
+                      </Link>
+                    ) : (
+                      <div
+                        className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center cursor-not-allowed opacity-60"
+                        title={course.finalAssessment.title[langKey] || course.finalAssessment.title["pt-BR"]}
+                      >
+                        <Lock className="w-3.5 h-3.5" />
                       </div>
-                      <div className="text-3xs text-blue-600/80 dark:text-blue-400">
-                        {course.finalAssessment.questionsCount} questões • {course.finalAssessment.estimatedMinutes} min
-                      </div>
-                    </div>
-                    <span className="text-2xs font-bold text-blue-600 dark:text-blue-400">Ir</span>
-                  </Link>
-                ) : (
-                  <div className="p-2.5 rounded-lg border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 flex items-center gap-2.5">
-                    <Award className="w-4 h-4 text-blue-600 shrink-0" />
-                    <div className="flex-1 min-w-0">
-                      <div className="font-semibold text-xs text-slate-800 dark:text-slate-200 truncate">
-                        {course.finalAssessment.title[langKey] || course.finalAssessment.title["pt-BR"]}
-                      </div>
-                      <div className="text-3xs text-slate-400">
-                        {course.finalAssessment.questionsCount} questões • {course.finalAssessment.estimatedMinutes} min
-                      </div>
-                    </div>
-                    <Lock className="w-3 h-3 text-slate-400 shrink-0" />
+                    )}
                   </div>
                 )}
               </div>
-            )}
-          </div>
+            </div>
+          ) : (
+            /* Modo Expandido Completo */
+            <>
+              {/* Header do Menu com botão de minimizar */}
+              <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800/80 flex items-center justify-between min-w-[18rem]">
+                <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
+                  {t.learning.tableOfContents}
+                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-2xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold">
+                    {metrics.progressPercent}%
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setSidebarCollapsed(true)}
+                    className="hidden lg:flex p-1 rounded-md text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    title={t.learning.minimizeSidebar}
+                    aria-label={t.learning.minimizeSidebar}
+                  >
+                    <PanelLeftClose className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Lista com Scroll */}
+              <div className="flex-1 overflow-y-auto p-3 space-y-4 min-w-[18rem]">
+                {allModules.map((moduleItem, modIdx) => {
+                  const modTitle = moduleItem.title[langKey] || moduleItem.title["pt-BR"];
+                  return (
+                    <div key={moduleItem.id} className="space-y-1">
+                      <div className="text-2xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 px-2 pt-1 pb-0.5">
+                        {modIdx + 1}. {modTitle.replace(/^Módulo \d+\s*—\s*/i, "")}
+                      </div>
+
+                      <div className="space-y-0.5">
+                        {moduleItem.lessons.map((les) => {
+                          const isCurrent = les.id === lessonId;
+                          const isDone = progressRecord.completedLessonIds.includes(les.id);
+                          const lesTitle = les.title[langKey] || les.title["pt-BR"];
+
+                          return (
+                            <button
+                              key={les.id}
+                              type="button"
+                              onClick={() => {
+                                setSidebarOpen(false);
+                                router.push(`/aprender/${courseId}/${les.id}`);
+                              }}
+                              className={`w-full text-left px-2.5 py-2 rounded-lg text-xs font-medium transition-colors flex items-center gap-2.5 ${
+                                isCurrent
+                                  ? "bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-semibold border-l-2 border-blue-600 dark:border-blue-400 pl-2"
+                                  : "hover:bg-slate-50 dark:hover:bg-slate-800/50 text-slate-600 dark:text-slate-300"
+                              }`}
+                            >
+                              <div className="shrink-0">
+                                {isDone ? (
+                                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                                ) : isCurrent ? (
+                                  <div className="w-3.5 h-3.5 rounded-full border-2 border-blue-600 flex items-center justify-center">
+                                    <div className="w-1 h-1 rounded-full bg-blue-600" />
+                                  </div>
+                                ) : (
+                                  <Circle className="w-3.5 h-3.5 text-slate-300 dark:text-slate-700" />
+                                )}
+                              </div>
+
+                              <span className="truncate flex-1">
+                                {lesTitle.replace(/^Aula \d+(\.\d+)?:\s*/i, "")}
+                              </span>
+
+                              <span className="text-3xs text-slate-400 dark:text-slate-500 shrink-0">
+                                {les.durationMinutes}m
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+
+                {/* AVALIAÇÃO / PROVA DO CURSO SEPARADA NO CURRÍCULO */}
+                {course.finalAssessment && (
+                  <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 space-y-1.5">
+                    <div className="text-3xs font-bold uppercase tracking-wider text-slate-400 px-2 flex items-center justify-between">
+                      <span>{t.learning.examBadge}</span>
+                      <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Nota mínima: {course.finalAssessment.passingScorePercent}%</span>
+                    </div>
+
+                    {course.finalAssessment.isAvailable && course.finalAssessment.questions ? (
+                      <Link
+                        href={`/aprender/${course.id}/prova`}
+                        className="p-2.5 rounded-lg border border-blue-200 dark:border-blue-900/60 bg-blue-50/50 dark:bg-blue-950/40 hover:bg-blue-100/60 flex items-center gap-2.5 transition-colors group cursor-pointer"
+                      >
+                        <Award className="w-4 h-4 text-orange-500 shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <div className="font-semibold text-xs text-blue-900 dark:text-blue-200 truncate group-hover:underline">
+                            {course.finalAssessment.title[langKey] || course.finalAssessment.title["pt-BR"]}
+                          </div>
+                          <div className="text-3xs text-blue-600/80 dark:text-blue-400">
+                            {course.finalAssessment.questionsCount} questões • {course.finalAssessment.estimatedMinutes} min
+                          </div>
+                        </div>
+                        <span className="text-2xs font-bold text-blue-600 dark:text-blue-400">Ir</span>
+                      </Link>
+                    ) : (
+                      <div className="p-2.5 rounded-lg border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 flex items-center gap-2.5">
+                        <Award className="w-4 h-4 text-blue-600 shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <div className="font-semibold text-xs text-slate-800 dark:text-slate-200 truncate">
+                            {course.finalAssessment.title[langKey] || course.finalAssessment.title["pt-BR"]}
+                          </div>
+                          <div className="text-3xs text-slate-400">
+                            {course.finalAssessment.questionsCount} questões • {course.finalAssessment.estimatedMinutes} min
+                          </div>
+                        </div>
+                        <Lock className="w-3 h-3 text-slate-400 shrink-0" />
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </>
+          )}
         </aside>
 
         {/* Área Central de Conteúdo */}
