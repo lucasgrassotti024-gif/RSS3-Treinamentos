@@ -4,6 +4,7 @@ import { excelCourseData } from "./courses/excel-course";
 import { gestaoPessoasCourseData } from "./courses/gestao-pessoas-course";
 import { gestaoProjetosCourseData } from "./courses/gestao-projetos-course";
 import { gestaoQualidadeCourseData } from "./courses/gestao-qualidade-course";
+import { wordCourseData } from "./courses/word-course";
 
 /**
  * Escolas Oficiais Ativas da RSS3 Soluções Industriais
@@ -87,7 +88,7 @@ export const DEMO_SCHOOLS: SchoolCategory[] = [
       "es": "Excel corporativo, informes de parada de planta y herramientas de productividad.",
     },
     iconName: "FileSpreadsheet",
-    coursesCount: 4,
+    coursesCount: 5,
     color: "#059669",
   },
 ];
@@ -5163,6 +5164,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
   gestaoPessoasCourseData,
   gestaoProjetosCourseData,
   gestaoQualidadeCourseData,
+  wordCourseData,
 ];
 
 export const DEMO_PERSONAS: UserDemonstration[] = [];
