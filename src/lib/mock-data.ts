@@ -53,6 +53,22 @@ export const DEMO_SCHOOLS: SchoolCategory[] = [
     coursesCount: 1,
     color: "#eab308", // Yellow 500 / Âmbar Industrial
   },
+  {
+    id: "seguranca-epi",
+    name: {
+      "pt-BR": "Segurança do Trabalho e Equipamentos de Proteção",
+      "en": "Occupational Safety & Personal Protective Equipment",
+      "es": "Seguridad Laboral y Equipos de Protección",
+    },
+    description: {
+      "pt-BR": "Diretrizes da NR-6, seleção, guarda, conservação, inspeção e responsabilidades legais de EPIs em operações de alta criticidade.",
+      "en": "NR-6 regulatory guidelines, PPE selection, maintenance, inspection, and compliance duties in high-risk operations.",
+      "es": "Directrices de la NR-6, selección, conservación, inspección y responsabilidades legales del EPP en operaciones de alto riesgo.",
+    },
+    iconName: "ShieldCheck",
+    coursesCount: 1,
+    color: "#2563eb", // Blue 600
+  },
 ];
 
 /**
@@ -2715,6 +2731,601 @@ export const DEMO_COURSES: CourseDemonstration[] = [
                 "pt-BR": "Incorreto e ilegal! Atividades de alto risco jamais admitem dispensa de treinamento prático e aptidão médica presencial.",
                 "en": "Incorrect and illegal! High-risk industrial activities strictly require certified practical competency.",
                 "es": "Incorrecto y contrario a la ley. Las actividades de riesgo requieren validación práctica presencial.",
+              },
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    id: "c-nr6-epi",
+    slug: "nr-6-equipamentos-de-protecao-individual",
+    title: {
+      "pt-BR": "NR-6: Equipamentos de Proteção Individual (EPI) e Práticas Operacionais",
+      "en": "NR-6: Personal Protective Equipment (PPE) & Operational Practices",
+      "es": "NR-6: Equipos de Protección Individual (EPP) y Prácticas Operativas",
+    },
+    description: {
+      "pt-BR": "Capacitação completa em NR-6: seleção, guarda, higienização, inspeção visual, responsabilidades legais e a importância vital do EPI nas operações industriais.",
+      "en": "Comprehensive NR-6 training: selection, storage, cleaning, inspection, legal responsibilities, and the vital role of PPE in industrial operations.",
+      "es": "Capacitación en NR-6: selección, almacenamiento, inspección y la importancia crítica del EPP en operaciones industriales.",
+    },
+    schoolId: "seguranca-epi",
+    schoolName: {
+      "pt-BR": "Segurança do Trabalho e EPIs",
+      "en": "Occupational Safety & PPE",
+      "es": "Seguridad Laboral y EPP",
+    },
+    workloadHours: 8,
+    level: "basic",
+    modality: "hybrid",
+    isMandatory: true,
+    mandatoryFor: ["Todos os Colaboradores Operacionais", "Operador Industrial", "Líder de Frente"],
+    targetAudience: {
+      "pt-BR": "Colaboradores operacionais da RSS3, encarregados, operadores e técnicos que atuam em plantas industriais e paradas de manutenção.",
+      "en": "RSS3 operational personnel, foremen, operators, and safety technicians working on industrial sites.",
+      "es": "Personal operativo de RSS3, encargados y técnicos que operan en plantas industriales.",
+    },
+    modulesCount: 2,
+    lessonsCount: 5,
+    thumbnailGradient: "from-blue-700 to-indigo-950",
+    badgeCode: "NR-06",
+    updatedAtDate: "2026-10-16",
+    modules: [
+      {
+        id: "mod-nr6-1",
+        order: 1,
+        title: {
+          "pt-BR": "Módulo 1: Fundamentos da Norma Regulamentadora NR-6 e Classificação dos EPIs",
+          "en": "Module 1: NR-6 Regulatory Fundamentals & PPE Classification",
+          "es": "Módulo 1: Fundamentos de la NR-6 y Clasificación de los EPP",
+        },
+        lessons: [
+          {
+            id: "les-nr6-1-1",
+            order: 1,
+            title: {
+              "pt-BR": "NR 6: Tudo o que você precisa saber para se proteger no trabalho — Aula 01",
+              "en": "NR 6: Everything You Need to Know for Workplace Protection — Lesson 01",
+              "es": "NR 6: Todo lo que necesita saber para protegerse en el trabajo — Lección 01",
+            },
+            durationMinutes: 15,
+            contentType: "video",
+            videoUrl: "Uxn4kqJZrBs",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Compreender os objetivos da NR-6, a definição formal de EPI e a hierarquia das medidas de controle de risco.",
+                "en": "Understand NR-6 regulatory goals, legal definition of PPE, and hierarchy of hazard controls.",
+                "es": "Comprender los objetivos de la NR-6, definición legal de EPP y jerarquía de controles de riesgo.",
+              },
+              introduction: {
+                "pt-BR": "A Norma Regulamentadora nº 06 (NR-6) estabelece os requisitos para seleção, fornecimento, uso, guarda, higienização, manutenção e descarte dos Equipamentos de Proteção Individual. Na RSS3 Soluções Industriais, a segurança é inegociável em todas as frentes de trabalho.",
+                "en": "Regulatory Standard NR-6 specifies requirements for personal protective equipment selection, supply, use, and inspection in industrial environments.",
+                "es": "La Norma Reguladora NR-6 establece los requisitos para el suministro, uso e inspección de los Equipos de Protección Individual.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "O que é um Equipamento de Proteção Individual (EPI)?",
+                    "en": "What is Personal Protective Equipment (PPE)?",
+                    "es": "¿Qué es un Equipo de Protección Individual (EPP)?",
+                  },
+                  body: {
+                    "pt-BR": "Conforme a NR-6, EPI é todo dispositivo ou produto, de uso individual utilizado pelo trabalhador, destinado à proteção contra riscos suscetíveis de ameaçar a segurança e a saúde no trabalho. O EPI é adotado prioritariamente quando as medidas de proteção coletiva (EPC) não forem viáveis ou suficientes.",
+                    "en": "According to NR-6, PPE is any device or product worn individually to protect against workplace health and safety hazards.",
+                    "es": "Según la NR-6, el EPP es todo dispositivo de uso individual destinado a proteger al trabajador contra riesgos operacionales.",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "Hierarquia das Medidas de Controle de Riscos",
+                    "en": "Hierarchy of Hazard Controls",
+                    "es": "Jerarquía de Controles de Riesgo",
+                  },
+                  body: {
+                    "pt-BR": "1. Eliminação do risco na fonte geradora;\n2. Substituição por método ou substância menos perigosa;\n3. Medidas de controle de engenharia e EPC (ex: exaustores, guarda-corpos);\n4. Medidas administrativas e procedimentos operacionais;\n5. Fornecimento e uso obrigatório de EPI adequado.",
+                    "en": "1. Elimination; 2. Substitution; 3. Engineering controls and collective protection; 4. Administrative controls; 5. PPE.",
+                    "es": "1. Eliminación; 2. Sustitución; 3. Controles de ingeniería y EPC; 4. Controles administrativos; 5. EPP.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "O EPI é a última linha de defesa do trabalhador e não substitui os controles de engenharia e proteções coletivas.",
+                  "en": "PPE is the final line of defense and does not replace engineering controls.",
+                  "es": "El EPP es la última línea de defensa y no reemplaza las medidas de protección colectiva.",
+                },
+                {
+                  "pt-BR": "Todo EPI deve possuir Certificado de Aprovação (CA) válido expedido pelo órgão competente.",
+                  "en": "All PPE must hold a valid Certificate of Approval (CA).",
+                  "es": "Todo EPP debe contar con Certificado de Aprobación (CA) vigente.",
+                },
+              ],
+            },
+          },
+          {
+            id: "les-nr6-1-2",
+            order: 2,
+            title: {
+              "pt-BR": "NR 6: Obrigações do Empregador e do Empregado — Aula 02",
+              "en": "NR 6: Employer and Employee Legal Responsibilities — Lesson 02",
+              "es": "NR 6: Obligaciones del Empleador y del Trabajador — Lección 02",
+            },
+            durationMinutes: 18,
+            contentType: "video",
+            videoUrl: "SLepcCP5qbE",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Conhecer com clareza os deveres legais da empresa (RSS3) e os deveres do colaborador no recebimento e utilização do EPI.",
+                "en": "Understand corporate employer legal duties and employee obligations regarding PPE usage.",
+                "es": "Conocer las obligaciones legales de la empresa y del trabajador respecto al EPP.",
+              },
+              introduction: {
+                "pt-BR": "A conformidade com a NR-6 é compartilhada entre empregador e empregado. O conhecimento dos deveres mútuos evita passivos trabalhistas e protege a integridade física de toda a equipe.",
+                "en": "Compliance with NR-6 is a shared responsibility between employer and employee. Clear understanding ensures legal safety and physical protection.",
+                "es": "El cumplimiento de la NR-6 es una responsabilidad compartida entre empresa y colaborador.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Deveres da Organização (Empregador)",
+                    "en": "Employer Responsibilities",
+                    "es": "Obligaciones del Empleador",
+                  },
+                  body: {
+                    "pt-BR": "• Adquirir o EPI adequado ao risco de cada atividade operacional;\n• Exigir o uso efetivo do equipamento em campo;\n• Fornecer gratuitamente ao colaborador somente EPI aprovado pelo órgão nacional competente (com CA válido);\n• Orientar e capacitar o empregado sobre o uso adequado, guarda e conservação;\n• Substituir imediatamente o EPI danificado ou extraviado;\n• Responsabilizar-se pela higienização periódica quando aplicável.",
+                    "en": "Provide compliant PPE free of charge, enforce use, train workers, and replace damaged items immediately.",
+                    "es": "Adquirir EPP con CA vigente, suministrarlo gratuitamente, capacitar y sustituir equipos dañados de inmediato.",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "Deveres do Trabalhador (Empregado)",
+                    "en": "Employee Responsibilities",
+                    "es": "Obligaciones del Trabajador",
+                  },
+                  body: {
+                    "pt-BR": "• Usar o EPI apenas para a finalidade a que se destina;\n• Responsabilizar-se pela limpeza, guarda e conservação do equipamento;\n• Comunicar imediatamente à liderança qualquer alteração que torne o EPI impróprio para uso;\n• Cumprir as determinações da empresa sobre o uso adequado.",
+                    "en": "Use PPE strictly for intended purpose, maintain its cleanliness, report damage immediately, and follow corporate safety rules.",
+                    "es": "Usar el EPP adecuadamente, responsabilizarse por su cuidado y reportar averías de inmediato a la supervisión.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "A recusa injustificada ao uso do EPI constitui ato faltoso passível de sanções disciplinares conforme a CLT.",
+                  "en": "Unjustified refusal to wear PPE is considered misconduct under labor regulations.",
+                  "es": "La negativa injustificada al uso del EPP constituye una falta laboral.",
+                },
+                {
+                  "pt-BR": "O fornecimento do EPI deve ser sempre registrado mediante ficha de entrega física ou eletrônica rastreável.",
+                  "en": "PPE delivery must be documented via traceable physical or digital records.",
+                  "es": "La entrega del EPP debe constar en un registro formal y rastreable.",
+                },
+              ],
+            },
+          },
+          {
+            id: "les-nr6-1-3",
+            order: 3,
+            title: {
+              "pt-BR": "NR 6: Certificado de Aprovação (CA), Especificação e Validade — Aula 03",
+              "en": "NR 6: Certificate of Approval (CA), Specs & Validity — Lesson 03",
+              "es": "NR 6: Certificado de Aprobación (CA), Especificaciones y Vigencia — Lección 03",
+            },
+            durationMinutes: 20,
+            contentType: "video",
+            videoUrl: "iloJ3QiLBbY",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Aprender a consultar, verificar e interpretar a validade do Certificado de Aprovação (CA) e a vida útil dos equipamentos.",
+                "en": "Learn how to verify, look up, and interpret Certificate of Approval (CA) validity and service life.",
+                "es": "Aprender a verificar la vigencia del Certificado de Aprobación (CA) y la vida útil del equipo.",
+              },
+              introduction: {
+                "pt-BR": "O Certificado de Aprovação (CA) é o documento emitido pelo Ministério do Trabalho que atesta que o equipamento foi submetido a rigorosos testes laboratoriais e atende às normas técnicas brasileiras de segurança.",
+                "en": "The Certificate of Approval (CA) guarantees that the equipment underwent accredited laboratory testing.",
+                "es": "El Certificado de Aprobación (CA) garantiza que el equipo pasó por pruebas técnicas oficiales.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Diferença entre Validade do CA e Vida Útil do EPI",
+                    "en": "CA Validity vs Equipment Service Life",
+                    "es": "Vigencia del CA vs Vida Útil del EPP",
+                  },
+                  body: {
+                    "pt-BR": "• Validade do CA: Prazo em que o fabricante pode comercializar o lote do EPI no mercado nacional.\n• Vida Útil do Equipamento: Prazo máximo estabelecido pelo fabricante para utilização após a fabricação ou abertura da embalagem, considerando o desgaste natural e exposição a agentes químicos/intempéries.\nIMPORTANTE: Um EPI adquirido com CA válido pode continuar sendo utilizado pelo colaborador mesmo após o vencimento do CA comercial, desde que esteja dentro da sua vida útil e em perfeitas condições de integridade física.",
+                    "en": "CA validity regulates legal commercialization; service life determines physical operational usage based on inspection.",
+                    "es": "La vigencia del CA regula la comercialización; la vida útil determina el tiempo de uso seguro en campo.",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "Como Inspecionar a Marcação Indelével do CA",
+                    "en": "Inspecting Indelible CA Markings",
+                    "es": "Inspección de la Marca Indeleble del CA",
+                  },
+                  body: {
+                    "pt-BR": "Todo EPI deve apresentar, em caracteres indeléveis e bem visíveis: o nome comercial do fabricante, o lote de fabricação e o número do Certificado de Aprovação (CA). Se a gravação estiver desgastada ou ilegível, o equipamento deve ser segregado e avaliado pelo setor de SST.",
+                    "en": "Every PPE must bear manufacturer name, batch code, and CA number in indelible marking.",
+                    "es": "Todo EPP debe presentar marca indeleble con nombre del fabricante, lote y número de CA.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "EPI sem CA válido no momento da compra é ilegal e não garante proteção contra riscos operacionais.",
+                  "en": "PPE purchased without a valid CA is non-compliant and illegal.",
+                  "es": "El EPP sin CA válido al comprarse no garantiza protección ni validez legal.",
+                },
+              ],
+            },
+          },
+          {
+            id: "les-nr6-1-4",
+            order: 4,
+            title: {
+              "pt-BR": "NR 6: Seleção Correta, Guarda, Higienização e Descarte — Aula 04",
+              "en": "NR 6: Proper Selection, Storage, Sanitization & Disposal — Lesson 04",
+              "es": "NR 6: Selección Correcta, Cuidado, Higienización y Desecho — Lección 04",
+            },
+            durationMinutes: 22,
+            contentType: "video",
+            videoUrl: "mbfte1L_D5M",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Dominar as boas práticas de guarda, conservação diária, higienização e descarte ambientalmente responsável de EPIs danificados.",
+                "en": "Master storage, daily maintenance, sanitization, and environmentally responsible disposal of damaged PPE.",
+                "es": "Dominar las buenas prácticas de almacenamiento, limpieza y desecho responsable de EPP.",
+              },
+              introduction: {
+                "pt-BR": "Um equipamento de primeira linha perde sua capacidade protetiva se for guardado de forma inadequada, exposto a solventes corrosivos ou contaminado por sujidades biológicas e químicas.",
+                "en": "Even premium PPE loses protective efficacy if improperly stored, exposed to corrosives, or left contaminated.",
+                "es": "El mejor EPP pierde su efectividad si se almacena mal o se contamina con sustancias químicas.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Regras de Ouro para Guarda e Conservação",
+                    "en": "Golden Rules for Storage & Maintenance",
+                    "es": "Reglas de Oro para Almacenamiento y Conservación",
+                  },
+                  body: {
+                    "pt-BR": "• Guardar sempre em local limpo, seco, arejado e protegido da radiação solar direta;\n• Nunca dobrar ou amassar respiradores, protetores faciais ou luvas de proteção química;\n• Não armazenar junto com ferramentas cortantes, graxas, combustíveis ou produtos químicos agressivos;\n• Inspecionar visualmente o equipamento antes de cada jornada de trabalho.",
+                    "en": "Store in dry, clean, shaded areas away from direct sunlight, sharp tools, and hazardous chemicals.",
+                    "es": "Guardar en lugar limpio, seco y protegido del sol, lejos de herramientas cortantes y químicos.",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "Critérios de Descarte e Inutilização",
+                    "en": "Disposal and Decommissioning Criteria",
+                    "es": "Criterios de Desecho e Inutilización",
+                  },
+                  body: {
+                    "pt-BR": "Quando um EPI atinge o fim de sua vida útil, sofre deformação plástica, rasgo, trinca ou contaminação severa, ele deve ser imediatamente inutilizado (cortado ou descaracterizado) para evitar reuso acidental por terceiros e descartado conforme o plano de gerenciamento de resíduos industriais da RSS3 / CMPC.",
+                    "en": "Damaged PPE must be decommissioned, physically rendered unusable, and disposed of according to environmental rules.",
+                    "es": "El EPP dañado debe ser inutilizado físicamente para evitar su reutilización accidental y desechado formalmente.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "EPI danificado deve ser substituído imediatamente e nunca reparado com métodos improvisados (gambiarras).",
+                  "en": "Damaged PPE must be replaced immediately; improvised repairs are strictly prohibited.",
+                  "es": "El EPP dañado debe cambiarse de inmediato; las reparaciones improvisadas están prohibidas.",
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: "mod-nr6-2",
+        order: 2,
+        title: {
+          "pt-BR": "Módulo 2: A Importância Vital do EPI e Aplicação Prática Operacional",
+          "en": "Module 2: The Vital Role of PPE & Practical Field Application",
+          "es": "Módulo 2: La Importancia Crítica del EPP y Aplicación Práctica",
+        },
+        lessons: [
+          {
+            id: "les-nr6-2-1",
+            order: 1,
+            title: {
+              "pt-BR": "Instrução Padrão: A Importância do EPI na Preservação da Vida e Cultura de Segurança",
+              "en": "Standard Instruction: The Vital Role of PPE in Preserving Life & Safety Culture",
+              "es": "Instrucción Estándar: La Importancia del EPP en la Preservación de la Vida",
+            },
+            durationMinutes: 20,
+            contentType: "video",
+            videoUrl: "vOUp6jhnJI8",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Internalizar a cultura de segurança interdependente, reconhecer que o EPI protege o futuro do colaborador e saber conduzir o diálogo diário de segurança (DDS) sobre proteção individual.",
+                "en": "Internalize an interdependent safety culture and understand how PPE protects life beyond compliance.",
+                "es": "Interiorizar la cultura de seguridad y reconocer que el EPP protege la vida y el futuro del trabajador.",
+              },
+              introduction: {
+                "pt-BR": "O uso do EPI vai muito além de uma exigência legal ou protocolo de auditoria. Ele representa o compromisso do trabalhador com sua própria vida, com seus companheiros de equipe e com sua família que o espera ao final de cada turno.",
+                "en": "PPE usage is not merely an audit rule; it represents a personal commitment to return home safely after every shift.",
+                "es": "El uso del EPP trasciende la norma: representa el compromiso de volver a casa sano y salvo al terminar la jornada.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Por que o Acidente Acontece? O Fator Comportamental",
+                    "en": "Why Do Accidents Occur? Behavioral Factors",
+                    "es": "¿Por qué Ocurren los Accidentes? Factores de Comportamiento",
+                  },
+                  body: {
+                    "pt-BR": "A grande maioria dos acidentes com lesões graves na indústria decorre de excesso de confiança, pressa, desatenção ou a falsa impressão de que 'é só um servicinho rápido de 2 minutos'. O perigo não espera o tempo passar: uma fagulha nos olhos, um respingo químico ou uma batida na cabeça ocorrem em centésimos de segundo.",
+                    "en": "Overconfidence, rush, and the myth of 'a quick two-minute job' cause devastating injuries. Hazards strike in milliseconds.",
+                    "es": "El exceso de confianza y la prisa causan lesiones graves. Los peligros ocurren en fracciones de segundo.",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "A Cultura do Cuidado Ativo: Eu Cuido de Mim, de Você e Deixo Você Cuidar de Mim",
+                    "en": "Active Care Culture: I Protect Myself, You, and Accept Your Feedback",
+                    "es": "Cultura del Cuidado Activo: Me Cuido, Te Cuido y Dejo que Me Cuides",
+                  },
+                  body: {
+                    "pt-BR": "Na RSS3 Soluções Industriais, todo colaborador tem o direito de recusa e o dever de intervir caso observe um colega sem o EPI adequado. Intervir para proteger um companheiro de equipe não é dedo-duro: é um ato de respeito e preservação da vida.",
+                    "en": "At RSS3, every employee has stop-work authority and the duty to intervene if a peer is unprotected.",
+                    "es": "En RSS3, todo colaborador tiene la autoridad y el deber de intervenir si observa a un compañero sin EPP.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "Nenhum trabalho é tão urgente ou importante que não possa ser executado com total segurança.",
+                  "en": "No job is so urgent or critical that it cannot be done with absolute safety.",
+                  "es": "Ningún trabajo es tan urgente que no pueda realizarse con total seguridad.",
+                },
+                {
+                  "pt-BR": "O EPI bem ajustado e utilizado corretamente salva vidas todos os dias na indústria pesada.",
+                  "en": "Properly fitted and maintained PPE saves lives every day in heavy industry.",
+                  "es": "El EPP bien ajustado y mantenido salva vidas diariamente en la industria.",
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+    finalAssessment: {
+      id: "exam-nr6-epi",
+      order: 1,
+      title: {
+        "pt-BR": "Avaliação Formal Teórica de NR-6 e Equipamentos de Proteção Individual",
+        "en": "Formal Theoretical Assessment: NR-6 & Personal Protective Equipment",
+        "es": "Evaluación Teórica Formal: NR-6 y Equipos de Protección Individual",
+      },
+      description: {
+        "pt-BR": "Verificação de conformidade conceitual e regulatória da NR-6, responsabilidades legais, inspeção de CA e procedimentos operacionais seguros.",
+        "en": "Regulatory compliance check on NR-6, legal obligations, CA inspection, and operational PPE safety.",
+        "es": "Verificación de cumplimiento de la NR-6, responsabilidades legales y procedimientos operativos.",
+      },
+      scope: "course",
+      estimatedMinutes: 20,
+      questionsCount: 5,
+      passingScorePercent: 70,
+      maxAttempts: 3,
+      isAvailable: true,
+      availabilityNotice: {
+        "pt-BR": "Avaliação teórica disponibilizada após conclusão de todas as aulas de NR-6.",
+        "en": "Theoretical assessment available upon completion of all NR-6 lessons.",
+        "es": "Evaluación teórica disponible tras completar todas las lecciones de NR-6.",
+      },
+      questions: [
+        {
+          id: "q-nr6-1",
+          order: 1,
+          question: {
+            "pt-BR": "1. Conforme a NR-6, em qual situação a empresa deve prioritariamente fornecer e exigir o uso de EPI pelo colaborador?",
+            "en": "1. According to NR-6, when must the company prioritize the provision and mandatory use of PPE?",
+            "es": "1. Según la NR-6, ¿cuándo debe la empresa suministrar y exigir prioritariamente el uso de EPP?",
+          },
+          options: [
+            {
+              id: "q1-a",
+              text: {
+                "pt-BR": "Sempre como primeira opção, antes mesmo de avaliar qualquer medida de proteção coletiva ou engenharia.",
+                "en": "Always as the first option, before assessing any collective protection or engineering measures.",
+                "es": "Siempre como primera opción, antes de evaluar cualquier medida de protección colectiva.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! Na hierarquia de controle, o EPI é a última linha de defesa, adotado quando as medidas coletivas não forem viáveis ou suficientes.",
+                "en": "Incorrect! PPE is the final line of defense after collective and engineering controls.",
+                "es": "Incorrecto. El EPP es la última línea de defensa en la jerarquía de control.",
+              },
+            },
+            {
+              id: "q1-b",
+              text: {
+                "pt-BR": "Quando as medidas de proteção coletiva não forem viáveis, estiverem sendo implantadas ou não oferecerem proteção completa contra os riscos.",
+                "en": "When collective protection measures are not feasible, being deployed, or do not offer complete protection against hazards.",
+                "es": "Cuando las medidas de protección colectiva no sean viables o no brinden protección completa contra los riesgos.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! A NR-6 determina que o EPI deve ser fornecido quando as medidas de ordem geral não ofereçam completa proteção.",
+                "en": "Correct! NR-6 mandates PPE whenever collective protections are insufficient or during implementation.",
+                "es": "¡Correcto! La NR-6 establece el uso de EPP cuando las protecciones colectivas no son suficientes.",
+              },
+            },
+            {
+              id: "q1-c",
+              text: {
+                "pt-BR": "Apenas se o trabalhador solicitar formalmente por escrito ao departamento de recursos humanos.",
+                "en": "Only if the employee formally requests it in writing to the HR department.",
+                "es": "Solo si el trabajador lo solicita por escrito a recursos humanos.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! O fornecimento e a exigência de uso decorrem de obrigação legal do empregador vinculada aos riscos da função.",
+                "en": "Incorrect! PPE provision is an employer legal duty driven by hazard assessment.",
+                "es": "Incorrecto. El suministro de EPP es una obligación legal del empleador.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr6-2",
+          order: 2,
+          question: {
+            "pt-BR": "2. Quem é responsável pelo custo financeiro da aquisição dos EPIs destinados aos colaboradores?",
+            "en": "2. Who is legally responsible for bearing the financial cost of purchasing PPE for employees?",
+            "es": "2. ¿Quién es responsable por el costo financiero de la adquisición del EPP?",
+          },
+          options: [
+            {
+              id: "q2-a",
+              text: {
+                "pt-BR": "A organização empregadora, que deve fornecer gratuitamente ao empregado o EPI adequado ao risco.",
+                "en": "The employer, who must provide hazard-compliant PPE free of charge to the employee.",
+                "es": "La empresa empleadora, que debe suministrar gratuitamente el EPP adecuado al riesgo.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! É expressamente proibido descontar ou cobrar do colaborador qualquer valor pela entrega do EPI obrigatório.",
+                "en": "Correct! Employers are strictly prohibited from charging employees for required PPE.",
+                "es": "¡Correcto! Está prohibido cobrar al colaborador por el EPP obligatorio.",
+              },
+            },
+            {
+              id: "q2-b",
+              text: {
+                "pt-BR": "O colaborador, por meio de desconto mensal direto em folha de pagamento parcelado em 12 vezes.",
+                "en": "The employee, through monthly payroll deductions split into 12 installments.",
+                "es": "El trabajador, mediante descuento en nómina en cuotas mensuales.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto e ilegal! O fornecimento deve ser integralmente gratuito.",
+                "en": "Incorrect and illegal! PPE must be completely free of charge.",
+                "es": "Incorrecto e ilegal. El suministro debe ser 100% gratuito.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr6-3",
+          order: 3,
+          question: {
+            "pt-BR": "3. O que comprova a conformidade técnica e a autorização legal para um EPI ser comercializado e utilizado no Brasil?",
+            "en": "3. What verifies technical compliance and legal authorization for PPE to be commercialized and used in Brazil?",
+            "es": "3. ¿Qué comprueba la conformidad técnica y autorización legal para que un EPP se use en Brasil?",
+          },
+          options: [
+            {
+              id: "q3-a",
+              text: {
+                "pt-BR": "Apenas a nota fiscal de compra emitida pelo distribuidor local de ferramentas.",
+                "en": "Only the purchase receipt issued by the local hardware distributor.",
+                "es": "Solo la factura de compra emitida por la ferretería local.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! A nota fiscal comprova a transação comercial, mas não a aprovação técnica do dispositivo.",
+                "en": "Incorrect! An invoice proves purchase, not safety compliance.",
+                "es": "Incorrecto. La factura prueba la compra pero no la homologación técnica.",
+              },
+            },
+            {
+              id: "q3-b",
+              text: {
+                "pt-BR": "O Certificado de Aprovação (CA) válido expedido pelo órgão nacional competente em segurança e saúde no trabalho.",
+                "en": "A valid Certificate of Approval (CA) issued by the competent national occupational safety authority.",
+                "es": "El Certificado de Aprobación (CA) vigente expedido por la autoridad nacional competente.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! O número do CA gravado de forma indelével no equipamento atesta que o produto passou por testes acreditados.",
+                "en": "Correct! The CA number indelibly marked on the PPE proves accredited safety testing.",
+                "es": "¡Correcto! El número de CA grabado en el equipo acredita las pruebas de homologación.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr6-4",
+          order: 4,
+          question: {
+            "pt-BR": "4. Ao identificar uma trinca no capacete de segurança ou rasgo na luva de proteção química antes do turno, qual deve ser a conduta do colaborador?",
+            "en": "4. Upon discovering a crack in a hardhat or tear in chemical gloves before shift start, what must the worker do?",
+            "es": "4. Al detectar una fisura en el casco o rotura en los guantes antes del turno, ¿cuál debe ser la conducta?",
+          },
+          options: [
+            {
+              id: "q4-a",
+              text: {
+                "pt-BR": "Fazer um reparo provisório com fita adesiva ou cola e continuar a atividade até a próxima semana.",
+                "en": "Make a makeshift repair using duct tape or glue and continue working until next week.",
+                "es": "Repararlo provisionalmente con cinta adhesiva y continuar el trabajo.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto e proibido! Nunca faça improvisações ou reparos caseiros em equipamentos de segurança.",
+                "en": "Incorrect and prohibited! Makeshift repairs on safety equipment are never permitted.",
+                "es": "Incorrecto y prohibido. Nunca se deben realizar reparaciones improvisadas en el EPP.",
+              },
+            },
+            {
+              id: "q4-b",
+              text: {
+                "pt-BR": "Comunicar imediatamente à liderança e ao setor de SST para substituição imediata do EPI antes de iniciar o trabalho.",
+                "en": "Immediately notify leadership and the safety team for immediate replacement before starting work.",
+                "es": "Comunicar de inmediato al supervisor y seguridad para su sustitución inmediata antes de iniciar.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! Equipamento danificado perde a capacidade protetiva e deve ser substituído antes da exposição ao risco.",
+                "en": "Correct! Damaged PPE compromises worker safety and must be replaced prior to hazard exposure.",
+                "es": "¡Correcto! El EPP dañado debe sustituirse antes de comenzar cualquier actividad de riesgo.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr6-5",
+          order: 5,
+          question: {
+            "pt-BR": "5. A conclusão com aproveitamento deste curso EAD de NR-6 confere habilitação prática para atividades regulamentadas de alto risco (ex: NR-35 em altura, NR-33 espaço confinado)?",
+            "en": "5. Does passing this online NR-6 course grant hands-on qualification for regulated high-risk activities (e.g. NR-35 height, NR-33 confined space)?",
+            "es": "5. ¿La aprobación de este curso online de NR-6 otorga habilitación práctica para actividades de alto riesgo (NR-35, NR-33)?",
+          },
+          options: [
+            {
+              id: "q5-a",
+              text: {
+                "pt-BR": "NÃO. Este certificado atesta a conclusão de conteúdo teórico. Atividades de alto risco exigem treinamento prático presencial validado e ASO com aptidão médica vigente.",
+                "en": "NO. This certificate certifies theoretical knowledge. Regulated high-risk tasks strictly require hands-on training and valid medical clearance.",
+                "es": "NO. Este certificado avala conocimiento teórico. Las tareas de alto riesgo exigen práctica presencial y aptitud médica vigente.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! Conforme a diretriz de integridade da RSS3, o EAD nunca substitui a qualificação prática presencial e a liberação formal do ASO.",
+                "en": "Correct! As per RSS3 safety guidelines, online learning never waives hands-on certified qualifications and occupational clearance.",
+                "es": "¡Correcto! El aprendizaje online no sustituye la capacitación práctica presencial ni la aptitud médica.",
+              },
+            },
+            {
+              id: "q5-b",
+              text: {
+                "pt-BR": "SIM. A aprovação no portal online libera automaticamente o colaborador para qualquer atividade na fábrica sem necessidade de prática presencial.",
+                "en": "YES. Passing the online portal automatically authorizes the employee for any plant work without in-person training.",
+                "es": "SÍ. La aprobación online habilita automáticamente para cualquier trabajo sin práctica presencial.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto e expressamente proibido pelas normas regulamentadoras e pelo código de segurança da RSS3.",
+                "en": "Incorrect and strictly prohibited by occupational safety standards and RSS3 safety bylaws.",
+                "es": "Incorrecto y prohibido por las normas reguladoras y directrices de RSS3.",
               },
             },
           ],
