@@ -66,7 +66,7 @@ export const DEMO_SCHOOLS: SchoolCategory[] = [
       "es": "Directrices de la NR-6, selección, conservación, inspección y responsabilidades legales del EPP en operaciones de alto riesgo.",
     },
     iconName: "ShieldCheck",
-    coursesCount: 2,
+    coursesCount: 3,
     color: "#2563eb", // Blue 600
   },
 ];
@@ -3998,6 +3998,411 @@ export const DEMO_COURSES: CourseDemonstration[] = [
                 "pt-BR": "Incorreto e terminantemente proibido pelas normas regulamentadoras do Ministério do Trabalho e diretrizes de integridade da RSS3.",
                 "en": "Incorrect and illegal under Brazilian labor safety laws and RSS3 operational safety policies.",
                 "es": "Incorrecto y prohibido por las normas reguladoras laborales.",
+              },
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    id: "c-nr9-agentes-ambientais",
+    slug: "nr-09-avaliacao-controle-exposicoes-ocupacionais",
+    title: {
+      "pt-BR": "NR-09: Avaliação e Controle das Exposições Ocupacionais a Agentes Físicos, Químicos e Biológicos",
+      "en": "NR-09: Assessment & Control of Occupational Exposure to Physical, Chemical & Biological Agents",
+      "es": "NR-09: Evaluación y Control de Exposiciones Ocupacionales a Agentes Físicos, Químicos y Biológicos",
+    },
+    description: {
+      "pt-BR": "Diretrizes atualizadas da NR-09 articulada com a NR-01 (PGR/GRO): identificação, avaliação quantitativa e qualitativa, níveis de ação, limites de tolerância e medidas de controle para ruído, poeiras, vapores e agentes biológicos na indústria.",
+      "en": "Updated NR-09 standards aligned with NR-01 (PGR/GRO): identification, qualitative/quantitative evaluation, action levels, exposure limits, and engineering controls in heavy industry.",
+      "es": "Directrices de la NR-09 vinculada a la NR-01: identificación, evaluación de riesgos, niveles de acción y medidas de control ambiental.",
+    },
+    schoolId: "seguranca-epi",
+    schoolName: {
+      "pt-BR": "Segurança do Trabalho e Higiene Ocupacional",
+      "en": "Occupational Safety & Industrial Hygiene",
+      "es": "Seguridad Laboral e Higiene Ocupacional",
+    },
+    workloadHours: 8,
+    level: "intermediate",
+    modality: "hybrid",
+    isMandatory: true,
+    mandatoryFor: ["Operador de Hidrojato", "Pintor Industrial", "Técnico de Segurança", "Líder de Frente"],
+    targetAudience: {
+      "pt-BR": "Trabalhadores operacionais, operadores de hidrojateamento, pintores industriais, mecânicos e supervisores da RSS3 expostos a ruído, vibração, névoas e compostos químicos em plantas industriais.",
+      "en": "RSS3 operational personnel, hydroblasters, industrial painters, and safety leads exposed to noise, vibrations, and airborne contaminants.",
+      "es": "Personal operativo de RSS3 expuesto a ruido, vibraciones y contaminantes químicos.",
+    },
+    modulesCount: 2,
+    lessonsCount: 2,
+    thumbnailGradient: "from-emerald-700 to-teal-950",
+    badgeCode: "NR-09",
+    updatedAtDate: "2026-10-16",
+    modules: [
+      {
+        id: "mod-nr9-1",
+        order: 1,
+        title: {
+          "pt-BR": "Módulo 1: A Nova NR-09 no Contexto do GRO/PGR e Metodologia de Avaliação",
+          "en": "Module 1: The New NR-09 within GRO/PGR Context & Assessment Methodology",
+          "es": "Módulo 1: La Nueva NR-09 en el Contexto de GRO/PGR y Metodología",
+        },
+        lessons: [
+          {
+            id: "les-nr9-1-1",
+            order: 1,
+            title: {
+              "pt-BR": "NR-09 Atualizada: Avaliação e Controle de Exposição Ocupacional e Integração ao PGR",
+              "en": "Updated NR-09: Occupational Exposure Assessment, Control & PGR Integration",
+              "es": "NR-09 Actualizada: Evaluación y Control de Exposición Ocupacional e Integración al PGR",
+            },
+            durationMinutes: 25,
+            contentType: "video",
+            videoUrl: "6caPMut3OMg",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Compreender a estrutura moderna da NR-09 após a transição do antigo PPRA para o PGR da NR-01, os objetivos da norma e a metodologia de identificação e avaliação das exposições ocupacionais.",
+                "en": "Understand the modernized NR-09 structure following the transition to NR-01 (PGR), regulatory objectives, and hazard assessment methodologies.",
+                "es": "Comprender la estructura actualizada de la NR-09 y su articulación con el PGR de la NR-01.",
+              },
+              introduction: {
+                "pt-BR": "Com a modernização das Normas Regulamentadoras, a NR-09 deixou de ser um programa estático em papel (o antigo PPRA) e passou a ser a norma técnica balizadora para avaliação e controle das exposições ocupacionais a agentes físicos, químicos e biológicos, subsidiando o Programa de Gerenciamento de Riscos (PGR) da NR-01.",
+                "en": "Under modern labor regulations, NR-09 serves as the technical guideline for assessing and controlling occupational exposures, directly feeding the Risk Management Program (PGR).",
+                "es": "La NR-09 es la norma técnica de referencia para la evaluación y control de exposiciones ambientales vinculada al PGR.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "O Papel da NR-09 e a Articulação com a NR-01 (GRO/PGR)",
+                    "en": "NR-09 Role and Alignment with NR-01 (GRO/PGR)",
+                    "es": "Rol de la NR-09 y Articulación con la NR-01 (GRO/PGR)",
+                  },
+                  body: {
+                    "pt-BR": "A NR-09 fornece os parâmetros técnicos e critérios de medição para:\n1. Identificação preliminar dos perigos nos ambientes de trabalho da RSS3;\n2. Avaliação das exposições ocupacionais aos agentes ambientais;\n3. Implantação de medidas preventivas antes que os limites de exposição sejam atingidos (nível de ação);\n4. Acompanhamento sistemático da eficácia dos controles adotados nas frentes operacionais.",
+                    "en": "NR-09 establishes technical criteria for preliminary hazard identification, exposure quantification, action levels, and control effectiveness monitoring.",
+                    "es": "La NR-09 define parámetros técnicos para identificar peligros, evaluar exposiciones y verificar la eficacia de los controles.",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "Avaliação Qualitativa vs. Avaliação Quantitativa",
+                    "en": "Qualitative vs. Quantitative Assessment",
+                    "es": "Evaluación Cualitativa vs. Cuantitativa",
+                  },
+                  body: {
+                    "pt-BR": "• Avaliação Qualitativa: Realizada na fase de reconhecimento para comprovar a presença ou ausência do agente, inspeção de FDS/FISPQ dos produtos químicos e caracterização das fontes emissoras;\n• Avaliação Quantitativa: Medição instrumental in loco (dosimetria de ruído, bombas gravimétricas para particulados, medidores de vibração e gases) necessária sempre que a avaliação qualitativa indicar probabilidade de exposição ou necessidade de comprovar a eficácia das proteções coletivas.",
+                    "en": "Qualitative assessment recognizes hazard sources and SDS data; quantitative assessment involves calibrated instruments (dosimeters, gravimetric sampling pumps).",
+                    "es": "La evaluación cualitativa reconoce el peligro; la cuantitativa mide instrumentalmente los niveles de exposición en campo.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "A NR-09 é a norma técnica que dita como avaliar e controlar os agentes ambientais inseridos no Inventário de Riscos do PGR.",
+                  "en": "NR-09 defines how environmental hazards must be evaluated and documented within the PGR Risk Inventory.",
+                  "es": "La NR-09 dicta cómo evaluar y controlar los agentes ambientales en el inventario del PGR.",
+                },
+                {
+                  "pt-BR": "O controle na fonte e as proteções coletivas (EPC) sempre prevalecem sobre a entrega isolada de EPI.",
+                  "en": "Source elimination and collective protections (EPC) always take precedence over PPE alone.",
+                  "es": "El control en el origen y las protecciones colectivas siempre prevalecen sobre el EPP.",
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: "mod-nr9-2",
+        order: 2,
+        title: {
+          "pt-BR": "Módulo 2: Agentes Físicos, Químicos e Biológicos e Medidas de Prevenção",
+          "en": "Module 2: Physical, Chemical & Biological Hazards & Preventative Measures",
+          "es": "Módulo 2: Agentes Físicos, Químicos y Biológicos y Medidas Preventivas",
+        },
+        lessons: [
+          {
+            id: "les-nr9-2-1",
+            order: 1,
+            title: {
+              "pt-BR": "NR 09 na Prática: Agentes Ambientais, Nível de Ação, Limites de Tolerância e Controle de Riscos",
+              "en": "NR 09 in Practice: Environmental Hazards, Action Levels, Threshold Limits & Risk Control",
+              "es": "NR 09 en la Práctica: Agentes Ambientales, Nivel de Acción, Límites de Tolerancia y Control",
+            },
+            durationMinutes: 28,
+            contentType: "video",
+            videoUrl: "hy-etKTjDrs",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Diferenciar agentes físicos, químicos e biológicos em operações industriais, compreender o conceito de Nível de Ação (50% do Limite de Tolerância) e aplicar as medidas de controle hierarquizadas.",
+                "en": "Differentiate physical, chemical, and biological agents, understand Action Levels (50% threshold limit), and enforce hierarchical controls.",
+                "es": "Diferenciar agentes físicos, químicos y biológicos, comprender el Nivel de Acción y aplicar controles.",
+              },
+              introduction: {
+                "pt-BR": "Nas operações industriais da RSS3 (como hidrojateamento, tratamento de superfícies e manutenção em fábricas de celulose), os colaboradores interagem com ruído contínuo de motobombas, névoas de solventes, vapores de tintas epóxi e particulados respiráveis. Saber identificar esses riscos e respeitar os limites de exposição salva a saúde a curto e longo prazo.",
+                "en": "In RSS3 heavy industrial operations, personnel face motor pump noise, solvent mists, epoxy vapors, and respirable dust. Understanding exposure thresholds prevents occupational diseases.",
+                "es": "En las operaciones industriales de RSS3, los trabajadores enfrentan ruido, nieblas de solventes y polvos químicos.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Classificação dos Agentes Ambientais",
+                    "en": "Environmental Agent Classification",
+                    "es": "Clasificación de Agentes Ambientales",
+                  },
+                  body: {
+                    "pt-BR": "• Agentes Físicos: Ruído contínuo/intermitente e de impacto, vibrações de corpo inteiro (VCI) e mãos/braços (VMB), temperaturas extremas (calor/frio), radiações ionizantes e não ionizantes;\n• Agentes Químicos: Poeiras minerais/respiráveis, fumos metálicos de solda, névoas ácidas/alcalinas, gases (ex: H2S em celulose) e vapores orgânicos de tintas e desengraxantes;\n• Agentes Biológicos: Bactérias, fungos, vírus e parasitas (frequentes em manutenção de efluentes, hidrovácuo e limpeza de lagoas industriais).",
+                    "en": "Physical: noise, vibration, thermal stress; Chemical: dusts, fumes, vapors, toxic gases; Biological: bacteria, fungi in wastewater and lagoons.",
+                    "es": "Físicos: ruido, vibración; Químicos: polvos, vapores, gases; Biológicos: bacterias y hongos en plantas de efluentes.",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "Limite de Tolerância (LT) vs. Nível de Ação (NA)",
+                    "en": "Threshold Limit Value (TLV) vs. Action Level (AL)",
+                    "es": "Límite de Tolerancia vs. Nivel de Acción",
+                  },
+                  body: {
+                    "pt-BR": "• Limite de Tolerância (LT): Concentração ou intensidade máxima do agente que a maioria dos trabalhadores pode estar exposta sem sofrer danos à saúde durante sua vida laboral (conforme NR-15 e ACGIH);\n• Nível de Ação (NA): Valor a partir do qual devem ser iniciadas ações preventivas para minimizar a probabilidade de que as exposições ultrapassem os limites de tolerância. Regra geral: corresponde a 50% da dose/concentração do limite de tolerância (ou 80 dB(A) para ruído, onde a dose diária atinge 50%). Ao atingir o Nível de Ação, a RSS3 inicia monitoramento periódico, exames médicos e controles preventivos.",
+                    "en": "Threshold Limit is the maximum safe exposure; Action Level triggers preventive actions (monitoring, medical surveillance) at 50% of the threshold limit (e.g. 80 dBA for noise).",
+                    "es": "El Límite de Tolerancia es el tope máximo; el Nivel de Acción (50% del límite o 80 dBA) exige iniciar medidas preventivas.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "O Nível de Ação serve para agir preventivamente antes que o colaborador adoeça ou atinja o limite máximo legal de tolerância.",
+                  "en": "Action Levels serve as an early warning trigger before exposure breaches legal threshold limits.",
+                  "es": "El Nivel de Acción permite actuar preventivamente antes de superar el límite de tolerancia.",
+                },
+                {
+                  "pt-BR": "Protetores auriculares, máscaras respiratórias e luvas químicas devem ser especificados com base nas concentrações quantificadas no ambiente.",
+                  "en": "PPE such as respirators and hearing protectors must be specified based on verified environmental monitoring data.",
+                  "es": "Los EPP respiratorios y auditivos deben seleccionarse según las concentraciones medidas en el área.",
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+    finalAssessment: {
+      id: "exam-nr9-agentes",
+      order: 1,
+      title: {
+        "pt-BR": "Avaliação Formal Teórica de NR-09: Avaliação e Controle de Agentes Ambientais",
+        "en": "Formal Theoretical Assessment: NR-09 Environmental Exposure & Control",
+        "es": "Evaluación Teórica Formal: NR-09 Evaluación y Control de Agentes Ambientales",
+      },
+      description: {
+        "pt-BR": "Exame de conformidade teórica da NR-09: integração com o PGR da NR-01, agentes físicos/químicos/biológicos, Nível de Ação e Limites de Tolerância.",
+        "en": "Regulatory theoretical exam: NR-09 integration with NR-01 (PGR), hazard classifications, Action Levels, and Threshold Limits.",
+        "es": "Examen de cumplimiento teórico de la NR-09: articulación con el PGR, clasificación de agentes, Nivel de Acción y Límites de Tolerancia.",
+      },
+      scope: "course",
+      estimatedMinutes: 20,
+      questionsCount: 5,
+      passingScorePercent: 70,
+      maxAttempts: 3,
+      isAvailable: true,
+      availabilityNotice: {
+        "pt-BR": "Avaliação liberada após a conclusão dos 2 módulos teóricos de NR-09.",
+        "en": "Exam available upon completion of both NR-09 theoretical modules.",
+        "es": "Evaluación habilitada tras completar los 2 módulos de NR-09.",
+      },
+      questions: [
+        {
+          id: "q-nr9-1",
+          order: 1,
+          question: {
+            "pt-BR": "1. Qual é a principal relação entre a NR-09 e a NR-01 (Gerenciamento de Riscos Ocupacionais / PGR)?",
+            "en": "1. What is the primary relationship between NR-09 and NR-01 (GRO / PGR)?",
+            "es": "1. ¿Cuál es la principal relación entre la NR-09 y la NR-01 (PGR)?",
+          },
+          options: [
+            {
+              id: "q1-a",
+              text: {
+                "pt-BR": "A NR-09 estabelece os requisitos técnicos e critérios para identificar, avaliar e controlar as exposições ocupacionais a agentes físicos, químicos e biológicos que alimentam o inventário de riscos do PGR.",
+                "en": "NR-09 establishes technical requirements to identify, evaluate, and control environmental agents feeding the PGR risk inventory.",
+                "es": "La NR-09 define los criterios técnicos para evaluar y controlar agentes ambientales que alimentan el inventario del PGR.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! A NR-09 subsidia tecnicamente o Programa de Gerenciamento de Riscos (PGR) da NR-01 com metodologias de higiene ocupacional.",
+                "en": "Correct! NR-09 technically feeds the NR-01 PGR with industrial hygiene methodology.",
+                "es": "¡Correcto! La NR-09 aporta los criterios técnicos de higiene ocupacional para el PGR.",
+              },
+            },
+            {
+              id: "q1-b",
+              text: {
+                "pt-BR": "A NR-09 substitui completamente a NR-01, tornando desnecessária a existência do PGR nas indústrias.",
+                "en": "NR-09 completely replaces NR-01, making the PGR obsolete.",
+                "es": "La NR-09 sustituye por completo a la NR-01 en las industrias.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! A NR-01 é a norma geral de gestão de riscos; a NR-09 é a norma técnica específica para agentes físicos, químicos e biológicos.",
+                "en": "Incorrect! NR-01 governs general risk management while NR-09 provides technical exposure standards.",
+                "es": "Incorrecto. La NR-01 es la norma general y la NR-09 es la norma técnica de agentes ambientales.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr9-2",
+          order: 2,
+          question: {
+            "pt-BR": "2. O que representa o 'Nível de Ação' (NA) na higiene ocupacional e qual a sua finalidade preventiva?",
+            "en": "2. What is the 'Action Level' (AL) in industrial hygiene and what is its preventive purpose?",
+            "es": "2. ¿Qué representa el 'Nivel de Acción' en higiene ocupacional y cuál es su fin preventivo?",
+          },
+          options: [
+            {
+              id: "q2-a",
+              text: {
+                "pt-BR": "É o limite a partir do qual o trabalhador deve ser imediatamente demitido por excesso de contaminação.",
+                "en": "It is the threshold where workers must be immediately terminated due to exposure.",
+                "es": "Es el límite a partir del cual el trabajador debe ser despedido.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto e absurdo! O nível de ação é uma salvaguarda técnica de saúde preventiva.",
+                "en": "Incorrect! The action level is a health protection benchmark.",
+                "es": "Incorrecto. Es un parámetro preventivo de salud laboral.",
+              },
+            },
+            {
+              id: "q2-b",
+              text: {
+                "pt-BR": "É o valor (geralmente 50% do Limite de Tolerância) a partir do qual devem ser iniciadas ações preventivas (como monitoramento periódico e exames médicos) para evitar que a exposição ultrapasse o limite de tolerância.",
+                "en": "It is the value (typically 50% of TLV) above which preventive measures (monitoring, surveillance) must be initiated to prevent exceeding threshold limits.",
+                "es": "Es el valor (generalmente 50% del Límite de Tolerancia) que activa medidas preventivas para evitar que se supere el límite máximo.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! O nível de ação funciona como um alarme precoce de gestão de saúde para mitigar a exposição antes que ocorra dano ou ultrapassagem do limite legal.",
+                "en": "Correct! Action levels serve as early warning benchmarks to prevent occupational illnesses.",
+                "es": "¡Correcto! El nivel de acción permite intervenir antes de que se alcancen concentraciones perjudiciales.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr9-3",
+          order: 3,
+          question: {
+            "pt-BR": "3. Em qual situação a avaliação quantitativa das exposições ocupacionais deve ser obrigatoriamente realizada pela organização?",
+            "en": "3. When must quantitative assessment of occupational exposure be mandatorily performed by the company?",
+            "es": "3. ¿Cuándo debe realizarse obligatoriamente la evaluación cuantitativa de exposiciones?",
+          },
+          options: [
+            {
+              id: "q3-a",
+              text: {
+                "pt-BR": "Sempre que a avaliação qualitativa preliminar indicar que há probabilidade de exposição a agentes ambientais que exijam comprovação da eficácia dos controles ou controle sistemático das doses.",
+                "en": "Whenever preliminary qualitative evaluation indicates potential environmental exposure requiring control verification or dosage tracking.",
+                "es": "Cuando la evaluación cualitativa indique probabilidad de exposición que requiera verificar la eficacia de los controles.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! A quantificação com instrumentos calibrados comprova se os controles de engenharia e EPIs mantêm as doses abaixo dos limites legais.",
+                "en": "Correct! Quantitative instrument sampling proves whether controls keep exposure under legal thresholds.",
+                "es": "¡Correcto! Las mediciones con instrumentos calibrados verifican la efectividad de los controles.",
+              },
+            },
+            {
+              id: "q3-b",
+              text: {
+                "pt-BR": "Nunca, pois uma simples vistoria visual sem instrumentos é suficiente para todos os agentes químicos e ruído.",
+                "en": "Never, since visual checks without tools are sufficient for all chemicals and noise.",
+                "es": "Nunca, ya que la inspección visual es suficiente para ruido y químicos.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! Ruído, vapores e poeiras respiráveis são invisíveis ou impossíveis de dosar sem equipamentos específicos de higiene ocupacional.",
+                "en": "Incorrect! Airborne dusts, noise levels, and vapors cannot be quantified by eye.",
+                "es": "Incorrecto. Los contaminantes ambientales requieren instrumentos de medición específicos.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr9-4",
+          order: 4,
+          question: {
+            "pt-BR": "4. Ruído de motobombas de hidrojato, vibração de ferramentas e calor radiante em caldeiras são classificados em qual categoria de agentes ambientais?",
+            "en": "4. Hydroblasting pump noise, tool vibrations, and radiant heat near boilers fall under which environmental hazard category?",
+            "es": "4. El ruido de bombas de hidrojet, vibraciones y calor en calderas se clasifican como:",
+          },
+          options: [
+            {
+              id: "q4-a",
+              text: {
+                "pt-BR": "Agentes Físicos.",
+                "en": "Physical Agents.",
+                "es": "Agentes Físicos.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! Ruído, vibrações, calor, frio, radiações e pressões anormais são modalidades de energia classificadas como agentes físicos.",
+                "en": "Correct! Noise, vibrations, and thermal energies are categorized as physical agents.",
+                "es": "¡Correcto! Ruido, vibraciones y calor son agentes físicos.",
+              },
+            },
+            {
+              id: "q4-b",
+              text: {
+                "pt-BR": "Agentes Biológicos.",
+                "en": "Biological Agents.",
+                "es": "Agentes Biológicos.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! Agentes biológicos são micro-organismos vivos como bactérias, fungos, vírus e parasitas.",
+                "en": "Incorrect! Biological agents are living microorganisms like viruses and bacteria.",
+                "es": "Incorrecto. Los agentes biológicos son bacterias, hongos o virus.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr9-5",
+          order: 5,
+          question: {
+            "pt-BR": "5. Conforme a diretriz regulamentar e de integridade do RSS3 Treinamentos, este certificado teórico online substitui avaliações ambientais in loco, medições de higiene e o exame clínico ocupacional do ASO?",
+            "en": "5. According to regulatory compliance and RSS3 integrity bylaws, does this online theoretical certificate replace field environmental hygiene testing or occupational medical exams (ASO)?",
+            "es": "5. ¿Este certificado teórico online exime de las mediciones ambientales en planta y del examen médico ocupacional (ASO)?",
+          },
+          options: [
+            {
+              id: "q5-a",
+              text: {
+                "pt-BR": "NÃO. Este curso atesta conhecimento teórico sobre a norma NR-09. Ele não substitui os laudos técnicos de higiene ocupacional, as dosimetrias em campo e nem a avaliação médica com ASO emitida pelo médico do trabalho.",
+                "en": "NO. This course certifies theoretical knowledge of NR-09. It does not replace field hygiene monitoring, engineering controls, or medical clearance (ASO).",
+                "es": "NO. Este curso avala conocimiento teórico sobre la NR-09. No reemplaza las mediciones ambientales ni el examen médico ocupacional del ASO.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! O EAD corporativo promove qualificação conceitual, mas a conformidade legal exige laudos técnicos e exames clínicos periódicos em campo.",
+                "en": "Correct! Online education provides conceptual competence while legal compliance requires on-site monitoring and clinical exams.",
+                "es": "¡Correcto! El curso online capacita conceptualmente, pero las mediciones e inspecciones en planta son indispensables.",
+              },
+            },
+            {
+              id: "q5-b",
+              text: {
+                "pt-BR": "SIM. O colaborador certificado no portal não precisa mais usar protetor auricular nem fazer exames audiológicos na empresa.",
+                "en": "YES. Certified employees no longer need hearing protection or audiometry exams.",
+                "es": "SÍ. El trabajador certificado ya no requiere EPP ni exámenes médicos.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto e ilegal! O treinamento reforça a necessidade contínua de proteção e monitoramento da saúde.",
+                "en": "Incorrect and illegal! Training reinforces the essential requirement for continuous health monitoring and PPE compliance.",
+                "es": "Incorrecto y contrario a la ley.",
               },
             },
           ],
