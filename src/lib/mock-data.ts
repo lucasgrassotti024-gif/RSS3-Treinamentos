@@ -114,6 +114,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
     modulesCount: 2,
     lessonsCount: 4,
     thumbnailGradient: "from-cyan-700 to-blue-950",
+    coverImage: "/images/courses/hidrojato.jpg",
     badgeCode: "HJ-UAP",
     updatedAtDate: "2026-10-15",
     modules: [
@@ -600,6 +601,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
     modulesCount: 4,
     lessonsCount: 10,
     thumbnailGradient: "from-amber-600 to-orange-950",
+    coverImage: "/images/courses/pintura.jpg",
     badgeCode: "PINT-IND",
     updatedAtDate: "2026-10-15",
     modules: [
@@ -1656,6 +1658,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
     modulesCount: 5,
     lessonsCount: 9,
     thumbnailGradient: "from-amber-600 to-yellow-800",
+    coverImage: "/images/courses/andaime.jpg",
     badgeCode: "AND-IND",
     updatedAtDate: "2026-10-15",
     modules: [
@@ -2771,6 +2774,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
     modulesCount: 2,
     lessonsCount: 5,
     thumbnailGradient: "from-blue-700 to-indigo-950",
+    coverImage: "/images/courses/nr6.jpg",
     badgeCode: "NR-06",
     updatedAtDate: "2026-10-16",
     modules: [
@@ -3366,6 +3370,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
     modulesCount: 2,
     lessonsCount: 6,
     thumbnailGradient: "from-amber-600 to-slate-950",
+    coverImage: "/images/courses/nr35.jpg",
     badgeCode: "NR-35",
     updatedAtDate: "2026-10-16",
     modules: [
@@ -4038,6 +4043,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
     modulesCount: 2,
     lessonsCount: 2,
     thumbnailGradient: "from-emerald-700 to-teal-950",
+    coverImage: "/images/courses/nr9.jpg",
     badgeCode: "NR-09",
     updatedAtDate: "2026-10-16",
     modules: [
@@ -4443,6 +4449,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
     modulesCount: 3,
     lessonsCount: 8,
     thumbnailGradient: "from-yellow-600 via-amber-700 to-slate-950",
+    coverImage: "/images/courses/nr10.jpg",
     badgeCode: "NR-10",
     updatedAtDate: "2026-10-16",
     modules: [

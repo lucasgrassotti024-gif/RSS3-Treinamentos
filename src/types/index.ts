@@ -144,6 +144,7 @@ export interface CourseDemonstration {
   finalAssessment?: CurriculumExamItem;
   assessments?: CurriculumExamItem[];
   thumbnailGradient: string;
+  coverImage?: string;
   badgeCode?: string;
   updatedAtDate: string; // ISO date string (YYYY-MM-DD)
 }

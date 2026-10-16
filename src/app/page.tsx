@@ -2,6 +2,7 @@
 
 import React, { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useApp } from "@/context/app-context";
 import { DEMO_COURSES } from "@/lib/mock-data";
 import {
@@ -195,12 +196,22 @@ export default function HomePage() {
               className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-lg transition-all flex flex-col justify-between group"
             >
               <div>
-                {/* Topo com gradiente institucional e badges operacionais */}
-                <div className={`h-32 bg-gradient-to-r ${course.thumbnailGradient} p-4 flex flex-col justify-between text-white relative overflow-hidden`}>
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white/10 to-transparent pointer-events-none" />
+                {/* Topo com imagem de capa temática do curso e badges operacionais */}
+                <div className={`h-40 bg-gradient-to-r ${course.thumbnailGradient} p-4 flex flex-col justify-between text-white relative overflow-hidden`}>
+                  {course.coverImage && (
+                    <Image
+                      src={course.coverImage}
+                      alt={course.title[locale] || "Capa do curso"}
+                      fill
+                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  )}
+                  {/* Overlay gradiente para contraste e legibilidade perfeita */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/30 pointer-events-none" />
 
                   <div className="flex items-center justify-between relative z-10">
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-black/40 backdrop-blur-xs uppercase tracking-wider">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-black/60 backdrop-blur-md uppercase tracking-wider border border-white/10 text-slate-100">
                       {course.schoolName[locale]}
                     </span>
                     {course.badgeCode && (
@@ -210,12 +221,12 @@ export default function HomePage() {
                     )}
                   </div>
 
-                  <div className="flex items-center justify-between text-xs font-semibold opacity-95 relative z-10">
-                    <span className="inline-flex items-center gap-1">
+                  <div className="flex items-center justify-between text-xs font-semibold opacity-95 relative z-10 text-slate-200">
+                    <span className="inline-flex items-center gap-1 bg-black/50 px-2 py-0.5 rounded backdrop-blur-xs">
                       <span className="w-1.5 h-1.5 rounded-full bg-cyan-300" />
                       {course.level === "advanced" ? "Avançado" : course.level}
                     </span>
-                    <span className="bg-black/30 px-2 py-0.5 rounded text-[10px]">
+                    <span className="bg-black/50 px-2 py-0.5 rounded text-[10px] backdrop-blur-xs">
                       Híbrido
                     </span>
                   </div>

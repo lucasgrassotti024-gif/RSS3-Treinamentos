@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { useApp } from "@/context/app-context";
 import { DEMO_COURSES } from "@/lib/mock-data";
@@ -114,27 +115,49 @@ export default function CourseDetailsClient({ courseId }: { courseId: string }) 
         </div>
       </div>
 
-      {/* Cabeçalho do Curso com Destaque Visual */}
-      <div className="p-6 sm:p-8 rounded-2xl border border-border bg-card shadow-sm space-y-6">
-        <div className="flex flex-wrap items-center gap-2 text-xs font-semibold">
-          <span className="px-2.5 py-1 rounded-md bg-blue-900 text-white font-bold uppercase tracking-wider text-[11px]">
-            {course.schoolName[locale]}
-          </span>
-          {course.isMandatory ? (
-            <span className="px-2.5 py-1 rounded-md bg-orange-100 dark:bg-orange-950/60 text-orange-700 dark:text-orange-300 font-bold">
-              {t.courseDetails.mandatoryBadge}
+      {/* Cabeçalho do Curso com Capa Temática e Destaque Visual */}
+      <div className="rounded-2xl border border-border bg-card shadow-sm overflow-hidden">
+        {course.coverImage && (
+          <div className="relative h-56 sm:h-72 w-full overflow-hidden bg-slate-950">
+            <Image
+              src={course.coverImage}
+              alt={course.title[locale] || "Capa do treinamento"}
+              fill
+              priority
+              className="object-cover object-center"
+              sizes="(max-width: 1200px) 100vw, 1200px"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-card via-black/40 to-transparent" />
+            <div className="absolute top-4 right-4 z-10">
+              {course.badgeCode && (
+                <span className="px-3 py-1 rounded-lg bg-black/70 backdrop-blur-md text-cyan-300 font-extrabold text-xs border border-cyan-500/30 shadow-lg">
+                  {course.badgeCode}
+                </span>
+              )}
+            </div>
+          </div>
+        )}
+
+        <div className="p-6 sm:p-8 space-y-6">
+          <div className="flex flex-wrap items-center gap-2 text-xs font-semibold">
+            <span className="px-2.5 py-1 rounded-md bg-blue-900 text-white font-bold uppercase tracking-wider text-[11px]">
+              {course.schoolName[locale]}
             </span>
-          ) : (
-            <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-              {t.courseDetails.optionalBadge}
-            </span>
-          )}
-          {course.badgeCode && (
-            <span className="px-2 py-1 rounded-md bg-secondary text-muted-foreground font-mono text-[10px]">
-              {course.badgeCode}
-            </span>
-          )}
-        </div>
+            {course.isMandatory ? (
+              <span className="px-2.5 py-1 rounded-md bg-orange-100 dark:bg-orange-950/60 text-orange-700 dark:text-orange-300 font-bold">
+                {t.courseDetails.mandatoryBadge}
+              </span>
+            ) : (
+              <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                {t.courseDetails.optionalBadge}
+              </span>
+            )}
+            {course.badgeCode && (
+              <span className="px-2 py-1 rounded-md bg-secondary text-muted-foreground font-mono text-[10px]">
+                {course.badgeCode}
+              </span>
+            )}
+          </div>
 
         <div className="space-y-3">
           <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
@@ -210,6 +233,7 @@ export default function CourseDetailsClient({ courseId }: { courseId: string }) 
               {metrics.completedCount} / {metrics.totalLessons} {t.common.lessons} ({metrics.progressPercent}%)
             </span>
           </div>
+        </div>
         </div>
       </div>
 

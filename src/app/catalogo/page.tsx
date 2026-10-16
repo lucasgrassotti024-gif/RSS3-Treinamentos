@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useApp } from "@/context/app-context";
 import { DEMO_COURSES, DEMO_SCHOOLS } from "@/lib/mock-data";
 import { CourseModality } from "@/types";
@@ -237,9 +238,21 @@ export default function CatalogPage() {
               className="rounded-xl border border-border bg-card overflow-hidden hover:shadow-lg transition-all flex flex-col justify-between group"
             >
               <div>
-                <div className={`h-32 bg-gradient-to-r ${course.thumbnailGradient} p-4 flex flex-col justify-between text-white relative`}>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-black/40 backdrop-blur-xs uppercase tracking-wider">
+                <div className={`h-40 bg-gradient-to-r ${course.thumbnailGradient} p-4 flex flex-col justify-between text-white relative overflow-hidden`}>
+                  {course.coverImage && (
+                    <Image
+                      src={course.coverImage}
+                      alt={course.title[locale] || "Capa do curso"}
+                      fill
+                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  )}
+                  {/* Overlay gradiente escuro para legibilidade perfeita dos badges */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/30 pointer-events-none" />
+
+                  <div className="flex items-center justify-between relative z-10">
+                    <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-black/60 backdrop-blur-md uppercase tracking-wider text-slate-100 border border-white/10">
                       {course.schoolName[locale]}
                     </span>
                     <div className="flex items-center gap-1.5">
@@ -249,15 +262,15 @@ export default function CatalogPage() {
                         </span>
                       )}
                       {course.badgeCode && (
-                        <span className="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-blue-950/70 text-slate-200">
+                        <span className="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-blue-950/80 text-cyan-300 border border-cyan-500/30">
                           {course.badgeCode}
                         </span>
                       )}
                     </div>
                   </div>
-                  <div className="flex items-center justify-between text-xs font-semibold opacity-95">
-                    <span>{t.common.level}: {t.common.levels[course.level]}</span>
-                    <span>{t.common.modalities[course.modality as CourseModality]}</span>
+                  <div className="flex items-center justify-between text-xs font-semibold opacity-95 relative z-10 text-slate-200">
+                    <span className="bg-black/50 px-2 py-0.5 rounded backdrop-blur-xs">{t.common.level}: {t.common.levels[course.level]}</span>
+                    <span className="bg-black/50 px-2 py-0.5 rounded backdrop-blur-xs">{t.common.modalities[course.modality as CourseModality]}</span>
                   </div>
                 </div>
 

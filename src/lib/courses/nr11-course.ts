@@ -49,6 +49,7 @@ export const nr11CourseData: CourseDemonstration = {
   modulesCount: 3,
   lessonsCount: 15,
   thumbnailGradient: "from-amber-600 via-orange-700 to-slate-950",
+  coverImage: "/images/courses/nr11.jpg",
   badgeCode: "NR-11",
   updatedAtDate: "2026-10-16",
   modules: [
