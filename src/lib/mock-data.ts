@@ -1,4 +1,5 @@
 import { CourseDemonstration, SchoolCategory, UserDemonstration } from "@/types";
+import { nr11CourseData } from "./courses/nr11-course";
 
 /**
  * Escolas Oficiais Ativas da RSS3 Soluções Industriais
@@ -66,7 +67,7 @@ export const DEMO_SCHOOLS: SchoolCategory[] = [
       "es": "Directrices de la NR-6, selección, conservación, inspección y responsabilidades legales del EPP en operaciones de alto riesgo.",
     },
     iconName: "ShieldCheck",
-    coursesCount: 4,
+    coursesCount: 5,
     color: "#2563eb", // Blue 600
   },
 ];
@@ -5130,6 +5131,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
       ],
     },
   },
+  nr11CourseData,
 ];
 
 export const DEMO_PERSONAS: UserDemonstration[] = [];
