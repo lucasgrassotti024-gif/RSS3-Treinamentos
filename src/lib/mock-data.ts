@@ -66,7 +66,7 @@ export const DEMO_SCHOOLS: SchoolCategory[] = [
       "es": "Directrices de la NR-6, selección, conservación, inspección y responsabilidades legales del EPP en operaciones de alto riesgo.",
     },
     iconName: "ShieldCheck",
-    coursesCount: 1,
+    coursesCount: 2,
     color: "#2563eb", // Blue 600
   },
 ];
@@ -3326,6 +3326,678 @@ export const DEMO_COURSES: CourseDemonstration[] = [
                 "pt-BR": "Incorreto e expressamente proibido pelas normas regulamentadoras e pelo código de segurança da RSS3.",
                 "en": "Incorrect and strictly prohibited by occupational safety standards and RSS3 safety bylaws.",
                 "es": "Incorrecto y prohibido por las normas reguladoras y directrices de RSS3.",
+              },
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    id: "c-nr35-trabalho-altura",
+    slug: "nr-35-trabalho-em-altura-seguranca-operacional",
+    title: {
+      "pt-BR": "NR-35: Trabalho em Altura e Segurança Operacional",
+      "en": "NR-35: Work at Height & Operational Safety",
+      "es": "NR-35: Trabajo en Altura y Seguridad Operativa",
+    },
+    description: {
+      "pt-BR": "Capacitação completa em NR-35: conceitos fundamentais, análise de risco, sistemas de proteção contra quedas (SPQ), inspeção de EPIs de altura, nós, ancoragens e noções de resgate e emergência.",
+      "en": "Comprehensive NR-35 work at height training: hazard analysis, fall protection systems, harness & lanyard inspection, anchor points, and emergency rescue concepts.",
+      "es": "Capacitación en NR-35: análisis de riesgos, sistemas de protección contra caídas, inspección de arneses, anclajes y nociones de rescate.",
+    },
+    schoolId: "seguranca-epi",
+    schoolName: {
+      "pt-BR": "Segurança do Trabalho e EPIs",
+      "en": "Occupational Safety & PPE",
+      "es": "Seguridad Laboral y EPP",
+    },
+    workloadHours: 16,
+    level: "intermediate",
+    modality: "hybrid",
+    isMandatory: true,
+    mandatoryFor: ["Montador de Andaime", "Operador de Hidrojato", "Pintor Industrial", "Líder de Frente", "Fiscal de Segurança"],
+    targetAudience: {
+      "pt-BR": "Trabalhadores, técnicos, operadores e encarregados da RSS3 que realizam ou supervisionam trabalhos com diferença de nível superior a 2,00 metros em plantas industriais e paradas de manutenção.",
+      "en": "RSS3 frontline operators, technicians, and foremen performing or supervising tasks at heights exceeding 2.0 meters.",
+      "es": "Trabajadores y supervisores de RSS3 que realizan labores con diferencia de nivel superior a 2 metros.",
+    },
+    modulesCount: 2,
+    lessonsCount: 6,
+    thumbnailGradient: "from-amber-600 to-slate-950",
+    badgeCode: "NR-35",
+    updatedAtDate: "2026-10-16",
+    modules: [
+      {
+        id: "mod-nr35-1",
+        order: 1,
+        title: {
+          "pt-BR": "Módulo 1: Fundamentos Normativos, Riscos e Sistemas de Proteção contra Quedas",
+          "en": "Module 1: Regulatory Fundamentals, Hazards & Fall Protection Systems",
+          "es": "Módulo 1: Fundamentos Normativos, Riesgos y Sistemas Anticaídas",
+        },
+        lessons: [
+          {
+            id: "les-nr35-1-1",
+            order: 1,
+            title: {
+              "pt-BR": "NR 35: Introdução e Normas Aplicáveis ao Trabalho em Altura",
+              "en": "NR 35: Introduction & Standards Applicable to Work at Height",
+              "es": "NR 35: Introducción y Normativa Aplicable al Trabajo en Altura",
+            },
+            durationMinutes: 20,
+            contentType: "video",
+            videoUrl: "QclDPxHakNY",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Compreender a definição de trabalho em altura pela NR-35, o campo de aplicação e as responsabilidades legais do empregador e do trabalhador.",
+                "en": "Understand NR-35 definition of work at height (>2.0m), scope of application, and regulatory safety responsibilities.",
+                "es": "Comprender la definición de trabajo en altura según la NR-35 y las responsabilidades de segurança.",
+              },
+              introduction: {
+                "pt-BR": "Considera-se trabalho em altura toda atividade executada acima de 2,00 m (dois metros) do nível inferior, onde haja risco de queda. A NR-35 estabelece os requisitos mínimos e as medidas de proteção para o trabalho em altura, envolvendo o planejamento, a organização e a execução.",
+                "en": "Work at height is defined as any activity executed above 2.0 meters with fall risk. NR-35 governs planning, organization, and execution.",
+                "es": "Se considera trabajo en altura toda actividad realizada por encima de 2,00 metros del nivel inferior con riesgo de caída.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Critério dos 2 Metros e Hierarquia das Ações",
+                    "en": "The 2-Meter Rule & Action Hierarchy",
+                    "es": "El Criterio de 2 Metros y Jerarquía de Acciones",
+                  },
+                  body: {
+                    "pt-BR": "A hierarquia de segurança em altura determina:\n1. Evitar o trabalho em altura sempre que existir meio alternativo de execução no nível do solo;\n2. Impedir a queda de trabalhadores através de proteções coletivas (guarda-corpos, telas);\n3. Minimizar as consequências da queda caso não possa ser evitada (sistemas de retenção com absorvedores de energia).",
+                    "en": "1. Avoid height work if possible; 2. Prevent falls via collective systems; 3. Mitigate fall impact using energy absorbers.",
+                    "es": "1. Evitar el trabajo en altura; 2. Impedir la caída con protecciones colectivas; 3. Minimizar las consecuencias.",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "Aptidão Médica e Capacitação",
+                    "en": "Medical Clearance & Training",
+                    "es": "Aptitud Médica y Capacitación",
+                  },
+                  body: {
+                    "pt-BR": "O trabalhador só é considerado autorizado para trabalho em altura se possuir capacitação teórica e prática (com carga horária mínima de 8 horas) e Atestado de Saúde Ocupacional (ASO) específico com avaliação clínica e psicossocial para altura dentro da validade.",
+                    "en": "Workers must hold valid occupational medical clearance (ASO) and certified theoretical + practical qualification.",
+                    "es": "El trabajador debe contar con ASO específico y capacitación teórica y práctica aprobada.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "Atividades acima de 2 metros exigem planejamento obrigatório e medidas preventivas de retenção ou restrição de queda.",
+                  "en": "Tasks above 2m require formal planning and certified fall prevention/mitigation systems.",
+                  "es": "Las tareas por encima de 2 metros exigen planificación y sistemas anticaídas certificados.",
+                },
+                {
+                  "pt-BR": "A conclusão teórica online não substitui o treinamento prático presencial com simulador e ancoragens.",
+                  "en": "Online theory does not replace in-person practical hands-on training with anchors and harness.",
+                  "es": "La teoría online no sustituye la práctica presencial con equipos y anclajes.",
+                },
+              ],
+            },
+          },
+          {
+            id: "les-nr35-1-2",
+            order: 2,
+            title: {
+              "pt-BR": "NR 35 Módulo 1: Análise de Risco (AR) e Permissão de Trabalho (PT)",
+              "en": "NR 35 Module 1: Hazard Analysis & Work Permit Procedures",
+              "es": "NR 35 Módulo 1: Análisis de Riesgo y Permiso de Trabajo",
+            },
+            durationMinutes: 25,
+            contentType: "video",
+            videoUrl: "CR5xDUX9_DI",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Dominar a elaboração e aplicação da Análise de Risco (AR), a emissão da Permissão de Trabalho (PT) e as condições impeditivas meteorológicas e operacionais.",
+                "en": "Master Job Hazard Analysis (JHA), Work Permits (PT), and environmental/weather stop-work conditions.",
+                "es": "Dominar el Análisis de Riesgo (AR), Permiso de Trabajo (PT) y condiciones de paralización por clima.",
+              },
+              introduction: {
+                "pt-BR": "Todo trabalho em altura deve ser precedido de Análise de Risco (AR) detalhada. Para atividades não rotineiras, a emissão e validação formal da Permissão de Trabalho (PT) no local é obrigatória antes de qualquer subida.",
+                "en": "Every task at height must be preceded by a formal Risk Analysis and Work Permit for non-routine operations.",
+                "es": "Todo trabajo en altura debe contar con Análisis de Riesgo y Permiso de Trabajo formal antes del ascenso.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Fatores Obrigatórios na Análise de Risco (AR)",
+                    "en": "Mandatory Factors in Hazard Analysis",
+                    "es": "Factores Obligatorios en el Análisis de Riesgo",
+                  },
+                  body: {
+                    "pt-BR": "• Local da execução e proximidade de redes elétricas energizadas;\n• Pontos de ancoragem certificados e sua capacidade de carga;\n• Condições meteorológicas adversas (ventos fortes, chuvas torrenciais, descargas atmosféricas);\n• Risco de queda de materiais e ferramentas para os níveis inferiores (isolamento de área);\n• Zona Livre de Queda (ZLQ) disponível sob o trabalhador.",
+                    "en": "Inspect anchor capacity, overhead electrical lines, weather conditions, dropped object hazards, and Fall Clearance.",
+                    "es": "Verificar anclajes, líneas eléctricas, clima, caída de herramientas y Zona Libre de Caída (ZLQ).",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "Condições Impeditivas e Direito de Recusa",
+                    "en": "Impediment Conditions & Stop-Work Authority",
+                    "es": "Condiciones Impeditivas y Derecho de Rechazo",
+                  },
+                  body: {
+                    "pt-BR": "Trabalhos em áreas externas devem ser imediatamente suspensos diante de ventos superiores aos limites do fabricante/procedimento, chuva com piso escorregadio, iluminação insuficiente ou falta de ponto de ancoragem seguro. O colaborador tem o dever de exercer o direito de recusa nessas condições.",
+                    "en": "Stop work immediately upon high winds, lightning, slippery surfaces, or missing structural anchors.",
+                    "es": "Detenga el trabajo ante vientos fuertes, lluvia, piso resbaloso o falta de anclajes seguros.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "A Análise de Risco deve considerar não apenas o risco do trabalhador cair, mas também o risco de queda de ferramentas sobre terceiros.",
+                  "en": "Risk analysis must consider both worker fall hazards and dropped objects injuring ground personnel.",
+                  "es": "El análisis de riesgo debe contemplar la caída del trabajador y de objetos sobre terceros.",
+                },
+              ],
+            },
+          },
+          {
+            id: "les-nr35-1-3",
+            order: 3,
+            title: {
+              "pt-BR": "NR 35 Módulo 2: Sistemas de Proteção contra Quedas (SPQ) e Zona Livre de Queda (ZLQ)",
+              "en": "NR 35 Module 2: Fall Protection Systems (FPS) & Fall Clearance Calculation",
+              "es": "NR 35 Módulo 2: Sistemas Anticaídas y Cálculo de la Zona Libre de Caída",
+            },
+            durationMinutes: 25,
+            contentType: "video",
+            videoUrl: "GoWe4tXoaok",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Compreender os componentes do Sistema de Proteção contra Quedas (SPQ), fator de queda e como calcular a Zona Livre de Queda (ZLQ).",
+                "en": "Understand Fall Protection System components, Fall Factor mechanics, and how to compute Fall Clearance.",
+                "es": "Comprender componentes del SPQ, factor de caída y cálculo de la Zona Libre de Caída (ZLQ).",
+              },
+              introduction: {
+                "pt-BR": "O SPQ pode ser de retenção de queda (para travar o corpo com segurança após o início da queda) ou de restrição de movimentação (para impedir fisicamente que o trabalhador atinja a borda).",
+                "en": "Fall Protection Systems either arrest a fall safely or restrict movement preventing access to edges.",
+                "es": "El sistema anticaídas detiene la caída con seguridad o restringe el acceso al borde desprotegido.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Fatores de Queda (FQ 0, FQ 1 e FQ 2)",
+                    "en": "Fall Factors (FF 0, FF 1 & FF 2)",
+                    "es": "Factores de Caída (FC 0, FC 1 y FC 2)",
+                  },
+                  body: {
+                    "pt-BR": "• Fator 0: Ponto de ancoragem acima da cabeça do trabalhador (situação ideal, menor distância de queda livre e menor impacto no corpo);\n• Fator 1: Ponto de ancoragem na altura do anel dorsal do cinto (queda livre igual ao comprimento do talabarte);\n• Fator 2: Ponto de ancoragem nos pés do trabalhador (situação mais perigosa, maior impacto e maior distância de queda — DEVE SER EVITADO ao máximo).",
+                    "en": "Factor 0: Anchor above head (optimal); Factor 1: Anchor at dorsal ring; Factor 2: Anchor at feet (highest impact, avoid).",
+                    "es": "Factor 0: Anclaje sobre la cabeza (ideal); Factor 1: Anclaje al pecho; Factor 2: Anclaje a los pies (muy peligroso).",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "Cálculo da Zona Livre de Queda (ZLQ)",
+                    "en": "Calculating Total Fall Clearance",
+                    "es": "Cálculo de la Zona Libre de Caída (ZLQ)",
+                  },
+                  body: {
+                    "pt-BR": "ZLQ é a distância vertical mínima necessária entre o ponto de ancoragem e o solo ou obstáculo inferior para que o trabalhador não colida contra o chão em caso de queda:\nZLQ = Comprimento do Talabarte + Abertura do Absorvedor de Energia (desaceleração) + Altura do Trabalhador + Distância de Segurança (mínimo 1 metro).",
+                    "en": "Clearance = Lanyard length + Deceleration distance + Worker height + Safety safety margin (min 1m).",
+                    "es": "ZLQ = Longitud del cabo + Despliegue del absorbedor + Estatura del trabajador + Margen de segurança (mín 1m).",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "Nunca use talabarte duplo com absorvedor sem verificar se a ZLQ disponível é suficiente (geralmente exige pelo menos 5,5 a 6 metros livres).",
+                  "en": "Never use energy-absorbing lanyards without ensuring required clearance height (typically 5.5 - 6m).",
+                  "es": "Verifique siempre que la altura disponible sea suficiente para la apertura del absorbedor.",
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: "mod-nr35-2",
+        order: 2,
+        title: {
+          "pt-BR": "Módulo 2: Equipamentos, Inspeção Pré-Uso, Ancoragens e Plano de Emergência",
+          "en": "Module 2: Equipment, Pre-Use Inspection, Anchorages & Rescue Plan",
+          "es": "Módulo 2: Equipos, Inspección, Anclajes y Plan de Emergencia",
+        },
+        lessons: [
+          {
+            id: "les-nr35-2-1",
+            order: 1,
+            title: {
+              "pt-BR": "NR 35 Módulo 3: Cinto Paraquedista, Talabartes, Trava-Quedas e Conectores",
+              "en": "NR 35 Module 3: Full-Body Harness, Lanyards, Rope Grabs & Carabiners",
+              "es": "NR 35 Módulo 3: Arnés Tipo Paracaidista, Cabos de Vida, Frenos y Mosquetones",
+            },
+            durationMinutes: 25,
+            contentType: "video",
+            videoUrl: "Pn40szq2fR8",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Conhecer as características técnicas do cinto paraquedista, talabartes em 'Y', trava-quedas retráteis e para linha de vida, e mosquetões com trava dupla.",
+                "en": "Master technical specs of full-body harness, Y-lanyards, fall arresters, and double-action locking carabiners.",
+                "es": "Conocer especificaciones técnicas de arneses, cabos de vida en Y, frenos anticaídas y conectores.",
+              },
+              introduction: {
+                "pt-BR": "O cinto de segurança tipo paraquedista é o único modelo aprovado para retenção de quedas no Brasil. Cintos abdominais são estritamente proibidos para retenção, servindo unicamente para posicionamento de trabalho.",
+                "en": "Full-body harness is the only approved device for fall arrest. Waist belts are forbidden for fall arresting.",
+                "es": "El arnés de cuerpo entero es el único aprobado para detención de caídas. Los cinturones simples están prohibidos.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Pontos de Conexão do Cinto Paraquedista",
+                    "en": "Harness Connection Points",
+                    "es": "Puntos de Conexión del Arnés",
+                  },
+                  body: {
+                    "pt-BR": "• Ponto Dorsal (A): Destinado exclusivamente para conexão do sistema de retenção de quedas (talabartes e trava-quedas);\n• Ponto Peitoral / Esternal (A ou A/2): Utilizado para trava-quedas em linhas verticais rígidas (escadas tipo marinheiro) e resgate;\n• Pontos Laterais: Exclusivos para talabarte de posicionamento (NUNCA para retenção de queda);\n• Ponto Umbilical / Ventral: Utilizado em acesso por corda e descensões controladas.",
+                    "en": "Dorsal point (A) is for fall arrest; Sternal for ladder climbs; Lateral for work positioning only.",
+                    "es": "Punto dorsal (A) para detención; esternal para ascenso vertical; laterales solo para posicionamiento.",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "Critérios de Conectores (Mosquetões)",
+                    "en": "Carabiners & Connectors",
+                    "es": "Conectores y Mosquetones",
+                  },
+                  body: {
+                    "pt-BR": "Todos os mosquetões utilizados na RSS3 devem possuir sistema de trava de segurança com abertura em no mínimo 2 movimentos voluntários e independentes (ex: girar e abrir). Mosquetões sem rosca ou com trava simples não são permitidos em operações de risco.",
+                    "en": "Carabiners must feature automatic double-action locking mechanisms to prevent accidental rollout.",
+                    "es": "Los mosquetones deben contar con cierre automático de doble movimiento independiente.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "O cinto deve estar perfeitamente ajustado ao corpo do colaborador: folgas excessivas podem causar traumas severos nos órgãos e coluna durante a desaceleração.",
+                  "en": "Harness must fit snugly: excessive slack causes internal trauma during sudden deceleration.",
+                  "es": "El arnés debe estar bien ajustado al cuerpo para evitar lesiones severas en una caída.",
+                },
+              ],
+            },
+          },
+          {
+            id: "les-nr35-2-2",
+            order: 2,
+            title: {
+              "pt-BR": "NR 35 Módulo 4: Pontos de Ancoragem, Linhas de Vida e Inspeção Pré-Uso",
+              "en": "NR 35 Module 4: Anchor Points, Lifelines & Daily Pre-Use Inspection",
+              "es": "NR 35 Módulo 4: Puntos de Anclaje, Líneas de Vida e Inspección Previa",
+            },
+            durationMinutes: 25,
+            contentType: "video",
+            videoUrl: "uxxpCbQKyF8",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Aprender os critérios de seleção e certificação de pontos de ancoragem (NR-35 Anexo II), linhas de vida horizontais e verticais, e rotina de inspeção pré-uso.",
+                "en": "Learn anchor selection & certification criteria (Annex II), horizontal/vertical lifelines, and pre-use inspection.",
+                "es": "Aprender criterios de anclajes certificados (Anexo II), líneas de vida e inspección previa.",
+              },
+              introduction: {
+                "pt-BR": "O ponto de ancoragem é o elo estrutural que suportará toda a carga de impacto no momento da queda. Conectar-se a estruturas improvisadas, eletrocalhas ou tubulações de processo sem certificação é uma das principais causas de acidentes fatais.",
+                "en": "Anchors bear the entire impact load. Connecting to pipes, conduits, or uncertified structures is strictly prohibited.",
+                "es": "El punto de anclaje sostiene toda la fuerza de impacto. Está prohibido anclarse a tuberías o bandejas de cables.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Requisitos do Sistema de Ancoragem",
+                    "en": "Anchor System Requirements",
+                    "es": "Requisitos del Sistema de Anclaje",
+                  },
+                  body: {
+                    "pt-BR": "Conforme o Anexo II da NR-35, os pontos de ancoragem devem:\n• Ser selecionados ou projetados por profissional legalmente habilitado;\n• Suportar carga de no mínimo 1.500 kgf (15 kN) por trabalhador conectado ou 2.200 kgf para pontos estruturais;\n• Possuir marcação indelével com indicação de carga máxima e número de usuários simultâneos autorizados.",
+                    "en": "Anchors must be certified by a qualified engineer and support at least 15 kN (1,500 kgf) per connected worker.",
+                    "es": "Los anclajes deben soportar mínimo 15 kN por trabajador y estar avalados por un profesional calificado.",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "Inspeção Pré-Uso Obrigatória",
+                    "en": "Mandatory Pre-Use Inspection",
+                    "es": "Inspección Previa Obligatoria",
+                  },
+                  body: {
+                    "pt-BR": "Antes de cada jornada, o trabalhador deve verificar:\n• Fitas do cinto: cortes, desfiamentos, queimaduras químicas ou desgaste por atrito;\n• Costuras de segurança: linhas rompidas ou frouxas;\n• Peças metálicas: deformações, trincas, ferrugem ou rebarbas;\n• Indicadores de queda: se a etiqueta de impacto do cinto ou absorvedor estiver estourada, o equipamento deve ser descartado imediatamente.",
+                    "en": "Inspect webbing for cuts or chemical burns, check stitch integrity, inspect metal D-rings, and verify fall indicators.",
+                    "es": "Inspeccionar cintas, costuras, argollas metálicas y testigos de caída antes de cada uso.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "Equipamento que já suportou o impacto de uma queda real deve ser retirado de serviço e inutilizado imediatamente.",
+                  "en": "Any PPE that has arrested a fall must be immediately taken out of service and destroyed.",
+                  "es": "El equipo que haya soportado una caída real debe ser retirado e inutilizado de inmediato.",
+                },
+              ],
+            },
+          },
+          {
+            id: "les-nr35-2-3",
+            order: 3,
+            title: {
+              "pt-BR": "NR 35 Módulo 5: Suspensão Inerte, Noções de Resgate e Emergências em Altura",
+              "en": "NR 35 Module 5: Suspension Trauma, Rescue Principles & Emergency Procedures",
+              "es": "NR 35 Módulo 5: Trauma por Suspensión, Rescate y Emergencias en Altura",
+            },
+            durationMinutes: 25,
+            contentType: "video",
+            videoUrl: "OMG8HWycMMQ",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Compreender a gravidade da síndrome da suspensão inerte (trauma de suspensão), tempo crítico de resposta e as condutas de resgate e primeiros socorros.",
+                "en": "Understand orthostatic suspension trauma severity, critical rescue time window, and emergency first response.",
+                "es": "Comprender la gravedad del trauma por suspensión inerte, tiempos críticos de rescate y primeros auxilios.",
+              },
+              introduction: {
+                "pt-BR": "Mesmo após o cinto de segurança e o absorvedor evitarem a colisão contra o solo, o trabalhador suspenso e imóvel corre risco de morte em poucos minutos devido ao acúmulo de sangue venoso nos membros inferiores e à compressão das veias femorais.",
+                "en": "Even after successful fall arrest, an immobilized suspended worker faces fatal risks within minutes from venous pooling.",
+                "es": "Tras detener la caída, el trabajador suspendido corre peligro de muerte en pocos minutos por acumulación venosa.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "A Síndrome da Suspensão Inerte (Trauma de Suspensão)",
+                    "en": "Suspension Trauma Mechanics",
+                    "es": "Mecanismo del Trauma por Suspensión",
+                  },
+                  body: {
+                    "pt-BR": "Quando o corpo fica suspenso pelas fitas da virilha sem movimentação das pernas, a bomba muscular da panturrilha para de funcionar. O sangue oxigenado deixa de retornar adequadamente ao cérebro e coração, podendo levar ao desmaio em menos de 5 a 10 minutos e à parada cardíaca se o resgate demorar.\nO trabalhador consciente deve pedalar no ar ou apoiar os pés em uma fita estribo para aliviar a compressão.",
+                    "en": "Lack of leg movement causes venous pooling. Loss of consciousness can occur in 5-10 minutes. Use foot stirrups to relieve pressure.",
+                    "es": "La falta de movimiento muscular acumula sangre en las piernas. Se pierde el conocimiento en 5-10 minutos.",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "Plano de Resgate e Atendimento Inicial",
+                    "en": "Rescue Planning & First Aid Protocol",
+                    "es": "Plan de Rescate y Primeros Auxilios",
+                  },
+                  body: {
+                    "pt-BR": "Toda frente de trabalho em altura deve ter equipe de emergência e recursos materiais de resgate previamente determinados na Análise de Risco. Ao resgatar a vítima inconsciente, evite deitá-la imediatamente de barriga para cima de forma abrupta para evitar sobrecarga súbita de sangue desoxigenado no coração (síndrome de refluxo). Mantenha a vítima sentada/semi-inclinada durante o atendimento médico.",
+                    "en": "Every work site must possess a predefined rescue plan. Keep rescued unconscious workers semi-seated to prevent cardiac overload.",
+                    "es": "Todo trabajo debe tener un plan de rescate previo. Mantenga a la víctima semisentada para evitar colapso cardíaco.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "O tempo de resposta para retirar um colaborador da suspensão inerte não deve ultrapassar 15 minutos.",
+                  "en": "Emergency response time to rescue a suspended worker must not exceed 15 minutes.",
+                  "es": "El tiempo de rescate de un trabajador suspendido no debe superar los 15 minutos.",
+                },
+                {
+                  "pt-BR": "A RSS3 prioriza técnicas de resgate que possam ser realizadas a partir do solo ou por plano rígido sem expor os socorristas a riscos desnecessários.",
+                  "en": "RSS3 prioritizes rescue protocols executed from ground or stable platforms without endangering rescuers.",
+                  "es": "RSS3 prioriza técnicas de rescate seguras sin exponer a los rescatistas.",
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+    finalAssessment: {
+      id: "exam-nr35-altura",
+      order: 1,
+      title: {
+        "pt-BR": "Avaliação Formal Teórica de NR-35 e Trabalho em Altura",
+        "en": "Formal Theoretical Assessment: NR-35 & Work at Height",
+        "es": "Evaluación Teórica Formal: NR-35 y Trabajo en Altura",
+      },
+      description: {
+        "pt-BR": "Verificação de conformidade da NR-35: Análise de Risco, Fatores de Queda, Zona Livre de Queda, inspeção de cinto paraquedista e trauma de suspensão.",
+        "en": "Regulatory compliance exam: NR-35 risk analysis, fall factors, clearance calculation, harness inspection, and suspension trauma.",
+        "es": "Examen de cumplimiento de la NR-35: análisis de riesgos, factores de caída, ZLQ, inspección y trauma por suspensión.",
+      },
+      scope: "course",
+      estimatedMinutes: 25,
+      questionsCount: 6,
+      passingScorePercent: 70,
+      maxAttempts: 3,
+      isAvailable: true,
+      availabilityNotice: {
+        "pt-BR": "Avaliação liberada após conclusão de todas as 6 aulas teóricas de NR-35.",
+        "en": "Exam available upon completion of all 6 NR-35 theoretical lessons.",
+        "es": "Evaluación habilitada tras completar las 6 lecciones de NR-35.",
+      },
+      questions: [
+        {
+          id: "q-nr35-1",
+          order: 1,
+          question: {
+            "pt-BR": "1. A partir de qual altura, medida em relação ao nível inferior onde haja risco de queda, a atividade é classificada formalmente como 'Trabalho em Altura' pela NR-35?",
+            "en": "1. Above what height difference with fall risk is an activity legally classified as 'Work at Height' by NR-35?",
+            "es": "1. ¿A partir de qué altura con riesgo de caída una actividad se clasifica como 'Trabajo en Altura' por la NR-35?",
+          },
+          options: [
+            {
+              id: "q1-a",
+              text: {
+                "pt-BR": "Acima de 2,00 metros (dois metros).",
+                "en": "Above 2.00 meters (two meters).",
+                "es": "Por encima de 2,00 metros (dos metros).",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! O item 35.1.2 da NR-35 define expressamente o trabalho em altura como toda atividade executada acima de 2,00 m do nível inferior com risco de queda.",
+                "en": "Correct! NR-35 specifically defines work at height as tasks executed above 2.0m with fall danger.",
+                "es": "¡Correcto! La NR-35 establece 2,00 metros como umbral regulatorio para trabajo en altura.",
+              },
+            },
+            {
+              id: "q1-b",
+              text: {
+                "pt-BR": "Acima de 4,00 metros (quatro metros).",
+                "en": "Above 4.00 meters (four meters).",
+                "es": "Por encima de 4,00 metros (cuatro metros).",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! A regra de segurança estipula 2 metros como limite regulamentar.",
+                "en": "Incorrect! The regulatory threshold is 2.0 meters.",
+                "es": "Incorrecto. El límite legal es de 2,00 metros.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr35-2",
+          order: 2,
+          question: {
+            "pt-BR": "2. Qual Fator de Queda (FQ) representa a situação de maior risco e maior força de impacto transmitida ao corpo do trabalhador?",
+            "en": "2. Which Fall Factor (FF) represents the highest risk and greatest deceleration impact on the worker's body?",
+            "es": "2. ¿Qué Factor de Caída representa la situación de mayor riesgo e impacto sobre el cuerpo?",
+          },
+          options: [
+            {
+              id: "q2-a",
+              text: {
+                "pt-BR": "Fator de Queda 0 (ponto de ancoragem localizado bem acima da cabeça do trabalhador).",
+                "en": "Fall Factor 0 (anchor point situated well above worker's head).",
+                "es": "Factor de Caída 0 (punto de anclaje ubicado por encima de la cabeza).",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! O Fator 0 é a condição ideal de segurança, onde a queda livre é praticamente nula.",
+                "en": "Incorrect! Factor 0 is the safest position with minimal free fall.",
+                "es": "Incorrecto. El Factor 0 es la situación ideal más segura.",
+              },
+            },
+            {
+              id: "q2-b",
+              text: {
+                "pt-BR": "Fator de Queda 2 (ponto de ancoragem fixado na altura dos pés do trabalhador).",
+                "en": "Fall Factor 2 (anchor point connected at the worker's foot level).",
+                "es": "Factor de Caída 2 (punto de anclaje fijado a la altura de los pies).",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! No Fator 2, a distância de queda livre equivale ao dobro do comprimento do talabarte, gerando o maior choque dinâmico sobre a estrutura e o cinto.",
+                "en": "Correct! Factor 2 causes free fall twice the lanyard length, generating maximum peak impact force.",
+                "es": "¡Correcto! En Factor 2 la caída libre es el doble del cabo de vida, generando el mayor impacto.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr35-3",
+          order: 3,
+          question: {
+            "pt-BR": "3. O que é a Zona Livre de Queda (ZLQ) e por que ela deve ser calculada antes do uso de talabartes com absorvedor de energia?",
+            "en": "3. What is Fall Clearance (ZLQ) and why must it be calculated prior to using energy-absorbing lanyards?",
+            "es": "3. ¿Qué es la Zona Libre de Caída (ZLQ) y por qué debe calcularse antes de usar absorbedores?",
+          },
+          options: [
+            {
+              id: "q3-a",
+              text: {
+                "pt-BR": "É a distância vertical mínima livre necessária abaixo do ponto de ancoragem para garantir que o trabalhador não colida contra o solo ou obstáculos antes da retenção total da queda.",
+                "en": "It is the minimum vertical distance required beneath the anchor to ensure the worker does not hit the ground or obstacles before fall arrest is complete.",
+                "es": "Es la distancia vertical mínima libre bajo el anclaje para garantizar que el trabajador no choque contra el suelo u obstáculos.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! Se a ZLQ for insuficiente, o trabalhador baterá no chão antes do absorvedor de impacto terminar de abrir.",
+                "en": "Correct! Without adequate clearance, the worker hits the ground before energy absorption completes.",
+                "es": "¡Correcto! Si la ZLQ es insuficiente, el trabajador impactará contra el suelo antes de detenerse.",
+              },
+            },
+            {
+              id: "q3-b",
+              text: {
+                "pt-BR": "É a área de isolamento com fitas zebradas no chão para impedir o tráfego de pedestres.",
+                "en": "It is the barricaded ground exclusion zone preventing pedestrian traffic.",
+                "es": "Es el área de aislamiento delimitada en el suelo para impedir el paso de personas.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! Essa área delimitada no solo é a zona de exclusão/isolamento contra queda de materiais, não a ZLQ.",
+                "en": "Incorrect! Barricaded ground is an exclusion zone, not Fall Clearance.",
+                "es": "Incorrecto. La delimitación en el suelo es la zona de exclusión, no la ZLQ.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr35-4",
+          order: 4,
+          question: {
+            "pt-BR": "4. Qual é o único tipo de cinto de segurança legalmente autorizado para retenção de quedas no Brasil?",
+            "en": "4. What is the only type of safety harness legally authorized for fall arrest in Brazil?",
+            "es": "4. ¿Cuál es el único tipo de arnés legalmente autorizado para detención de caídas?",
+          },
+          options: [
+            {
+              id: "q4-a",
+              text: {
+                "pt-BR": "Cinto abdominal simples de couro de eletricista.",
+                "en": "Simple leather linesman waist belt.",
+                "es": "Cinturón abdominal simple de cuero.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto e perigoso! O cinto abdominal não distribui a força de desaceleração e pode causar rompimento da coluna ou ejeção.",
+                "en": "Incorrect and dangerous! Waist belts cause spinal fractures and cannot be used for fall arrest.",
+                "es": "Incorrecto y peligroso. El cinturón abdominal no distribuye el impacto y está prohibido para detención.",
+              },
+            },
+            {
+              id: "q4-b",
+              text: {
+                "pt-BR": "Cinto de segurança tipo paraquedista com ponto de conexão dorsal ou esternal apropriado.",
+                "en": "Full-body harness with dedicated dorsal or sternal fall-arrest connection points.",
+                "es": "Arnés de seguridad tipo paracaidista de cuerpo entero con punto dorsal o esternal.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! O cinto tipo paraquedista distribui a força de impacto pelas coxas, bacia e ombros.",
+                "en": "Correct! Full-body harness distributes deceleration forces safely across thighs, pelvis, and shoulders.",
+                "es": "¡Correcto! El arnés tipo paracaidista distribuye las cargas en piernas, pelvis y hombros.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr35-5",
+          order: 5,
+          question: {
+            "pt-BR": "5. O que é a 'Síndrome da Suspensão Inerte' (Trauma de Suspensão) e por que o resgate de uma vítima pendurada deve ser executado no menor tempo possível?",
+            "en": "5. What is 'Suspension Trauma' and why must an immobilized suspended victim be rescued in the shortest possible time?",
+            "es": "5. ¿Qué es el 'Trauma por Suspensión' y por qué el rescate debe realizarse en el menor tiempo posible?",
+          },
+          options: [
+            {
+              id: "q5-a",
+              text: {
+                "pt-BR": "É o acúmulo de sangue venoso nas pernas causado pela gravidade e compressão das fitas do cinto, que reduz o fluxo cerebral e cardíaco e pode levar ao desmaio e morte em poucos minutos.",
+                "en": "Venous blood pooling in lower limbs caused by gravity and harness strap pressure, starving brain and heart of blood, causing unconsciousness and death within minutes.",
+                "es": "Es la acumulación de sangre en las piernas por gravedad y compresión del arnés, que priva de flujo al cerebro y corazón, pudiendo ser mortal en pocos minutos.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! A suspensão imóvel é uma emergência crítica de tempo. Sem movimentação das panturrilhas, o retorno venoso colapsa rapidamente.",
+                "en": "Correct! Suspension trauma is a time-critical emergency requiring rapid rescue and specialized medical handling.",
+                "es": "¡Correcto! La suspensión inerte es una emergencia médica crítica que requiere rescate inmediato.",
+              },
+            },
+            {
+              id: "q5-b",
+              text: {
+                "pt-BR": "É apenas o medo de altura e pânico psicológico do trabalhador que passa sozinho em até 2 horas.",
+                "en": "It is merely fear of heights and panic that dissipates naturally within two hours.",
+                "es": "Es solo miedo a las alturas y pánico que pasa espontáneamente en dos horas.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! Trata-se de uma patologia médica física e circulatória gravíssima, com risco iminente de parada cardiorrespiratória.",
+                "en": "Incorrect! It is a physiological circulatory collapse, not psychological panic.",
+                "es": "Incorrecto. Se trata de un colapso circulatorio grave con riesgo de muerte.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr35-6",
+          order: 6,
+          question: {
+            "pt-BR": "6. A aprovação nesta avaliação teórica online de NR-35 confere habilitação formal para realizar trabalhos em altura na fábrica sem a necessidade do treinamento prático presencial?",
+            "en": "6. Does passing this online NR-35 exam grant legal authorization to work at height without in-person practical training?",
+            "es": "6. ¿La aprobación de esta prueba teórica online autoriza a trabajar en altura sin capacitación práctica presencial?",
+          },
+          options: [
+            {
+              id: "q6-a",
+              text: {
+                "pt-BR": "NÃO. Este certificado valida exclusivamente a conclusão do conteúdo teórico. O trabalho em altura exige obrigatoriamente treinamento prático presencial validado por instrutor habilitado e ASO com aptidão médica vigente.",
+                "en": "NO. This certificate certifies theoretical knowledge only. Work at height strictly requires certified hands-on practical training and a valid occupational medical clearance (ASO).",
+                "es": "NO. Este certificado avala únicamente la teoría. El trabajo en altura exige obligatoriamente capacitación práctica presencial y aptitud médica vigente en el ASO.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! Conforme a diretriz permanente do RSS3 Treinamentos (item 3.1 do AGENTS.md), o EAD nunca confere habilitação prática formal para atividades de alto risco.",
+                "en": "Correct! Per permanent safety rules, online coursework never waives mandatory in-person practical qualification.",
+                "es": "¡Correcto! El curso online nunca sustituye el entrenamiento práctico presencial en altura.",
+              },
+            },
+            {
+              id: "q6-b",
+              text: {
+                "pt-BR": "SIM. A certificação digital online dispensa qualquer prova física ou avaliação presencial em plantas industriais.",
+                "en": "YES. Digital online certification waives any hands-on training or in-person verification.",
+                "es": "SÍ. La certificación digital online exime de cualquier práctica presencial.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto e terminantemente proibido pelas normas regulamentadoras do Ministério do Trabalho e diretrizes de integridade da RSS3.",
+                "en": "Incorrect and illegal under Brazilian labor safety laws and RSS3 operational safety policies.",
+                "es": "Incorrecto y prohibido por las normas reguladoras laborales.",
               },
             },
           ],
