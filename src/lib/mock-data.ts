@@ -1,0 +1,2880 @@
+import { CourseDemonstration, SchoolCategory, UserDemonstration } from "@/types";
+
+/**
+ * Escolas Oficiais Ativas da RSS3 Soluções Industriais
+ * Apenas escolas com cursos reais cadastrados são exibidas no catálogo.
+ */
+export const DEMO_SCHOOLS: SchoolCategory[] = [
+  {
+    id: "hidrojato",
+    name: {
+      "pt-BR": "Hidrojateamento e Hidrovácuo",
+      "en": "Hydroblasting & Vacuum Operations",
+      "es": "Hidrojet e Hidrovacío",
+    },
+    description: {
+      "pt-BR": "Equipamentos de alta e ultra-alta pressão, zonas de exclusão, conexões seguras e sucção industrial.",
+      "en": "High and ultra-high pressure units, exclusion zones, and waste extraction.",
+      "es": "Equipos de alta presión, zonas de exclusión y succión de residuos.",
+    },
+    iconName: "Droplets",
+    coursesCount: 1,
+    color: "#0891b2", // Cyan 600
+  },
+  {
+    id: "pintura-industrial",
+    name: {
+      "pt-BR": "Pintura Industrial e Tratamento de Superfície",
+      "en": "Industrial Painting & Surface Treatment",
+      "es": "Pintura Industrial y Tratamiento de Superficies",
+    },
+    description: {
+      "pt-BR": "Preparação mecânica de superfícies, esquemas anticorrosivos, ensaios de película e controle de qualidade.",
+      "en": "Mechanical surface prep, anti-corrosive coatings, dry film thickness, and quality control.",
+      "es": "Preparación de superficies, esquemas anticorrosivos y control de calidad.",
+    },
+    iconName: "Paintbrush",
+    coursesCount: 1,
+    color: "#ea580c", // Orange 600
+  },
+  {
+    id: "andaimes-acesso",
+    name: {
+      "pt-BR": "Montagem de Andaimes e Acesso Industrial",
+      "en": "Scaffolding Assembly & Industrial Access",
+      "es": "Montaje de Andamios y Acceso Industrial",
+    },
+    description: {
+      "pt-BR": "Montagem, travamento, cálculo de sobrecarga, inspeção com etiquetas e segurança em trabalho em altura (NR-18 e NR-35).",
+      "en": "Assembly, bracing, load calculation, tag inspections, and working at height safety (NR-18 & NR-35).",
+      "es": "Montaje, arriostramiento, cálculo de cargas, inspección con tarjetas y seguridad en altura.",
+    },
+    iconName: "Layers",
+    coursesCount: 1,
+    color: "#eab308", // Yellow 500 / Âmbar Industrial
+  },
+];
+
+/**
+ * Catálogo Oficial de Cursos da RSS3 Treinamentos
+ * Contém exclusivamente o treinamento operacional real de Hidrojateamento de Alta Pressão.
+ */
+export const DEMO_COURSES: CourseDemonstration[] = [
+  {
+    id: "c-hidrojato-seguranca",
+    slug: "seguranca-operacional-em-hidrojateamento",
+    title: {
+      "pt-BR": "Segurança Operacional em Hidrojateamento de Alta Pressão",
+      "en": "Operational Safety in High-Pressure Hydroblasting",
+      "es": "Seguridad Operacional en Hidrojet de Alta Presión",
+    },
+    description: {
+      "pt-BR": "Inspeção de mangueiras, conexões com travas de segurança (whip-checks), zonas de exclusão e comunicação.",
+      "en": "Hose inspection, safety whip checks, exclusion zone management, and radio protocols.",
+      "es": "Inspección de mangueras, seguros anticaída y zonas de exclusión.",
+    },
+    longDescription: {
+      "pt-BR": "Práticas de segurança de alto rigor para operações de hidrojateamento com pressões de até 2.800 bar. Procedimentos de vistoria em mangueiras, conexões anti-chicoteamento, armaduras de proteção para lanceiro, válvula de pé corta-fluxo e coordenação de zona de isolamento.",
+      "en": "Rigorous safety practices for hydroblasting operations up to 2,800 bar. Inspection procedures for high-pressure hoses, whip-checks, operator ballistic gaiters/aprons, dump guns, and exclusion zone barricading.",
+      "es": "Prácticas de seguridad en hidrojet hasta 2.800 bar. Inspección de mangueras, seguros anticaída, trajes de protección y zonas de aislamiento.",
+    },
+    schoolId: "hidrojato",
+    schoolName: {
+      "pt-BR": "Hidrojateamento",
+      "en": "Hydroblasting",
+      "es": "Hidrojet",
+    },
+    workloadHours: 16,
+    level: "advanced",
+    modality: "hybrid",
+    isMandatory: true,
+    mandatoryFor: ["Operador de Hidrojato"],
+    targetAudience: {
+      "pt-BR": "Operadores de hidrojato, lanceiros, ajudantes e fiscais de segurança em paradas industriais.",
+      "en": "Hydroblasting operators, lance operators, pump tenders, and shutdown safety supervisors.",
+      "es": "Operadores de hidrojet, asistentes y supervisores de seguridad.",
+    },
+    modulesCount: 2,
+    lessonsCount: 4,
+    thumbnailGradient: "from-cyan-700 to-blue-950",
+    badgeCode: "HJ-UAP",
+    updatedAtDate: "2026-10-15",
+    modules: [
+      {
+        id: "mod-hj-1",
+        order: 1,
+        title: {
+          "pt-BR": "Módulo 1: Equipamentos, Física da Pressão e Segurança (NR-34 / NR-12)",
+          "en": "Module 1: Units, Pressure Physics & Safety Standards (NR-34 / NR-12)",
+          "es": "Módulo 1: Equipos, Física de Presión y Seguridad (NR-34 / NR-12)",
+        },
+        lessons: [
+          {
+            id: "les-hj-1-1",
+            order: 1,
+            title: {
+              "pt-BR": "Treinamento Operacional: Princípios, Riscos e Prática de Hidrojateamento",
+              "en": "Operational Training: Principles, Hazards & Hydroblasting Practice",
+              "es": "Entrenamiento Operacional: Principios, Riesgos y Práctica de Hidrojet",
+            },
+            durationMinutes: 25,
+            contentType: "video",
+            videoUrl: "SfkQOXvAlzg",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Compreender os fundamentos operacionais do hidrojateamento de alta pressão, os limites de segurança da NR-34/NR-12 e a severidade do risco de injeção subcutânea por jato fluido.",
+                "en": "Understand high-pressure waterjet operational fundamentals, NR-34/NR-12 compliance thresholds, and high-pressure fluid injection severity.",
+                "es": "Comprender los fundamentos del hidrojet, normas NR-34/NR-12 y riesgos de inyección subcutánea.",
+              },
+              introduction: {
+                "pt-BR": "O hidrojateamento é uma das técnicas mais eficientes da indústria pesada para limpeza e decapagem em paradas de manutenção. Porém, pressões operacionais acima de 250 bar (podendo ultrapassar 2.800 bar) possuem energia cinética suficiente para cortar materiais ferrosos e causar lesões corporais graves em frações de segundo.",
+                "en": "Hydroblasting is among the most effective industrial cleaning methods for plant shutdowns. Operating pressures exceeding 250 bar to 2,800 bar can sever metals and cause fatal trauma instantly.",
+                "es": "El hidrojet es fundamental en paradas de mantenimiento industrial con presiones capaces de cortar metales y causar traumas severos.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Classificação das Faixas de Pressão Operacional",
+                    "en": "Pressure Range Classification",
+                    "es": "Clasificación de Rangos de Presión",
+                  },
+                  body: {
+                    "pt-BR": "• Baixa Pressão: Até 350 bar (5.000 psi) — limpezas superficiais e lavagens industriais leves.\n• Alta Pressão: De 350 bar a 1.400 bar (5.000 a 20.000 psi) — desobstrução de tubulações, feixes tubulares e tanques.\n• Ultra-Alta Pressão (UAP): Acima de 1.400 bar (20.000 a 40.000+ psi) — remoção de tintas epóxi, incrustações pesadas e preparação de superfície padrão Sa 2.5 / Sa 3.",
+                    "en": "• Low: up to 350 bar (5,000 psi).\n• High: 350 to 1,400 bar (5,000 to 20,000 psi).\n• Ultra-High: above 1,400 bar (20,000 to 40,000+ psi).",
+                    "es": "• Baja presión: hasta 350 bar.\n• Alta presión: 350 a 1.400 bar.\n• Ultra alta presión: superior a 1.400 bar.",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "O Risco Fatal da Injeção de Jato Subcutâneo",
+                    "en": "Fatal Fluid Injection Trauma",
+                    "es": "Trauma por Inyección de Fluido a Alta Presión",
+                  },
+                  body: {
+                    "pt-BR": "Ao contrário de cortes convencionais, o jato de alta pressão penetra a derme através de orifícios microscópicos, injetando água contaminada, graxa e bactérias profundamente nos tecidos musculares e corrente sanguínea. Todo acidente com hidrojato é considerado EMERGÊNCIA CIRÚRGICA IMEDIATA — o membro não deve sofrer torniquete caseiro e o médico deve ser informado imediatamente sobre a pressão de trabalho.",
+                    "en": "High-pressure fluid penetrates dermis microscopically, injecting contaminants deep into tissues and vascular streams. Immediate hospital surgical intervention is mandatory.",
+                    "es": "El chorro a presión penetra tejidos e inocula bacterias. Constituye una emergencia quirúrgica inmediata.",
+                  },
+                },
+              ],
+              table: {
+                headers: [
+                  { "pt-BR": "Faixa de Pressão", "en": "Pressure Range", "es": "Rango de Presión" },
+                  { "pt-BR": "Pressão Típica (bar / psi)", "en": "Typical Pressure", "es": "Presión Típica" },
+                  { "pt-BR": "Aplicações Industriais", "en": "Applications", "es": "Aplicaciones" },
+                  { "pt-BR": "Requisito de EPI", "en": "PPE Requirement", "es": "EPP Obligatorio" },
+                ],
+                rows: [
+                  [
+                    { "pt-BR": "Baixa Pressão", "en": "Low", "es": "Baja" },
+                    { "pt-BR": "Até 350 bar (5.000 psi)", "en": "Up to 350 bar", "es": "Hasta 350 bar" },
+                    { "pt-BR": "Limpeza de piso, veículos pesados e canaletas", "en": "General washdown", "es": "Limpieza general" },
+                    { "pt-BR": "Macacão impermeável, óculos, luvas de PVC", "en": "Standard waterproof", "es": "Impermeable estándar" },
+                  ],
+                  [
+                    { "pt-BR": "Alta Pressão", "en": "High", "es": "Alta" },
+                    { "pt-BR": "350 a 1.400 bar (5k - 20k psi)", "en": "350 - 1,400 bar", "es": "350 - 1.400 bar" },
+                    { "pt-BR": "Desobstrução de feixes tubulares e trocadores de calor", "en": "Heat exchangers", "es": "Intercambiadores" },
+                    { "pt-BR": "Bota com metatarso de aço, proteção facial total", "en": "Metatarsal boots, shield", "es": "Bota con metatarso" },
+                  ],
+                  [
+                    { "pt-BR": "Ultra-Alta Pressão (UAP)", "en": "Ultra-High", "es": "Ultra Alta" },
+                    { "pt-BR": "1.400 a 2.800+ bar (20k - 40k psi)", "en": "1,400 - 2,800+ bar", "es": "1.400 - 2.800+ bar" },
+                    { "pt-BR": "Decapagem Sa 2.5/Sa 3, corte frio e hidrovácuo", "en": "Hydro-demolition, surface prep", "es": "Decapado e hidrovacío" },
+                    { "pt-BR": "Armadura balística completa (Kevlar/Dyneema 2800 bar)", "en": "Full ballistic armor", "es": "Traje balístico completo" },
+                  ],
+                ],
+              },
+            },
+            challenge: {
+              id: "chal-hj-1-1",
+              question: {
+                "pt-BR": "DESAFIO DE CAMPO 1: Durante o pré-operacional na área industrial, o operador observa uma mancha úmida e um orifício minúsculo 'furinho' espirrando água finíssima em uma mangueira pressurizada a 1.000 bar. Qual conduta é estritamente obrigatória?",
+                "en": "FIELD CHALLENGE 1: A pinhole leak is spraying a mist from a 1,000 bar pressurized hose. What is the mandatory immediate action?",
+                "es": "DESAFÍO 1: Se observa una fuga microscópica en una manguera a 1.000 bar. ¿Cuál es la acción obligatoria?",
+              },
+              contextScenario: {
+                "pt-BR": "A equipe está atrasada para entregar o permutador de calor e o ajudante sugere cobrir o furo com borracha e fita reforçada até o final do turno.",
+                "en": "The turnaround team is rushing and a helper suggests taping the pinhole leak.",
+                "es": "El equipo tiene prisa y sugieren parchar la manguera con cinta reforzada.",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Tentar colocar a mão enluvada com luva de vaqueta para conter o vazamento e verificar a pressão.",
+                    "en": "Put a gloved hand over the leak to gauge pressure.",
+                    "es": "Colocar la mano con guante para verificar la fuga.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO E EXTREMAMENTE PERIGOSO! A luva de vaqueta é perfurada instantaneamente pelo micro-jato a 1.000 bar, resultando em injeção subcutânea e amputação.",
+                    "en": "Extremely hazardous! Leather gloves are penetrated instantly by micro-jets.",
+                    "es": "¡Peligroso! El chorro perfora el cuero e inyecta fluido de inmediato.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Acionar a parada de emergência, despressurizar toda a linha no descarte e substituir a mangueira danificada imediatamente.",
+                    "en": "Hit emergency dump, depressurize line, and replace damaged hose immediately.",
+                    "es": "Presionar parada de emergencia, despresurizar y cambiar la manguera de inmediato.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! Mangueiras com perda de integridade mecânica NUNCA podem ser emendadas ou vedadas com fita. Devem ser despressurizadas e segregadas para descarte.",
+                    "en": "CORRECT! High-pressure hoses with structural compromise can never be taped or repaired on site.",
+                    "es": "¡CORRECTO! Mangueras de alta presión comprometidas jamás se reparan en campo.",
+                  },
+                },
+                {
+                  id: "opt-3",
+                  text: {
+                    "pt-BR": "Diminuir a aceleração da bomba no motor para 200 bar e continuar o serviço com cuidado.",
+                    "en": "Lower engine throttle to 200 bar and keep blasting.",
+                    "es": "Bajar la presión a 200 bar y continuar.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO! 200 bar ainda é suficiente para causar cegueira ou lesão grave se houver ruptura total do tramado de aço.",
+                    "en": "Incorrect! 200 bar remains hazardous if structural braids fail.",
+                    "es": "Incorrecto. 200 bar aún causa lesiones graves si la malla cede.",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            id: "les-hj-1-2",
+            order: 2,
+            title: {
+              "pt-BR": "Armadura de Proteção Metatarsal e EPIs Balísticos (NR-06 / NR-34)",
+              "en": "Metatarsal Guards & Ballistic PPE (NR-06 / NR-34)",
+              "es": "Protección Metatarsal y EPP Balístico (NR-06 / NR-34)",
+            },
+            durationMinutes: 30,
+            contentType: "pdf",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Dominar a correta inspeção, vestimenta e limites de proteção dos trajes balísticos (Kevlar/Dyneema) e botas de metatarso de aço para lanceiros.",
+                "en": "Master inspection, donning, and protection limitations of ballistic body armor and metatarsal boots for lance operators.",
+                "es": "Dominar la inspección y colocación de trajes balísticos y botas metatarsales.",
+              },
+              introduction: {
+                "pt-BR": "Em operações de hidrojateamento, o EPI convencional de construção civil (bota simples de biqueira plástica e óculos de proteção comum) NÃO OFERECE PROTEÇÃO contra o jato d'água. É compulsório o uso do conjunto de proteção balística certificado internacionalmente.",
+                "en": "Standard construction PPE provides zero defense against high pressure jets. Certified multi-layer ballistic armor is mandatory.",
+                "es": "El EPP común no protege contra chorros de alta presión. Es obligatorio el traje balístico certificado.",
+              },
+              checklist: {
+                title: {
+                  "pt-BR": "Checklist de Verificação dos EPIs do Lanceiro antes da Pressurização",
+                  "en": "Lance Operator PPE Inspection Checklist",
+                  "es": "Checklist de EPP del Operador de Lanza",
+                },
+                items: [
+                  {
+                    id: "chk-1",
+                    label: {
+                      "pt-BR": "Protetor Metatarsal Rígido Externo e Perneira Balística",
+                      "en": "Rigid External Metatarsal Guard & Ballistic Gaiter",
+                      "es": "Protector Metatarsal Rígido y Polaina Balística",
+                    },
+                    criterion: {
+                      "pt-BR": "Sem rasgos no tecido de Dyneema, chapas de alumínio/aço alinhadas cobrindo peito do pé e canela.",
+                      "en": "No tears in Dyneema, aluminum plates shielding instep and shin.",
+                      "es": "Sin rasgaduras, placas alineadas sobre empeine y espinilla.",
+                    },
+                  },
+                  {
+                    id: "chk-2",
+                    label: {
+                      "pt-BR": "Jaqueta / Avental Balístico com Proteção de Braço",
+                      "en": "Ballistic Jacket / Apron with Forearm Guards",
+                      "es": "Chaqueta Balística con Protección de Antebrazo",
+                    },
+                    criterion: {
+                      "pt-BR": "Tiras de velcro e fivelas 100% afiveladas e ajustadas ao corpo do lanceiro.",
+                      "en": "Straps securely fastened to torso without loose fabric.",
+                      "es": "Correas bien ajustadas al torso sin telas sueltas.",
+                    },
+                  },
+                  {
+                    id: "chk-3",
+                    label: {
+                      "pt-BR": "Capacete com Protetor Facial de Policarbonato + Óculos de Ampla Visão",
+                      "en": "Helmet with Polycarbonate Face Shield + Impact Goggles",
+                      "es": "Casco con Careta de Policarbonato + Gafas de Seguridad",
+                    },
+                    criterion: {
+                      "pt-BR": "Dupla proteção ocular obrigatória para evitar ricochete de fragmentos e spray pressurizado.",
+                      "en": "Dual eye defense mandatory against high velocity debris.",
+                      "es": "Doble protección ocular obligatoria contra rebotes y astillas.",
+                    },
+                  },
+                  {
+                    id: "chk-4",
+                    label: {
+                      "pt-BR": "Proteção Auditiva Dupla (Plugue de Inserção + Abafador Tipo Concha)",
+                      "en": "Dual Hearing Protection (Earplugs + Muffs)",
+                      "es": "Doble Protección Auditiva (Tapones + Orejeras)",
+                    },
+                    criterion: {
+                      "pt-BR": "Níveis de ruído na pistola frequentemente ultrapassam 105 dB(A).",
+                      "en": "Noise at hydro lance exceeds 105 dB(A).",
+                      "es": "El ruido en la lanza supera habitualmente los 105 dB(A).",
+                    },
+                  },
+                ],
+              },
+            },
+            challenge: {
+              id: "chal-hj-1-2",
+              question: {
+                "pt-BR": "DESAFIO DE CAMPO 2: Um novo ajudante de hidrojateamento alega que, por estar calor intenso (34°C), vai retirar a perneira balística e usar apenas a botina de biqueira de composite comum. Como o operador lanceiro e líder devem agir?",
+                "en": "FIELD CHALLENGE 2: An assistant wants to remove ballistic gaiters due to high heat. What is the mandatory leadership response?",
+                "es": "DESAFÍO 2: Un ayudante quiere quitarse la polaina balística por calor extremo. ¿Cómo se debe proceder?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Permitir, desde que ele fique a pelo menos 1 metro de distância do bico do jato.",
+                    "en": "Allow it if standing 1 meter away from nozzle.",
+                    "es": "Permitirlo si se mantiene a 1 metro de distancia.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO! Em caso de ricochete ou perda de controle da lança, o jato percorre metros em milissegundos e decepa tecidos sem armadura.",
+                    "en": "Incorrect! Deflected jets travel meters in milliseconds.",
+                    "es": "Incorrecto. Los rebotes alcanzan metros en milisegundos.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Proibir terminantemente a operação e aplicar revezamento térmico com pausas para hidratação, sem jamais abrir mão do EPI balístico.",
+                    "en": "Strictly halt operation, schedule thermal rotation with hydration breaks, never compromising ballistic gear.",
+                    "es": "Prohibir la operación, implementar pausas de hidratación y rotación sin retirar el EPP.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! O estresse térmico deve ser gerenciado com pausas, rodízio de equipes e sombra, NUNCA com a supressão de EPIs de proteção contra risco de morte.",
+                    "en": "CORRECT! Thermal stress is managed via rotations and hydration breaks, never by stripping life-saving armor.",
+                    "es": "¡CORRECTO! El calor se mitiga con rotación y pausas, jamás retirando el equipo de protección.",
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: "mod-hj-2",
+        order: 2,
+        title: {
+          "pt-BR": "Módulo 2: Montagem de Linha, Conexões e Procedimentos Críticos",
+          "en": "Module 2: Rigging Lines, Couplings & Critical Procedures",
+          "es": "Módulo 2: Montaje de Línea, Acoples y Procedimientos Críticos",
+        },
+        lessons: [
+          {
+            id: "les-hj-2-1",
+            order: 1,
+            title: {
+              "pt-BR": "Checklist de Mangueiras e Travas Anti-Chicoteamento (Whip-Checks)",
+              "en": "Hose Inspection & Whip-Check Safety Cables",
+              "es": "Inspección de Mangueras y Seguros Antichicoteo",
+            },
+            durationMinutes: 35,
+            contentType: "video",
+            videoUrl: "SfkQOXvAlzg",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Aprender a instalar travas de segurança tipo laço (cabo de aço/whip-check) em 100% das conexões da linha pressurizada, eliminando o efeito chicote em caso de desacoplamento.",
+                "en": "Ensure 100% of pressurized line couplings are secured with whip-check steel cables to suppress whipping.",
+                "es": "Instalar seguros tipo guaya antichicoteo en el 100% de las uniones de mangueras.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "O Princípio Físico do Chicoteamento (Efeito Whipping)",
+                    "en": "The Whipping Effect Physics",
+                    "es": "Física del Efecto Látigo",
+                  },
+                  body: {
+                    "pt-BR": "Quando uma mangueira de 1.400 bar se solta sob pressão, a saída desordenada do fluxo de água atua como um propulsor de foguete. O terminal metálico da mangueira se transforma em um projétil oscilante que bate repetidamente com força destrutiva contra o piso, estruturas e trabalhadores.",
+                    "en": "A decoupled hose under 1,400 bar acts like an uncontrolled rocket thruster. The metal terminal strikes repeatedly with lethal force.",
+                    "es": "Una manguera suelta a alta presión actúa como propulsor descontrolado con fuerza destructiva mortal.",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "Regras de Ouro na Instalação de Whip-Checks",
+                    "en": "Golden Rules for Whip-Check Rigging",
+                    "es": "Reglas de Oro para Seguros Antichicoteo",
+                  },
+                  body: {
+                    "pt-BR": "1. O cabo deve estar esticado (sem folga excessiva que permita aceleração).\n2. As molas devem estar comprimidas firmemente sobre a borracha da mangueira, nunca sobre a rosca metálica.\n3. Em conexões mangueira-bomba ou mangueira-válvula de pé, deve-se usar o modelo com olhal aparafusado à carcaça do equipamento.",
+                    "en": "1. Keep cable snug.\n2. Position springs on hose rubber, not metal collars.\n3. Anchor to rigid equipment chassis on machine ends.",
+                    "es": "1. Mantener cable tenso.\n2. Resortes sobre la goma de la manguera.\n3. Fijar a partes rígidas en las bombas.",
+                  },
+                },
+              ],
+            },
+            challenge: {
+              id: "chal-hj-2-1",
+              question: {
+                "pt-BR": "DESAFIO DE CAMPO 3: Ao inspecionar a montagem da linha de 50 metros entre a bomba e a frente de limpeza, você nota que a emenda intermediária possui cabo anti-chicoteamento, mas com o laço frouxo deslizando livremente sobre a carcaça. O que deve ser feito?",
+                "en": "FIELD CHALLENGE 3: A whip check cable is loosely sliding over a hose joint without spring tension. What is required?",
+                "es": "DESAFÍO 3: Un seguro antichicoteo está flojo y resbala libremente. ¿Qué debe hacerse?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Reapertar a mola e ajustar os laços tensionados sobre o corpo de borracha de ambas as mangueiras antes de permitir a pressurização.",
+                    "en": "Reposition spring tension snug against rubber bodies on both sides before pressure is applied.",
+                    "es": "Tensar el resorte y ajustar sobre el cuerpo de goma de ambas mangueras antes de presurizar.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! Se o whip-check deslizar solto, o terminal metálico escapa do laço no momento do rompimento e o chicoteamento ocorre da mesma forma.",
+                    "en": "CORRECT! A loose whip check will slip off upon rupture, rendering it useless.",
+                    "es": "¡CORRECTO! Si el seguro desliza, el terminal se suelta y ocurre el latigazo.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Passar fita isolante ao redor do laço para não escorregar e iniciar o teste de pressão.",
+                    "en": "Wrap electrical tape around it to prevent sliding and test.",
+                    "es": "Colocar cinta aislante para que no resbale y probar.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO! Fita adesiva não suporta forças dinâmicas de tração calculadas em toneladas.",
+                    "en": "Incorrect! Tape cannot resist multiton dynamic blast forces.",
+                    "es": "Incorrecto. La cinta no soporta fuerzas de toneladas.",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            id: "les-hj-2-2",
+            order: 2,
+            title: {
+              "pt-BR": "Comunicação Operacional, Válvula de Pé e Zonas de Exclusão",
+              "en": "Operational Radio Protocols, Dump Valve & Exclusion Zones",
+              "es": "Comunicación Operacional, Válvula de Pedal y Zonas de Exclusión",
+            },
+            durationMinutes: 30,
+            contentType: "activity",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Executar o isolamento físico de área (barricamento), o protocolo de homem-morto da válvula de pé e o alinhamento de rádio bidirecional entre lanceiro e operador da bomba.",
+                "en": "Execute exclusion zone barricading, foot dump valve deadman protocol, and two-way radio sync between lance tender and pump operator.",
+                "es": "Ejecutar delimitación de zona de exclusión y sincronización de válvula de pie homem-morto.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Zona de Exclusão e Raio de Isolamento",
+                    "en": "Exclusion Zone Radius",
+                    "es": "Radio de Zona de Exclusión",
+                  },
+                  body: {
+                    "pt-BR": "É proibida a permanência de qualquer pessoa não envolvida na operação dentro de um raio mínimo de 10 a 15 metros do ponto de hidrojato. A área deve ser isolada com cones e correntes zebradas rígidas (placas de aviso: PERIGO - HIDROJATEAMENTO EM ANDAMENTO).",
+                    "en": "Minimum 10-15m exclusion perimeter demarcated with rigid stanchions and danger signage.",
+                    "es": "Perímetro mínimo de 10 a 15 metros señalizado con conos y cadenas rígidas.",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "A Válvula de Pé 'Homem Morto' (Foot Dump Valve)",
+                    "en": "Deadman Foot Dump Valve",
+                    "es": "Válvula de Pie 'Hombre Muerto'",
+                  },
+                  body: {
+                    "pt-BR": "A válvula de pé operada pelo lanceiro ou pelo ajudante de segurança desvia instantaneamente todo o fluxo de água para a descarga quando o operador retira o pé do pedal. NUNCA DEVE SER AMARRADA, TRAVADA OU CALÇADA COM MADEIRA.",
+                    "en": "Foot dump valve redirects full pressure to exhaust instantly upon pedal release. It must NEVER be mechanically wedged or tied down.",
+                    "es": "La válvula de pie desvía la presión al soltar el pedal. NUNCA debe amarrarse o trabarse.",
+                  },
+                },
+              ],
+            },
+            challenge: {
+              id: "chal-hj-2-2",
+              question: {
+                "pt-BR": "DESAFIO DE CAMPO 4: Um colaborador de outra empreiteira fura a corrente de isolamento e caminha em direção ao tanque enquanto o lanceiro está com o jato acionado a 1.200 bar. Qual deve ser a reação imediata do ajudante de segurança na válvula de pé?",
+                "en": "FIELD CHALLENGE 4: An unauthorized worker enters the exclusion zone while lance is active at 1,200 bar. What is the immediate safety tender response?",
+                "es": "DESAFÍO 4: Un tercero ingresa al área de exclusión con el hidrojet encendido. ¿Cuál es la reacción inmediata?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Aliviar o pedal da válvula de pé imediatamente (cortando a pressão da lança), acionar o botão de emergência da bomba e advertir o intruso.",
+                    "en": "Release the foot pedal immediately to dump line pressure, trigger emergency shutdown, and clear the intruder.",
+                    "es": "Soltar el pedal de la válvula de pie de inmediato para cortar la presión y detener el equipo.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! A vida humana tem prioridade absoluta sobre a continuidade da limpeza. A primeira ação é despressurizar imediatamente a linha.",
+                    "en": "CORRECT! Safety of life overrides production speed. Dump pressure instantly.",
+                    "es": "¡CORRECTO! La seguridad humana es prioridad absoluta. Despresurice de inmediato.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Gritar com o colaborador para ele sair rápido, mantendo o jato ligado para não perder o ponto da limpeza.",
+                    "en": "Yell at the worker while keeping pressure active.",
+                    "es": "Gritarle al trabajador manteniendo el chorro encendido.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO! Com protetor auricular duplo e o ruído ensurdecedor do jato, o colaborador não ouvirá e poderá ser atingido mortalmente.",
+                    "en": "Incorrect! Industrial noise drowns out shouts and catastrophic injury can occur in seconds.",
+                    "es": "Incorrecto. El ruido impide escuchar gritos y puede ocurrir un accidente fatal.",
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "c-pintura-industrial-completo",
+    slug: "pintura-industrial-tratamento-superficie",
+    title: {
+      "pt-BR": "Pintura Industrial, Tratamento de Superfície e Controle de Corrosão",
+      "en": "Industrial Painting, Surface Treatment & Corrosion Control",
+      "es": "Pintura Industrial, Tratamiento de Superficies y Control de Corrosión",
+    },
+    description: {
+      "pt-BR": "Formação técnica completa: mecanismos de corrosão, preparação de substratos (decapagem e jateamento), química de tintas, aplicação e controle de qualidade.",
+      "en": "Complete technical training: corrosion mechanisms, surface prep, paint chemistry, application methods, and QC inspection.",
+      "es": "Capacitación técnica completa: corrosión, preparación de superficies, tipos de pinturas y control de calidad.",
+    },
+    longDescription: {
+      "pt-BR": "Curso de qualificação profissional abrangendo todo o ciclo de vida do revestimento anticorrosivo na indústria: desde os fundamentos de corrosão e agressividade do meio ambiente até os métodos de limpeza química, jateamento abrasivo, formulação de primers e epóxis, métodos de pulverização e ensaios normativos de controle de qualidade e gestão de efluentes.",
+      "en": "Professional qualification covering corrosion protection lifecycle: degradation fundamentals, aggressive atmospheres, chemical cleaning, abrasive blasting, primer and topcoat application, and non-destructive quality tests.",
+      "es": "Curso profesional de protección anticorrosiva: corrosión, agresividad del medio, preparación de superficies, formulación de pinturas y ensayos de calidad.",
+    },
+    schoolId: "pintura-industrial",
+    schoolName: {
+      "pt-BR": "Pintura Industrial",
+      "en": "Industrial Painting",
+      "es": "Pintura Industrial",
+    },
+    workloadHours: 40,
+    level: "intermediate",
+    modality: "online",
+    isMandatory: false,
+    mandatoryFor: ["Pintor Industrial", "Inspetor de Pintura"],
+    targetAudience: {
+      "pt-BR": "Pintores industriais, jateadores, ajudantes de pintura, fiscais de qualidade e técnicos de manutenção em paradas.",
+      "en": "Industrial painters, sandblasters, paint tenders, QC inspectors, and maintenance technicians.",
+      "es": "Pintores industriales, arenadores, inspectores de calidad y técnicos de mantenimiento.",
+    },
+    modulesCount: 4,
+    lessonsCount: 10,
+    thumbnailGradient: "from-amber-600 to-orange-950",
+    badgeCode: "PINT-IND",
+    updatedAtDate: "2026-10-15",
+    modules: [
+      {
+        id: "mod-pint-1",
+        order: 1,
+        title: {
+          "pt-BR": "Módulo 1: Fundamentos de Corrosão e Degradação de Materiais",
+          "en": "Module 1: Corrosion Fundamentals & Material Degradation",
+          "es": "Módulo 1: Fundamentos de Corrosión y Degradación",
+        },
+        lessons: [
+          {
+            id: "les-pint-1",
+            order: 1,
+            title: {
+              "pt-BR": "Aula 01: Introdução ao Tratamento de Superfície e Proteção dos Metais",
+              "en": "Lesson 01: Introduction to Surface Treatment & Metal Protection",
+              "es": "Clase 01: Introducción al Tratamiento de Superficies y Protección",
+            },
+            durationMinutes: 20,
+            contentType: "video",
+            videoUrl: "eNBpD6NZm5o",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Compreender o papel do tratamento de superfície na extensão da vida útil de estruturas metálicas e redução de custos industriais.",
+                "en": "Understand surface treatment role in extending asset life and minimizing industrial losses.",
+                "es": "Comprender el papel del tratamiento superficial en la vida útil de estructuras.",
+              },
+              introduction: {
+                "pt-BR": "A corrosão metálica consome anualmente cerca de 3% a 4% do PIB mundial em perdas industriais. O tratamento de superfície é a barreira física e eletroquímica primária que impede a degradação de tanques, tubulações e estruturas.",
+                "en": "Metallic corrosion consumes up to 4% of global GDP. Surface engineering is the frontline barrier against asset deterioration.",
+                "es": "La corrosión genera enormes pérdidas industriales. El tratamiento de superficies es la barrera principal.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "O Custo da Corrosão na Indústria Pesada",
+                    "en": "Corrosion Impact in Heavy Industry",
+                    "es": "Impacto de la Corrosión Industrial",
+                  },
+                  body: {
+                    "pt-BR": "Estruturas expostas a intempéries sem recobrimento sofrem oxidação contínua. A pintura técnica atua isolando o metal base da umidade e do oxigênio atmosférico, evitando paradas não programadas.",
+                    "en": "Unprotected steel oxidizes continuously. Protective coatings insulate base metal from moisture and oxygen.",
+                    "es": "El acero sin protección se oxida. La pintura aísla el metal de la humedad y el oxígeno.",
+                  },
+                },
+              ],
+            },
+            challenge: {
+              id: "chal-pint-1",
+              question: {
+                "pt-BR": "DESAFIO 1: Por que a simples aplicação de tinta sobre uma chapa oxidada sem pré-tratamento não impede o avanço da corrosão?",
+                "en": "CHALLENGE 1: Why does painting directly over rusted steel fail to stop corrosion?",
+                "es": "DESAFÍO 1: ¿Por qué pintar sobre óxido sin preparar la superficie no detiene la corrosión?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Porque a ferrugem aprisiona ar e umidade sob a película, continuando a reação de oxidação oculta sob a tinta.",
+                    "en": "Because rust traps moisture and oxygen underneath, continuing subsurface corrosion.",
+                    "es": "Porque el óxido atrapa humedad y aire, continuando la corrosión oculta.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! A ferrugem é porosa e hidrofílica. Pintar sobre ela resulta em empolamento (blistering) e desplacamento prematuro.",
+                    "en": "CORRECT! Rust is porous and hydrophilic, leading to rapid blistering and coating detachment.",
+                    "es": "¡CORRECTO! El óxido es poroso y provoca ampollas y desprendimiento rápido de la película.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Porque a tinta reage quimicamente com o óxido transformando-o em vapor inflamável.",
+                    "en": "Because paint reacts with rust to create flammable gas.",
+                    "es": "Porque la pintura reacciona generando gases inflamables.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO! A falha ocorre por falta de aderência mecânica e retenção de agentes oxidantes.",
+                    "en": "Incorrect! Failure stems from mechanical adhesion loss and trapped corrosive agents.",
+                    "es": "Incorrecto. La falla se debe a pérdida de adherencia y humedad atrapada.",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            id: "les-pint-2",
+            order: 2,
+            title: {
+              "pt-BR": "Aula 02: Agressividade do Ambiente e Mecanismos de Corrosão",
+              "en": "Lesson 02: Environmental Aggressiveness & Corrosion Mechanisms",
+              "es": "Clase 02: Agresividad del Medio y Mecanismos de Corrosión",
+            },
+            durationMinutes: 22,
+            contentType: "video",
+            videoUrl: "7bL527_A8GA",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Identificar os diferentes graus de agressividade ambiental (marítimo, industrial, rural) e sua relação com a seleção do esquema de pintura.",
+                "en": "Classify environmental corrosivity categories (marine, chemical, rural) to specify correct coating systems.",
+                "es": "Clasificar la agresividad del ambiente según normas internacionales para seleccionar el esquema de pintura.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Categorias de Agressividade (ISO 12944)",
+                    "en": "Corrosivity Categories (ISO 12944)",
+                    "es": "Categorías de Corrosividad (ISO 12944)",
+                  },
+                  body: {
+                    "pt-BR": "• C1 / C2 (Baixa): Ambientes internos climatizados ou rurais secos.\n• C3 (Média): Atmosferas urbanas com moderada poluição de SO2 e umidade.\n• C4 (Alta): Áreas industriais químicas e zonas costeiras com salinidade moderada.\n• C5 / CX (Muito Alta / Extrema): Orla marítima com maresia pesada, plantas offshore e plantas de celulose (altos teores de cloretos e sulfatos).",
+                    "en": "Categories range from C1 (indoor dry) up to C5/CX (offshore marine and chemical plants with heavy salt/sulfur exposure).",
+                    "es": "Desde C1 (interiores secos) hasta C5/CX (costero offshore con niebla salina y químicos agresivos).",
+                  },
+                },
+              ],
+            },
+            challenge: {
+              id: "chal-pint-2",
+              question: {
+                "pt-BR": "DESAFIO 2: Em uma planta de celulose próxima ao litoral com alto índice de umidade e névoa salina, qual categoria de agressividade deve guiar o projeto de pintura?",
+                "en": "CHALLENGE 2: In a pulp mill near the coast with heavy salt spray, which corrosivity category guides the paint scheme?",
+                "es": "DESAFÍO 2: En una planta industrial cerca del mar con salinidad y humedad, ¿qué categoría aplica?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Categoria C1 (Muito Baixa), pois a estrutura fica coberta por galpão.",
+                    "en": "Category C1 (Very Low), because the structure is covered.",
+                    "es": "Categoría C1 (Muy Baja), por estar bajo techo.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO! A condensação de cloretos em ambientes industriais costeiros exige esquemas para agressividade C5 ou superior.",
+                    "en": "Incorrect! Industrial coastal condensation demands C5 or CX specifications.",
+                    "es": "Incorrecto. La salinidad y condensación exigen protección C5 o superior.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Categoria C5 / CX (Muito Alta / Extrema), exigindo primer rico em zinco e epóxi de alta espessura.",
+                    "en": "Category C5 / CX (Very High / Extreme), mandating zinc-rich primers and high-build epoxies.",
+                    "es": "Categoría C5 / CX (Muy Alta / Extrema), requiriendo primer rico en zinc y epoxi de alto espesor.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! Ambientes com cloretos e agentes químicos necessitam de barreiras epóxi robustas com poliuretano alifático no acabamento.",
+                    "en": "CORRECT! High salinity and chemical fallout mandate high performance zinc + epoxy + polyurethane systems.",
+                    "es": "¡CORRECTO! Requiere esquemas robustos con primer de zinc, barrera epoxi y acabado poliuretano.",
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: "mod-pint-2",
+        order: 2,
+        title: {
+          "pt-BR": "Módulo 2: Pré-Tratamento e Preparação da Superfície",
+          "en": "Module 2: Pre-treatment & Surface Preparation",
+          "es": "Módulo 2: Pretratamiento y Preparación de Superficies",
+        },
+        lessons: [
+          {
+            id: "les-pint-3",
+            order: 1,
+            title: {
+              "pt-BR": "Aula 03: Limpeza Mecânica, Desengraxe e Decapagem Química",
+              "en": "Lesson 03: Mechanical Cleaning, Degreasing & Chemical Pickling",
+              "es": "Clase 03: Limpieza Mecánica, Desengrase y Decapado Químico",
+            },
+            durationMinutes: 24,
+            contentType: "video",
+            videoUrl: "BKy5BpFzh9k",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Conhecer os processos de remoção de óleos, graxas e carepas de laminação antes de qualquer processo de jateamento ou pintura.",
+                "en": "Master degreasing and pickling processes to eliminate oils, grease, and mill scale before blasting.",
+                "es": "Conocer los métodos de desengrase y decapado químico para eliminar contaminantes y cascarilla de laminación.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "A Regra Fundamental do Desengraxe Prévio",
+                    "en": "The Prime Degreasing Rule",
+                    "es": "Regla Fundamental del Desengrase Previo",
+                  },
+                  body: {
+                    "pt-BR": "NUNCA jateie uma superfície contaminada com óleo ou graxa! O jateamento abrasivo espalha o óleo por toda a rugosidade do aço e contamina o abrasivo reciclado, impedindo a aderência da tinta.",
+                    "en": "NEVER blast an oily surface! Blasting spreads grease deep into steel anchor profiles and contaminates blast media.",
+                    "es": "¡NUNCA granalle sobre grasa! La granalla incrusta los aceites en el perfil de rugosidade arruinando la adherencia.",
+                  },
+                },
+              ],
+            },
+            challenge: {
+              id: "chal-pint-3",
+              question: {
+                "pt-BR": "DESAFIO 3: Ao chegar em uma viga com respingos grossos de graxa pesada, qual a sequência correta de preparação?",
+                "en": "CHALLENGE 3: On a steel beam covered in heavy grease, what is the mandatory sequence?",
+                "es": "DESAFÍO 3: Ante una viga con manchas de grasa pesada, ¿cuál es la secuencia correcta?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "1º Limpeza com solvente/desengraxante biodegradável (ISO 8504-3); 2º Secagem; 3º Jateamento abrasivo ao padrão especificado.",
+                    "en": "1st Solvent/detergent degreasing; 2nd Drying; 3rd Abrasive blasting to spec.",
+                    "es": "1º Desengrase con solvente/biodegradable; 2º Secado; 3º Granallado abrasivo al patrón especificado.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! O desengraxe deve ser sempre a PRIMEIRA etapa, garantindo que o abrasivo encontre o substrato isento de filmes graxos.",
+                    "en": "CORRECT! Degreasing must strictly precede blasting to prevent embedding contaminants into the steel anchor pattern.",
+                    "es": "¡CORRECTO! El desengrase siempre antecede al arenado para evitar incrustar grasa en el perfil de anclaje.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Jatear com granalha de aço em alta velocidade para que o impacto 'queime' a graxa instantaneamente.",
+                    "en": "Blast with high velocity grit to 'burn off' grease.",
+                    "es": "Arenar a alta velocidad para 'quemar' la grasa con el impacto.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "GRAVE ERRO! O abrasivo contamina todo o lote de granalha e impregna o óleo nos microporos do metal.",
+                    "en": "Severe error! Oil contaminates the entire media hopper and coats anchor valleys.",
+                    "es": "¡Error grave! La granalla se contamina y distribuye el aceite en los valles del acero.",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            id: "les-pint-4",
+            order: 2,
+            title: {
+              "pt-BR": "Aula 04: Preparação de Superfície e Padrões de Jateamento (Sa 2 / Sa 2.5 / Sa 3)",
+              "en": "Lesson 04: Surface Prep & Abrasive Blasting Standards (Sa 2 / Sa 2.5 / Sa 3)",
+              "es": "Clase 04: Preparación de Superficies y Patrones de Granallado (Sa 2.5 / Sa 3)",
+            },
+            durationMinutes: 28,
+            contentType: "video",
+            videoUrl: "ddHneOWQW9A",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Identificar visualmente e normativamente os graus de limpeza por jateamento abrasivo conforme a norma ISO 8501-1 / SSPC-SP.",
+                "en": "Identify visual cleanliness grades per ISO 8501-1 (Sa 1, Sa 2, Sa 2.5, Sa 3) and SSPC standards.",
+                "es": "Identificar los grados de limpieza por chorreado abrasivo según norma ISO 8501-1 y SSPC.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Escala Visual de Jateamento Abrasivo (ISO 8501-1)",
+                    "en": "Visual Blasting Scale (ISO 8501-1)",
+                    "es": "Escala Visual de Granallado (ISO 8501-1)",
+                  },
+                  body: {
+                    "pt-BR": "• Sa 1 (Ligeiro): Remoção superficial de carepa solta e tinta frouxa.\n• Sa 2 (Comercial): Quase toda a carepa e ferrugem é removida (mínimo de 67% limpo).\n• Sa 2.5 (Ao Metal Quase Branco): Padrão mais utilizado na indústria pesada (mínimo de 95% da superfície totalmente limpa, sombras leves toleradas).\n• Sa 3 (Ao Metal Branco): 100% livre de qualquer mancha, oxidação ou sombra (metal perfeitamente uniforme).",
+                    "en": "• Sa 2: Commercial blast.\n• Sa 2.5: Near-white metal (95% clean, standard for heavy industry).\n• Sa 3: White metal (100% clean, required for tank linings).",
+                    "es": "• Sa 2: Arenado comercial.\n• Sa 2.5: Metal casi blanco (95% limpio, estándar industrial).\n• Sa 3: Metal blanco al 100% (obligatorio en tanques).",
+                  },
+                },
+              ],
+            },
+            challenge: {
+              id: "chal-pint-4",
+              question: {
+                "pt-BR": "DESAFIO 4: Em paradas industriais da celulose e petróleo, qual o padrão de jateamento mais requisitado para aplicação de primers epóxi de alta performance?",
+                "en": "CHALLENGE 4: Which blasting standard is most widely specified for high-performance epoxy primers in industrial shutdowns?",
+                "es": "DESAFÍO 4: ¿Cuál es el patrón de arenado más solicitado para esquemas epoxi de alto desempeño?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Padrão Sa 2.5 (Jateamento ao Metal Quase Branco / SSPC-SP 10).",
+                    "en": "Standard Sa 2.5 (Near-White Blast Cleaning / SSPC-SP 10).",
+                    "es": "Patrón Sa 2.5 (Metal Casi Blanco / SSPC-SP 10).",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! O padrão Sa 2.5 garante o balanço ideal entre pureza superficial e produtividade para adesão máxima do primer.",
+                    "en": "CORRECT! Sa 2.5 yields the optimal trade-off of cleanliness and application efficiency for primer adhesion.",
+                    "es": "¡CORRECTO! Sa 2.5 es el estándar de oro en la industria para adherencia de primers epóxicos.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Padrão Sa 1 (Escovação manual leve com escova de aço).",
+                    "en": "Standard Sa 1 (Light brush-off).",
+                    "es": "Patrón Sa 1 (Cepillado manual leve).",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO! Sa 1 não atinge rugosidade nem pureza suficiente para tintas de alta espessura.",
+                    "en": "Incorrect! Sa 1 leaves mill scale and lacks anchor profile for high-build coats.",
+                    "es": "Incorrecto. Sa 1 deja cascarilla y no genera perfil de rugosidad suficiente.",
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: "mod-pint-3",
+        order: 3,
+        title: {
+          "pt-BR": "Módulo 3: Tintas, Química dos Revestimentos e Métodos de Aplicação",
+          "en": "Module 3: Coating Chemistry, Formulations & Application Methods",
+          "es": "Módulo 3: Química de Pinturas, Recubrimientos y Aplicación",
+        },
+        lessons: [
+          {
+            id: "les-pint-5",
+            order: 1,
+            title: {
+              "pt-BR": "Aula 05: Fundamentos da Pintura Industrial: Resinas, Solventes e Pigmentos",
+              "en": "Lesson 05: Industrial Paint Fundamentals: Resins, Solvents & Pigments",
+              "es": "Clase 05: Componentes de la Pintura: Resinas, Solventes y Pigmentos",
+            },
+            durationMinutes: 25,
+            contentType: "video",
+            videoUrl: "952Rohf4baQ",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Entender os 4 componentes fundamentais de uma tinta industrial (veículo não-volátil, pigmentos, solventes/diluentes e aditivos) e suas funções.",
+                "en": "Understand the 4 core components of industrial coatings: resin/binder, pigments, solvents/thinners, and additives.",
+                "es": "Comprender los 4 componentes de las pinturas industriales y sus funciones.",
+              },
+            },
+            challenge: {
+              id: "chal-pint-5",
+              question: {
+                "pt-BR": "DESAFIO 5: Qual componente da tinta é o responsável por formar a película contínua aderida e conferir as resistências mecânica e química principais?",
+                "en": "CHALLENGE 5: Which paint component forms the continuous adhered film providing chemical/mechanical resistance?",
+                "es": "DESAFÍO 5: ¿Qué componente forma la película continua y otorga la resistencia química?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "A Resina (Veículo Fixo / Ligante).",
+                    "en": "The Resin (Binder / Non-volatile vehicle).",
+                    "es": "La Resina (Ligante / Vehículo Fijo).",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! A resina (epóxi, poliuretano, silicato de etila) é a espinha dorsal que une os pigmentos e ancora no metal.",
+                    "en": "CORRECT! The resin binds pigments together and anchors the film to the substrate.",
+                    "es": "¡CORRECTO! La resina es la matriz que adhiere al sustrato y otorga la resistencia.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "O Solvente, pois ele queima na superfície e endurece o metal.",
+                    "en": "The solvent, because it burns onto the surface.",
+                    "es": "El solvente, porque quema la superficie.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO! O solvente evapora totalmente durante a secagem e não faz parte da película seca final.",
+                    "en": "Incorrect! Solvents evaporate entirely during curing and do not remain in the dry film.",
+                    "es": "Incorrecto. El solvente se evapora completamente en el curado.",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            id: "les-pint-6",
+            order: 2,
+            title: {
+              "pt-BR": "Aula 06: Tipos de Tintas Industriais: Epóxi, Poliuretano e Ricos em Zinco",
+              "en": "Lesson 06: Industrial Paint Types: Epoxy, Polyurethane & Zinc-Rich Primers",
+              "es": "Clase 06: Tipos de Pinturas Industriales: Epoxi, Poliuretano y Ricos en Zinc",
+            },
+            durationMinutes: 26,
+            contentType: "video",
+            videoUrl: "2CdntiI11ds",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Diferenciar a função de cada camada: Primer de sacrifício galvânico (Zinco), Intermediário de barreira (Epóxi Mastic/High Build) e Acabamento resistente a UV (Poliuretano Alifático).",
+                "en": "Differentiate coat roles: galvanic sacrifice primer (zinc), barrier mastic (epoxy), and UV-resistant finish (aliphatic PU).",
+                "es": "Diferenciar capas: primer galvánico, capa intermedia barrera y acabado resistente a UV.",
+              },
+            },
+            challenge: {
+              id: "chal-pint-6",
+              question: {
+                "pt-BR": "DESAFIO 6: Por que a tinta epóxi NÃO deve ser usada como camada final de acabamento em estruturas externas expostas diretamente à luz do sol?",
+                "en": "CHALLENGE 6: Why should epoxy NOT be used as the exterior topcoat exposed directly to sunlight?",
+                "es": "DESAFÍO 6: ¿Por qué la pintura epoxi NO debe usarse como acabado final al sol?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Porque a radiação ultravioleta do sol quebra as cadeias da resina epóxi, causando calcinação (tiza/chalking) e descoloração.",
+                    "en": "Because UV solar radiation degrades epoxy resin chains, inducing chalking and color fade.",
+                    "es": "Porque los rayos UV degradan la resina epóxica causando tizado (calcinação) y decoloración.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! O epóxi é um excelente produto de barreira interna, mas para intempéries externas o acabamento deve ser Poliuretano Alifático.",
+                    "en": "CORRECT! Epoxy degrades under sunlight; aliphatic polyurethane must be applied as topcoat.",
+                    "es": "¡CORRECTO! El epoxi se tiza al sol; para exteriores se debe sellar con poliuretano alifático.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Porque o calor do sol faz o epóxi amolecer e virar líquido novamente.",
+                    "en": "Because heat liquefies cured epoxy.",
+                    "es": "Porque el calor vuelve líquida la pintura.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO! O epóxi é termofixo e não funde com o calor ambiente; o problema é a degradação fotoquímica pelos raios UV.",
+                    "en": "Incorrect! Epoxy is thermoset and will not melt; failure is photochemical UV degradation.",
+                    "es": "Incorrecto. El epoxi es termoestable; la falla es la fotodegradación por rayos UV.",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            id: "les-pint-7",
+            order: 3,
+            title: {
+              "pt-BR": "Aula 07: Processos e Equipamentos de Aplicação: Trincha, Rolo e Pistola Airless",
+              "en": "Lesson 07: Application Equipment: Brush, Roller & Airless Spray",
+              "es": "Clase 07: Equipos de Aplicación: Brocha, Rodillo y Pistola Airless",
+            },
+            durationMinutes: 30,
+            contentType: "video",
+            videoUrl: "dxrft0a4sQE",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Dominar a seleção de bicos, pressão e técnica de sobreposição (passadas cruzadas 50%) com bomba Airless para produção industrial.",
+                "en": "Master spray tip selection, fluid pressure, and 50% overlap technique with airless pumps.",
+                "es": "Dominar selección de boquillas, presión y técnica de traslape al 50% con bomba Airless.",
+              },
+            },
+            challenge: {
+              id: "chal-pint-7",
+              question: {
+                "pt-BR": "DESAFIO 7: Em estruturas com cantos vivos, soldas e frestas, qual procedimento obrigatório deve anteceder a demão geral com pistola airless?",
+                "en": "CHALLENGE 7: On structural steel welds, sharp edges, and bolt clusters, what mandatory prep precedes airless spraying?",
+                "es": "DESAFÍO 7: En bordes afilados, soldaduras y pernos, ¿qué procedimiento previo es obligatorio?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Pintura de reforço com trincha (Stripe Coat / Demão de Trincha em Cantos e Soldas).",
+                    "en": "Stripe coating by brush on all edges, welds, and crevices.",
+                    "es": "Pintura de refuerzo con brocha (Stripe Coat) en cantos y cordones de soldadura.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! A tensão superficial da tinta na pulverização tende a fugir de cantos vivos. A trincha manual garante a espessura mínima necessária nessas áreas críticas.",
+                    "en": "CORRECT! Paint surface tension pulls coating away from sharp edges; stripe coating by brush guarantees required film thickness.",
+                    "es": "¡CORRECTO! La tensión superficial adelgaza la pintura en bordes; la brocha asegura el espesor necesario.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Aproximar o bico da pistola airless a menos de 5 cm do canto com pressão máxima.",
+                    "en": "Hold airless gun 5 cm from corners with maximum pressure.",
+                    "es": "Acercar la pistola airless a 5 cm con presión máxima.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO! Isso causa escorrimento violento, porosidade e bolhas por aprisionamento de solvente.",
+                    "en": "Incorrect! This causes severe runs, sags, and solvent entrapment pinholes.",
+                    "es": "Incorrecto. Provoca escurrimiento severo y ampollas por solvente atrapado.",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            id: "les-pint-8",
+            order: 4,
+            title: {
+              "pt-BR": "Aula 08: Recobrimentos Metálicos Protetores e Galvanização",
+              "en": "Lesson 08: Metallic Protective Coatings & Galvanizing",
+              "es": "Clase 08: Recubrimientos Metálicos Protectores y Galvanizado",
+            },
+            durationMinutes: 24,
+            contentType: "video",
+            videoUrl: "ujWWOrmBIpY",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Compreender a proteção catódica por galvanização a fogo, metalização por aspersão térmica (TSA) e compatibilidade com tintas.",
+                "en": "Understand galvanic cathodic protection by hot-dip galvanizing, thermal spray aluminum (TSA), and duplex systems.",
+                "es": "Comprender la protección catódica por galvanizado en caliente y compatibilidad de esquemas dúplex.",
+              },
+            },
+            challenge: {
+              id: "chal-pint-8",
+              question: {
+                "pt-BR": "DESAFIO 8: Como se chama o sistema de altíssima durabilidade que combina galvanização a fogo com posterior pintura líquida?",
+                "en": "CHALLENGE 8: What is the high-durability system combining hot-dip galvanizing with subsequent liquid coating called?",
+                "es": "DESAFÍO 8: ¿Cómo se denomina el sistema de alta durabilidad que combina galvanizado y pintura?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Sistema Duplex (Proteção por Efeito Sinérgico).",
+                    "en": "Duplex System (Synergistic Protection Effect).",
+                    "es": "Sistema Dúplex (Protección por Efecto Sinérgico).",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! O Sistema Duplex proporciona uma vida útil até 2,5 vezes maior do que a soma das duas proteções isoladas.",
+                    "en": "CORRECT! Duplex systems deliver service lives up to 2.5x longer than the sum of both systems alone.",
+                    "es": "¡CORRECTO! El sistema dúplex multiplica la vida útil al proteger la capa de zinc del desgaste directo.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Sistema Monolítico de Fusão.",
+                    "en": "Monolithic Fusion System.",
+                    "es": "Sistema Monolítico de Fusión.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO! A terminologia técnica e normativa correta é Sistema Duplex.",
+                    "en": "Incorrect! Standard engineering term is Duplex System.",
+                    "es": "Incorrecto. El término técnico normativo es Sistema Dúplex.",
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: "mod-pint-4",
+        order: 4,
+        title: {
+          "pt-BR": "Módulo 4: Controle de Qualidade, Ensaios e Gestão Ambiental",
+          "en": "Module 4: Quality Control, Inspection Tests & Environmental Safety",
+          "es": "Módulo 4: Control de Calidad, Ensayos y Medio Ambiente",
+        },
+        lessons: [
+          {
+            id: "les-pint-9",
+            order: 1,
+            title: {
+              "pt-BR": "Aula 09: Inspeção e Controle de Qualidade: Espessura Úmida, Seca e Teste de Aderência",
+              "en": "Lesson 09: QC Inspection: Wet Film, Dry Film Thickness (DFT) & Adhesion",
+              "es": "Clase 09: Control de Calidad: Espesor Húmedo, Espesor Seco (EPH/EPS) y Adherencia",
+            },
+            durationMinutes: 28,
+            contentType: "video",
+            videoUrl: "sYlm1isRgx0",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Executar medições de Espessura de Película Úmida (pente medidor EPH), Espessura de Película Seca (EPS magnético / ultrassônico) e ensaio de aderência em corte em X (ASTM D3359).",
+                "en": "Conduct wet film thickness (WFT comb), dry film thickness (magnetic/ultrasonic DFT gauge), and cross-cut adhesion tests.",
+                "es": "Medir espesor húmedo (peine), espesor seco (galgas magnéticas) y ensayo de adherencia por corte.",
+              },
+            },
+            challenge: {
+              id: "chal-pint-9",
+              question: {
+                "pt-BR": "DESAFIO 9: Se uma tinta epóxi possui 80% de Sólidos por Volume (SV) e a especificação de projeto exige EPS de 200 micras, qual Espessura de Película Úmida (EPH) o pintor deve manter no pente durante a aplicação?",
+                "en": "CHALLENGE 9: If an epoxy has 80% Solids by Volume and project requires 200 µm DFT, what Wet Film Thickness (WFT) must be measured on the comb?",
+                "es": "DESAFÍO 9: Con 80% de sólidos por volumen y EPS requerido de 200 micras, ¿qué espesor húmedo (EPH) debe medirse?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "250 micras (Fórmula: EPH = EPS / (SV / 100) -> 200 / 0.8 = 250 µm).",
+                    "en": "250 µm (Formula: WFT = DFT / (SV / 100) -> 200 / 0.8 = 250 µm).",
+                    "es": "250 micras (Fórmula: EPH = EPS / (SV / 100) -> 200 / 0.8 = 250 µm).",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! O cálculo de EPH é o ensaio de controle de processo mais importante para garantir que, após evaporação do solvente, o filme atinja exatamente as 200 micras exigidas.",
+                    "en": "CORRECT! Real-time WFT tracking ensures precise target DFT upon curing.",
+                    "es": "¡CORRECTO! El cálculo de EPH garantiza que al secar se alcance exactamente el espesor de proyecto.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "160 micras (Multiplicando 200 por 0.8).",
+                    "en": "160 µm (Multiplying 200 by 0.8).",
+                    "es": "160 micras (Multiplicando 200 por 0.8).",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO! Como o solvente evapora, o filme úmido deve ser MAIOR do que o filme seco, nunca menor.",
+                    "en": "Incorrect! Solvent loss causes film shrinkage; wet film must always exceed dry target.",
+                    "es": "Incorrecto. Como el solvente se evapora, la película húmeda siempre debe ser mayor a la seca.",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            id: "les-pint-10",
+            order: 2,
+            title: {
+              "pt-BR": "Aula 10: Tratamento de Efluentes, Resíduos e Gestão Ambiental na Pintura Industrial",
+              "en": "Lesson 10: Effluent Treatment, Hazardous Waste & Environmental Safety in Painting",
+              "es": "Clase 10: Tratamiento de Efluentes, Residuos Peligrosos y Gestión Ambiental",
+            },
+            durationMinutes: 22,
+            contentType: "video",
+            videoUrl: "sfsPVTBX2U8",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Aplicar as normas de descarte e contenção de solventes residuais, borra de tinta, abrasivos usados e emissão de Compostos Orgânicos Voláteis (VOC).",
+                "en": "Comply with waste segregation, hazardous sludge disposal, spent blast media management, and VOC emission controls.",
+                "es": "Aplicar normas de disposición de solventes, lodos de pintura, granalla usada y control de emisiones VOC.",
+              },
+            },
+            challenge: {
+              id: "chal-pint-10",
+              question: {
+                "pt-BR": "DESAFIO 10: Ao término da jornada de pintura, o que deve ser feito com o solvente sujo utilizado na limpeza da bomba airless e pistolas?",
+                "en": "CHALLENGE 10: At the end of the shift, what is the mandatory disposal procedure for solvent used in pump flushing?",
+                "es": "DESAFÍO 10: Al terminar el turno, ¿qué se debe hacer con el solvente usado en la limpieza de la bomba airless?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Armazenar em tambor metálico identificado para resíduo Classe I (Perigoso), hermeticamente fechado e aterrado, para destinação a empresa licenciada.",
+                    "en": "Store in grounded, airtight steel drum labeled for Class I Hazardous Waste for licensed recycler disposal.",
+                    "es": "Almacenar en tambor rotulado como Residuo Peligroso Clase I, hermético y con conexión a tierra.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! Solventes e borras são inflamáveis e tóxicos (Classe I). É estritamente proibido o descarte em rede de esgoto ou solo.",
+                    "en": "CORRECT! Solvents are flammable Class I toxics. Dumping down drains or on soil violates environmental laws.",
+                    "es": "¡CORRECTO! Los solventes son inflamables y tóxicos. El descarte en desagües o suelo es delito ambiental.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Despejar na canaleta de drenagem pluvial do pátio para que evapore mais rápido ao sol.",
+                    "en": "Dump into stormwater drains to let sunlight evaporate it.",
+                    "es": "Tirar en el desagüe pluvial para que se evapore al sol.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "CRIME AMBIENTAL GRAVÍSSIMO! Contamina lençóis freáticos e mananciais, passível de embargo e prisão.",
+                    "en": "Severe environmental crime! Contaminates water tables and creates explosion hazards.",
+                    "es": "¡Delito ambiental grave! Contamina aguas y genera riesgo de explosión.",
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+    finalAssessment: {
+      id: "exam-pintura-final",
+      order: 1,
+      title: {
+        "pt-BR": "Avaliação Teórica de Qualificação em Pintura Industrial e Corrosão",
+        "en": "Theoretical Qualification Exam in Industrial Painting & Corrosion",
+        "es": "Evaluación Teórica de Calificación en Pintura Industrial y Corrosión",
+      },
+      description: {
+        "pt-BR": "Exame formal de certificação abordando graus de agressividade ambiental, padrões de jateamento Sa 2.5/Sa 3, cálculo de película úmida (EPH), formulação de tintas e ensaios de qualidade.",
+        "en": "Formal certification exam covering environmental corrosivity, Sa 2.5/Sa 3 blasting standards, wet film thickness calculations, coating chemistry, and quality tests.",
+        "es": "Examen formal de certificación que abarca corrosividad, granallado Sa 2.5, cálculo de EPH, formulación de pinturas y ensayos de calidad.",
+      },
+      scope: "course",
+      estimatedMinutes: 45,
+      questionsCount: 8,
+      passingScorePercent: 70,
+      maxAttempts: 3,
+      isAvailable: true,
+      availabilityNotice: {
+        "pt-BR": "Avaliação liberada após a conclusão dos 4 módulos técnicos.",
+        "en": "Exam available upon completing the 4 technical modules.",
+        "es": "Evaluación habilitada tras concluir los 4 módulos técnicos.",
+      },
+      questions: [
+        {
+          id: "q-1",
+          order: 1,
+          question: {
+            "pt-BR": "1. Qual é a principal consequência de aplicar uma demão de primer epóxi diretamente sobre uma superfície metálica com carepa de laminação intacta?",
+            "en": "1. What is the primary consequence of applying epoxy primer directly over intact mill scale?",
+            "es": "1. ¿Cuál es la consecuencia principal de aplicar primer epoxi sobre cascarilla de laminación intacta?",
+          },
+          options: [
+            {
+              id: "q1-a",
+              text: {
+                "pt-BR": "A carepa se desprende com o tempo devido a tensões mecânicas e diferença de dilatação térmica, provocando o desplacamento de todo o sistema de pintura.",
+                "en": "Mill scale detaches over time due to thermal stress and mechanical shocks, popping off the paint film.",
+                "es": "La cascarilla se desprende con el tiempo por dilatación térmica, arrancando la pintura.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! A carepa de laminação possui coeficiente de dilatação térmica diferente do aço base e é catódica em relação ao ferro, acelerando a corrosão galvânica e desplacando a tinta.",
+                "en": "Correct! Mill scale is cathodic to iron and exhibits differential expansion, leading to severe delamination.",
+                "es": "¡Correcto! La cascarilla tiene diferente dilatación y causa desprendimiento catastrófico.",
+              },
+            },
+            {
+              id: "q1-b",
+              text: {
+                "pt-BR": "A carepa absorve a tinta e aumenta a espessura seca sem nenhum prejuízo estrutural.",
+                "en": "Mill scale absorbs paint, increasing dry film thickness safely.",
+                "es": "La cascarilla absorbe la pintura aumentando el espesor sin daños.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! A carepa não é porosa nem flexível; ela quebra e solta.",
+                "en": "Incorrect! Mill scale is brittle and non-elastic.",
+                "es": "Incorrecto. La cascarilla es quebradiza y se fractura.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-2",
+          order: 2,
+          question: {
+            "pt-BR": "2. Segundo a norma ISO 8501-1, qual padrão de jateamento abrasivo exige que pelo menos 95% da superfície esteja completamente livre de resíduos visíveis, tolerando apenas leves sombras?",
+            "en": "2. According to ISO 8501-1, which abrasive blast standard requires at least 95% free of visible residues, tolerating only faint shadows?",
+            "es": "2. Según ISO 8501-1, ¿qué grado de chorreado abrasivo exige al menos 95% libre de residuos visibles?",
+          },
+          options: [
+            {
+              id: "q2-a",
+              text: {
+                "pt-BR": "Padrão Sa 2.5 (Jateamento ao Metal Quase Branco).",
+                "en": "Grade Sa 2.5 (Near-White Blast Cleaning).",
+                "es": "Grado Sa 2.5 (Metal Casi Blanco).",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! O padrão Sa 2.5 (equivalente ao SSPC-SP 10) é a especificação padrão para tintas de alta espessura na indústria pesada.",
+                "en": "Correct! Sa 2.5 is the heavy industry benchmark specification for high-build systems.",
+                "es": "¡Correcto! Sa 2.5 es el estándar universal en la industria pesada.",
+              },
+            },
+            {
+              id: "q2-b",
+              text: {
+                "pt-BR": "Padrão Sa 1 (Jateamento Ligeiro).",
+                "en": "Grade Sa 1 (Light brush-off).",
+                "es": "Grado Sa 1 (Chorreado Ligero).",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! Sa 1 apenas remove materiais soltos e não atinge o metal quase branco.",
+                "en": "Incorrect! Sa 1 only removes loose deposits.",
+                "es": "Incorrecto. Sa 1 solo desprende escamas sueltas.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-3",
+          order: 3,
+          question: {
+            "pt-BR": "3. Se um projeto exige EPS (Espessura de Película Seca) de 150 micras e a tinta especificada possui 75% de Sólidos por Volume (SV), qual a EPH (Espessura de Película Úmida) mínima que o pintor deve medir no pente durante a aplicação?",
+            "en": "3. If a spec requires 150 µm DFT with 75% Solids by Volume, what minimum WFT must be tracked on the wet film gauge comb?",
+            "es": "3. Para 150 µm de EPS con 75% de sólidos en volumen, ¿qué EPH debe medir el aplicador con el peine?",
+          },
+          options: [
+            {
+              id: "q3-a",
+              text: {
+                "pt-BR": "200 micras (Cálculo: EPH = 150 / 0.75 = 200 µm).",
+                "en": "200 µm (Formula: WFT = 150 / 0.75 = 200 µm).",
+                "es": "200 micras (Cálculo: EPH = 150 / 0.75 = 200 µm).",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! EPH = (EPS / SV%) * 100 -> (150 / 75) * 100 = 200 micras úmidas.",
+                "en": "Correct! Formula WFT = (DFT / %SV) * 100 yields 200 µm.",
+                "es": "¡Correcto! La fórmula da exactamente 200 micras húmedas requeridas.",
+              },
+            },
+            {
+              id: "q3-b",
+              text: {
+                "pt-BR": "112,5 micras (Multiplicando 150 por 0.75).",
+                "en": "112.5 µm (150 multiplied by 0.75).",
+                "es": "112,5 micras (150 multiplicado por 0.75).",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! A espessura úmida deve ser sempre maior que a seca, pois o solvente evapora.",
+                "en": "Incorrect! Wet film must exceed dry target because solvents evaporate.",
+                "es": "Incorrecto. El espesor húmedo siempre es mayor por la pérdida de solvente.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-4",
+          order: 4,
+          question: {
+            "pt-BR": "4. Por que em estruturas externas com forte insolação a tinta poliuretano alifático é aplicada sobre o epóxi?",
+            "en": "4. Why is aliphatic polyurethane applied over epoxy on outdoor structures exposed to sunlight?",
+            "es": "4. ¿Por qué se aplica poliuretano alifático sobre epoxi en estructuras exteriores expuestas al sol?",
+          },
+          options: [
+            {
+              id: "q4-a",
+              text: {
+                "pt-BR": "Porque o poliuretano alifático possui excelente estabilidade contra raios UV, impedindo que o epóxi sofra calcinação (tizado), perda de brilho e erosão precoce.",
+                "en": "Because aliphatic polyurethane provides superior UV stability, shielding epoxy from chalking and photo-degradation.",
+                "es": "Porque el poliuretano alifático resiste los rayos UV, evitando el tizado y degradación del epoxi.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! O epóxi é uma excelente barreira anticorrosiva mecânica, mas se decompõe sob luz UV; o poliuretano funciona como escudo protetor contra intempéries.",
+                "en": "Correct! Epoxy provides chemical barrier while polyurethane provides weather/UV retention.",
+                "es": "¡Correcto! El epoxi aporta la barrera y el poliuretano la resistencia a la intemperie.",
+              },
+            },
+            {
+              id: "q4-b",
+              text: {
+                "pt-BR": "Porque o poliuretano alifático é mais barato e serve apenas para dar uma cor bonita sem função protetora.",
+                "en": "Because PU is cheaper and only provides aesthetic color.",
+                "es": "Porque el poliuretano es más barato y solo aporta color.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! O poliuretano é uma resina técnica nobre essencial para a retenção de cor e durabilidade externa.",
+                "en": "Incorrect! Polyurethane is a high grade resin critical to long term durability.",
+                "es": "Incorrecto. Es una resina técnica imprescindible para evitar la degradación del sistema.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-5",
+          order: 5,
+          question: {
+            "pt-BR": "5. O que é a técnica de 'Stripe Coat' (Demão de Trincha de Reforço) e em quais locais ela deve ser obrigatoriamente realizada?",
+            "en": "5. What is 'Stripe Coating' and where is it mandatorily applied?",
+            "es": "5. ¿Qué es el 'Stripe Coat' y dónde debe aplicarse obligatoriamente?",
+          },
+          options: [
+            {
+              id: "q5-a",
+              text: {
+                "pt-BR": "Aplicação prévia com trincha em cantos vivos, parafusos, frestas e cordões de solda antes da demão geral com pistola airless.",
+                "en": "Prior brush application on sharp edges, fasteners, crevices, and weld seams before spray passes.",
+                "es": "Aplicación previa con brocha en bordes afilados, pernos, hendiduras y soldaduras antes del airless.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! Cantos vivos e soldas sofrem retração da película durante a secagem por tensão superficial. O stripe coat garante espessura suficiente nos pontos onde a corrosão costuma iniciar.",
+                "en": "Correct! Surface tension thins coatings at edges. Stripe coating secures minimum barrier thickness where corrosion initiates first.",
+                "es": "¡Correcto! En los bordes la pintura se adelgaza; el stripe coat previene el inicio de la corrosión.",
+              },
+            },
+            {
+              id: "q5-b",
+              text: {
+                "pt-BR": "Pintar listras coloridas zebradas na peça para sinalizar que o serviço foi finalizado.",
+                "en": "Painting colored stripes to signal work completion.",
+                "es": "Pintar líneas de advertencia para señalizar fin de obra.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! Stripe coat é uma técnica de reforço de espessura de película anticorrosiva.",
+                "en": "Incorrect! Stripe coating is a technical thickness reinforcement procedure.",
+                "es": "Incorrecto. Es un procedimiento de refuerzo anticorrosivo fundamental.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-6",
+          order: 6,
+          question: {
+            "pt-BR": "6. Como funciona a proteção por 'sacrifício galvânico' proporcionada por primers ricos em zinco sobre o aço carbono?",
+            "en": "6. How does galvanic cathodic protection work in zinc-rich primers applied over carbon steel?",
+            "es": "6. ¿Cómo funciona la protección por 'sacrificio galvánico' en primers ricos en zinc sobre acero?",
+          },
+          options: [
+            {
+              id: "q6-a",
+              text: {
+                "pt-BR": "O zinco possui potencial eletroquímico mais negativo que o ferro; portanto, em caso de risco ou dano na película, o zinco se oxida preferencialmente protegendo o aço catodicamente.",
+                "en": "Zinc has a more negative electrochemical potential than iron, oxidizing sacrificially to protect the base steel.",
+                "es": "El zinc tiene potencial más negativo que el hierro, oxidándose preferentemente para proteger el acero.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! O pó de zinco em contato íntimo com o metal base atua como ânodo galvânico de sacrifício, impedindo a corrosão por perda de elétrons do ferro.",
+                "en": "Correct! Zinc particles act as sacrificial anodes in direct electrical contact with base metal.",
+                "es": "¡Correcto! El zinc actúa como ánodo galvánico protegiendo el acero base.",
+              },
+            },
+            {
+              id: "q6-b",
+              text: {
+                "pt-BR": "O zinco derrete sobre o aço criando uma solda líquida que fecha todos os poros.",
+                "en": "Zinc melts over steel creating a liquid weld sealing pores.",
+                "es": "El zinc se funde con el calor sellando todos los poros.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! Não há fusão térmica na pintura líquida; o mecanismo é estritamente eletroquímico galvânico.",
+                "en": "Incorrect! Mechanism is electrochemical, not thermal fusion.",
+                "es": "Incorrecto. El mecanismo es electroquímico, no por fusión.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-7",
+          order: 7,
+          question: {
+            "pt-BR": "7. Durante o ensaio de controle de aderência por corte em X (conforme ASTM D3359 Método A), qual resultado indica a melhor aderência da película?",
+            "en": "7. In an X-cut adhesion test per ASTM D3359 Method A, which classification indicates superior adhesion?",
+            "es": "7. En un ensayo de adherencia por corte en X (ASTM D3359 Método A), ¿qué resultado indica mejor adherencia?",
+          },
+          options: [
+            {
+              id: "q7-a",
+              text: {
+                "pt-BR": "Classificação 5A (Nenhum destacamento de tinta ao longo da incisão ou na interseção do X).",
+                "en": "Rating 5A (No peeling or removal along incisions or at intersection).",
+                "es": "Clasificación 5A (Cero desprendimiento en las incisiones o intersección del corte).",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! Na escala ASTM D3359 Método A, 5A é a aderência máxima perfeita (sem destacamento) e 0A é a falha total.",
+                "en": "Correct! 5A represents zero detachment while 0A represents complete coating removal.",
+                "es": "¡Correcto! 5A representa la máxima adherencia sin desprendimiento alguno.",
+              },
+            },
+            {
+              id: "q7-b",
+              text: {
+                "pt-BR": "Classificação 0A (Mais de 50% da tinta arrancada pela fita adesiva).",
+                "en": "Rating 0A (Over 50% removal by tape).",
+                "es": "Clasificación 0A (Más del 50% desprendido).",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! 0A é a pior nota da norma, significando reprovação imediata da pintura.",
+                "en": "Incorrect! 0A represents complete failure and coating rejection.",
+                "es": "Incorrecto. 0A es reprobación inmediata por desprendimiento masivo.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-8",
+          order: 8,
+          question: {
+            "pt-BR": "8. Na limpeza e manutenção diária de equipamentos de pintura Airless, qual o procedimento correto com relação aos resíduos de solvente e aterramento elétrico?",
+            "en": "8. In daily airless pump maintenance, what is mandatory regarding solvent waste and grounding?",
+            "es": "8. En el mantenimiento de bombas airless, ¿cuál es el procedimiento obligatorio con solventes y tierra?",
+          },
+          options: [
+            {
+              id: "q8-a",
+              text: {
+                "pt-BR": "Conectar o cabo de aterramento da bomba à carcaça do balde metálico de descarte para dissipar eletricidade estática (evitando centelha e explosão) e segregar o solvente sujo como resíduo Classe I.",
+                "en": "Attach equipment grounding clamp to metallic waste pail to discharge static (preventing spark/explosion) and segregate solvent as Class I hazardous waste.",
+                "es": "Conectar el cable a tierra al balde metálico para evitar chispas por estática y clasificar el solvente como residuo Clase I.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! O atrito do fluido em alta velocidade na mangueira gera eletricidade estática que pode inflamar vapores de solvente. O aterramento equipotencial salva vidas.",
+                "en": "Correct! High velocity fluid friction creates static electricity capable of igniting solvent vapors. Static bonding prevents flash fires.",
+                "es": "¡Correcto! La fricción genera electricidad estática inflamable; la conexión a tierra evita explosiones.",
+              },
+            },
+            {
+              id: "q8-b",
+              text: {
+                "pt-BR": "Usar baldes de plástico abertos e descartar o solvente no ralo de água pluvial da fábrica.",
+                "en": "Use open plastic buckets and flush down storm drains.",
+                "es": "Usar baldes plásticos abiertos y tirar el solvente al desagüe.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Extremamente perigoso e ilegal! Baldes plásticos acumulam estática e descarte em ralo é crime ambiental.",
+                "en": "Extremely dangerous! Plastic holds static charge and drain dumping is a crime.",
+                "es": "¡Peligroso e ilegal! El plástico acumula estática y es un delito ambiental grave.",
+              },
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    id: "c-andaime-montagem-seguranca",
+    slug: "montagem-inspecao-seguranca-andaimes",
+    title: {
+      "pt-BR": "Montagem, Inspeção e Segurança Operacional em Andaimes (NR-18 e NR-35)",
+      "en": "Scaffolding Assembly, Inspection & Operational Safety (NR-18 & NR-35)",
+      "es": "Montaje, Inspección y Seguridad Operacional en Andamios (NR-18 y NR-35)",
+    },
+    description: {
+      "pt-BR": "Capacitação completa para montadores, encarregados e fiscais: componentes tubulares e modulares, travamentos, sapatas, procedimentos de APR, inspeção com etiquetas e montagem prática passo a passo.",
+      "en": "Comprehensive training for scaffolders, foremen, and inspectors: tubular and system scaffolding, bracing, base plates, risk assessment, tagging systems, and step-by-step practical assembly.",
+      "es": "Capacitación técnica integral: componentes tubulares y multidireccionales, arriostramientos, nivelación, permisos de trabajo en altura, tarjetas de inspección y montaje práctico.",
+    },
+    longDescription: {
+      "pt-BR": "Curso operacional avançado focado na integridade estrutural e segurança de montagem de andaimes industriais e da construção civil. O programa aborda os preceitos mandatórios da NR-18 (Condições de Segurança na Indústria da Construção) e NR-35 (Trabalho em Altura), detalhando desde a seleção de terreno e sapatas ajustáveis, prumos e diagonais de travamento, montagem de guarda-corpo duplo com rodapé, cálculo de sobrecarga de pranchões, até o protocolo de liberação por etiquetas (Verde/Vermelha) e desmontagem sequencial segura.",
+      "en": "Advanced operational qualification covering structural integrity and assembly safety for industrial and civil scaffolding. The curriculum strictly complies with NR-18 and NR-35 regulatory standards, addressing ground preparation, adjustable base plates, plumb and diagonal bracing, double guardrails with toeboards, deck load limits, inspection tagging procedures (Green/Red), and safe sequential dismantling.",
+      "es": "Curso avanzado enfocado en la estabilidad estructural y seguridad en el montaje de andamios industriales. Cubre las normas NR-18 y NR-35, placas base, arriostramiento diagonal, barandillas dobles con rodapié, límites de carga, tarjetas de inspección y desmontaje seguro.",
+    },
+    schoolId: "andaimes-acesso",
+    schoolName: {
+      "pt-BR": "Montagem de Andaimes e Acesso Industrial",
+      "en": "Scaffolding Assembly & Industrial Access",
+      "es": "Montaje de Andamios y Acceso Industrial",
+    },
+    workloadHours: 40,
+    level: "advanced",
+    modality: "hybrid",
+    isMandatory: true,
+    mandatoryFor: ["Montador de Andaime", "Encarregado de Andaimes", "Fiscal de Segurança do Trabalho"],
+    targetAudience: {
+      "pt-BR": "Montadores de andaimes, encarregados de estruturas provisórias, ajudantes de montagem, técnicos em segurança do trabalho e supervisores de paradas industriais.",
+      "en": "Scaffolders, temporary structure foremen, rigger helpers, safety technicians, and industrial turnaround supervisors.",
+      "es": "Montadores de andamios, supervisores de estructuras temporales, técnicos de seguridad y jefes de mantenimiento.",
+    },
+    modulesCount: 5,
+    lessonsCount: 9,
+    thumbnailGradient: "from-amber-600 to-yellow-800",
+    badgeCode: "AND-IND",
+    updatedAtDate: "2026-10-15",
+    modules: [
+      {
+        id: "mod-and-1",
+        order: 1,
+        title: {
+          "pt-BR": "Módulo 1: Fundamentos Normativos e Componentes Estruturais",
+          "en": "Module 1: Standards & Structural Scaffold Components",
+          "es": "Módulo 1: Fundamentos Normativos y Componentes Estructurales",
+        },
+        lessons: [
+          {
+            id: "les-and-1",
+            order: 1,
+            title: {
+              "pt-BR": "Aula 01: Introdução à Montagem de Andaimes e Diretrizes Normativas (NR-18 e NR-35)",
+              "en": "Lesson 01: Introduction to Scaffolding Assembly & Regulatory Standards",
+              "es": "Clase 01: Introducción al Montaje de Andamios y Normas Técnicas",
+            },
+            durationMinutes: 20,
+            contentType: "video",
+            videoUrl: "YGSi8_p5z9w",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Compreender os princípios basilares da montagem de andaimes segundo a NR-18 e NR-35, responsabilidades legais e mitigação de risco de queda.",
+                "en": "Understand foundational scaffolding assembly standards under NR-18 and NR-35, legal liabilities, and fall prevention.",
+                "es": "Comprender los principios de montaje de andamios según NR-18 y NR-35 y prevención de caídas.",
+              },
+              introduction: {
+                "pt-BR": "O andaime é uma plataforma de trabalho temporária essencial na indústria e na construção civil. Por envolver trabalho contínuo em altura, falhas em sua concepção, base ou travamento podem desencadear colapsos catastróficos. O conhecimento aprofundado das normas vigentes é o primeiro passo para o risco zero.",
+                "en": "Scaffolding is an indispensable temporary working platform in heavy industry. Because work is performed at elevation, structural failure can lead to catastrophic falls.",
+                "es": "El andamio es una estructura temporal vital pero de alto riesgo. El cumplimiento normativo estricto es indispensable para evitar incidentes.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Marco Regulatório: Exigências da NR-18 e NR-35",
+                    "en": "Regulatory Framework: NR-18 & NR-35 Requirements",
+                    "es": "Marco Regulatorio: Exigencias de la NR-18 y NR-35",
+                  },
+                  body: {
+                    "pt-BR": "A NR-18 estabelece os critérios técnicos para materiais, travamentos e liberação de plataformas provisórias, enquanto a NR-35 regulamenta todo trabalho executado acima de 2,00 metros do piso com risco de queda. Todo projeto de andaime com altura superior a limites normativos ou montado em balanço exige projeto assinado por profissional legalmente habilitado (PLH) com emissão de ART.",
+                    "en": "NR-18 governs construction and industrial scaffolding design and safety, while NR-35 regulates all work at heights above 2 meters. Scaffolding exceeding prescriptive limits requires a certified engineer's structural design.",
+                    "es": "La NR-18 establece especificaciones de materiales y plataformas, mientras la NR-35 regula el trabajo en altura por encima de 2 metros con riesgo de caída.",
+                  },
+                },
+              ],
+            },
+            challenge: {
+              id: "chal-and-1",
+              question: {
+                "pt-BR": "DESAFIO 1: A partir de qual altura em relação ao nível inferior qualquer atividade com risco de queda é considerada trabalho em altura pela NR-35?",
+                "en": "CHALLENGE 1: From what elevation threshold is an activity considered work at height under NR-35?",
+                "es": "DESAFÍO 1: ¿A partir de qué altura se considera trabajo en altura según la norma NR-35?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "A partir de 2,00 metros de altura do nível inferior onde haja risco de queda.",
+                    "en": "Above 2.00 meters from the lower level where fall hazard exists.",
+                    "es": "A partir de 2,00 metros del nivel inferior donde exista riesgo de caída.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! Conforme o item 35.1.2 da NR-35, considera-se trabalho em altura toda atividade executada acima de 2,00 m do nível inferior, onde haja risco de queda.",
+                    "en": "CORRECT! NR-35 clause 35.1.2 explicitly defines work at height as any activity performed above 2.00 meters with fall risk.",
+                    "es": "¡CORRECTO! Según el acápite 35.1.2, se considera trabajo en altura a partir de 2 metros del nivel inferior con riesgo de caída.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Apenas a partir de 4,00 metros de altura em ambientes industriais.",
+                    "en": "Only above 4.00 meters in heavy industrial plants.",
+                    "es": "Únicamente a partir de 4,00 metros en entornos industriales.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO! O patamar normativo geral no Brasil é 2,00 metros, exigindo medidas de proteção coletiva e individual.",
+                    "en": "INCORRECT! The Brazilian national regulatory baseline is 2.00 meters.",
+                    "es": "INCORRECTO. El límite normativo legal es de 2,00 metros.",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            id: "les-and-2",
+            order: 2,
+            title: {
+              "pt-BR": "Aula 02: Tipos de Andaimes, Componentes e Acessórios de Apoio",
+              "en": "Lesson 02: Scaffolding Classifications, Components & Base Fixtures",
+              "es": "Clase 02: Tipos de Andamios, Componentes y Accesorios de Apoyo",
+            },
+            durationMinutes: 22,
+            contentType: "video",
+            videoUrl: "9_jQ3Q9j4os",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Identificar os diferentes modelos de andaimes (tubo com abraçadeira, multidirecional e fachadeiro) e suas peças críticas de apoio estrutural.",
+                "en": "Identify types of scaffolding (tube & coupler, system ringlock/cuplok, facade frames) and structural base components.",
+                "es": "Identificar los tipos de andamios y sus componentes críticos de soporte estructural.",
+              },
+              introduction: {
+                "pt-BR": "A escolha correta do sistema estrutural de andaime depende da geometria da área de trabalho, interferências de tubulação e capacidade portante. Montadores qualificados conhecem detalhadamente a função de postes, travessas, longarinas, sapatas fixas e ajustáveis.",
+                "en": "Selecting proper scaffolding depends on geometric layout, pipe routing, and load bearing capacity. Skilled scaffolders understand standards, ledgers, transoms, base plates, and jacks.",
+                "es": "La elección del sistema depende de las interferencias y cargas. Es fundamental dominar postes, largueros, travesaños y placas de apoyo.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Sapatas Fixas e Ajustáveis: A Base da Estabilidade",
+                    "en": "Base Plates & Screw Jacks: Foundation Stability",
+                    "es": "Placas Base y Husillos Niveladores: La Base de la Estabilidad",
+                  },
+                  body: {
+                    "pt-BR": "Nenhum andaime pode ser apoiado diretamente sobre solo instável ou de forma improvisada com tijolos e calços frágeis. Em solos não pavimentados, utiliza-se pranchão de madeira contínuo sob as sapatas metálicas com espessura mínima de 3,8 cm para distribuir as cargas pontuais uniformemente e evitar recalque diferencial.",
+                    "en": "Scaffolds must never rest on soft ground or makeshift blocks. On unpaved soil, continuous heavy timber sole boards (min 38mm thickness) under steel base plates distribute concentrated loads and prevent uneven settling.",
+                    "es": "Nunca apoye andamios sobre bloques de hormigón huecos o tierra suelta. Use soleras de madera de espesor suficiente para repartir cargas.",
+                  },
+                },
+              ],
+            },
+            challenge: {
+              id: "chal-and-2",
+              question: {
+                "pt-BR": "DESAFIO 2: Ao montar os postes iniciais de um andaime sobre solo natural compactado, qual é o item obrigatório para distribuição das cargas verticais?",
+                "en": "CHALLENGE 2: When erecting standards on compacted natural soil, what is mandatory to distribute vertical loads?",
+                "es": "DESAFÍO 2: Al levantar los postes sobre terreno natural, ¿qué elemento es obligatorio para repartir la carga?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Pranchões de madeira maciça de boa qualidade (tabiques/soleiras) sob as sapatas de aço, distribuindo o peso no solo.",
+                    "en": "Solid timber sole boards beneath steel base plates to distribute weight onto the ground.",
+                    "es": "Soleras de madera maciza bajo las placas base de acero para repartir la carga.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! A sapata de aço metálica deve assentar sobre um pranchão contínuo (soleira) que distribui a carga pontual, impedindo afundamento e perda de prumo.",
+                    "en": "CORRECT! Sole boards distribute concentrated leg loads, preventing differential soil settlement and tower collapse.",
+                    "es": "¡CORRECTO! Las soleras de madera bajo las placas base distribuyen el peso evitando hundimientos.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Apoio direto dos tubos de aço na terra sem sapata metálica para aumentar a aderência.",
+                    "en": "Direct placement of steel tubes onto soil without base plates for ground grip.",
+                    "es": "Apoyo directo de los tubos sobre la tierra sin placas de base.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO E GRAVÍSSIMO! O tubo de aço penetra facilmente no solo, gerando desaprumo e colapso imediato da estrutura.",
+                    "en": "EXTREMELY DANGEROUS! Tubes penetrate soft soil, causing severe tilt and immediate failure.",
+                    "es": "¡PELIGRO CRÍTICO! El tubo de acero se entierra en el suelo provocando el colapso.",
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: "mod-and-2",
+        order: 2,
+        title: {
+          "pt-BR": "Módulo 2: Procedimentos de Segurança e APR no Trabalho em Altura",
+          "en": "Module 2: Scaffolding Safety Protocols & JHA in Working at Heights",
+          "es": "Módulo 2: Procedimientos de Seguridad y AST en Trabajo en Altura",
+        },
+        lessons: [
+          {
+            id: "les-and-3",
+            order: 3,
+            title: {
+              "pt-BR": "Aula 03: Análise Preliminar de Risco (APR), Permissão de Trabalho (PT) e Isolamento",
+              "en": "Lesson 03: Job Hazard Analysis (JHA), Work Permits & Barricading",
+              "es": "Clase 03: Análisis Seguro de Trabajo (AST), Permisos de Trabajo y Aislamiento",
+            },
+            durationMinutes: 25,
+            contentType: "video",
+            videoUrl: "6Jf6fcvTwDI",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Dominar a elaboração e leitura de APR para montagem de andaimes, permissões de trabalho a quente/frio e isolamento da área de projeção de materiais.",
+                "en": "Master JHA review for scaffold erection, permit-to-work protocols, and drop-zone perimeter barricading.",
+                "es": "Elaborar AST para montaje de andamios, tramitar permisos de trabajo y delimitar zonas de caída de objetos.",
+              },
+              introduction: {
+                "pt-BR": "Antes do aperto da primeira braçadeira, o canteiro precisa estar documentalmente e fisicamente preparado. O isolamento do piso inferior contra projeção de ferramentas ou componentes de aço é indispensável para proteger quem transita no nível térreo.",
+                "en": "Before tightening the first coupler, the work zone must be physically and administratively secured. Drop-zone barricading protects pedestrians below.",
+                "es": "Antes de comenzar el montaje físico, se debe asegurar el área inferior con señalización y delimitación perimetral rígida.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Zona de Exclusão e Raio de Queda",
+                    "en": "Drop Zone & Exclusion Perimeter",
+                    "es": "Zona de Exclusión y Radio de Caída",
+                  },
+                  body: {
+                    "pt-BR": "Durante a montagem e desmontagem, a área inferior deve ser demarcada com cones, fitas ou correntes plásticas zebradas e placas de advertência ('PERIGO - MONTAGEM DE ANDAIME / QUEDA DE MATERIAIS'). O raio de isolamento deve cobrir a altura proporcional da estrutura para conter qualquer peça que venha a escorregar das mãos da equipe.",
+                    "en": "During assembly and disassembly, the lower ground zone must be strictly barricaded with warning signs. The perimeter radius corresponds to scaffold height to capture dropped items.",
+                    "es": "Señalizar el área de montaje con letreros de advertencia y cadenas perimetrales. Nadie no autorizado puede permanecer bajo la estructura.",
+                  },
+                },
+              ],
+            },
+            challenge: {
+              id: "chal-and-3",
+              question: {
+                "pt-BR": "DESAFIO 3: O que deve ser rigorosamente feito na área térrea logo abaixo do andaime antes do início de qualquer atividade de montagem ou desmontagem?",
+                "en": "CHALLENGE 3: What must be rigorously implemented at ground level below the scaffold before assembly starts?",
+                "es": "DESAFÍO 3: ¿Qué medida debe implementarse rigurosamente en el suelo antes de montar o desmontar un andamio?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Isolar e sinalizar a área térrea com placas de advertência e cones/correntes, impedindo a passagem de pessoas no raio de queda de peças.",
+                    "en": "Barricade and signpost the ground area with warning signs, preventing entry into the potential drop zone.",
+                    "es": "Delimitar y señalizar la zona inferior con advertencias de peligro impidiendo el tránsito de personas.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! O isolamento da área de influência inferior é obrigatório na NR-18 e NR-35 para evitar acidentes com ferramentas ou peças em queda livre.",
+                    "en": "CORRECT! Drop-zone isolation is strictly mandatory to protect personnel from dropped objects.",
+                    "es": "¡CORRECTO! El acordonamiento inferior evita impactos graves por caída de herramientas o abrazaderas.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Apenas gritar para os transeuntes prestarem atenção caso uma peça comece a cair.",
+                    "en": "Simply shout verbal warnings to pedestrians if a component begins falling.",
+                    "es": "Solo avisar a viva voz a los transeúntes si cae alguna herramienta.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO! Avisos verbais improvisados não constituem barreira de segurança e violam as normas regulamentadoras.",
+                    "en": "INCORRECT! Shouting is unacceptable and violates safety governance.",
+                    "es": "INCORRECTO. Las advertencias verbales no sustituyen las barreras físicas obligatorias.",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            id: "les-and-4",
+            order: 4,
+            title: {
+              "pt-BR": "Aula 04: EPIs Específicos para Montador: Cinto Paraquedista, Talabarte Duplo e Trava-Quedas",
+              "en": "Lesson 04: Scaffolder PPE: Full Body Harness, Twin Lanyards & Fall Arresters",
+              "es": "Clase 04: EPP Específico: Arnés de Seguridad, Línea de Vida Doble y Anticaídas",
+            },
+            durationMinutes: 24,
+            contentType: "video",
+            videoUrl: "AFybQYZ6dWk",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Instruir sobre o uso correto do cinto tipo paraquedista com ponto dorsal e peitoral, talabarte em Y com absorvedor de energia e conexão 100% contínua.",
+                "en": "Train on proper fitting of full body harness, twin-tail shock-absorbing lanyards, and 100% continuous tie-off.",
+                "es": "Capacitar en el uso del arnés de cuerpo entero, cabo de doble vida con absorbedor de impacto y anclaje continuo.",
+              },
+              introduction: {
+                "pt-BR": "O princípio fundamental da segurança do montador de andaime é o 'engate 100% do tempo'. Durante a subida e movimentação pela estrutura ainda incompleta, um dos conectores do talabarte duplo deve estar permanentemente ancorado em elemento estrutural capaz de resistir aos esforços de retenção de queda.",
+                "en": "The golden rule for scaffolders is '100% continuous tie-off'. While transitioning across incomplete scaffolds, at least one hook must remain anchored to a structural point.",
+                "es": "El montador debe permanecer anclado el 100% del tiempo utilizando talabartes de doble gancho con absorbedor de energía.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Regra do Ponto de Ancoragem e Zona Livre de Queda (ZLQ)",
+                    "en": "Anchor Points & Minimum Fall Clearance (ZLQ)",
+                    "es": "Puntos de Anclaje y Distancia Libre de Caída (ZLQ)",
+                  },
+                  body: {
+                    "pt-BR": "O gancho do talabarte deve ser conectado preferencialmente acima da cabeça do montador (fator de queda 0). Jamais conecte em tubos soltos, diagonais sem travamento de topo ou eletrocalhas. Calcule a Zona Livre de Queda (ZLQ): comprimento do talabarte + extensão do absorvedor + altura do trabalhador + margem de segurança de 1 metro.",
+                    "en": "Lanyard snap hooks should be anchored overhead whenever possible (fall factor 0). Never clip onto loose tubes or cable trays. Factor in fall clearance: lanyard length + shock pack deployment + worker height + 1m safety margin.",
+                    "es": "El anclaje debe fijarse preferentemente por encima de los hombros. Calcule siempre la distancia libre de caída para evitar el impacto contra el suelo.",
+                  },
+                },
+              ],
+            },
+            challenge: {
+              id: "chal-and-4",
+              question: {
+                "pt-BR": "DESAFIO 4: Qual é o procedimento obrigatório de retenção de queda para o montador que se movimenta em um nível ainda desprovido de guarda-corpo definitivo?",
+                "en": "CHALLENGE 4: What is the mandatory fall protection procedure for a scaffolder moving on an unshielded level?",
+                "es": "DESAFÍO 4: ¿Cuál es el procedimiento obligatorio para el montador que se desplaza en un nivel sin barandilla?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Manter conexão de 100% do tempo com talabarte duplo em Y, conectando um gancho antes de soltar o outro em ponto estruturalmente seguro.",
+                    "en": "Maintain 100% tie-off using a twin-tail Y lanyard, hooking one snap before releasing the other on structural points.",
+                    "es": "Mantener 100% de anclaje permanente con cabo de doble gancho en Y, conectando uno antes de soltar el otro.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! O sistema de ancoragem 100% com talabarte duplo garante que o colaborador nunca fique desprotegido durante suas transições.",
+                    "en": "CORRECT! 100% tie-off with twin lanyards guarantees the technician is never unprotected during transitions.",
+                    "es": "¡CORRECTO! El sistema de doble cabo asegura que el trabajador nunca quede desprotegido al avanzar.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Desconectar os dois ganchos simultaneamente para caminhar mais depressa até o final do pranchão.",
+                    "en": "Unhook both lanyards simultaneously to walk faster along scaffold planks.",
+                    "es": "Soltar ambos ganchos al mismo tiempo para caminar más rápido sobre los tablones.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO E PROIBIDO! Desconectar os dois ganchos anula a proteção contra quedas e é causa recorrente de acidentes fatais.",
+                    "en": "FATAL VIOLATION! Unhooking both lanyards eliminates fall protection completely.",
+                    "es": "¡PROHIBIDO! Desconectar ambos ganchos elimina la protección anticaídas.",
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: "mod-and-3",
+        order: 3,
+        title: {
+          "pt-BR": "Módulo 3: Dimensionamento, Travamentos, Diagonais e Fixações",
+          "en": "Module 3: Scaffolding Bracing, Ties & Structural Rigidity",
+          "es": "Módulo 3: Arriostramiento, Amarres y Estabilidad Estructural",
+        },
+        lessons: [
+          {
+            id: "les-and-5",
+            order: 5,
+            title: {
+              "pt-BR": "Aula 05: Travamentos Longitudinais, Diagonais e Prumo da Estrutura",
+              "en": "Lesson 05: Longitudinal Bracing, Diagonal Stays & Vertical Alignment",
+              "es": "Clase 05: Arriostramiento Longitudinal, Diagonales y Verticalidad",
+            },
+            durationMinutes: 26,
+            contentType: "video",
+            videoUrl: "ygx_JrCSktY",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Compreender as funções das diagonais de travamento para dissipar forças horizontais de vento e cargas dinâmicas, garantindo o prumo perfeito dos postes.",
+                "en": "Understand diagonal bracing mechanics in dissipating horizontal wind loads and dynamic sway, ensuring plumb alignment.",
+                "es": "Comprender la función del arriostramiento diagonal para contrarrestar esfuerzos de viento y asegurar la verticalidad.",
+              },
+              introduction: {
+                "pt-BR": "Uma torre de andaime sem travamento diagonal tende a se deformar na forma de paralelogramo ao ser submetida a ventos ou peso de trabalhadores. As barras diagonais transformam os quadros retangulares em estruturas trianguladas rígidas e indeformáveis.",
+                "en": "A scaffold tower without diagonal bracing tends to parallelogram under wind pressure or worker dynamic movement. Diagonal bracing creates rigid triangles that resist lateral forces.",
+                "es": "Sin arriostramiento diagonal, los andamios pierden la verticalidad y sufren colapso lateral ante ráfagas de viento o movimiento.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "A Regra da Triangulação e Verificação de Prumo",
+                    "en": "Triangulation Rules & Plumb Line Verification",
+                    "es": "Regla de Triangulación y Comprobación de Aplomado",
+                  },
+                  body: {
+                    "pt-BR": "O prumo dos postes verticais deve ser conferido a cada nível com nível de bolha magnético ou prumo de corda. A tolerância máxima de desaprumo não deve ultrapassar 1/500 da altura total da torre. Diagonais em zigue-zague ou em 'X' devem ser instaladas desde o primeiro lance.",
+                    "en": "Standards must be verified for vertical plumb at every lift using magnetic spirit levels. Out-of-plumb deviation cannot exceed 1/500 of overall height. Continuous zig-zag or X-bracing must start from base level.",
+                    "es": "Verificar la verticalidad de los postes en cada nivel con nivel de burbuja. La desviación no debe superar la tolerancia de 1/500 de la altura.",
+                  },
+                },
+              ],
+            },
+            challenge: {
+              id: "chal-and-5",
+              question: {
+                "pt-BR": "DESAFIO 5: Por que as barras diagonais de contraventamento são indispensáveis na estrutura de qualquer andaime?",
+                "en": "CHALLENGE 5: Why are diagonal sway braces indispensable in any scaffolding structure?",
+                "es": "DESAFÍO 5: ¿Por qué las diagonales de arriostramiento son indispensables en la estructura de un andamio?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Porque elas triangulam os quadros retangulares, impedindo a torção e o tombamento lateral gerado pelo vento e movimentação de cargas.",
+                    "en": "Because they triangulate rectangular frames, resisting lateral sway, torsion, and wind load collapse.",
+                    "es": "Porque forman triángulos rígidos que evitan la deformación lateral provocada por el viento y las cargas.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! A triangulação geométrica elimina os graus de liberdade de movimentação lateral da estrutura, garantindo rigidez contra tombamento.",
+                    "en": "CORRECT! Triangular geometry prevents rhomboidal deformation under lateral forces.",
+                    "es": "¡CORRECTO! La triangulación estructural es la base de la rigidez y resistencia al vuelco.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Servem exclusivamente como corrimão auxiliar para os montadores subirem mais rápido.",
+                    "en": "They only serve as handrails for scaffolders to climb quicker.",
+                    "es": "Sirven únicamente como apoyo para trepar por el exterior.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO E PROIBIDO! Diagonais são elementos estruturais de contraventamento e é expressamente proibido escalar pela diagonal externa.",
+                    "en": "INCORRECT! Diagonals are structural bracing members; climbing external braces is strictly forbidden.",
+                    "es": "INCORRECTO. Las diagonales son elementos resistentes y está prohibido trepar por ellas.",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            id: "les-and-6",
+            order: 6,
+            title: {
+              "pt-BR": "Aula 06: Amarração e Ancoragem em Estruturas Fixas e Cálculo de Cargas",
+              "en": "Lesson 06: Scaffold Ties, Wall Anchors & Safe Working Load Limits",
+              "es": "Clase 06: Amarres a Estructuras Fijas y Capacidad de Carga",
+            },
+            durationMinutes: 28,
+            contentType: "video",
+            videoUrl: "KP72OmNZ9D4",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Dominar os métodos de amarração em colunas, vigas metálicas e concreto, além dos limites de peso admissíveis sobre os pisos de trabalho.",
+                "en": "Master tying methods into building columns, steel girders, and concrete, along with safe floor load limits.",
+                "es": "Dominar los sistemas de anclaje a elementos de hormigón y perfiles de acero, respetando la carga admisible.",
+              },
+              introduction: {
+                "pt-BR": "Andaimamentos externos que ultrapassam a relação esbeltez de 4:1 (altura quatro vezes maior que a menor dimensão da base) necessitam obrigatoriamente de amarrações ou estaiamentos em estruturas sólidas existentes para resistir à força do vento.",
+                "en": "Scaffold towers exceeding a 4:1 height-to-base ratio must be positively anchored or tied into rigid adjacent building structures to resist wind overturning.",
+                "es": "Los andamios que superan la relación de esbeltez 4:1 requieren anclaje obligatorio a estructuras existentes para resistir el viento.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Tipos de Amarração: Através, Engastada e com Braçadeiras",
+                    "en": "Tie Methods: Through-Ties, Reveal Ties & Box Ties",
+                    "es": "Tipos de Amarre: Pasantes, de Caja y con Abrazaderas",
+                  },
+                  body: {
+                    "pt-BR": "As amarrações devem resistir tanto à tração (puxão para fora) quanto à compressão (empurrão contra a parede). Jamais ancore andaimes em eletrocalhas, tubulações de incêndio, condutores elétricos ou chapas finas de isolamento térmico.",
+                    "en": "Scaffold anchors must withstand both tension and compression loads. Never anchor scaffolding to electrical conduits, sprinkler pipes, cable trays, or light cladding.",
+                    "es": "Los amarres deben soportar tracción y compresión. Queda terminantemente prohibido anclarse a tuberías de servicios o bandejas eléctricas.",
+                  },
+                },
+              ],
+            },
+            challenge: {
+              id: "chal-and-6",
+              question: {
+                "pt-BR": "DESAFIO 6: Em qual dos seguintes elementos é estritamente PROIBIDO ancorar ou amarrar uma torre de andaime?",
+                "en": "CHALLENGE 6: To which of the following elements is it strictly FORBIDDEN to anchor a scaffolding tie?",
+                "es": "DESAFÍO 6: ¿A cuál de los siguientes elementos está terminantemente PROHIBIDO amarrar un andamio?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Em tubulações de processos industriais, eletrocalhas e corrimãos de passarelas.",
+                    "en": "Process piping, cable trays, and walkway handrails.",
+                    "es": "En tuberías de proceso, bandejas eléctricas o barandillas peatonales.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! Tubulações e eletrocalhas não são elementos estruturais de sustentação e podem romper, causando vazamentos tóxicos, choque elétrico ou colapso do andaime.",
+                    "en": "CORRECT! Utility pipes and cable racks lack structural capacity and tying to them can cause severe leaks or scaffolding collapse.",
+                    "es": "¡CORRECTO! Las tuberías y canalizaciones eléctricas no tienen capacidad portante y su daño provoca graves accidentes.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Em vigas de aço laminado ou colunas de concreto armado do prédio.",
+                    "en": "Structural steel I-beams or reinforced concrete building columns.",
+                    "es": "En vigas de acero estructural o columnas de hormigón armado.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO! Vigas e colunas estruturais são exatamente os pontos recomendados e seguros para fixação das amarrações com braçadeiras de perfil.",
+                    "en": "INCORRECT! Structural steel and concrete columns are primary authorized tie-in anchor locations.",
+                    "es": "INCORRECTO. Las vigas de acero y pilares de hormigón son las ubicaciones autorizadas.",
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: "mod-and-4",
+        order: 4,
+        title: {
+          "pt-BR": "Módulo 4: Pisos, Guarda-Corpo, Rodapé, Inspeção e Liberação (Etiquetas)",
+          "en": "Module 4: Decks, Guardrails, Toeboards, Tagging & Inspections",
+          "es": "Módulo 4: Plataformas, Barandillas, Rodapiés, Inspección y Tarjetas",
+        },
+        lessons: [
+          {
+            id: "les-and-7",
+            order: 7,
+            title: {
+              "pt-BR": "Aula 07: Montagem de Plataforma de Trabalho: Forração Completa, Alçapões e Rodapés",
+              "en": "Lesson 07: Working Platform Setup: Complete Decking, Trapdoors & Toeboards",
+              "es": "Clase 07: Montaje de Plataformas: Entarimado Completo, Trampillas y Rodapiés",
+            },
+            durationMinutes: 24,
+            contentType: "video",
+            videoUrl: "DRO5w2rWI-E",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Aplicar as exigências de piso 100% forrado, travamento de pranchões metálicos ou madeira, instalação de rodapé mínimo de 20 cm e guarda-corpo duplo (1,20 m e 0,70 m).",
+                "en": "Apply standards for 100% gap-free decking, plank hold-down clamps, 20cm toeboards, and dual guardrails at 1.20m and 0.70m.",
+                "es": "Instalar plataformas sin huecos, rodapiés de 20 cm y barandillas perimetrales a 1,20 m y 0,70 m de altura.",
+              },
+              introduction: {
+                "pt-BR": "A plataforma onde o trabalhador executa sua tarefa deve ser totalmente fechada, antiderrapante e dotada de proteção perimetral contra quedas de colaboradores e de ferramentas.",
+                "en": "Work platforms must be fully decked, non-slip, and equipped with comprehensive perimeter edge protection.",
+                "es": "La plataforma de trabajo debe estar totalmente entarimada para evitar tropiezos y caídas de herramientas.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Dimensões do Sistema de Proteção Coletiva (SPC)",
+                    "en": "Collective Protection System Dimensions",
+                    "es": "Dimensiones del Sistema de Protección Colectiva",
+                  },
+                  body: {
+                    "pt-BR": "O sistema de guarda-corpo deve ser composto por: travessa superior a 1,20 m do piso, travessa intermediária a 0,70 m e rodapé rígido de no mínimo 20 cm (0,20 m) rente ao piso. O rodapé é o responsável direto por impedir que parafusos, chaves ou tintas rolem do tablado sobre as pessoas abaixo.",
+                    "en": "Standard guardrail assembly requires: top rail at 1.20m, mid rail at 0.70m, and a continuous rigid toeboard of at least 20cm height. Toeboards stop tools from kicking off edges.",
+                    "es": "Barandilla superior a 1,20 m, intermedia a 0,70 m y rodapié de 20 cm de altura para impedir el desprendimiento de materiales.",
+                  },
+                },
+              ],
+            },
+            challenge: {
+              id: "chal-and-7",
+              question: {
+                "pt-BR": "DESAFIO 7: Qual é a altura mínima obrigatória para o rodapé instalado no perímetro de qualquer piso de andaime conforme a NR-18?",
+                "en": "CHALLENGE 7: What is the mandatory minimum height for scaffold toeboards under NR-18?",
+                "es": "DESAFÍO 7: ¿Cuál es la altura mínima obligatoria del rodapié perimetral según la NR-18?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Mínimo de 20 centímetros (0,20 m) de altura rente ao piso.",
+                    "en": "Minimum of 20 centimeters (0.20 m) flush with the deck.",
+                    "es": "Mínimo de 20 centímetros (0,20 m) a ras de la plataforma.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! O rodapé de 20 cm de altura rente ao piso impede a queda de ferramentas manuais, peças soltas e detritos.",
+                    "en": "CORRECT! A 20cm toeboard prevents kicked tools and debris from falling over platform edges.",
+                    "es": "¡CORRECTO! Los 20 cm de altura evitan la caída accidental de herramientas y piezas pequeñas.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "5 centímetros (0,05 m) apenas nos cantos.",
+                    "en": "5 centimeters (0.05 m) only at outer corners.",
+                    "es": "5 centímetros solo en las esquinas.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO! Rodapés de 5 cm não retêm o impacto acidental de calçados ou peças cilíndricas que rolam.",
+                    "en": "INCORRECT! 5cm does not provide adequate containment against sliding objects.",
+                    "es": "INCORRECTO. 5 cm no ofrece contención suficiente contra caídas de herramientas.",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            id: "les-and-8",
+            order: 8,
+            title: {
+              "pt-BR": "Aula 08: Inspeção Formal, Gestão de Etiquetas (Verde/Vermelha) e Desmontagem Segura",
+              "en": "Lesson 08: Formal Inspections, Tagging Protocols (Green/Red) & Safe Dismantling",
+              "es": "Clase 08: Inspección Técnica, Tarjetas Verde/Roja y Protocolo de Desmontaje",
+            },
+            durationMinutes: 25,
+            contentType: "video",
+            videoUrl: "BhMgyXv-mIs",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Conhecer a rotina de checklist diário de inspeção, critérios de liberação por etiqueta verde, interdição imediata por etiqueta vermelha e fases de desmontagem inversa.",
+                "en": "Master daily checklist audits, Green Tag release criteria, Red Tag prohibition, and reverse dismantling sequences.",
+                "es": "Dominar el checklist de inspección, uso de tarjetas verde y roja, y el orden inverso para el desmontaje.",
+              },
+              introduction: {
+                "pt-BR": "Ninguém tem autorização para utilizar um andaime sem que ele esteja com a Etiqueta Verde preenchida e assinada pelo montador qualificado ou fiscal habilitado. Qualquer avaria, chuva forte ou alteração temporária exige a substituição imediata pela Etiqueta Vermelha de interdição.",
+                "en": "No worker may step onto a scaffold without an active Green Tag signed by the competent scaffolder. Adverse weather or missing braces requires immediate Red Tag lock-out.",
+                "es": "Queda prohibido el uso del andamio sin tarjeta verde firmada por el inspector o montador responsable.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Significado e Regras das Etiquetas de Andaime",
+                    "en": "Scaffold Tag Classification & Rules",
+                    "es": "Significado de las Tarjetas de Inspección",
+                  },
+                  body: {
+                    "pt-BR": "ETIQUETA VERDE: Andaime 100% inspecionado, travado, ancorado, com escada de acesso e guarda-corpo completo — LIBERADO PARA USO. ETIQUETA VERMELHA: Andaime em montagem, manutenção, incompleto ou interditado — PROIBIDO O ACESSO, exceto pelos montadores devidamente paramentados com EPI específico.",
+                    "en": "GREEN TAG: 100% inspected, braced, tied, equipped with ladders and rails — APPROVED FOR USE. RED TAG: Under construction, altered, or damaged — DO NOT USE (authorized scaffolders only with harness).",
+                    "es": "TARJETA VERDE: Aprobado para uso tras inspección completa. TARJETA ROJA: En montaje o fuera de servicio, acceso prohibido a personal general.",
+                  },
+                },
+              ],
+            },
+            challenge: {
+              id: "chal-and-8",
+              question: {
+                "pt-BR": "DESAFIO 8: Qual é o significado regulamentar da presença de uma Etiqueta Vermelha afixada no acesso de um andaime em uma parada industrial?",
+                "en": "CHALLENGE 8: What is the mandatory meaning of a Red Tag affixed to a scaffold access ladder?",
+                "es": "DESAFÍO 8: ¿Qué significa la colocación de una Tarjeta Roja en el acceso de un andamio?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Andaime INTERDITADO / EM MONTAGEM: Acesso expressamente PROIBIDO para qualquer usuário, exceto montadores autorizados executando o serviço.",
+                    "en": "Scaffold CONDEMNED / UNDER ERECTION: Strictly PROHIBITED for all personnel, except authorized scaffolders actively building it.",
+                    "es": "Andamio FUERA DE SERVICIO / EN MONTAJE: Prohibido el acceso a todo el personal excepto montadores.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! A Etiqueta Vermelha sinaliza risco iminente de queda ou estrutura incompleta, impedindo o acesso de qualquer colaborador de outras disciplinas.",
+                    "en": "CORRECT! Red tags indicate unsafe or incomplete scaffolding. Unauthorized entry is a critical safety violation.",
+                    "es": "¡CORRECTO! La tarjeta roja avisa que el andamio no cumple con las condiciones mínimas para ser usado.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Andaime liberado para uso, mas apenas para colaboradores com menos de 70 kg.",
+                    "en": "Scaffold approved, but strictly for personnel weighing under 70 kg.",
+                    "es": "Andamio autorizado únicamente para operarios de poco peso.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO! A etiqueta vermelha nunca libera o uso por peso. Ela indica interdição total da estrutura.",
+                    "en": "INCORRECT! Red tags never grant access based on weight; they mean complete lockout.",
+                    "es": "INCORRECTO. La tarjeta roja prohíbe el acceso a todo el personal no montador.",
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: "mod-and-5",
+        order: 5,
+        title: {
+          "pt-BR": "Módulo 5: Procedimento Prático: Montagem Correta Passo a Passo",
+          "en": "Module 5: Practical Hands-On Procedure: Step-by-Step Erection",
+          "es": "Módulo 5: Procedimiento Práctico: Montaje Correcto Paso a Paso",
+        },
+        lessons: [
+          {
+            id: "les-and-9",
+            order: 9,
+            title: {
+              "pt-BR": "Aula 09: Procedimento Operacional Prático: Sequência de Montagem e Ajustes em Campo",
+              "en": "Lesson 09: Practical Field Procedure: Safe Assembly Sequence & Field Alignment",
+              "es": "Clase 09: Procedimiento Práctico en Campo: Secuencia de Montaje y Ajustes",
+            },
+            durationMinutes: 30,
+            contentType: "video",
+            videoUrl: "Xchqh9As_kw",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Acompanhar a sequência física exata de montagem em campo: nivelamento inicial, colocação de quadros, diagonais, pisos de trabalho, alçapão com escada e fechamento de guarda-corpo.",
+                "en": "Follow the exact field assembly sequence: ground leveling, base jacks, frames, diagonal braces, decking, internal ladder with hatch, and guardrail closure.",
+                "es": "Observar la secuencia física exacta de montaje: nivelado de bases, colocación de marcos, arriostramiento, pisos y barandillas.",
+              },
+              introduction: {
+                "pt-BR": "Nesta aula prática demonstrativa, vemos a execução real de uma torre de andaime passo a passo. A sequência correta de encaixes e o aperto adequado evitam o estresse mecânico das peças e garantem que o montador execute toda a subida com estabilidade estrutural sob seus pés.",
+                "en": "In this hands-on field lesson, watch a complete scaffold tower being safely assembled. Proper sequencing ensures structural stability under the scaffolder's boots at every lift.",
+                "es": "Clase práctica completa que muestra la secuencia correcta de ensamble de módulos, garantizando la seguridad en cada avance.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Sequenciamento Construtivo do Andaime",
+                    "en": "Scaffold Assembly Workflow",
+                    "es": "Flujo de Montaje del Andamio",
+                  },
+                  body: {
+                    "pt-BR": "1º Passo: Preparação do terreno e nivelamento das sapatas com pranchões de base. 2º Passo: Instalação do primeiro lance de postes/quadros e colocação imediata das diagonais de contraventamento. 3º Passo: Instalação da plataforma provisória para trabalho dos montadores com cinto e talabarte duplo. 4º Passo: Instalação da escada de acesso interna com alçapão basculante. 5º Passo: Guarda-corpo duplo perimetral com rodapé em todos os lados expostos.",
+                    "en": "Step 1: Ground prep & base jacks leveling over sole boards. Step 2: First tier standards/frames & immediate diagonal cross braces. Step 3: Temporary working deck with 100% tie-off. Step 4: Internal access ladder with trapdoor hatch. Step 5: Full perimeter double guardrails & 20cm toeboards.",
+                    "es": "1. Nivelación de bases sobre soleras. 2. Instalación de postes y diagonales inmediatas. 3. Montaje de plataforma provisoria con anclaje continuo. 4. Escala interior con trampilla. 5. Barandillas perimetrales y rodapiés.",
+                  },
+                },
+              ],
+            },
+            challenge: {
+              id: "chal-and-9",
+              question: {
+                "pt-BR": "DESAFIO 9: Como deve ser realizado o acesso dos trabalhadores aos diferentes níveis do andaime montado?",
+                "en": "CHALLENGE 9: How must workers safely access different levels of the erected scaffold?",
+                "es": "DESAFÍO 9: ¿Cómo deben acceder los trabajadores a los distintos niveles del andamio?",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Por meio de escadas internas incorporadas à estrutura com alçapão basculante ou torre de escada de lance contígua.",
+                    "en": "Via internal integrated ladders equipped with trapdoor hatches or adjacent dedicated stair towers.",
+                    "es": "A través de escaleras interiores integradas con trampilla basculante o torre de escalera anexa.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! Conforme a NR-18, o acesso deve ser interno por escada com alçapão ou torre de escada dedicada. É proibido subir pela estrutura externa do andaime.",
+                    "en": "CORRECT! NR-18 requires internal ladder access with trapdoors or dedicated stairs. External climbing on frames is strictly forbidden.",
+                    "es": "¡CORRECTO! El acceso debe realizarse por escaleras interiores con trampilla o torres de escaleras.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Escalando os tubos e diagonais pelo lado de fora da torre.",
+                    "en": "Climbing up tubes and diagonal stays along the external face.",
+                    "es": "Escalando por el exterior utilizando las barras diagonales.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "GRAVÍSSIMO E PROIBIDO! Escalar tubos externos é uma das maiores causas de quedas fatais na indústria.",
+                    "en": "PROHIBITED! Climbing outside faces is a fatal hazard and violates all safety regulations.",
+                    "es": "¡PROHIBIDO! Trepar por la parte externa es una infracción grave causante de accidentes fatales.",
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+    finalAssessment: {
+      id: "exam-andaime-final",
+      order: 1,
+      title: {
+        "pt-BR": "Avaliação Teórica de Qualificação em Montagem e Segurança em Andaimes",
+        "en": "Theoretical Qualification Exam in Scaffolding Assembly & Safety",
+        "es": "Evaluación Teórica de Calificación en Montaje y Seguridad en Andamios",
+      },
+      description: {
+        "pt-BR": "Exame formal de certificação abordando as exigências da NR-18 e NR-35, inspeção de componentes estruturais, amarrações, regras de contraventamento, sistemas de guarda-corpo e liberação por etiquetas.",
+        "en": "Formal certification exam covering NR-18 and NR-35 standards, component integrity, wall ties, cross-bracing geometry, perimeter collective protection, and tagging systems.",
+        "es": "Examen formal de certificación que abarca las normas NR-18 y NR-35, inspección de piezas, arriostramiento, barandillas y gestión de tarjetas verde/roja.",
+      },
+      scope: "course",
+      estimatedMinutes: 45,
+      questionsCount: 8,
+      passingScorePercent: 70,
+      maxAttempts: 3,
+      isAvailable: true,
+      availabilityNotice: {
+        "pt-BR": "Avaliação liberada após a conclusão dos 5 módulos técnicos.",
+        "en": "Exam unlocked upon completing all 5 technical modules.",
+        "es": "Evaluación habilitada tras concluir los 5 módulos técnicos.",
+      },
+      questions: [
+        {
+          id: "q-and-1",
+          order: 1,
+          question: {
+            "pt-BR": "1. Qual é o papel obrigatório da soleira (pranchão contínuo de madeira) posicionado sob a sapata de aço metálica em solo natural ou compactado?",
+            "en": "1. What is the mandatory purpose of a continuous timber sole board placed under base plates on soil?",
+            "es": "1. ¿Cuál es la función obligatoria de la solera de madera colocada bajo la placa base sobre tierra?",
+          },
+          options: [
+            {
+              id: "q1-a",
+              text: {
+                "pt-BR": "Distribuir a carga pontual dos postes sobre uma área maior de solo, impedindo o afundamento e o desaprumo da estrutura.",
+                "en": "Distribute concentrated standard loads over a broader soil footprint, preventing subsidence and tilt.",
+                "es": "Distribuir la carga puntual de los postes en una superficie mayor, evitando hundimientos y desaplome.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! A sapata de aço possui área reduzida; a soleira multiplica a área de contato com o solo, reduzindo a tensão por centímetro quadrado.",
+                "en": "Correct! Steel base plates have small footprints; sole boards disperse vertical forces evenly across soil.",
+                "es": "¡Correcto! La solera de madera distribuye la carga puntual evitando que el poste se clave en el suelo.",
+              },
+            },
+            {
+              id: "q1-b",
+              text: {
+                "pt-BR": "Apenas servir de isolamento elétrico em caso de relâmpagos.",
+                "en": "Merely provide electrical insulation against lightning strikes.",
+                "es": "Servir únicamente como aislante eléctrico.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! A função primária é geotécnica e estrutural de distribuição de carga mecânica.",
+                "en": "Incorrect! The primary role is structural load dissipation across bearing soil.",
+                "es": "Incorrecto. La función principal es mecánica y estructural para evitar hundimientos.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-and-2",
+          order: 2,
+          question: {
+            "pt-BR": "2. De acordo com a NR-35, a partir de qual altura acima do nível inferior qualquer atividade com risco de queda exige medidas regulamentares de segurança?",
+            "en": "2. Under NR-35, above what height elevation does work with fall hazard require mandatory compliance measures?",
+            "es": "2. Según la NR-35, ¿a partir de qué altura se exige la aplicación obligatoria de medidas de protección contra caídas?",
+          },
+          options: [
+            {
+              id: "q2-a",
+              text: {
+                "pt-BR": "Acima de 2,00 metros do nível inferior.",
+                "en": "Above 2.00 meters from the lower level.",
+                "es": "Por encima de 2,00 metros del nivel inferior.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! O limite legal expresso no item 35.1.2 da NR-35 é 2,00 metros.",
+                "en": "Correct! NR-35 explicitly mandates fall control systems at 2.00 meters and above.",
+                "es": "¡Correcto! El acápite 35.1.2 de la NR-35 establece el umbral legal en 2,00 metros.",
+              },
+            },
+            {
+              id: "q2-b",
+              text: {
+                "pt-BR": "Apenas acima de 5,00 metros.",
+                "en": "Only above 5.00 meters.",
+                "es": "Únicamente por encima de 5,00 metros.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! Quedas de 2 metros já causam traumatismos severos e estão sob vigência integral da norma.",
+                "en": "Incorrect! Falls from 2m can be fatal; standards apply at 2 meters.",
+                "es": "Incorrecto. A partir de 2 metros rige toda la exigencia de la NR-35.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-and-3",
+          order: 3,
+          question: {
+            "pt-BR": "3. Como deve ser constituído o sistema de guarda-corpo perimetral rígido em todos os lados expostos do tablado de andaime conforme a NR-18?",
+            "en": "3. How must the perimeter collective guardrail system be configured under NR-18?",
+            "es": "3. ¿Cómo debe configurarse el sistema de barandilla perimetral según la NR-18?",
+          },
+          options: [
+            {
+              id: "q3-a",
+              text: {
+                "pt-BR": "Travessa superior a 1,20 m, travessa intermediária a 0,70 m e rodapé rígido de no mínimo 20 cm rente ao piso.",
+                "en": "Top rail at 1.20m, intermediate rail at 0.70m, and a rigid toeboard of at least 20cm flush with deck.",
+                "es": "Barandilla superior a 1,20 m, intermedia a 0,70 m y rodapié rígido de mínimo 20 cm a ras de plataforma.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! Essas são as dimensões padrão estabelecidas pela NR-18 para proteção contra quedas de pessoas e materiais.",
+                "en": "Correct! These exact dimensions define regulatory collective edge protection.",
+                "es": "¡Correcto! Son las medidas reglamentarias de seguridad colectiva perimetral.",
+              },
+            },
+            {
+              id: "q3-b",
+              text: {
+                "pt-BR": "Uma corda simples amarrada a 50 cm de altura sem rodapé.",
+                "en": "A single loose rope tied at 50 cm with no toeboard.",
+                "es": "Una cuerda simple atada a 50 cm de altura sin rodapié.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto e perigosíssimo! Cordas simples cedem à pressão corporal e a falta de rodapé permite queda de ferramentas.",
+                "en": "Extremely dangerous! Loose ropes deflect under load and lack toeboard containment.",
+                "es": "¡Peligroso e ilegal! Las cuerdas flectan y no retienen el cuerpo ni las herramientas.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-and-4",
+          order: 4,
+          question: {
+            "pt-BR": "4. Qual é o procedimento mandatório durante a movimentação e montagem de andaimes no que diz respeito ao uso do talabarte duplo tipo Y?",
+            "en": "4. What is the mandatory rule regarding twin Y lanyards during scaffold assembly at heights?",
+            "es": "4. ¿Cuál es el procedimiento obligatorio con el cabo de doble gancho en Y durante el montaje en altura?",
+          },
+          options: [
+            {
+              id: "q4-a",
+              text: {
+                "pt-BR": "Conectar o segundo gancho antes de soltar o primeiro, assegurando 100% de ancoragem ininterrupta em ponto estrutural aprovado.",
+                "en": "Anchor the second snap hook before detaching the first, guaranteeing 100% continuous tie-off to approved anchors.",
+                "es": "Conectar el segundo gancho antes de soltar el primero, garantizando el 100% de anclaje ininterrumpido.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! A regra de ouro é o engate 100% contínuo, impedindo que o montador fique desprotegido em qualquer segundo.",
+                "en": "Correct! 100% continuous tie-off ensures zero unanchored exposure.",
+                "es": "¡Correcto! El operario debe permanecer anclado de forma continua en todo momento.",
+              },
+            },
+            {
+              id: "q4-b",
+              text: {
+                "pt-BR": "Manter os dois ganchos presos no próprio cinto para facilitar os movimentos.",
+                "en": "Keep both snaps clipped into harness rings to ease fast walking.",
+                "es": "Llevar ambos ganchos guardados en el arnés para mayor comodidad.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! Prender os ganchos no próprio cinto significa estar completamente solto em altura sem nenhuma proteção ativa.",
+                "en": "Incorrect! Clipping lanyards to yourself leaves you completely exposed to fatal falls.",
+                "es": "Incorrecto. Esto significa estar completamente desprotegido ante una caída.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-and-5",
+          order: 5,
+          question: {
+            "pt-BR": "5. O que sinaliza a presença de uma ETIQUETA VERMELHA no acesso a um andaime em uma área industrial?",
+            "en": "5. What does a RED TAG indicate when posted at the entrance of an industrial scaffold?",
+            "es": "5. ¿Qué significa una TARJETA ROJA fijada en el acceso a un andamio industrial?",
+          },
+          options: [
+            {
+              id: "q5-a",
+              text: {
+                "pt-BR": "Andaime interditado, incompleto ou em montagem: ACESSO PROIBIDO para qualquer usuário comum.",
+                "en": "Scaffold unsafe, altered or under erection: ENTRY FORBIDDEN to general users.",
+                "es": "Andamio fuera de servicio o en montaje: ACCESO PROHIBIDO para usuarios generales.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! A Etiqueta Vermelha impede qualquer trabalho até que a estrutura seja 100% concluída, inspecionada e liberada com Etiqueta Verde.",
+                "en": "Correct! Red tags restrict access to certified erecting crews until fully audited.",
+                "es": "¡Correcto! La tarjeta roja impide el uso hasta su completa inspección y liberación con tarjeta verde.",
+              },
+            },
+            {
+              id: "q5-b",
+              text: {
+                "pt-BR": "Andaime liberado apenas para trabalhos com lixadeiras e solda.",
+                "en": "Scaffold approved only for hot work and welding.",
+                "es": "Andamio permitido solo para trabajos en caliente.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! A cor vermelha não tem relação com trabalho a quente; ela indica impedimento total de uso por falta de conformidade.",
+                "en": "Incorrect! Red tags signify lock-out and structural non-compliance, not hot work authorization.",
+                "es": "Incorrecto. El color rojo indica interdicción y riesgo, nunca habilitación especial.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-and-6",
+          order: 6,
+          question: {
+            "pt-BR": "6. Por que é estritamente proibido ancorar amarrações de andaimes em tubulações de utilidades ou eletrocalhas industriais?",
+            "en": "6. Why is it strictly forbidden to tie scaffolding into utility pipes or cable trays?",
+            "es": "6. ¿Por qué está terminantemente prohibido anclar andamios a tuberías de proceso o bandejas eléctricas?",
+          },
+          options: [
+            {
+              id: "q6-a",
+              text: {
+                "pt-BR": "Porque tubulações e bandejas não são dimensionadas para suportar os esforços mecânicos de tração e vento do andaime, podendo romper e causar graves acidentes industriais.",
+                "en": "Because utility racks and pipes lack structural capacity to absorb wind and sway forces, causing rupture risks and collapse.",
+                "es": "Porque no tienen capacidad portante para absorber las cargas del andamio, pudiendo romperse y provocar fugas o colapsos.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! Amarrações exigem elementos estruturais sólidos como pilares de concreto ou vigas de aço calculadas.",
+                "en": "Correct! Scaffold ties require rigid columns or steel building framing.",
+                "es": "¡Correcto! Las cargas dinámicas de un andamio pueden arrancar tuberías presurizadas o bandejas.",
+              },
+            },
+            {
+              id: "q6-b",
+              text: {
+                "pt-BR": "Porque a tinta da tubulação pode arranhar os tubos do andaime.",
+                "en": "Merely to avoid scratching paint on process pipes.",
+                "es": "Solo para evitar rayar la pintura de las tuberías.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! A restrição decorre do risco iminente de colapso estrutural, rompimento de fluidos perigosos ou curto-circuito.",
+                "en": "Incorrect! It is a critical life-safety prevention rule against plant blowouts and collapse.",
+                "es": "Incorrecto. Se trata de una prohibición crítica de seguridad de procesos y de personas.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-and-7",
+          order: 7,
+          question: {
+            "pt-BR": "7. Como deve ser garantida a transição segura dos trabalhadores entre os diferentes pisos de uma torre de andaime?",
+            "en": "7. How must workers transition safely between vertical levels on a scaffold tower?",
+            "es": "7. ¿Cómo debe garantizarse el acceso vertical seguro entre pisos en un andamio?",
+          },
+          options: [
+            {
+              id: "q7-a",
+              text: {
+                "pt-BR": "Através de escadas internas com alçapão basculante ou torre de escada dedicada, mantendo o alçapão fechado após a passagem.",
+                "en": "Through internal inclined/vertical ladders with trapdoors or dedicated stair towers, closing trapdoors after passing.",
+                "es": "Mediante escalas interiores con trampilla basculante o torre de escaleras, cerrando la trampilla al pasar.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! O alçapão fechado restaura a continuidade do piso e previne que alguém caia pelo orifício de acesso.",
+                "en": "Correct! Keeping trapdoors closed restores platform surface and eliminates open floor hole falls.",
+                "es": "¡Correcto! Cerrar la trampilla mantiene el piso continuo y evita caídas al vacío.",
+              },
+            },
+            {
+              id: "q7-b",
+              text: {
+                "pt-BR": "Pulando de um piso para outro ou escalando as travessas externas sem escada.",
+                "en": "Jumping down between decks or climbing external ledgers without a ladder.",
+                "es": "Saltando de un piso a otro o escalando los travesaños externos.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! Pular ou escalar a estrutura externa é ato inseguro gravíssimo e terminantemente proibido pela NR-18.",
+                "en": "Incorrect! Climbing frame exteriors or jumping causes catastrophic falls and is illegal.",
+                "es": "Incorrecto. Trepar o saltar entre niveles es una infracción gravísima.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-and-8",
+          order: 8,
+          question: {
+            "pt-BR": "8. Conforme as diretrizes da RSS3 Treinamentos e as normas regulamentadoras (NR-35 e NR-18), a aprovação neste exame teórico em LMS confere habilitação prática imediata para montagem de andaimes?",
+            "en": "8. Under RSS3 Training guidelines and NR-18/NR-35 standards, does passing this theoretical LMS exam grant immediate practical qualification?",
+            "es": "8. Según las directrices de RSS3 Treinamentos y la normativa, ¿la aprobación de este examen otorga habilitación práctica inmediata?",
+          },
+          options: [
+            {
+              id: "q8-a",
+              text: {
+                "pt-BR": "NÃO. Este certificado valida a formação teórica regulamentar; a habilitação formal prática exige treinamento presencial supervisionado por instrutor credenciado e ASO vigente com aptidão para trabalho em altura.",
+                "en": "NO. This certificate certifies theoretical regulatory compliance; practical operational qualification requires supervised hands-on field training and a valid occupational medical clearance (ASO).",
+                "es": "NO. Este certificado avala la capacitación teórica; la calificación práctica formal requiere entrenamiento presencial supervisado y examen médico (ASO) apto para altura.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! Conforme o AGENTS.md e as NRs, cursos EAD de atividades de alto risco cobrem a teoria; a liberação operacional depende de comprovação prática presencial e aptidão médica ocupacional.",
+                "en": "Correct! As stipulated in regulatory policies, theoretical LMS mastery must be paired with hands-on validation and certified fitness.",
+                "es": "¡Correcto! La teoría no reemplaza la evaluación práctica presencial ni la aptitud médica ocupacional.",
+              },
+            },
+            {
+              id: "q8-b",
+              text: {
+                "pt-BR": "SIM. A aprovação teórica online dispensa qualquer treinamento prático e o colaborador pode liderar montagens imediatamente.",
+                "en": "YES. Online completion waives all hands-on training requirements and allows immediate field leadership.",
+                "es": "SÍ. La aprobación online exime de toda práctica y permite liderar montajes de inmediato.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto e ilegal! Atividades de alto risco jamais admitem dispensa de treinamento prático e aptidão médica presencial.",
+                "en": "Incorrect and illegal! High-risk industrial activities strictly require certified practical competency.",
+                "es": "Incorrecto y contrario a la ley. Las actividades de riesgo requieren validación práctica presencial.",
+              },
+            },
+          ],
+        },
+      ],
+    },
+  },
+];
+
+export const DEMO_PERSONAS: UserDemonstration[] = [];
+ 
+ /**
+  * Catálogo Oficial de MBAs Técnicos e Executivos da RSS3 Treinamentos
+  * Estrutura idêntica à esteira de aprendizado integrada (estilo FM2S).
+  */
+ export const DEMO_MBAS: import("@/types").MbaProgram[] = [
+   {
+     id: "mba-operacoes-hidrojato",
+     slug: "mba-operacoes-industriais-hidrojateamento",
+     title: {
+       "pt-BR": "MBA em Operações Industriais e Hidrojateamento de Alta Pressão",
+       "en": "MBA in Industrial Operations and High-Pressure Hydroblasting",
+       "es": "MBA en Operaciones Industriales e Hidrojet de Alta Presión",
+     },
+     subtitle: {
+       "pt-BR": "Programa Executivo e Operacional de Alta Criticidade",
+       "en": "High-Criticality Executive and Operational Program",
+       "es": "Programa Ejecutivo y Operacional de Alta Criticidad",
+     },
+     description: {
+       "pt-BR": "Torne-se um especialista em operações industriais de alta criticidade, paradas de manutenção, segurança de hidrojateamento até 2.800 bar, liderança de frentes de trabalho e excelência operacional na indústria pesada.",
+       "en": "Become a specialist in high-criticality industrial operations, plant turnarounds, hydroblasting safety up to 2,800 bar, frontline leadership, and operational excellence.",
+       "es": "Conviértase en un especialista en operaciones industriales de alta criticidad, paradas de planta, seguridad en hidrojet hasta 2.800 bar y excelencia operacional.",
+     },
+     category: {
+       "pt-BR": "Operações Industriais",
+       "en": "Industrial Operations",
+       "es": "Operaciones Industriales",
+     },
+     accentColor: "#ef4444", // Vermelho FM2S / Laranja RSS3
+     totalHours: 360,
+     featured: true,
+     courses: [
+       {
+         id: "mba-hj-c0",
+         title: {
+           "pt-BR": "Boas-vindas ao MBA em Operações Industriais e Hidrojateamento",
+           "en": "Welcome to the MBA in Industrial Operations & Hydroblasting",
+           "es": "Bienvenida al MBA en Operaciones Industriales e Hidrojet",
+         },
+         categoryTag: "Onboarding",
+         workloadHours: 4,
+         order: 1,
+         isUnlocked: true,
+         accentColor: "#0284c7",
+         iconType: "user",
+         description: {
+           "pt-BR": "Diretrizes acadêmicas, metodologia de estudo, critérios de aprovação e navegação no portal.",
+           "en": "Academic guidelines, study methodology, evaluation criteria, and portal navigation.",
+           "es": "Directrices académicas, metodología de estudio y navegación en el portal.",
+         },
+         modulesCount: 1,
+         lessonsCount: 3,
+       },
+       {
+         id: "mba-hj-c1",
+         courseId: "c-hidrojato-seguranca",
+         title: {
+           "pt-BR": "Segurança Operacional em Hidrojateamento de Alta Pressão",
+           "en": "Operational Safety in High-Pressure Hydroblasting",
+           "es": "Seguridad Operacional en Hidrojet de Alta Presión",
+         },
+         categoryTag: "Operações Críticas",
+         workloadHours: 16,
+         order: 2,
+         isUnlocked: true,
+         accentColor: "#0891b2",
+         iconType: "droplet",
+         description: {
+           "pt-BR": "Inspeção de mangueiras, travas anti-chicoteamento, zonas de exclusão e normas operacionais.",
+           "en": "Hose inspection, whip checks, exclusion zones, and operational safety standards.",
+           "es": "Inspección de mangueras, seguros anticaída y zonas de exclusión.",
+         },
+         modulesCount: 2,
+         lessonsCount: 4,
+       },
+       {
+         id: "mba-hj-c2",
+         title: {
+           "pt-BR": "Especialista em Paradas de Manutenção e Gestão de Riscos Industriais",
+           "en": "Specialist in Plant Turnarounds and Industrial Risk Management",
+           "es": "Especialista en Paradas de Mantenimiento y Gestión de Riesgos",
+         },
+         categoryTag: "Gestão e Riscos",
+         workloadHours: 60,
+         order: 3,
+         isUnlocked: true,
+         accentColor: "#0284c7",
+         iconType: "gear",
+         description: {
+           "pt-BR": "Planejamento e coordenação de paradas programadas, cronograma em caminho crítico, matriz LOTO e APR.",
+           "en": "Shutdown planning, critical path schedules, LOTO matrix, and Job Safety Analysis.",
+           "es": "Planificación de paradas de planta, cronograma crítico, matriz LOTO y APR.",
+         },
+         modulesCount: 4,
+         lessonsCount: 12,
+       },
+       {
+         id: "mba-hj-c3",
+         title: {
+           "pt-BR": "Metodologia 5S e Organização de Frentes Operacionais",
+           "en": "5S Methodology and Operational Workplace Organization",
+           "es": "Metodología 5S y Organización de Frentes Operacionales",
+         },
+         categoryTag: "Excelência Operacional",
+         workloadHours: 40,
+         order: 4,
+         isUnlocked: false,
+         unlockedReason: {
+           "pt-BR": "Liberação automática após conclusão do Módulo de Gestão de Riscos.",
+           "en": "Automatic unlock after completing the Risk Management module.",
+           "es": "Liberación automática tras concluir el Módulo de Gestión de Riesgos.",
+         },
+         accentColor: "#84cc16",
+         iconType: "document",
+         description: {
+           "pt-BR": "Aplicação dos 5 sensos em canteiros de obra, oficinas de hidrojateamento e almoxarifados industriais.",
+           "en": "Applying 5S principles in industrial sites, hydroblasting shops, and warehouses.",
+           "es": "Aplicación de 5S en frentes industriales y talleres de hidrojet.",
+         },
+         modulesCount: 3,
+         lessonsCount: 8,
+       },
+       {
+         id: "mba-hj-c4",
+         title: {
+           "pt-BR": "Liderança Operacional e Gestão de Equipes de Alto Desempenho",
+           "en": "Frontline Leadership and High-Performance Team Management",
+           "es": "Liderazgo Operacional y Gestión de Equipos de Alto Rendimiento",
+         },
+         categoryTag: "Liderança",
+         workloadHours: 80,
+         order: 5,
+         isUnlocked: false,
+         unlockedReason: {
+           "pt-BR": "Liberação programada conforme cronograma letivo.",
+           "en": "Scheduled unlock according to syllabus timeline.",
+           "es": "Liberación programada según el cronograma lectivo.",
+         },
+         accentColor: "#f59e0b",
+         iconType: "award",
+         description: {
+           "pt-BR": "Comunicação assertiva, feedback operacional, gestão de conflitos em campo e cultura de segurança interdependente.",
+           "en": "Assertive communication, operational feedback, field conflict resolution, and interdependent safety culture.",
+           "es": "Comunicación asertiva, retroalimentación y cultura de seguridad.",
+         },
+         modulesCount: 5,
+         lessonsCount: 15,
+       },
+     ],
+   },
+ ];
+
