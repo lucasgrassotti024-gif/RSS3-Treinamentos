@@ -1,5 +1,6 @@
 import { CourseDemonstration, SchoolCategory, UserDemonstration } from "@/types";
 import { nr11CourseData } from "./courses/nr11-course";
+import { excelCourseData } from "./courses/excel-course";
 
 /**
  * Escolas Oficiais Ativas da RSS3 Soluções Industriais
@@ -69,6 +70,22 @@ export const DEMO_SCHOOLS: SchoolCategory[] = [
     iconName: "ShieldCheck",
     coursesCount: 5,
     color: "#2563eb", // Blue 600
+  },
+  {
+    id: "gestao-lideranca",
+    name: {
+      "pt-BR": "Gestão Industrial, Tecnologia e Produtividade",
+      "en": "Industrial Management, Technology & Productivity",
+      "es": "Gestión Industrial, Tecnología y Productividad",
+    },
+    description: {
+      "pt-BR": "Excel corporativo, relatórios de parada de fábrica, apontamentos de campo, gestão ágil e ferramentas de produtividade.",
+      "en": "Corporate Excel, plant shutdown reporting, jobsite logs, and productivity tooling.",
+      "es": "Excel corporativo, informes de parada de planta y herramientas de productividad.",
+    },
+    iconName: "FileSpreadsheet",
+    coursesCount: 1,
+    color: "#059669",
   },
 ];
 
@@ -5139,6 +5156,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
     },
   },
   nr11CourseData,
+  excelCourseData,
 ];
 
 export const DEMO_PERSONAS: UserDemonstration[] = [];
