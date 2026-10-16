@@ -66,7 +66,7 @@ export const DEMO_SCHOOLS: SchoolCategory[] = [
       "es": "Directrices de la NR-6, selección, conservación, inspección y responsabilidades legales del EPP en operaciones de alto riesgo.",
     },
     iconName: "ShieldCheck",
-    coursesCount: 3,
+    coursesCount: 4,
     color: "#2563eb", // Blue 600
   },
 ];
@@ -4403,6 +4403,726 @@ export const DEMO_COURSES: CourseDemonstration[] = [
                 "pt-BR": "Incorreto e ilegal! O treinamento reforça a necessidade contínua de proteção e monitoramento da saúde.",
                 "en": "Incorrect and illegal! Training reinforces the essential requirement for continuous health monitoring and PPE compliance.",
                 "es": "Incorrecto y contrario a la ley.",
+              },
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    id: "c-nr10-seguranca-eletricidade",
+    slug: "nr-10-seguranca-instalacoes-servicos-eletricidade",
+    title: {
+      "pt-BR": "NR-10: Segurança em Instalações e Serviços em Eletricidade e SEP",
+      "en": "NR-10: Electrical Installations & Services Safety and Power Systems (SEP)",
+      "es": "NR-10: Seguridad en Instalaciones y Servicios de Electricidad y SEP",
+    },
+    description: {
+      "pt-BR": "Capacitação completa em NR-10 e Sistema Elétrico de Potência (SEP): riscos elétricos, arco elétrico, medidas de controle (desenergização e LOTO), barramentos, EPIs/EPCs dielétricos, combate a incêndio em painéis e primeiros socorros a vítimas de choque elétrico.",
+      "en": "Comprehensive NR-10 and Power Electric System (SEP) safety training: shock hazards, arc flash, LOTO de-energization, dielectric PPE/EPC, electrical fire protection, and CPR first aid.",
+      "es": "Capacitación en NR-10 y Sistema Eléctrico de Potencia: riesgos eléctricos, arco eléctrico, bloqueo LOTO, EPP dieléctrico y primeros auxilios.",
+    },
+    schoolId: "seguranca-epi",
+    schoolName: {
+      "pt-BR": "Segurança do Trabalho e Elétrica",
+      "en": "Occupational & Electrical Safety",
+      "es": "Seguridad Laboral y Eléctrica",
+    },
+    workloadHours: 40,
+    level: "advanced",
+    modality: "hybrid",
+    isMandatory: true,
+    mandatoryFor: ["Eletricista Industrial", "Eletrotécnico", "Instrumentista", "Operador de Hidrojato", "Mecânico Industrial", "Líder de Frente"],
+    targetAudience: {
+      "pt-BR": "Eletricistas, instrumentistas, montadores, operadores de hidrojateamento e trabalhadores da RSS3 que interagem direta ou indiretamente com instalações elétricas, subestações e painéis de força.",
+      "en": "RSS3 electricians, instrument technicians, fitters, hydroblasters, and frontline leaders working near energized industrial systems.",
+      "es": "Electricistas, técnicos y operarios que interactúan con instalaciones eléctricas industriales y subestaciones.",
+    },
+    modulesCount: 3,
+    lessonsCount: 8,
+    thumbnailGradient: "from-yellow-600 via-amber-700 to-slate-950",
+    badgeCode: "NR-10",
+    updatedAtDate: "2026-10-16",
+    modules: [
+      {
+        id: "mod-nr10-1",
+        order: 1,
+        title: {
+          "pt-BR": "Módulo 1: Fundamentos Normativos da NR-10 e Introdução ao Sistema Elétrico de Potência (SEP)",
+          "en": "Module 1: NR-10 Regulatory Fundamentals & Intro to Power Systems (SEP)",
+          "es": "Módulo 1: Fundamentos de la NR-10 e Introducción al SEP",
+        },
+        lessons: [
+          {
+            id: "les-nr10-1-1",
+            order: 1,
+            title: {
+              "pt-BR": "NR 10 Curso Básico Completo EAD: Introdução e Objetivos da Norma",
+              "en": "NR 10 Complete Basic Course: Introduction & Regulatory Scope",
+              "es": "NR 10 Curso Básico Completo: Introducción y Alcance de la Norma",
+            },
+            durationMinutes: 20,
+            contentType: "video",
+            videoUrl: "aopJlygrhhk",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Compreender os objetivos da NR-10, o campo de aplicação em todas as fases de geração, transmissão, distribuição e consumo de eletricidade e a qualificação de trabalhadores (qualificado, habilitado, capacitado e autorizado).",
+                "en": "Understand NR-10 scope, regulatory objectives across generation/distribution/consumption, and worker qualification levels.",
+                "es": "Comprender los objetivos de la NR-10, alcance de aplicación y niveles de cualificación y autorización.",
+              },
+              introduction: {
+                "pt-BR": "A Norma Regulamentadora nº 10 estabelece os requisitos e condições mínimas para a implementação de medidas de controle e sistemas preventivos, de forma a garantir a segurança e a saúde dos trabalhadores que, direta ou indiretamente, interajam em instalações elétricas e serviços com eletricidade.",
+                "en": "NR-10 sets mandatory preventive safety measures to protect personnel interacting directly or indirectly with electrical infrastructure.",
+                "es": "La NR-10 establece los requisitos mínimos para garantizar la seguridad en instalaciones y servicios con electricidad.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Campo de Aplicação e Qualificação Profissional",
+                    "en": "Application Scope & Professional Qualification",
+                    "es": "Campo de Aplicación y Calificación Profesional",
+                  },
+                  body: {
+                    "pt-BR": "A NR-10 aplica-se às fases de geração, transmissão, distribuição e consumo, incluindo as etapas de projeto, construção, montagem, operação, manutenção das instalações elétricas e quaisquer trabalhos realizados nas suas proximidades.\n• Trabalhador Qualificado: Possui curso específico na área elétrica reconhecido pelo MEC;\n• Trabalhador Habilitado: É qualificado e possui registro no conselho de classe competente (ex: CREA / CRT);\n• Trabalhador Capacitado: Recebe treinamento sob orientação de profissional habilitado e trabalha sob responsabilidade deste;\n• Trabalhador Autorizado: É aquele qualificado ou capacitado e com anuência formal expressa da empresa (RSS3).",
+                    "en": "Applies across all electrical phases. Defines Qualified, Accredited, Trained, and Authorized worker legal statuses.",
+                    "es": "Aplica a generación, transmisión y consumo. Define trabajador cualificado, habilitado, capacitado y autorizado.",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "Prontuário de Instalações Elétricas (PIE)",
+                    "en": "Electrical Installation Records (PIE)",
+                    "es": "Expediente de Instalaciones Eléctricas (PIE)",
+                  },
+                  body: {
+                    "pt-BR": "Estabelecimentos com carga instalada superior a 75 kW devem obrigatoriamente constituir e manter atualizado o Prontuário de Instalações Elétricas (PIE), contendo diagramas unifilares atualizados, laudos de aterramento e para-raios (SPDA), procedimentos de trabalho e especificação dos EPIs e EPCs.",
+                    "en": "Facilities exceeding 75 kW must maintain an updated electrical safety dossier (PIE) with one-line diagrams and inspection reports.",
+                    "es": "Instalaciones con más de 75 kW deben mantener el expediente PIE con diagramas unifilares y puesta a tierra.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "A autorização para intervir em instalações elétricas é individual, formal e emitida exclusivamente pela empresa.",
+                  "en": "Authorization to perform electrical work is individual, formal, and company-issued.",
+                  "es": "La autorización para intervenir en instalaciones eléctricas es personal, formal y emitida por la empresa.",
+                },
+                {
+                  "pt-BR": "A conclusão do curso teórico EAD integra a formação do colaborador, mas não substitui a prática presencial e a liberação formal pelo responsável técnico.",
+                  "en": "Online theory provides essential knowledge but does not waive hands-on verification and formal technical clearance.",
+                  "es": "La teoría online no sustituye la verificación práctica presencial y la autorización técnica.",
+                },
+              ],
+            },
+          },
+          {
+            id: "les-nr10-1-2",
+            order: 2,
+            title: {
+              "pt-BR": "NR 10: Introdução ao Treinamento Complementar em Sistema Elétrico de Potência (SEP)",
+              "en": "NR 10: Introduction to Complementary Training in Power Electric Systems (SEP)",
+              "es": "NR 10: Introducción al Curso Complementario de Sistemas Eléctricos de Potencia (SEP)",
+            },
+            durationMinutes: 22,
+            contentType: "video",
+            videoUrl: "amiF2XCvbfU",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Compreender os requisitos específicos do treinamento complementar de Sistema Elétrico de Potência (SEP) para alta tensão e subestações industriais.",
+                "en": "Understand complementary High Voltage Power System (SEP) safety requirements for substations and distribution lines.",
+                "es": "Comprender los requisitos del curso complementario de SEP para alta tensión y subestaciones.",
+              },
+              introduction: {
+                "pt-BR": "Os trabalhadores que intervêm em instalações elétricas integrantes do Sistema Elétrico de Potência (SEP) ou em suas proximidades (alta tensão acima de 1.000 V em corrente alternada) devem possuir treinamento complementar específico, com foco em técnicas de trabalho energizado e manobras em subestações.",
+                "en": "Personnel working on or near High-Voltage Power Systems (>1,000V AC) must hold complementary SEP certification.",
+                "es": "Los operarios que intervienen en alta tensión (>1.000 V) deben contar con capacitación complementaria de SEP.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "O que Caracteriza o SEP nas Plantas Industriais",
+                    "en": "High Voltage Power Systems in Heavy Industry",
+                    "es": "Características del SEP en Plantas Industriales",
+                  },
+                  body: {
+                    "pt-BR": "Em grandes plantas industriais (como fábricas de celulose, siderúrgicas e petroquímicas), o SEP compreende as subestações de entrada (69 kV, 138 kV ou 230 kV), transformadores de potência, cubículos de média tensão (13,8 kV) e linhas aéreas de transmissão. A proximidade a essas estruturas exige procedimentos rigorosos de zona controlada e zona de risco.",
+                    "en": "Covers primary substations (69kV - 230kV), medium-voltage switchgear (13.8kV), and plant power distribution.",
+                    "es": "Abarca subestaciones de entrada, transformadores de potencia y celdas de media tensión (13,8 kV).",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "Trabalhos em alta tensão exigem Permissão de Trabalho (PT) individualizada e equipe de no mínimo dois trabalhadores autorizados.",
+                  "en": "High-voltage tasks require formal Work Permits and a minimum crew of two authorized workers.",
+                  "es": "Los trabajos en alta tensión exigen Permiso de Trabajo y un equipo mínimo de dos trabajadores autorizados.",
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: "mod-nr10-2",
+        order: 2,
+        title: {
+          "pt-BR": "Módulo 2: Riscos Elétricos, Arco Voltaico, Proteção Coletiva e Desenergização (LOTO)",
+          "en": "Module 2: Electrical Hazards, Arc Flash, Collective Protection & LOTO De-energization",
+          "es": "Módulo 2: Riesgos Eléctricos, Arco Eléctrico, Protección Colectiva y Bloqueo LOTO",
+        },
+        lessons: [
+          {
+            id: "les-nr10-2-1",
+            order: 1,
+            title: {
+              "pt-BR": "NR 10 Módulo 1: Riscos em Instalações e Serviços com Eletricidade — Choque Elétrico e Queimaduras",
+              "en": "NR 10 Module 1: Hazards in Electrical Installations — Electric Shock & Burn Injuries",
+              "es": "NR 10 Módulo 1: Riesgos en Instalaciones Eléctricas — Choque Eléctrico y Quemaduras",
+            },
+            durationMinutes: 25,
+            contentType: "video",
+            videoUrl: "cdlQAFkirk8",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Entender os mecanismos fisiológicos do choque elétrico (fibrilação ventricular, tetanização, queimaduras internas e parada respiratória) e a influência da intensidade da corrente e do trajeto pelo corpo.",
+                "en": "Understand electric shock physiological mechanics (ventricular fibrillation, tetanization, internal burns) and pathway factors.",
+                "es": "Comprender los efectos fisiológicos del choque eléctrico, fibrilación ventricular y quemaduras internas.",
+              },
+              introduction: {
+                "pt-BR": "O choque elétrico ocorre quando o corpo humano se torna parte de um circuito condutor. A gravidade da lesão não depende apenas da tensão (voltagem), mas primordialmente da intensidade da corrente elétrica (miliamperes), da frequência e do tempo de contato.",
+                "en": "Electric shock severity depends primarily on current magnitude (milliamperes), contact duration, and body pathway.",
+                "es": "La gravedad del choque depende de la intensidad de la corriente (mA), tiempo de contacto y trayectoria en el cuerpo.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Limiares de Sensação e Perigo da Corrente Elétrica",
+                    "en": "Electric Current Thresholds & Physiological Effects",
+                    "es": "Umbrales de Percepción y Efectos de la Corriente",
+                  },
+                  body: {
+                    "pt-BR": "• 1 mA a 5 mA: Limiar de percepção sensorial (formigamento leve);\n• 10 mA a 20 mA: Limiar de largar (tetanização muscular — o trabalhador não consegue soltar o condutor);\n• 25 mA a 75 mA: Parada respiratória e colapso circulatório;\n• 100 mA a 3 A: Fibrilação ventricular cardíaca irreversível em frações de segundo (morte súbita se não houver desfibrilador imediato);\n• Acima de 3 A: Parada cardíaca instantânea e queimaduras de terceiro grau nos órgãos vitais.",
+                    "en": "1-5mA: perception; 10-20mA: muscle freezing; 25-75mA: respiratory paralysis; 100mA+: lethal ventricular fibrillation.",
+                    "es": "1-5mA: percepción; 10-20mA: contracción muscular; 100mA+: fibrilación ventricular potencialmente mortal.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "Correntes a partir de 10 mA já podem impedir o colaborador de soltar um fio energizado por contração involuntária dos músculos.",
+                  "en": "Currents above 10mA induce involuntary muscle contractions preventing release from conductors.",
+                  "es": "Corrientes superiores a 10 mA provocan tetanización e impiden soltar el conductor.",
+                },
+              ],
+            },
+          },
+          {
+            id: "les-nr10-2-2",
+            order: 2,
+            title: {
+              "pt-BR": "NR 10 Módulo 2: O Perigo Extremo do Arco Elétrico (Arc Flash), Radiação Térmica e Onda de Choque",
+              "en": "NR 10 Module 2: The Extreme Hazard of Arc Flash, Thermal Radiation & Blast Waves",
+              "es": "NR 10 Módulo 2: El Peligro Extremo del Arco Eléctrico, Radiación Térmica y Onda Expansiva",
+            },
+            durationMinutes: 25,
+            contentType: "video",
+            videoUrl: "fXuhUl9X7lE",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Compreender a física do arco elétrico, as temperaturas extremas atingidas (superiores a 19.000 °C), cálculo da energia incidente e a especificação de vestimentas de proteção contra arco (cal/cm²).",
+                "en": "Understand arc flash physics, extreme temperatures (>19,000°C), incident energy calculation, and arc-rated clothing (cal/cm²).",
+                "es": "Comprender la física del arco eléctrico, temperaturas extremas y ropa de protección ignífuga en cal/cm².",
+              },
+              introduction: {
+                "pt-BR": "O arco elétrico é uma descarga luminosa e violenta que vaporiza instantaneamente condutores metálicos. Não é necessário tocar na fiação para ser ferido: a radiação térmica e a onda de pressão (arc blast) podem causar queimaduras fatais a metros de distância.",
+                "en": "An arc flash vaporizes copper instantaneously. Physical contact is not required; radiant heat causes severe burns meters away.",
+                "es": "El arco eléctrico vaporiza metales al instante. La radiación térmica causa quemaduras fatales sin necesidad de contacto.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Efeitos do Arco Elétrico e Vestimentas ATPV",
+                    "en": "Arc Flash Effects & ATPV Clothing",
+                    "es": "Efectos del Arco y Ropa con Clasificación ATPV",
+                  },
+                  body: {
+                    "pt-BR": "O arco elétrico atinge até 20.000 °C (quatro vezes a temperatura da superfície do Sol), liberando:\n• Luz ofuscante capaz de causar cegueira imediata;\n• Onda de choque mecânico que projeta estilhaços e trabalhadores contra estruturas;\n• Gotículas de cobre fundido a alta velocidade;\n• Gases tóxicos gerados pela queima de isolamentos.\nTodo trabalho próximo a barramentos deve utilizar vestimentas de algodão tratado anti-chama com ATPV (Arc Thermal Performance Value) adequado à energia incidente do painel.",
+                    "en": "Reaches 20,000°C generating molten shrapnel, pressure blasts, and blinding light. Flame-resistant ATPV apparel is mandatory.",
+                    "es": "Alcanza hasta 20.000 °C proyectando metralla de cobre fundido. Es obligatorio el uso de ropa ignífuga con valor ATPV.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "Nunca use roupas de tecidos sintéticos comuns (poliéster, nylon) em áreas elétricas: elas derretem e aderem à pele humana em caso de arco.",
+                  "en": "Never wear ordinary synthetic fabrics (nylon, polyester) near electrical panels; they melt onto skin.",
+                  "es": "Nunca use telas sintéticas cerca de tableros eléctricos: se derriten sobre la piel en caso de arco.",
+                },
+              ],
+            },
+          },
+          {
+            id: "les-nr10-2-3",
+            order: 3,
+            title: {
+              "pt-BR": "NR 10 Módulo 3: Medidas de Controle do Risco Elétrico — Desenergização Segura em 6 Passos e LOTO",
+              "en": "NR 10 Module 3: Electrical Hazard Controls — 6-Step De-energization & LOTO Lockout",
+              "es": "NR 10 Módulo 3: Medidas de Control — Desenergización Segura en 6 Pasos y Bloqueo LOTO",
+            },
+            durationMinutes: 28,
+            contentType: "video",
+            videoUrl: "WgozQQfe0Pc",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Dominar o protocolo rigoroso dos 6 passos da desenergização elétrica da NR-10 e a aplicação de bloqueio e etiquetagem (Lockout & Tagout - LOTO).",
+                "en": "Master NR-10 mandatory 6-step de-energization sequence and Lockout & Tagout (LOTO) procedures.",
+                "es": "Dominar los 6 pasos obligatorios de desenergización según la NR-10 y el bloqueo LOTO.",
+              },
+              introduction: {
+                "pt-BR": "Somente serão consideradas desenergizadas as instalações elétricas liberadas para trabalho mediante os procedimentos apropriados e obedecida a sequência obrigatória de seis etapas da NR-10.",
+                "en": "Installations are only legally considered de-energized after strict compliance with the sequential six-step protocol.",
+                "es": "Una instalación solo se considera desenergizada tras cumplir estrictamente los seis pasos normativos.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Os 6 Passos Canônicos da Desenergização (NR-10 item 10.5.1)",
+                    "en": "The 6 Mandatory Steps of De-energization",
+                    "es": "Los 6 Pasos Obligatorios de Desenergización",
+                  },
+                  body: {
+                    "pt-BR": "1. Seccionamento: Abertura física dos circuitos (disjuntores e chaves seccionadoras);\n2. Impedimento de reenergização: Bloqueio físico por cadeados, garras de travamento e sinalização LOTO;\n3. Constatação da ausência de tensão: Teste com detector de tensão calibrado e testado antes e depois da medição;\n4. Instalação de aterramento temporário com equipotencialização dos condutores dos circuitos;\n5. Proteção dos elementos energizados existentes na zona controlada (mantas e isoladores);\n6. Instalação da sinalização de impedimento de reenergização (cartões e etiquetas invioláveis).",
+                    "en": "1. Disconnect; 2. Lockout; 3. Test for zero voltage; 4. Temporary grounding & equipotential bonding; 5. Barrier energized parts; 6. Tagout signage.",
+                    "es": "1. Seccionamiento; 2. Bloqueo LOTO; 3. Comprobación de tensión nula; 4. Puesta a tierra temporal; 5. Protección de partes activas; 6. Señalización.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "Instalação sem aterramento temporário instalado NÃO é considerada desenergizada perante a lei.",
+                  "en": "An installation lacking temporary grounding is legally considered energized.",
+                  "es": "Una instalación sin puesta a tierra temporal instalada se considera energizada ante la ley.",
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: "mod-nr10-3",
+        order: 3,
+        title: {
+          "pt-BR": "Módulo 3: Equipamentos de Proteção, Procedimentos de Trabalho, Incêndios e Primeiros Socorros",
+          "en": "Module 3: Protective Equipment, Safe Work Procedures, Fire Safety & First Aid",
+          "es": "Módulo 3: Equipos de Protección, Procedimientos, Incendios y Primeros Auxilios",
+        },
+        lessons: [
+          {
+            id: "les-nr10-3-1",
+            order: 1,
+            title: {
+              "pt-BR": "NR 10 Módulo 4: Equipamentos de Proteção Coletiva (EPC) e Individual (EPI) Dielétricos",
+              "en": "NR 10 Module 4: Collective and Personal Dielectric Protective Equipment",
+              "es": "NR 10 Módulo 4: Equipos de Protección Colectiva e Individual Dieléctricos",
+            },
+            durationMinutes: 25,
+            contentType: "video",
+            videoUrl: "Rv2Ad2gHTcE",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Especificar e inspecionar mantas isolantes, tapetes dielétricos, luvas de borracha isolante com sobreluva de vaqueta, varas de manobra e calçados sem componentes metálicos.",
+                "en": "Specify and inspect dielectric blankets, insulating gloves with leather protectors, hot sticks, and metal-free boots.",
+                "es": "Especificar e inspeccionar mantas aislantes, guantes dieléctricos con sobreguante y pértigas de maniobra.",
+              },
+              introduction: {
+                "pt-BR": "Os equipamentos de proteção para eletricidade devem possuir rigidez dielétrica certificada e controle rigoroso de ensaios laboratoriais periódicos.",
+                "en": "Dielectric protective gear requires verified electrical insulation ratings and periodic laboratory testing.",
+                "es": "Los equipos de protección para electricidad deben contar con rigidez dieléctrica certificada y pruebas periódicas.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Inspeção e Classes das Luvas Isolantes de Borracha",
+                    "en": "Insulating Glove Classes & Daily Pneumatic Inspection",
+                    "es": "Clases de Guantes Aislantes e Inspección Neumática",
+                  },
+                  body: {
+                    "pt-BR": "As luvas isolantes são classificadas por tensão de trabalho (Classe 00 a Classe 4).\nAntes de cada uso, é obrigatório realizar o teste pneumático manual (inflar a luva e torcer o punho para verificar furos ou microfissuras). Luvas com vazamento de ar devem ser descartadas imediatamente.",
+                    "en": "Glove classes range from Class 00 to Class 4. Daily air tests (inflating to detect micro-punctures) are mandatory.",
+                    "es": "Los guantes aislantes van de Clase 00 a Clase 4. El inflado manual diario para detectar pinchaduras es obligatorio.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "Luvas isolantes de borracha devem ser sempre utilizadas com sobreluva de vaqueta para proteção contra perfurações mecânicas.",
+                  "en": "Rubber insulating gloves must always be worn beneath leather protector gloves against punctures.",
+                  "es": "Los guantes dieléctricos deben usarse siempre con sobreguantes de cuero protector.",
+                },
+              ],
+            },
+          },
+          {
+            id: "les-nr10-3-2",
+            order: 2,
+            title: {
+              "pt-BR": "NR 10 Módulo 5: Documentação, Procedimentos de Trabalho e Trabalho em Equipe",
+              "en": "NR 10 Module 5: Safety Documentation, Work Procedures & Teamwork",
+              "es": "NR 10 Módulo 5: Documentación, Procedimientos de Trabajo y Trabajo en Equipo",
+            },
+            durationMinutes: 22,
+            contentType: "video",
+            videoUrl: "qUqVFh571As",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Conhecer as exigências documentais da NR-10: Ordens de Serviço, Análise Preliminar de Risco (APR), Permissão de Trabalho (PT) e comunicação operacional.",
+                "en": "Understand NR-10 documentation mandates: Safe Operating Procedures, JHA risk analysis, Work Permits, and crew coordination.",
+                "es": "Conocer las exigencias documentales: Órdenes de Servicio, APR y Permisos de Trabajo en equipo.",
+              },
+              introduction: {
+                "pt-BR": "Nenhuma intervenção elétrica em plantas industriais pode ser realizada de improviso ou sem procedimento operacional escrito e aprovado pela engenharia e segurança do trabalho.",
+                "en": "No electrical work may be performed improvised or without approved standard operating procedures.",
+                "es": "Ningún trabajo eléctrico puede realizarse sin procedimiento operativo formal y análisis de riesgos.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Regra de Ouro do Trabalho em Dupla",
+                    "en": "The Two-Worker Safety Rule",
+                    "es": "La Regla de Oro del Trabajo en Pareja",
+                  },
+                  body: {
+                    "pt-BR": "Os serviços executados em instalações elétricas energizadas em alta tensão, bem como aqueles realizados no Sistema Elétrico de Potência (SEP), não podem ser realizados individualmente. É obrigatório o trabalho em equipe de no mínimo dois colaboradores capacitados e autorizados, equipados com comunicação bidirecional.",
+                    "en": "High voltage and power system tasks must never be performed alone; a minimum crew of two trained workers is mandatory.",
+                    "es": "Las tareas en alta tensión no pueden realizarse de forma individual; se requiere como mínimo una pareja capacitada.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "O segundo trabalhador atua como vigia ativo, pronto para desenergizar a fonte ou iniciar o resgate em caso de emergência.",
+                  "en": "The second worker acts as an active safety observer prepared to dump power and execute rescue.",
+                  "es": "El segundo trabajador actúa como vigía activo para desenergizar e iniciar el rescate si ocurre un accidente.",
+                },
+              ],
+            },
+          },
+          {
+            id: "les-nr10-3-3",
+            order: 3,
+            title: {
+              "pt-BR": "NR 10 Módulo 6: Proteção e Combate a Incêndios Elétricos e Primeiros Socorros / RCP",
+              "en": "NR 10 Module 6: Electrical Fire Fighting & First Aid / CPR Protocols",
+              "es": "NR 10 Módulo 6: Protección Contra Incendios Eléctricos y Primeros Auxilios / RCP",
+            },
+            durationMinutes: 28,
+            contentType: "video",
+            videoUrl: "QLCz4OKFKhU",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Dominar as técnicas de combate a incêndios de Classe C (equipamentos elétricos energizados) com extintores de CO2 e Pó Químico, e o protocolo de socorro e Reanimação Cardiopulmonar (RCP) para vítimas de choque elétrico.",
+                "en": "Master Class C electrical fire suppression (CO2 & Dry Chemical) and CPR first aid response for shock victims.",
+                "es": "Dominar el combate de incendios Clase C (CO2 y Polvo) y reanimación cardiopulmonar (RCP) en víctimas de descarga.",
+              },
+              introduction: {
+                "pt-BR": "Em caso de acidente elétrico, cada segundo é decisivo. A desenergização imediata da fonte e a aplicação precoce da massagem cardíaca garantem a sobrevivência da vítima até a chegada do resgate médico avançado.",
+                "en": "In electrical incidents, immediate de-energization and rapid chest compressions preserve life until paramedics arrive.",
+                "es": "La desenergización inmediata y la reanimación cardiopulmonar rápida son determinantes para salvar la vida.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Combate a Incêndios em Equipamentos Energizados (Classe C)",
+                    "en": "Class C Electrical Fire Suppression",
+                    "es": "Combate de Incendios en Equipos Energizados (Clase C)",
+                  },
+                  body: {
+                    "pt-BR": "• NUNCA USE ÁGUA ou extintores de espuma em painéis elétricos energizados (risco fatal de condução elétrica pelo jato);\n• Use extintores de Gás Carbônico (CO2): excelente para painéis eletrônicos, atua por abafamento e resfriamento sem deixar resíduos condutores;\n• Use extintores de Pó Químico Seco (PQS - pó BC ou ABC): eficiente para extinguir chamas rápidas, mas requer limpeza posterior dos contatos elétricos.",
+                    "en": "NEVER use water or foam on live electrical gear. Deploy Carbon Dioxide (CO2) or dry chemical agents.",
+                    "es": "NUNCA use agua o espuma en tableros energizados. Use extintores de CO2 o polvo químico seco.",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "Socorro a Vítimas de Choque Elétrico e RCP",
+                    "en": "Electrical Shock Rescue & CPR Protocol",
+                    "es": "Rescate de Víctimas de Choque Eléctrico y RCP",
+                  },
+                  body: {
+                    "pt-BR": "1. Primeiro corte a corrente elétrica ou use bastão isolante para afastar o condutor (NUNCA toque na vítima ainda energizada);\n2. Verifique a responsividade e a respiração;\n3. Se a vítima estiver inconsciente e sem respirar: inicie imediatamente compressões torácicas contínuas (100 a 120 compressões por minuto no centro do peito);\n4. Solicite o Desfibrilador Externo Automático (DEA) imediatamente para reverter eventual fibrilação ventricular.",
+                    "en": "1. Cut power or use hot stick to detach victim; 2. Check breathing; 3. Perform CPR compressions (100-120/min); 4. Deploy AED immediately.",
+                    "es": "1. Corte la energía o use pértiga aislante; 2. Inicie compresiones torácicas (100-120/min); 3. Use desfibrilador DEA.",
+                  },
+                },
+              ],
+              summaryPoints: [
+                {
+                  "pt-BR": "Nunca toque diretamente em uma vítima presa ao choque elétrico sem antes desligar o disjuntor ou afastar o fio com material isolante aprovado.",
+                  "en": "Never touch an energized shock victim without first cutting power or using certified insulating tools.",
+                  "es": "Nunca toque a la víctima sin cortar la corriente o usar una pértiga aislante.",
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+    finalAssessment: {
+      id: "exam-nr10-eletrica",
+      order: 1,
+      title: {
+        "pt-BR": "Avaliação Formal Teórica de NR-10 e Segurança em Eletricidade",
+        "en": "Formal Theoretical Assessment: NR-10 Electrical Safety & SEP",
+        "es": "Evaluación Teórica Formal: NR-10 y Seguridad en Electricidad",
+      },
+      description: {
+        "pt-BR": "Exame de conformidade teórica da NR-10: riscos do choque elétrico, arco elétrico (arc flash), os 6 passos da desenergização segura (LOTO), EPIs dielétricos e combate a incêndios de Classe C.",
+        "en": "Regulatory compliance exam: shock mechanisms, arc flash energy, 6-step de-energization sequence, dielectric PPE, and Class C fires.",
+        "es": "Examen de cumplimiento teórico de la NR-10: choque eléctrico, arco voltaico, desenergización en 6 pasos y EPP dieléctrico.",
+      },
+      scope: "course",
+      estimatedMinutes: 30,
+      questionsCount: 6,
+      passingScorePercent: 70,
+      maxAttempts: 3,
+      isAvailable: true,
+      availabilityNotice: {
+        "pt-BR": "Avaliação liberada após conclusão de todas as 8 aulas do curso de NR-10.",
+        "en": "Exam available upon completion of all 8 lessons of the NR-10 course.",
+        "es": "Evaluación habilitada tras completar las 8 lecciones del curso de NR-10.",
+      },
+      questions: [
+        {
+          id: "q-nr10-1",
+          order: 1,
+          question: {
+            "pt-BR": "1. Quais são as seis etapas sequenciais obrigatórias da NR-10 para que uma instalação elétrica seja considerada legalmente desenergizada?",
+            "en": "1. What are the six mandatory sequential steps required by NR-10 for an installation to be considered legally de-energized?",
+            "es": "1. ¿Cuáles son los seis pasos obligatorios de la NR-10 para considerar una instalación desenergizada?",
+          },
+          options: [
+            {
+              id: "q1-a",
+              text: {
+                "pt-BR": "1. Seccionamento; 2. Impedimento de reenergização (LOTO); 3. Constatação da ausência de tensão; 4. Instalação de aterramento temporário com equipotencialização; 5. Proteção dos elementos energizados existentes; 6. Instalação da sinalização de impedimento.",
+                "en": "1. Disconnect; 2. Lockout prevention; 3. Verification of zero voltage; 4. Temporary grounding with equipotential bonding; 5. Barrier live parts; 6. Tagout signage.",
+                "es": "1. Seccionamiento; 2. Bloqueo LOTO; 3. Constatación de ausencia de tensión; 4. Puesta a tierra temporal; 5. Protección de partes activas; 6. Señalización.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! O item 10.5.1 da NR-10 estipula taxativamente essa sequência de seis etapas para garantir risco zero de reenergização acidental.",
+                "en": "Correct! NR-10 section 10.5.1 strictly mandates this six-step sequence.",
+                "es": "¡Correcto! La NR-10 establece taxativamente esta secuencia de 6 pasos.",
+              },
+            },
+            {
+              id: "q1-b",
+              text: {
+                "pt-BR": "Apenas desligar o disjuntor geral e colocar uma fita adesiva sobre o botão sem precisar testar a tensão nem aterrar.",
+                "en": "Simply flipping the breaker and taping it without testing voltage or grounding.",
+                "es": "Solo apagar el interruptor y poner cinta adhesiva sin probar tensión ni aterrizar.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto e fatal! Desligar disjuntor sem bloqueio, sem teste de tensão e sem aterramento temporário causa acidentes graves.",
+                "en": "Incorrect and fatal! Breakers can fail internally or be re-energized by third parties.",
+                "es": "Incorrecto y peligroso. El disyuntor puede ser accionado accidentalmente por terceros.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr10-2",
+          order: 2,
+          question: {
+            "pt-BR": "2. Por que roupas de tecidos sintéticos comuns (como poliéster, nylon e elastano) são estritamente proibidas para colaboradores que atuam em painéis elétricos?",
+            "en": "2. Why are ordinary synthetic fabrics strictly forbidden for personnel working near electrical panels?",
+            "es": "2. ¿Por qué la ropa sintética está prohibida cerca de tableros eléctricos?",
+          },
+          options: [
+            {
+              id: "q2-a",
+              text: {
+                "pt-BR": "Porque em caso de arco elétrico, as fibras sintéticas entram em combustão imediata, derretem e fundem-se à pele humana, agravando dramaticamente as queimaduras.",
+                "en": "Because in an arc flash event, synthetic fibers ignite instantly, melt, and fuse into human skin, causing catastrophic burn trauma.",
+                "es": "Porque ante un arco eléctrico las fibras sintéticas se derriten y se adhieren a la piel, agravando las quemaduras.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! Devem ser utilizadas exclusivamente vestimentas 100% algodão ou fibras inerentemente retardantes a chamas com classificação ATPV.",
+                "en": "Correct! Only flame-resistant arc-rated (ATPV) clothing may be worn near energized panels.",
+                "es": "¡Correcto! Solo deben utilizarse prendas de algodón tratado ignífugas con valor ATPV.",
+              },
+            },
+            {
+              id: "q2-b",
+              text: {
+                "pt-BR": "Porque o tecido sintético atrai descargas atmosféricas e raios mesmo dentro de galpões fechados.",
+                "en": "Because synthetic fabric attracts lightning indoors.",
+                "es": "Porque las telas sintéticas atraen rayos.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! O risco principal é a fusão do plástico derretido na derme do trabalhador sob a radiação térmica do arco.",
+                "en": "Incorrect! The primary hazard is melting plastic inflicting severe burn injury.",
+                "es": "Incorrecto. El peligro radica en que el plástico se funde sobre la piel.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr10-3",
+          order: 3,
+          question: {
+            "pt-BR": "3. Em um princípio de incêndio em um painel elétrico energizado (Classe C), qual tipo de agente extintor NUNCA deve ser utilizado?",
+            "en": "3. In an electrical fire involving energized equipment (Class C), which extinguishing agent must NEVER be used?",
+            "es": "3. En un conato de incendio en un tablero eléctrico energizado (Clase C), ¿qué extintor NUNCA debe usarse?",
+          },
+          options: [
+            {
+              id: "q3-a",
+              text: {
+                "pt-BR": "Água pressurizada ou espuma mecânica.",
+                "en": "Pressurized water or mechanical foam.",
+                "es": "Agua a presión o espuma mecánica.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! A água e a espuma conduzem eletricidade de volta pelo jato até o operador do extintor, provocando choque elétrico fatal.",
+                "en": "Correct! Water conducts electricity back through the nozzle stream, electrocuting the responder.",
+                "es": "¡Correcto! El agua conduce la corriente eléctrica provocando una descarga mortal.",
+              },
+            },
+            {
+              id: "q3-b",
+              text: {
+                "pt-BR": "Gás Carbônico (CO2) ou Pó Químico Seco (PQS).",
+                "en": "Carbon Dioxide (CO2) or Dry Chemical (PQS).",
+                "es": "Dióxido de Carbono (CO2) o Polvo Químico Seco.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto! CO2 e Pó Químico são os agentes indicados e não condutores para incêndios de Classe C.",
+                "en": "Incorrect! CO2 and dry chemical agents are safe, non-conductive extinguishants for electrical fires.",
+                "es": "Incorrecto. El CO2 y el polvo químico son los agentes recomendados para clase C.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr10-4",
+          order: 4,
+          question: {
+            "pt-BR": "4. Antes de utilizar luvas isolantes de borracha para manobras elétricas, qual teste simples e obrigatório deve ser realizado diariamente pelo trabalhador?",
+            "en": "4. Prior to using rubber insulating gloves, what simple mandatory daily test must be performed by the worker?",
+            "es": "4. Antes de usar guantes aislantes de goma, ¿qué prueba diaria obligatoria debe realizar el operario?",
+          },
+          options: [
+            {
+              id: "q4-a",
+              text: {
+                "pt-BR": "Teste pneumático manual (insuflar ar na luva e torcer o punho para verificar vazamentos e microfuros).",
+                "en": "Manual pneumatic test (inflating glove and rolling cuff to detect air leaks and micro-pinholes).",
+                "es": "Prueba neumática manual (inflar el guante y girar el puño para verificar fugas de aire).",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! Um microfuro imperceptível a olho nu permite a passagem de arco elétrico e corrente fatal para a mão do operador.",
+                "en": "Correct! Microscopic pinholes compromise dielectric integrity, allowing lethal current passage.",
+                "es": "¡Correcto! Una microfisura permite el paso de corriente eléctrica letal a la mano.",
+              },
+            },
+            {
+              id: "q4-b",
+              text: {
+                "pt-BR": "Mergulhar a luva em balde com óleo lubrificante para amaciar a borracha.",
+                "en": "Soaking the glove in motor oil to soften the rubber.",
+                "es": "Sumergir el guante en aceite lubricante.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto e destrutivo! Óleo e derivados de petróleo degradam a borracha e destroem a rigidez dielétrica da luva.",
+                "en": "Incorrect! Petroleum hydrocarbons destroy rubber insulation compounds.",
+                "es": "Incorrecto. Los derivados del petróleo destruyen las propiedades dieléctricas de la goma.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr10-5",
+          order: 5,
+          question: {
+            "pt-BR": "5. Qual é a exigência da NR-10 quanto à composição da equipe para execução de serviços em alta tensão e Sistema Elétrico de Potência (SEP)?",
+            "en": "5. What is the NR-10 requirement regarding crew composition for high-voltage and power system (SEP) tasks?",
+            "es": "5. ¿Cuál es la exigencia de la NR-10 sobre el equipo para trabajos en alta tensión y SEP?",
+          },
+          options: [
+            {
+              id: "q5-a",
+              text: {
+                "pt-BR": "É expressamente proibido o trabalho individual; deve ser executado por equipe de no mínimo dois colaboradores qualificados/capacitados e formalmente autorizados.",
+                "en": "Working alone is strictly forbidden; work must be performed by a minimum crew of two trained and authorized workers.",
+                "es": "Está prohibido el trabajo individual; debe realizarse como mínimo por una pareja autorizada.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! O item 10.7.3 da NR-10 proíbe o trabalho individual em alta tensão e SEP para garantir socorro imediato.",
+                "en": "Correct! NR-10 10.7.3 forbids solo high-voltage work to ensure immediate emergency response.",
+                "es": "¡Correcto! La NR-10 prohíbe el trabajo individual en alta tensión para garantizar rescate inmediato.",
+              },
+            },
+            {
+              id: "q5-b",
+              text: {
+                "pt-BR": "O trabalho pode ser realizado sozinho desde que o colaborador esteja com o celular no bolso para emergências.",
+                "en": "Solo work is allowed provided the worker carries a cell phone.",
+                "es": "El trabajo puede ser individual si el operario lleva teléfono móvil.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto e perigoso! Em caso de choque ou arco, a vítima fica incapacitada em milissegundos e não consegue usar celular.",
+                "en": "Incorrect and dangerous! Electrical trauma causes immediate incapacitation.",
+                "es": "Incorrecto. Ante una descarga la incapacitación es instantánea.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q-nr10-6",
+          order: 6,
+          question: {
+            "pt-BR": "6. A aprovação nesta avaliação teórica online confere autorização legal formal para intervir em circuitos elétricos energizados sem o treinamento prático presencial e a autorização expressa da empresa?",
+            "en": "6. Does passing this online theoretical exam grant legal authorization to intervene on live electrical circuits without hands-on training and company formal clearance?",
+            "es": "6. ¿La aprobación de esta prueba teórica otorga autorización legal para intervenir en circuitos energizados sin práctica presencial?",
+          },
+          options: [
+            {
+              id: "q6-a",
+              text: {
+                "pt-BR": "NÃO. Este certificado atesta exclusivamente a conclusão do conteúdo teórico da NR-10. A autorização formal para intervir em instalações elétricas exige treinamento prático presencial, ASO com aptidão médica vigente e anuência formal por escrito da RSS3 Soluções Industriais.",
+                "en": "NO. This certificate certifies theoretical knowledge only. Formal electrical authorization requires certified practical training, medical clearance (ASO), and formal written corporate authorization.",
+                "es": "NO. Este certificado avala únicamente la teoría de la NR-10. La autorización formal exige capacitación práctica presencial, aptitud médica en el ASO y autorización expresa por escrito de la empresa.",
+              },
+              isCorrect: true,
+              explanation: {
+                "pt-BR": "Correto! Conforme a diretriz permanente de integridade do AGENTS.md, cursos EAD não conferem habilitação operacional prática sem os devidos requisitos presenciais e documentais.",
+                "en": "Correct! Per permanent AGENTS.md compliance guidelines, online training does not grant practical qualification without certified hands-on evaluation.",
+                "es": "¡Correcto! La capacitación online nunca sustituye la práctica presencial ni la autorización formal.",
+              },
+            },
+            {
+              id: "q6-b",
+              text: {
+                "pt-BR": "SIM. A aprovação no portal online libera o trabalhador para manobrar qualquer subestação de alta tensão imediatamente.",
+                "en": "YES. Online approval waives all in-person requirements.",
+                "es": "SÍ. La aprobación online permite maniobrar cualquier subestación de alta tensión.",
+              },
+              isCorrect: false,
+              explanation: {
+                "pt-BR": "Incorreto e ilegal pelas normas regulamentadoras do Ministério do Trabalho e políticas de segurança da RSS3.",
+                "en": "Incorrect and illegal under labor safety legislation.",
+                "es": "Incorrecto y contrario a la legislación laboral.",
               },
             },
           ],
