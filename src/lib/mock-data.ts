@@ -1,6 +1,7 @@
 import { CourseDemonstration, SchoolCategory, UserDemonstration } from "@/types";
 import { nr11CourseData } from "./courses/nr11-course";
 import { excelCourseData } from "./courses/excel-course";
+import { gestaoPessoasCourseData } from "./courses/gestao-pessoas-course";
 
 /**
  * Escolas Oficiais Ativas da RSS3 Soluções Industriais
@@ -84,7 +85,7 @@ export const DEMO_SCHOOLS: SchoolCategory[] = [
       "es": "Excel corporativo, informes de parada de planta y herramientas de productividad.",
     },
     iconName: "FileSpreadsheet",
-    coursesCount: 1,
+    coursesCount: 2,
     color: "#059669",
   },
 ];
@@ -5157,6 +5158,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
   },
   nr11CourseData,
   excelCourseData,
+  gestaoPessoasCourseData,
 ];
 
 export const DEMO_PERSONAS: UserDemonstration[] = [];
