@@ -50,6 +50,7 @@ export const powerBiCourseData: CourseDemonstration = {
   lessonsCount: 6,
   thumbnailGradient: "from-amber-600 via-yellow-700 to-slate-950",
   coverImage: "/images/courses/power-bi.jpg",
+  categories: ["gestao-produtividade","qualidade-processos"],
   badgeCode: "PBI-RSS3",
   updatedAtDate: "2026-10-16",
   modules: [

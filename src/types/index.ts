@@ -145,6 +145,7 @@ export interface CourseDemonstration {
   assessments?: CurriculumExamItem[];
   thumbnailGradient: string;
   coverImage?: string;
+  categories?: ("nr-regulamentar" | "conhecimento-operacional" | "gestao-produtividade" | "qualidade-processos")[];
   badgeCode?: string;
   updatedAtDate: string; // ISO date string (YYYY-MM-DD)
 }

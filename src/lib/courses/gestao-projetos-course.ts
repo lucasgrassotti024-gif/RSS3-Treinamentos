@@ -50,6 +50,7 @@ export const gestaoProjetosCourseData: CourseDemonstration = {
   lessonsCount: 18,
   thumbnailGradient: "from-blue-950 via-cyan-950 to-slate-950",
   coverImage: "/images/courses/gestao-projetos.jpg",
+  categories: ["gestao-produtividade","conhecimento-operacional","qualidade-processos"],
   badgeCode: "PM-RSS3",
   updatedAtDate: "2026-10-16",
   modules: [

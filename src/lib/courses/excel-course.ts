@@ -50,6 +50,7 @@ export const excelCourseData: CourseDemonstration = {
   lessonsCount: 8,
   thumbnailGradient: "from-emerald-700 via-teal-800 to-slate-950",
   coverImage: "/images/courses/excel.jpg",
+  categories: ["gestao-produtividade"],
   badgeCode: "EXCEL-365",
   updatedAtDate: "2026-10-16",
   modules: [

@@ -50,6 +50,7 @@ export const gestaoQualidadeCourseData: CourseDemonstration = {
   lessonsCount: 9,
   thumbnailGradient: "from-amber-900 via-orange-950 to-slate-950",
   coverImage: "/images/courses/gestao-qualidade.jpg",
+  categories: ["qualidade-processos","gestao-produtividade"],
   badgeCode: "GQ-RSS3",
   updatedAtDate: "2026-10-16",
   modules: [

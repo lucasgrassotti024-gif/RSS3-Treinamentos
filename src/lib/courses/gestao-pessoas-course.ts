@@ -50,6 +50,7 @@ export const gestaoPessoasCourseData: CourseDemonstration = {
   lessonsCount: 15,
   thumbnailGradient: "from-blue-900 via-indigo-900 to-slate-950",
   coverImage: "/images/courses/gestao-pessoas.jpg",
+  categories: ["gestao-produtividade","qualidade-processos"],
   badgeCode: "GP-RSS3",
   updatedAtDate: "2026-10-16",
   modules: [

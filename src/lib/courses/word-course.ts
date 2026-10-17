@@ -50,6 +50,7 @@ export const wordCourseData: CourseDemonstration = {
   lessonsCount: 20,
   thumbnailGradient: "from-blue-900 via-sky-950 to-slate-950",
   coverImage: "/images/courses/word-corporativo.jpg",
+  categories: ["gestao-produtividade"],
   badgeCode: "WORD-RSS3",
   updatedAtDate: "2026-10-16",
   modules: [

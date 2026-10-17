@@ -137,6 +137,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
     lessonsCount: 5,
     thumbnailGradient: "from-cyan-700 to-blue-950",
     coverImage: "/images/courses/hidrojato.jpg",
+    categories: ["conhecimento-operacional", "nr-regulamentar"],
     badgeCode: "HJ-UAP",
     updatedAtDate: "2026-10-15",
     modules: [
@@ -712,6 +713,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
     lessonsCount: 10,
     thumbnailGradient: "from-amber-600 to-orange-950",
     coverImage: "/images/courses/pintura.jpg",
+    categories: ["conhecimento-operacional", "qualidade-processos"],
     badgeCode: "PINT-IND",
     updatedAtDate: "2026-10-15",
     modules: [
@@ -1769,6 +1771,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
     lessonsCount: 9,
     thumbnailGradient: "from-amber-600 to-yellow-800",
     coverImage: "/images/courses/andaime.jpg",
+    categories: ["conhecimento-operacional", "nr-regulamentar"],
     badgeCode: "AND-IND",
     updatedAtDate: "2026-10-15",
     modules: [
@@ -2885,6 +2888,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
     lessonsCount: 5,
     thumbnailGradient: "from-blue-700 to-indigo-950",
     coverImage: "/images/courses/nr6.jpg",
+    categories: ["nr-regulamentar"],
     badgeCode: "NR-06",
     updatedAtDate: "2026-10-16",
     modules: [
@@ -3481,6 +3485,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
     lessonsCount: 6,
     thumbnailGradient: "from-amber-600 to-slate-950",
     coverImage: "/images/courses/nr35.jpg",
+    categories: ["nr-regulamentar", "conhecimento-operacional"],
     badgeCode: "NR-35",
     updatedAtDate: "2026-10-16",
     modules: [
@@ -4154,6 +4159,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
     lessonsCount: 2,
     thumbnailGradient: "from-emerald-700 to-teal-950",
     coverImage: "/images/courses/nr9.jpg",
+    categories: ["nr-regulamentar"],
     badgeCode: "NR-09",
     updatedAtDate: "2026-10-16",
     modules: [
@@ -4560,6 +4566,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
     lessonsCount: 8,
     thumbnailGradient: "from-yellow-600 via-amber-700 to-slate-950",
     coverImage: "/images/courses/nr10.jpg",
+    categories: ["nr-regulamentar", "conhecimento-operacional"],
     badgeCode: "NR-10",
     updatedAtDate: "2026-10-16",
     modules: [
