@@ -6,6 +6,7 @@ import { gestaoProjetosCourseData } from "./courses/gestao-projetos-course";
 import { gestaoQualidadeCourseData } from "./courses/gestao-qualidade-course";
 import { wordCourseData } from "./courses/word-course";
 import { powerBiCourseData } from "./courses/power-bi-course";
+import { manutencaoIndustrialCourseData } from "./courses/manutencao-course";
 
 /**
  * Escolas Oficiais Ativas da RSS3 Soluções Industriais
@@ -91,6 +92,22 @@ export const DEMO_SCHOOLS: SchoolCategory[] = [
     iconName: "FileSpreadsheet",
     coursesCount: 6,
     color: "#059669",
+  },
+  {
+    id: "mecanica-industrial",
+    name: {
+      "pt-BR": "Manutenção Mecânica e Confiabilidade Industrial",
+      "en": "Mechanical Maintenance & Asset Reliability",
+      "es": "Mantenimiento Mecánico y Confiabilidad Industrial",
+    },
+    description: {
+      "pt-BR": "Procedimentos de manutenção corretiva, preventiva e preditiva, bloqueio LOTO, lubrificação e confiabilidade de ativos pesados.",
+      "en": "Corrective, preventive, and predictive maintenance workflows, LOTO energy isolation, and asset reliability.",
+      "es": "Mantenimiento correctivo, preventivo y predictivo, bloqueo LOTO y confiabilidad de activos.",
+    },
+    iconName: "Wrench",
+    coursesCount: 1,
+    color: "#d97706",
   },
 ];
 
@@ -5262,6 +5279,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
   gestaoQualidadeCourseData,
   wordCourseData,
   powerBiCourseData,
+  manutencaoIndustrialCourseData,
 ];
 
 export const DEMO_PERSONAS: UserDemonstration[] = [];
