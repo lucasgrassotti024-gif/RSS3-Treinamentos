@@ -122,7 +122,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
       "en": "Hydroblasting",
       "es": "Hidrojet",
     },
-    workloadHours: 16,
+    workloadHours: 20,
     level: "advanced",
     modality: "hybrid",
     isMandatory: true,
@@ -133,7 +133,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
       "es": "Operadores de hidrojet, asistentes y supervisores de seguridad.",
     },
     modulesCount: 2,
-    lessonsCount: 4,
+    lessonsCount: 5,
     thumbnailGradient: "from-cyan-700 to-blue-950",
     coverImage: "/images/courses/hidrojato.jpg",
     badgeCode: "HJ-UAP",
@@ -576,6 +576,94 @@ export const DEMO_COURSES: CourseDemonstration[] = [
                     "pt-BR": "INCORRETO! Com protetor auricular duplo e o ruído ensurdecedor do jato, o colaborador não ouvirá e poderá ser atingido mortalmente.",
                     "en": "Incorrect! Industrial noise drowns out shouts and catastrophic injury can occur in seconds.",
                     "es": "Incorrecto. El ruido impide escuchar gritos y puede ocurrir un accidente fatal.",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            id: "les-hj-2-3",
+            order: 3,
+            title: {
+              "pt-BR": "Operação de Caminhão Tanque Combinado (Hidrojato e Hidrovácuo)",
+              "en": "Combination Tank Truck Operations (Hydroblasting & Vacuum Recovery)",
+              "es": "Operación de Camión Tanque Combinado (Hidrojet e Hidrovacío)",
+            },
+            durationMinutes: 30,
+            contentType: "video",
+            videoUrl: "y3rbkHr0ylw",
+            contentDetail: {
+              objective: {
+                "pt-BR": "Compreender o funcionamento integrado de unidades móveis combinadas de hidrojato e auto-vácuo (Center Vac), procedimentos de sucção de efluentes, operação de carretel hidráulico e segurança no descarte de resíduos industriais.",
+                "en": "Understand integrated combination jetting and vacuum truck units, slurry extraction, hydraulic hose reel operation, and industrial waste handling safety.",
+                "es": "Comprender el funcionamiento integrado de camiones combinados de hidrojet y succión al vacío, carrete hidráulico y seguridad en la descarga.",
+              },
+              sections: [
+                {
+                  title: {
+                    "pt-BR": "Arquitetura e Componentes da Unidade Combinada",
+                    "en": "Combination Unit Architecture & Systems",
+                    "es": "Arquitectura y Componentes de la Unidad Combinada",
+                  },
+                  body: {
+                    "pt-BR": "O caminhão combinado integra dois sistemas essenciais na mesma plataforma: um tanque de lodo basculante com bomba de vácuo de anel líquido ou compressor rotativo (Roots) para sucção pesada, e um reservatório de água limpa com bomba triplex de alta pressão acoplada à tomada de força (PTO). Essa sinergia permite desobstruir tubulações, redes pluviais e tanques enquanto aspira simultaneamente os detritos desprendidos, evitando alagamentos e contaminação ambiental.",
+                    "en": "The combo truck houses a tilting sludge tank with a liquid ring or Roots rotary vacuum blower alongside a fresh water reservoir and high-pressure triplex pump driven via PTO. Enables concurrent pipe descaling and high-volume slurry extraction.",
+                    "es": "El camión combinado integra un tanque de lodos basculante con bomba de vacío y un depósito de agua limpia con bomba triplex de alta presión para limpieza y succión simultánea.",
+                  },
+                },
+                {
+                  title: {
+                    "pt-BR": "Procedimentos Críticos de Operação e Segurança com Auto-Vácuo",
+                    "en": "Critical Vacuum Operation Protocols & Safety",
+                    "es": "Procedimientos Críticos de Seguridad en Auto-Vacío",
+                  },
+                  body: {
+                    "pt-BR": "1. Abertura e travamento da tampa traseira com travas hidráulicas e cunhas mecânicas antes de qualquer manutenção interna.\n2. Inspeção da válvula quebra-vácuo (alívio) e sensores de nível para evitar transbordamento de espuma ou líquidos para a bomba de vácuo.\n3. Aterramento eletrostático obrigatório do caminhão ao operar em áreas classificadas com vapores inflamáveis ou gases industriais.\n4. Manobras de retro-lavagem com lança desobstruidora e mangueira laranja de 1 polegada com terminal de ponta de aço e bico perfurador.",
+                    "en": "1. Mechanical lockouts on rear hatch opening.\n2. Inspection of vacuum relief valves and shutoff float balls.\n3. Mandatory electrostatic grounding in classified industrial atmospheres.\n4. Sewer jetting hose protocols using forward and reverse thrust nozzles.",
+                    "es": "1. Bloqueo mecánico de la compuerta trasera.\n2. Válvula de alivio de vacío y boyas de nivel.\n3. Puesta a tierra antiestática obligatoria.\n4. Operación segura del carrete y boquillas de empuje.",
+                  },
+                },
+              ],
+            },
+            challenge: {
+              id: "chal-hj-2-3",
+              question: {
+                "pt-BR": "DESAFIO DE CAMPO 5: Durante a sucção de lodo em canaleta industrial com caminhão combinado, o operador observa que o manovacuômetro atingiu o vácuo máximo e a mangueira começou a vibrar violentamente. Qual é o diagnóstico e a conduta imediata?",
+                "en": "FIELD CHALLENGE 5: While vacuuming slurry with a combo truck, vacuum reaches maximum and the suction hose vibrates violently. What is the diagnosis and correct action?",
+                "es": "DESAFÍO 5: Durante la succión, el vacuómetro llega al límite y la manguera vibra bruscamente. ¿Cuál es el diagnóstico y la acción correcta?",
+              },
+              contextScenario: {
+                "pt-BR": "O mangote de 4 polegadas sugou uma pedra ou pedaço de madeira que obstruiu a entrada, criando vácuo total preso na linha.",
+                "en": "A stone or heavy debris choked the 4-inch suction hose nozzle, pulling full dead-head vacuum.",
+                "es": "Un objeto sólido atascó la boquilla de succión de 4 pulgadas generando vacío total bloqueado.",
+              },
+              options: [
+                {
+                  id: "opt-1",
+                  text: {
+                    "pt-BR": "Abrir imediatamente a válvula quebra-vácuo de emergência na carcaça do caminhão para despressurizar o mangote antes de desobstruir manualmente com ferramentas adequadas.",
+                    "en": "Immediately open the emergency vacuum relief valve to neutralize line suction before safely clearing obstruction.",
+                    "es": "Abrir de inmediato la válvula de alivio de vacío para despresurizar antes de retirar la obstrucción de forma segura.",
+                  },
+                  isCorrect: true,
+                  explanation: {
+                    "pt-BR": "CORRETO! Tentar desobstruir o bocal com o vácuo pleno acionado causa sucção violenta e pode prender as mãos ou decepar membros do operador.",
+                    "en": "CORRECT! Clearing a blocked hose under full live vacuum causes violent suction trauma or limb entrapment.",
+                    "es": "¡CORRECTO! Intentar desatascar con vacío activo puede causar atrapamiento severo de extremidades.",
+                  },
+                },
+                {
+                  id: "opt-2",
+                  text: {
+                    "pt-BR": "Colocar o braço dentro do bocal com a bomba ligada para puxar a pedra com a mão.",
+                    "en": "Reach an arm inside the nozzle with the vacuum running to grab the stone.",
+                    "es": "Meter el brazo dentro de la manguera con la bomba encendida para sacar la piedra.",
+                  },
+                  isCorrect: false,
+                  explanation: {
+                    "pt-BR": "INCORRETO E POTENCIALMENTE FATAL! O vácuo industrial puxa e esmaga o braço com força de centenas de quilos.",
+                    "en": "Extremely hazardous! Industrial suction creates crushing entrapment forces.",
+                    "es": "¡Peligro de muerte! La succión industrial aplasta y atrapa el brazo instantáneamente.",
                   },
                 },
               ],
