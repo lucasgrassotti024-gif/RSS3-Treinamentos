@@ -7,6 +7,7 @@ import { gestaoQualidadeCourseData } from "./courses/gestao-qualidade-course";
 import { wordCourseData } from "./courses/word-course";
 import { powerBiCourseData } from "./courses/power-bi-course";
 import { manutencaoIndustrialCourseData } from "./courses/manutencao-course";
+import { pcmCourseData } from "./courses/pcm-course";
 
 /**
  * Escolas Oficiais Ativas da RSS3 Soluções Industriais
@@ -106,7 +107,7 @@ export const DEMO_SCHOOLS: SchoolCategory[] = [
       "es": "Mantenimiento correctivo, preventivo y predictivo, bloqueo LOTO y confiabilidad de activos.",
     },
     iconName: "Wrench",
-    coursesCount: 1,
+    coursesCount: 2,
     color: "#d97706",
   },
 ];
@@ -5280,6 +5281,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
   wordCourseData,
   powerBiCourseData,
   manutencaoIndustrialCourseData,
+  pcmCourseData,
 ];
 
 export const DEMO_PERSONAS: UserDemonstration[] = [];
