@@ -258,7 +258,7 @@ export function toggleLessonCompletion(courseId: string, lessonId: string): bool
  */
 export function calculateCourseProgressMetrics(
   course: CourseDemonstration,
-  progress: CourseProgressRecord
+  progress?: CourseProgressRecord | null
 ): {
   totalLessons: number;
   completedCount: number;
@@ -266,7 +266,7 @@ export function calculateCourseProgressMetrics(
   isFullyCompleted: boolean;
   resumeLessonId: string;
 } {
-  const allLessons = (course.modules || []).flatMap((m) => m.lessons);
+  const allLessons = (course?.modules || []).flatMap((m) => m.lessons || []);
   const totalLessons = allLessons.length;
 
   if (totalLessons === 0) {
@@ -280,7 +280,8 @@ export function calculateCourseProgressMetrics(
   }
 
   // Filtrar apenas IDs válidos pertencentes a este curso
-  const validCompletedIds = progress.completedLessonIds.filter((id) =>
+  const completedIds = Array.isArray(progress?.completedLessonIds) ? progress.completedLessonIds : [];
+  const validCompletedIds = completedIds.filter((id) =>
     allLessons.some((l) => l.id === id)
   );
 
@@ -289,7 +290,7 @@ export function calculateCourseProgressMetrics(
   const isFullyCompleted = completedCount === totalLessons && totalLessons > 0;
 
   // Determinar aula de retomada: última acessada ou primeira não concluída ou primeira aula
-  let resumeLessonId = progress.lastAccessedLessonId;
+  let resumeLessonId = progress?.lastAccessedLessonId;
   if (!resumeLessonId || !allLessons.some((l) => l.id === resumeLessonId)) {
     const firstIncomplete = allLessons.find((l) => !validCompletedIds.includes(l.id));
     resumeLessonId = firstIncomplete ? firstIncomplete.id : allLessons[0]?.id || "";
