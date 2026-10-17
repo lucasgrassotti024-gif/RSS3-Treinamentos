@@ -391,118 +391,120 @@ export default function HomePage() {
           })}
         </div>
 
-        {/* Grid de Cursos Filtrados da Home */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pt-1">
+        {/* Grid de Cursos Filtrados da Home - 3 por fileira em telas grandes */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pt-1">
           {showcaseCourses.map((course) => {
             const courseProgress = progressStore[course.id];
             const courseMetrics = calculateCourseProgressMetrics(course, courseProgress);
-            const targetLessonId = courseMetrics.resumeLessonId || course.modules?.[0]?.lessons?.[0]?.id || "";
             const courseStarted = courseMetrics.completedCount > 0 || !!courseProgress?.lastAccessedLessonId;
             const isFav = favorites.includes(course.id);
 
             return (
-              <div
+              <Link
                 key={course.id}
-                className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-lg transition-all flex flex-col justify-between group"
+                href={`/catalogo/${course.id}`}
+                className="group flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/90 hover:border-blue-500/60 dark:hover:border-blue-400/60 hover:shadow-md transition-all duration-200 overflow-hidden relative"
               >
-                <div>
-                  {/* Topo com imagem de capa temática do curso e badges operacionais */}
-                  <div className={`h-40 bg-gradient-to-r ${course.thumbnailGradient} p-4 flex flex-col justify-between text-white relative overflow-hidden`}>
-                    {course.coverImage && (
-                      <Image
-                        src={course.coverImage}
-                        alt={course.title[locale] || "Capa do curso"}
-                        fill
-                        className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    )}
-                    {/* Overlay gradiente */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/30 pointer-events-none" />
-
-                    <div className="flex items-center justify-between relative z-10">
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-black/60 backdrop-blur-md uppercase tracking-wider border border-white/10 text-slate-100 truncate max-w-[150px]">
-                        {course.schoolName[locale]}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          toggleFavoriteCourse(course.id);
-                        }}
-                        title={isFav ? "Remover dos favoritos" : "Favoritar"}
-                        className={`p-1.5 rounded-lg backdrop-blur-md transition-all active:scale-90 cursor-pointer ${
-                          isFav
-                            ? "bg-amber-500 text-white shadow-xs"
-                            : "bg-black/50 text-white/80 hover:text-white hover:bg-black/70"
-                        }`}
-                      >
-                        <Star className={`w-3.5 h-3.5 ${isFav ? "fill-white" : ""}`} />
-                      </button>
-                    </div>
-
-                    <div className="flex items-center justify-between text-xs font-semibold opacity-95 relative z-10 text-slate-200">
-                      <span className="inline-flex items-center gap-1 bg-black/50 px-2 py-0.5 rounded backdrop-blur-xs text-[10px]">
-                        {course.level === "advanced" ? "Avançado" : course.level === "intermediate" ? "Intermediário" : "Básico"}
-                      </span>
-                      <span className="bg-black/50 px-2 py-0.5 rounded text-[10px] backdrop-blur-xs">
-                        {t.common.modalities[course.modality]}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Barra de Progresso Real se iniciado */}
-                  {courseStarted && (
-                    <div className="bg-slate-100 dark:bg-slate-800 px-4 py-2 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 text-2xs font-semibold">
-                      <div className="flex-1 bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
-                        <div
-                          className="bg-emerald-500 h-full rounded-full transition-all duration-500"
-                          style={{ width: `${courseMetrics.progressPercent}%` }}
-                        />
-                      </div>
-                      <span className="text-slate-600 dark:text-slate-300 shrink-0 text-[11px]">
-                        {courseMetrics.progressPercent}% concluído
-                      </span>
-                    </div>
+                {/* Imagem / Capa Compacta 16:9 */}
+                <div className="relative aspect-16/9 w-full bg-slate-950 overflow-hidden">
+                  {course.coverImage ? (
+                    <Image
+                      src={course.coverImage}
+                      alt={course.title[locale] || "Capa do curso"}
+                      fill
+                      className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  ) : (
+                    <div className={`w-full h-full bg-gradient-to-r ${course.thumbnailGradient}`} />
                   )}
 
-                  {/* Conteúdo do Card */}
-                  <div className="p-4 space-y-3">
-                    <h3 className="font-bold text-sm text-slate-900 dark:text-white line-clamp-2 leading-snug group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
-                      {course.title[locale]}
-                    </h3>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
-                      {course.description[locale]}
-                    </p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/20 pointer-events-none" />
 
-                    <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-100 dark:border-slate-800">
-                      <span className="inline-flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5 text-blue-500" />
-                        {course.workloadHours}h
+                  {/* Badge de Código / NR */}
+                  <div className="absolute top-2 left-2 flex items-center gap-1 z-10">
+                    {course.badgeCode && (
+                      <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-black/75 backdrop-blur-md text-white border border-white/10 tracking-wider">
+                        {course.badgeCode}
                       </span>
-                      <span className="inline-flex items-center gap-1">
-                        <BookOpen className="w-3.5 h-3.5 text-emerald-500" />
-                        {course.modulesCount} módulos
+                    )}
+                    {course.isMandatory && (
+                      <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-orange-600 text-white shadow-xs">
+                        NR Obrigatória
                       </span>
-                      <span className="inline-flex items-center gap-1">
-                        <Award className="w-3.5 h-3.5 text-orange-500" />
-                        {course.lessonsCount} aulas
-                      </span>
-                    </div>
+                    )}
+                  </div>
+
+                  {/* Botão de Favoritar */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      toggleFavoriteCourse(course.id);
+                    }}
+                    title={isFav ? "Remover dos favoritos" : "Favoritar"}
+                    className={`absolute top-2 right-2 p-1.5 rounded-lg backdrop-blur-md transition-all active:scale-90 z-20 cursor-pointer ${
+                      isFav
+                        ? "bg-amber-500 text-white shadow-xs"
+                        : "bg-black/50 text-white/70 hover:text-white hover:bg-black/75"
+                    }`}
+                  >
+                    <Star className={`w-3.5 h-3.5 ${isFav ? "fill-white" : ""}`} />
+                  </button>
+
+                  {/* Horas e Aulas no rodapé da capa */}
+                  <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-white text-[11px] font-semibold z-10 pointer-events-none">
+                    <span className="flex items-center gap-1 bg-black/60 backdrop-blur-xs px-2 py-0.5 rounded">
+                      <Clock className="w-3 3 text-orange-400" />
+                      {course.workloadHours}h
+                    </span>
+                    <span className="bg-black/60 backdrop-blur-xs px-2 py-0.5 rounded text-[10px] text-slate-200">
+                      {course.lessonsCount} aulas
+                    </span>
                   </div>
                 </div>
 
-                <div className="p-4 pt-0">
-                  <Link
-                    href={`/catalogo/${course.id}`}
-                    className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-orange-500 text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-orange-600 dark:hover:text-orange-400 transition-all cursor-pointer"
-                  >
-                    <span>Ver Detalhes</span>
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </Link>
+                {/* Barra de Progresso Real se iniciado */}
+                {courseStarted && (
+                  <div className="bg-slate-100 dark:bg-slate-800 px-3 py-1.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2 text-2xs font-semibold">
+                    <div className="flex-1 bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                      <div
+                        className="bg-emerald-500 h-full rounded-full transition-all duration-500"
+                        style={{ width: `${courseMetrics.progressPercent}%` }}
+                      />
+                    </div>
+                    <span className="text-slate-600 dark:text-slate-300 shrink-0 text-[10px]">
+                      {courseMetrics.progressPercent}%
+                    </span>
+                  </div>
+                )}
+
+                {/* Título direto e Categorias */}
+                <div className="p-3.5 flex flex-col justify-between flex-1 space-y-2">
+                  <h3 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 leading-snug line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    {course.title[locale]}
+                  </h3>
+
+                  {/* Categorias compactas */}
+                  {course.categories && course.categories.length > 0 && (
+                    <div className="flex flex-wrap gap-1 pt-0.5">
+                      {course.categories.slice(0, 2).map((catId) => {
+                        const catDef = COURSE_TAXONOMY_TYPES.find((ct) => ct.id === catId);
+                        if (!catDef) return null;
+                        return (
+                          <span
+                            key={catId}
+                            className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${catDef.badgeBg} ${catDef.badgeText}`}
+                          >
+                            {catDef.label[locale].split(" ")[0]}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
