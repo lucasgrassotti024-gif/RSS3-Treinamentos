@@ -1,46 +1,230 @@
 "use client";
 
-import React, { useMemo, useState, useSyncExternalStore } from "react";
+import React, { useMemo, useState, useRef, useSyncExternalStore } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useApp } from "@/context/app-context";
-import { DEMO_COURSES, DEMO_SCHOOLS } from "@/lib/mock-data";
-import { COURSE_TAXONOMY_TYPES, CourseTaxonomyType } from "@/lib/course-types";
+import { DEMO_COURSES } from "@/lib/mock-data";
+import { COURSE_TAXONOMY_TYPES, CourseTaxonomyType, CourseTypeDefinition } from "@/lib/course-types";
 import {
   subscribeToFavorites,
   getStoredFavorites,
   getServerFavoritesSnapshot,
   toggleFavoriteCourse,
 } from "@/lib/favorites";
+import { CourseDemonstration } from "@/types";
 import {
   Search,
-  Clock,
-  BookOpen,
-  Award,
-  ArrowRight,
-  ShieldCheck,
-  RotateCcw,
-  SlidersHorizontal,
+  ChevronLeft,
+  ChevronRight,
   Star,
+  Clock,
   Layers,
   Wrench,
   TrendingUp,
   CheckCircle2,
   ShieldAlert,
   LayoutGrid,
+  ShieldCheck,
+  RotateCcw,
 } from "lucide-react";
 
-type SortOption = "nameAsc" | "nameDesc" | "durationAsc" | "durationDesc" | "recent";
+// Componente de carrossel de fileira de cursos
+interface CourseRowProps {
+  categoryDef: CourseTypeDefinition;
+  courses: CourseDemonstration[];
+  favorites: string[];
+  locale: "pt-BR" | "en" | "es";
+}
+
+function CourseRow({ categoryDef, courses, favorites, locale }: CourseRowProps) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (!scrollContainerRef.current) return;
+    const container = scrollContainerRef.current;
+    // O container mostra 3 cards por vez. Rola exatamente a largura de um card + gap (~360px)
+    const scrollAmount = container.clientWidth * 0.75;
+    container.scrollBy({
+      left: direction === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth",
+    });
+  };
+
+  if (courses.length === 0) return null;
+
+  return (
+    <section className="space-y-3 relative group/row">
+      {/* Título da Fileira + Contador + Botões de Navegação */}
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <span
+            className={`w-2.5 h-6 rounded-full shrink-0 ${
+              categoryDef.id === "nr-regulamentar"
+                ? "bg-blue-600"
+                : categoryDef.id === "conhecimento-operacional"
+                ? "bg-orange-500"
+                : categoryDef.id === "gestao-produtividade"
+                ? "bg-emerald-500"
+                : "bg-amber-500"
+            }`}
+          />
+          <h2 className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white truncate">
+            {categoryDef.label[locale]}
+          </h2>
+          <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+            {courses.length}
+          </span>
+        </div>
+
+        {/* Setas de rolagem para o lado */}
+        <div className="flex items-center gap-1.5 shrink-0">
+          <button
+            type="button"
+            onClick={() => scroll("left")}
+            aria-label="Rolar para esquerda"
+            className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer shadow-xs"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => scroll("right")}
+            aria-label="Rolar para direita"
+            className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer shadow-xs"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+
+      {/* Carrossel Horizontal: Exatamente 3 cards visíveis por fileira em desktop (w-[calc((100%-2rem)/3)]) */}
+      <div
+        ref={scrollContainerRef}
+        className="flex gap-4 overflow-x-auto scroll-smooth scrollbar-none pb-2 pt-1 -mx-1 px-1 snap-x snap-mandatory"
+      >
+        {courses.map((course) => {
+          const isFav = favorites.includes(course.id);
+          return (
+            <div
+              key={`${categoryDef.id}-${course.id}`}
+              className="w-[85vw] sm:w-[calc((100%-1rem)/2)] lg:w-[calc((100%-2rem)/3)] shrink-0 snap-start"
+            >
+              <CompactCourseCard course={course} isFav={isFav} locale={locale} />
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+// Card Compacto Inspirado no Layout Horizontal FM2S/Streaming
+interface CompactCardProps {
+  course: CourseDemonstration;
+  isFav: boolean;
+  locale: "pt-BR" | "en" | "es";
+}
+
+function CompactCourseCard({ course, isFav, locale }: CompactCardProps) {
+  return (
+    <Link
+      href={`/catalogo/${course.id}`}
+      className="group flex flex-col h-full rounded-xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/90 hover:border-blue-500/60 dark:hover:border-blue-400/60 hover:shadow-md transition-all duration-200 overflow-hidden relative"
+    >
+      {/* Imagem / Capa Compacta (Proporção 16:9 mais baixa) */}
+      <div className="relative aspect-16/9 w-full bg-slate-950 overflow-hidden">
+        {course.coverImage ? (
+          <Image
+            src={course.coverImage}
+            alt={course.title[locale]}
+            fill
+            className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+            sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 33vw"
+          />
+        ) : (
+          <div className={`w-full h-full bg-gradient-to-r ${course.thumbnailGradient}`} />
+        )}
+
+        {/* Gradiente sutil inferior */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/20 pointer-events-none" />
+
+        {/* Badge do Código / Sigla */}
+        <div className="absolute top-2 left-2 flex items-center gap-1 z-10">
+          {course.badgeCode && (
+            <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-black/75 backdrop-blur-md text-white border border-white/10 tracking-wider">
+              {course.badgeCode}
+            </span>
+          )}
+          {course.isMandatory && (
+            <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-orange-600 text-white shadow-xs">
+              NR Obrigatória
+            </span>
+          )}
+        </div>
+
+        {/* Botão Favoritar na imagem */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleFavoriteCourse(course.id);
+          }}
+          title={isFav ? "Remover dos favoritos" : "Adicionar aos favoritos"}
+          className={`absolute top-2 right-2 p-1.5 rounded-lg backdrop-blur-md transition-all active:scale-90 z-20 cursor-pointer ${
+            isFav
+              ? "bg-amber-500 text-white shadow-xs"
+              : "bg-black/50 text-white/70 hover:text-white hover:bg-black/75"
+          }`}
+        >
+          <Star className={`w-3.5 h-3.5 ${isFav ? "fill-white" : ""}`} />
+        </button>
+
+        {/* Carga Horária e Aulas no canto inferior */}
+        <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-white text-[11px] font-semibold z-10 pointer-events-none">
+          <span className="flex items-center gap-1 bg-black/60 backdrop-blur-xs px-2 py-0.5 rounded">
+            <Clock className="w-3 h-3 text-orange-400" />
+            {course.workloadHours}h
+          </span>
+          <span className="bg-black/60 backdrop-blur-xs px-2 py-0.5 rounded text-[10px] text-slate-200">
+            {course.lessonsCount} aulas
+          </span>
+        </div>
+      </div>
+
+      {/* Conteúdo do Card: Título direto, sem parágrafos longos */}
+      <div className="p-3.5 flex flex-col justify-between flex-1 space-y-2">
+        <h3 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 leading-snug line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+          {course.title[locale]}
+        </h3>
+
+        {/* Badges de Categorias Múltiplas */}
+        {course.categories && course.categories.length > 0 && (
+          <div className="flex flex-wrap gap-1 pt-0.5">
+            {course.categories.slice(0, 2).map((catId) => {
+              const catDef = COURSE_TAXONOMY_TYPES.find((ct) => ct.id === catId);
+              if (!catDef) return null;
+              return (
+                <span
+                  key={catId}
+                  className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${catDef.badgeBg} ${catDef.badgeText}`}
+                >
+                  {catDef.label[locale].split(" ")[0]}
+                </span>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </Link>
+  );
+}
 
 export default function CatalogPage() {
   const { t, locale } = useApp();
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedType, setSelectedType] = useState<CourseTaxonomyType>("all");
-  const [selectedSchool, setSelectedSchool] = useState<string>("all");
-  const [selectedLevel, setSelectedLevel] = useState<string>("all");
-  const [selectedModality, setSelectedModality] = useState<string>("all");
-  const [selectedObligation, setSelectedObligation] = useState<string>("all");
-  const [sortBy, setSortBy] = useState<SortOption>("nameAsc");
+  const [selectedTypeFilter, setSelectedTypeFilter] = useState<CourseTaxonomyType>("all");
 
   // Favoritos reativos
   const favorites = useSyncExternalStore(
@@ -49,440 +233,171 @@ export default function CatalogPage() {
     getServerFavoritesSnapshot
   );
 
-  // Filtragem e ordenação derivadas dos dados
-  const filteredAndSortedCourses = useMemo(() => {
-    const filtered = DEMO_COURSES.filter((course) => {
-      const term = searchTerm.toLowerCase().trim();
+  // Categorias canônicas (excluindo 'all' para agrupar em fileiras)
+  const categoryRows = useMemo(() => {
+    return COURSE_TAXONOMY_TYPES.filter((t) => t.id !== "all");
+  }, []);
+
+  // Filtragem dos cursos por busca e filtro de categoria no topo
+  const filteredCourses = useMemo(() => {
+    const term = searchTerm.toLowerCase().trim();
+    return DEMO_COURSES.filter((course) => {
       const matchesSearch =
         term === "" ||
         course.title[locale].toLowerCase().includes(term) ||
-        course.description[locale].toLowerCase().includes(term) ||
-        (course.badgeCode && course.badgeCode.toLowerCase().includes(term)) ||
-        (course.targetAudience && course.targetAudience[locale].toLowerCase().includes(term));
+        (course.badgeCode && course.badgeCode.toLowerCase().includes(term));
 
-      // Filtro por tipo/taxonomia
       const matchesType =
-        selectedType === "all" ||
-        (course.categories && course.categories.includes(selectedType as any));
+        selectedTypeFilter === "all" ||
+        (course.categories && course.categories.includes(selectedTypeFilter as any));
 
-      const matchesSchool = selectedSchool === "all" || course.schoolId === selectedSchool;
-      const matchesLevel = selectedLevel === "all" || course.level === selectedLevel;
-      const matchesModality = selectedModality === "all" || course.modality === selectedModality;
-      const matchesObligation =
-        selectedObligation === "all" ||
-        (selectedObligation === "mandatory" && course.isMandatory) ||
-        (selectedObligation === "optional" && !course.isMandatory);
-
-      return matchesSearch && matchesType && matchesSchool && matchesLevel && matchesModality && matchesObligation;
+      return matchesSearch && matchesType;
     });
+  }, [searchTerm, selectedTypeFilter, locale]);
 
-    return filtered.sort((a, b) => {
-      if (sortBy === "nameAsc") {
-        return a.title[locale].localeCompare(b.title[locale]);
-      }
-      if (sortBy === "nameDesc") {
-        return b.title[locale].localeCompare(a.title[locale]);
-      }
-      if (sortBy === "durationAsc") {
-        return a.workloadHours - b.workloadHours;
-      }
-      if (sortBy === "durationDesc") {
-        return b.workloadHours - a.workloadHours;
-      }
-      if (sortBy === "recent") {
-        return new Date(b.updatedAtDate).getTime() - new Date(a.updatedAtDate).getTime();
-      }
-      return 0;
-    });
-  }, [searchTerm, selectedType, selectedSchool, selectedLevel, selectedModality, selectedObligation, sortBy, locale]);
-
-  const hasActiveFilters =
-    searchTerm !== "" ||
-    selectedType !== "all" ||
-    selectedSchool !== "all" ||
-    selectedLevel !== "all" ||
-    selectedModality !== "all" ||
-    selectedObligation !== "all" ||
-    sortBy !== "nameAsc";
-
-  const handleClearFilters = () => {
-    setSearchTerm("");
-    setSelectedType("all");
-    setSelectedSchool("all");
-    setSelectedLevel("all");
-    setSelectedModality("all");
-    setSelectedObligation("all");
-    setSortBy("nameAsc");
-  };
-
-  const currentTypeMeta = COURSE_TAXONOMY_TYPES.find((ct) => ct.id === selectedType);
-
-  // Renderizar ícone do tipo
+  // Função para pegar ícone da categoria
   const renderTypeIcon = (icon: string) => {
     switch (icon) {
       case "ShieldAlert":
-        return <ShieldAlert className="w-4 h-4" />;
+        return <ShieldAlert className="w-3.5 h-3.5" />;
       case "Wrench":
-        return <Wrench className="w-4 h-4" />;
+        return <Wrench className="w-3.5 h-3.5" />;
       case "TrendingUp":
-        return <TrendingUp className="w-4 h-4" />;
+        return <TrendingUp className="w-3.5 h-3.5" />;
       case "CheckCircle2":
-        return <CheckCircle2 className="w-4 h-4" />;
+        return <CheckCircle2 className="w-3.5 h-3.5" />;
       default:
-        return <LayoutGrid className="w-4 h-4" />;
+        return <LayoutGrid className="w-3.5 h-3.5" />;
     }
   };
 
   return (
-    <div className="flex-1 py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-8">
+    <div className="flex-1 py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-8">
       {/* Cabeçalho */}
-      <div className="space-y-2">
-        <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-blue-100 dark:bg-blue-950/60 text-blue-900 dark:text-blue-300 text-xs font-bold">
+      <div className="space-y-1.5">
+        <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-blue-100 dark:bg-blue-950/60 text-blue-900 dark:text-blue-300 text-xs font-bold">
           <ShieldCheck className="w-3.5 h-3.5 text-orange-500" />
-          <span>Matriz Técnica RSS3 Soluções Industriais</span>
+          <span>Vitrine Corporativa • RSS3 Soluções Industriais</span>
         </div>
-        <h1 className="text-3xl font-extrabold tracking-tight text-foreground">
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
           {t.catalog.title}
         </h1>
-        <p className="text-sm text-muted-foreground">
-          {t.catalog.subtitle}
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+          Navegue pelas fileiras temáticas de cursos industriais ou busque por código e norma.
         </p>
       </div>
 
-      {/* SELETOR DE TIPOS / CATEGORIAS EM ABAS MODERNAS */}
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-            Filtrar por Área de Conhecimento
-          </span>
-          <span className="text-xs font-semibold text-slate-500">
-            {filteredAndSortedCourses.length} cursos encontrados
-          </span>
-        </div>
-
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin">
+      {/* Barra de Filtro Rápido e Pesquisa */}
+      <div className="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
+        {/* Pílulas de filtro de tipo rápido */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
           {COURSE_TAXONOMY_TYPES.map((typeDef) => {
-            const isSelected = selectedType === typeDef.id;
-            const count = typeDef.id === "all"
-              ? DEMO_COURSES.length
-              : DEMO_COURSES.filter((c) => c.categories && c.categories.includes(typeDef.id as any)).length;
-
+            const isSelected = selectedTypeFilter === typeDef.id;
             return (
               <button
                 key={typeDef.id}
-                onClick={() => setSelectedType(typeDef.id)}
-                className={`inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all shrink-0 cursor-pointer ${
+                onClick={() => setSelectedTypeFilter(typeDef.id)}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                   isSelected
-                    ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm"
-                    : "bg-card border border-border text-muted-foreground hover:bg-muted hover:text-foreground"
+                    ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-xs"
+                    : "bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                 }`}
               >
                 {renderTypeIcon(typeDef.iconName)}
                 <span>{typeDef.label[locale]}</span>
-                <span className={`px-1.5 py-0.5 rounded-md text-[10px] font-bold ${
-                  isSelected
-                    ? "bg-white/20 text-white dark:bg-slate-900/20 dark:text-slate-900"
-                    : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400"
-                }`}>
-                  {count}
-                </span>
               </button>
             );
           })}
         </div>
 
-        {/* Descrição contextual da categoria ativa */}
-        {currentTypeMeta && (
-          <p className="text-xs text-muted-foreground italic px-1">
-            {currentTypeMeta.description[locale]}
-          </p>
-        )}
-      </div>
-
-      {/* Painel Completo de Filtros e Busca */}
-      <div className="p-5 rounded-2xl border border-border bg-card shadow-xs space-y-4">
-        {/* Linha 1: Busca e Ordenação */}
-        <div className="flex flex-col md:flex-row gap-3">
-          <div className="relative flex-1">
-            <Search className="w-4 h-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder={t.catalog.searchPlaceholder}
-              className="w-full pl-10 pr-4 py-2 text-xs rounded-lg border bg-background focus:outline-hidden focus:ring-2 focus:ring-blue-500 transition-all"
-            />
-          </div>
-
-          <div className="flex items-center gap-2 shrink-0">
-            <label htmlFor="sort-select" className="text-xs font-semibold text-muted-foreground whitespace-nowrap">
-              {t.catalog.sortBy}:
-            </label>
-            <select
-              id="sort-select"
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as SortOption)}
-              className="px-3 py-2 text-xs rounded-lg border bg-background font-medium text-foreground focus:outline-hidden focus:ring-2 focus:ring-blue-500 cursor-pointer"
-            >
-              <option value="nameAsc">{t.catalog.sortOptions.nameAsc}</option>
-              <option value="nameDesc">{t.catalog.sortOptions.nameDesc}</option>
-              <option value="durationAsc">{t.catalog.sortOptions.durationAsc}</option>
-              <option value="durationDesc">{t.catalog.sortOptions.durationDesc}</option>
-              <option value="recent">{t.catalog.sortOptions.recent}</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Linha 2: Dropdowns de Filtros Refinados */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 pt-2 border-t">
-          {/* Escola */}
-          <div className="space-y-1">
-            <label className="text-[11px] font-semibold text-muted-foreground flex items-center gap-1">
-              <SlidersHorizontal className="w-3 h-3 text-orange-500" />
-              <span>{t.catalog.filterBySchool}</span>
-            </label>
-            <select
-              value={selectedSchool}
-              onChange={(e) => setSelectedSchool(e.target.value)}
-              className="w-full px-2.5 py-1.5 text-xs rounded-md border bg-background text-foreground cursor-pointer"
-            >
-              <option value="all">{t.catalog.allSchools}</option>
-              {DEMO_SCHOOLS.map((school) => (
-                <option key={school.id} value={school.id}>
-                  {school.name[locale]}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Nível */}
-          <div className="space-y-1">
-            <label className="text-[11px] font-semibold text-muted-foreground">
-              {t.catalog.filterByLevel}
-            </label>
-            <select
-              value={selectedLevel}
-              onChange={(e) => setSelectedLevel(e.target.value)}
-              className="w-full px-2.5 py-1.5 text-xs rounded-md border bg-background text-foreground cursor-pointer"
-            >
-              <option value="all">{t.catalog.allLevels}</option>
-              <option value="basic">{t.common.levels.basic}</option>
-              <option value="intermediate">{t.common.levels.intermediate}</option>
-              <option value="advanced">{t.common.levels.advanced}</option>
-            </select>
-          </div>
-
-          {/* Modalidade */}
-          <div className="space-y-1">
-            <label className="text-[11px] font-semibold text-muted-foreground">
-              {t.catalog.filterByModality}
-            </label>
-            <select
-              value={selectedModality}
-              onChange={(e) => setSelectedModality(e.target.value)}
-              className="w-full px-2.5 py-1.5 text-xs rounded-md border bg-background text-foreground cursor-pointer"
-            >
-              <option value="all">{t.catalog.allModalities}</option>
-              <option value="online">{t.common.modalities.online}</option>
-              <option value="hybrid">{t.common.modalities.hybrid}</option>
-              <option value="presential">{t.common.modalities.presential}</option>
-            </select>
-          </div>
-
-          {/* Obrigatoriedade */}
-          <div className="space-y-1">
-            <label className="text-[11px] font-semibold text-muted-foreground">
-              {t.catalog.filterByObligation}
-            </label>
-            <select
-              value={selectedObligation}
-              onChange={(e) => setSelectedObligation(e.target.value)}
-              className="w-full px-2.5 py-1.5 text-xs rounded-md border bg-background text-foreground cursor-pointer"
-            >
-              <option value="all">{t.catalog.allMandatory}</option>
-              <option value="mandatory">{t.catalog.onlyMandatory}</option>
-              <option value="optional">{t.catalog.onlyOptional}</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Barra de Status e Limpeza */}
-        <div className="text-xs text-muted-foreground font-medium flex items-center justify-between pt-2 border-t">
-          <span>
-            {t.catalog.showingResults
-              .replace("{count}", filteredAndSortedCourses.length.toString())
-              .replace("{total}", DEMO_COURSES.length.toString())}
-          </span>
-          {hasActiveFilters && (
+        {/* Campo de Busca Rápida */}
+        <div className="relative w-full md:w-72 shrink-0">
+          <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Buscar por nome ou sigla (ex: NR-10)..."
+            className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-blue-500"
+          />
+          {searchTerm && (
             <button
-              onClick={handleClearFilters}
-              className="text-orange-600 dark:text-orange-400 font-semibold hover:underline inline-flex items-center gap-1.5 cursor-pointer"
+              onClick={() => setSearchTerm("")}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
             >
               <RotateCcw className="w-3 h-3" />
-              <span>{t.catalog.clearFilters}</span>
             </button>
           )}
         </div>
       </div>
 
-      {/* Grid de Cards de Cursos */}
-      {filteredAndSortedCourses.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredAndSortedCourses.map((course) => {
-            const isFav = favorites.includes(course.id);
+      {/* RENDERIZAÇÃO EM FILEIRAS POR TIPO (3 CARDS POR FILEIRA COM SCROLL HORIZONTAL) */}
+      {selectedTypeFilter === "all" && searchTerm === "" ? (
+        <div className="space-y-10">
+          {categoryRows.map((catDef) => {
+            const coursesInCat = DEMO_COURSES.filter(
+              (c) => c.categories && c.categories.includes(catDef.id as any)
+            );
             return (
-              <div
-                key={course.id}
-                className="rounded-xl border border-border bg-card overflow-hidden hover:shadow-lg transition-all flex flex-col justify-between group relative"
-              >
-                <div>
-                  <div className={`h-40 bg-gradient-to-r ${course.thumbnailGradient} p-4 flex flex-col justify-between text-white relative overflow-hidden`}>
-                    {course.coverImage && (
-                      <Image
-                        src={course.coverImage}
-                        alt={course.title[locale] || "Capa do curso"}
-                        fill
-                        className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    )}
-                    {/* Overlay escuro em degradê para legibilidade das tags */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/40 to-slate-900/30 pointer-events-none" />
-
-                    <div className="flex justify-between items-start relative z-10">
-                      <div className="flex flex-wrap items-center gap-1.5 max-w-[75%]">
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-black/60 backdrop-blur-md border border-white/10 text-white">
-                          {course.schoolName[locale]}
-                        </span>
-                        {course.isMandatory && (
-                          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-orange-600 text-white shadow-xs">
-                            {t.catalog.onlyMandatory}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Botão de Favoritar */}
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          toggleFavoriteCourse(course.id);
-                        }}
-                        title={isFav ? "Remover dos favoritos" : "Adicionar aos favoritos"}
-                        className={`p-2 rounded-xl backdrop-blur-md transition-all active:scale-90 cursor-pointer ${
-                          isFav
-                            ? "bg-amber-500 text-white shadow-xs"
-                            : "bg-black/50 text-white/70 hover:text-white hover:bg-black/70"
-                        }`}
-                      >
-                        <Star className={`w-4 h-4 ${isFav ? "fill-white" : ""}`} />
-                      </button>
-                    </div>
-
-                    <div className="flex items-center gap-2 relative z-10">
-                      <span className="text-xs font-semibold px-2 py-0.5 rounded bg-white/20 backdrop-blur-md">
-                        {t.common.levels[course.level]}
-                      </span>
-                      <span className="text-xs font-semibold px-2 py-0.5 rounded bg-white/20 backdrop-blur-md">
-                        {t.common.modalities[course.modality]}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="p-5 space-y-4">
-                    <div>
-                      {/* Tags de Categoria do Curso */}
-                      {course.categories && course.categories.length > 0 && (
-                        <div className="flex flex-wrap gap-1 mb-2">
-                          {course.categories.map((catKey) => {
-                            const catDef = COURSE_TAXONOMY_TYPES.find((ct) => ct.id === catKey);
-                            if (!catDef) return null;
-                            return (
-                              <span
-                                key={catKey}
-                                className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${catDef.badgeBg} ${catDef.badgeText}`}
-                              >
-                                {catDef.label[locale]}
-                              </span>
-                            );
-                          })}
-                        </div>
-                      )}
-
-                      <h3 className="font-bold text-base text-foreground line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                        {course.title[locale]}
-                      </h3>
-                      <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
-                        {course.description[locale]}
-                      </p>
-                    </div>
-
-                    <div className="grid grid-cols-3 gap-2 py-3 border-y text-center">
-                      <div>
-                        <div className="flex items-center justify-center gap-1 text-muted-foreground mb-0.5">
-                          <Clock className="w-3.5 h-3.5 text-blue-500" />
-                          <span className="text-[11px] font-medium">{t.common.hours}</span>
-                        </div>
-                        <span className="text-xs font-bold text-foreground">{course.workloadHours}h</span>
-                      </div>
-                      <div>
-                        <div className="flex items-center justify-center gap-1 text-muted-foreground mb-0.5">
-                          <BookOpen className="w-3.5 h-3.5 text-emerald-500" />
-                          <span className="text-[11px] font-medium">{t.common.modules}</span>
-                        </div>
-                        <span className="text-xs font-bold text-foreground">{course.modulesCount}</span>
-                      </div>
-                      <div>
-                        <div className="flex items-center justify-center gap-1 text-muted-foreground mb-0.5">
-                          <Award className="w-3.5 h-3.5 text-orange-500" />
-                          <span className="text-[11px] font-medium">{t.common.lessons}</span>
-                        </div>
-                        <span className="text-xs font-bold text-foreground">{course.lessonsCount}</span>
-                      </div>
-                    </div>
-
-                    {course.mandatoryFor && course.mandatoryFor.length > 0 && (
-                      <div className="text-[11px] text-muted-foreground line-clamp-1">
-                        <span className="font-semibold text-foreground">Função: </span>
-                        {course.mandatoryFor.join(", ")}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="p-5 pt-0">
-                  <Link
-                    href={`/catalogo/${course.id}`}
-                    className="w-full flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-lg bg-secondary hover:bg-primary hover:text-primary-foreground text-xs font-bold transition-all"
-                  >
-                    <span>{t.common.details}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              </div>
+              <CourseRow
+                key={catDef.id}
+                categoryDef={catDef}
+                courses={coursesInCat}
+                favorites={favorites}
+                locale={locale}
+              />
             );
           })}
         </div>
       ) : (
-        <div className="p-12 text-center rounded-2xl border border-dashed border-border bg-card space-y-4">
-          <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mx-auto text-muted-foreground">
-            <Search className="w-6 h-6" />
+        /* Caso o usuário tenha filtrado por busca ou clicado em uma categoria específica */
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+              {filteredCourses.length} cursos encontrados
+            </span>
+            {(selectedTypeFilter !== "all" || searchTerm !== "") && (
+              <button
+                onClick={() => {
+                  setSelectedTypeFilter("all");
+                  setSearchTerm("");
+                }}
+                className="text-xs font-semibold text-orange-600 dark:text-orange-400 hover:underline flex items-center gap-1 cursor-pointer"
+              >
+                <RotateCcw className="w-3 h-3" />
+                <span>Restaurar todas as fileiras</span>
+              </button>
+            )}
           </div>
-          <div className="space-y-1">
-            <h3 className="text-base font-bold text-foreground">
-              {t.catalog.emptyStateTitle}
-            </h3>
-            <p className="text-xs text-muted-foreground max-w-sm mx-auto">
-              {t.catalog.emptyState}
-            </p>
-          </div>
-          <button
-            onClick={handleClearFilters}
-            className="px-4 py-2 text-xs font-bold rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all cursor-pointer"
-          >
-            {t.catalog.clearFilters}
-          </button>
+
+          {filteredCourses.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredCourses.map((course) => (
+                <CompactCourseCard
+                  key={course.id}
+                  course={course}
+                  isFav={favorites.includes(course.id)}
+                  locale={locale}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="p-12 text-center rounded-2xl border border-dashed border-slate-300 dark:border-slate-800 space-y-3">
+              <Search className="w-8 h-8 text-slate-400 mx-auto" />
+              <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                Nenhum treinamento encontrado com esse critério.
+              </p>
+              <button
+                onClick={() => {
+                  setSelectedTypeFilter("all");
+                  setSearchTerm("");
+                }}
+                className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                Limpar busca e filtros
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>
