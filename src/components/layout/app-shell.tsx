@@ -213,9 +213,9 @@ export function AppShell({ children }: AppShellProps) {
         </div>
 
         {/* Rodapé da Sidebar: Área do Usuário + Botão de Recolher */}
-        <div className="p-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
+        <div suppressHydrationWarning className="p-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
           {currentUser && (
-            <div className="space-y-1" suppressHydrationWarning>
+            <div className="space-y-1">
               <Link
                 href="/dashboard"
                 onClick={() => setMobileOpen(false)}
