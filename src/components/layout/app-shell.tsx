@@ -214,8 +214,8 @@ export function AppShell({ children }: AppShellProps) {
 
         {/* Rodapé da Sidebar: Área do Usuário + Botão de Recolher */}
         <div className="p-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
-          {mounted && currentUser && (
-            <div className="space-y-1">
+          {currentUser && (
+            <div className="space-y-1" suppressHydrationWarning>
               <Link
                 href="/dashboard"
                 onClick={() => setMobileOpen(false)}
@@ -338,29 +338,31 @@ export function AppShell({ children }: AppShellProps) {
             </button>
 
             {/* Perfil do Usuário / Acesso ao Login */}
-            {mounted && currentUser ? (
-              <Link
-                href="/dashboard"
-                className="flex items-center gap-2 p-1 sm:px-3 sm:py-1 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              >
-                <div className="w-6 h-6 rounded-full bg-blue-900 dark:bg-blue-600 text-white flex items-center justify-center font-bold text-2xs shrink-0">
-                  {currentUser.name.charAt(0)}
-                </div>
-                <div className="hidden sm:flex flex-col text-left">
-                  <span className="text-xs font-semibold text-slate-900 dark:text-white truncate max-w-[120px]">
-                    {currentUser.name.split(" ")[0]}
-                  </span>
-                </div>
-              </Link>
-            ) : (
-              <Link
-                href="/login"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-900 dark:bg-blue-600 text-white text-xs font-semibold hover:bg-blue-800 transition-colors shadow-xs"
-              >
-                <User className="w-3.5 h-3.5" />
-                <span>{t.nav.login}</span>
-              </Link>
-            )}
+            <div suppressHydrationWarning className="flex items-center">
+              {currentUser ? (
+                <Link
+                  href="/dashboard"
+                  className="flex items-center gap-2 p-1 sm:px-3 sm:py-1 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                >
+                  <div className="w-6 h-6 rounded-full bg-blue-900 dark:bg-blue-600 text-white flex items-center justify-center font-bold text-2xs shrink-0">
+                    {currentUser.name.charAt(0)}
+                  </div>
+                  <div className="hidden sm:flex flex-col text-left">
+                    <span className="text-xs font-semibold text-slate-900 dark:text-white truncate max-w-[120px]">
+                      {currentUser.name.split(" ")[0]}
+                    </span>
+                  </div>
+                </Link>
+              ) : (
+                <Link
+                  href="/login"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-900 dark:bg-blue-600 text-white text-xs font-semibold hover:bg-blue-800 transition-colors shadow-xs"
+                >
+                  <User className="w-3.5 h-3.5" />
+                  <span>{t.nav.login}</span>
+                </Link>
+              )}
+            </div>
           </div>
         </header>
 
