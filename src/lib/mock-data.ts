@@ -10,6 +10,7 @@ import { manutencaoIndustrialCourseData } from "./courses/manutencao-course";
 import { pcmCourseData } from "./courses/pcm-course";
 import { geometriaEspacialCourseData } from "./courses/geometria-course";
 import { administracaoCourseData } from "./courses/administracao-course";
+import { nr12CourseData } from "./courses/nr12-course";
 
 /**
  * Escolas Oficiais Ativas da RSS3 Soluções Industriais
@@ -77,7 +78,7 @@ export const DEMO_SCHOOLS: SchoolCategory[] = [
       "es": "Directrices de la NR-6, selección, conservación, inspección y responsabilidades legales del EPP en operaciones de alto riesgo.",
     },
     iconName: "ShieldCheck",
-    coursesCount: 5,
+    coursesCount: 6,
     color: "#2563eb", // Blue 600
   },
   {
@@ -5286,6 +5287,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
   pcmCourseData,
   geometriaEspacialCourseData,
   administracaoCourseData,
+  nr12CourseData,
 ];
 
 export const DEMO_PERSONAS: UserDemonstration[] = [];
