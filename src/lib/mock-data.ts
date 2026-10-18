@@ -9,6 +9,7 @@ import { powerBiCourseData } from "./courses/power-bi-course";
 import { manutencaoIndustrialCourseData } from "./courses/manutencao-course";
 import { pcmCourseData } from "./courses/pcm-course";
 import { geometriaEspacialCourseData } from "./courses/geometria-course";
+import { administracaoCourseData } from "./courses/administracao-course";
 
 /**
  * Escolas Oficiais Ativas da RSS3 Soluções Industriais
@@ -92,7 +93,7 @@ export const DEMO_SCHOOLS: SchoolCategory[] = [
       "es": "Excel corporativo, informes de parada de planta y herramientas de productividad.",
     },
     iconName: "FileSpreadsheet",
-    coursesCount: 6,
+    coursesCount: 7,
     color: "#059669",
   },
   {
@@ -5284,6 +5285,7 @@ export const DEMO_COURSES: CourseDemonstration[] = [
   manutencaoIndustrialCourseData,
   pcmCourseData,
   geometriaEspacialCourseData,
+  administracaoCourseData,
 ];
 
 export const DEMO_PERSONAS: UserDemonstration[] = [];
