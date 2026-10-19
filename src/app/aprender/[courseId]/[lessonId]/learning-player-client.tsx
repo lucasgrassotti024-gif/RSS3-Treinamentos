@@ -117,7 +117,7 @@ export default function LearningPlayerClient({
     if (nextLesson) {
       router.push(`/aprender/${courseId}/${nextLesson.id}`);
     } else {
-      router.push(`/cursos/${courseId}`);
+      router.push(`/catalogo/${courseId}`);
     }
   };
 
