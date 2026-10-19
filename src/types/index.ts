@@ -69,6 +69,15 @@ export interface LessonQuizChallenge {
   options: LessonChallengeOption[];
 }
 
+export interface LessonAttachment {
+  id: string;
+  title: Record<Locale, string>;
+  type: "pdf" | "spreadsheet" | "document" | "standard";
+  sizeMb?: number;
+  description?: Record<Locale, string>;
+  downloadUrl?: string;
+}
+
 export interface LessonDemonstration {
   id: string;
   order: number;
@@ -80,6 +89,7 @@ export interface LessonDemonstration {
   videoUrl?: string; // Ex: YouTube video ID ou URL completa
   challenge?: LessonQuizChallenge;
   contentDetail?: LessonContentDetail;
+  attachments?: LessonAttachment[];
 }
 
 export interface ExamOption {

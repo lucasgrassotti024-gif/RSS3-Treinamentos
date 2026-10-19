@@ -13,9 +13,11 @@ import {
   calculateCourseProgressMetrics,
   issueCourseCertificate,
   getCertificateForCourse,
+  getLessonNotes,
+  saveLessonNote,
 } from "@/lib/progress";
 import CertificateModal from "@/components/certificate-modal";
-import { CourseDemonstration, LessonDemonstration, CertificateDemonstration } from "@/types";
+import { CourseDemonstration, LessonDemonstration, CertificateDemonstration, LessonAttachment } from "@/types";
 import { VISUAL_ASSETS_MAP } from "@/components/illustrations/pilot-5s-assets";
 import {
   ArrowLeft,
@@ -42,6 +44,13 @@ import {
   GraduationCap,
   ExternalLink,
   ShieldCheck,
+  Maximize2,
+  Minimize2,
+  StickyNote,
+  Paperclip,
+  Download,
+  BookOpen,
+  Save,
 } from "lucide-react";
 
 interface LearningPlayerClientProps {
@@ -65,6 +74,29 @@ export default function LearningPlayerClient({
   // Modal de Certificado
   const [certificateModalOpen, setCertificateModalOpen] = useState(false);
   const [activeCertificate, setActiveCertificate] = useState<CertificateDemonstration | null>(null);
+
+  // Modo Foco Total / Teatro
+  const [focusMode, setFocusMode] = useState(false);
+
+  // Aba ativa na aula: 'conteudo' | 'anotacoes' | 'materiais'
+  const [activeTab, setActiveTab] = useState<"conteudo" | "anotacoes" | "materiais">("conteudo");
+
+  // Anotações pessoais do aluno nesta aula
+  const [noteText, setNoteText] = useState("");
+  const [noteSaved, setNoteSaved] = useState(false);
+
+  useEffect(() => {
+    if (courseId && lessonId) {
+      setNoteText(getLessonNotes(courseId, lessonId));
+      setNoteSaved(false);
+    }
+  }, [courseId, lessonId]);
+
+  const handleSaveNote = () => {
+    saveLessonNote(courseId, lessonId, noteText);
+    setNoteSaved(true);
+    setTimeout(() => setNoteSaved(false), 2500);
+  };
 
   // Estado interativo demonstrativo para checklist da aula (não oficial/local)
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
@@ -241,6 +273,35 @@ export default function LearningPlayerClient({
                 />
               </div>
             </div>
+
+            {/* Botão Modo Foco / Modo Teatro */}
+            <button
+              onClick={() => {
+                const nextFocus = !focusMode;
+                setFocusMode(nextFocus);
+                if (nextFocus) {
+                  setSidebarCollapsed(true);
+                }
+              }}
+              className={`hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-colors ${
+                focusMode
+                  ? "bg-blue-600 border-blue-600 text-white"
+                  : "border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+              }`}
+              title={focusMode ? "Sair do Modo Foco" : "Ativar Modo Foco (Oculta distrações)"}
+            >
+              {focusMode ? (
+                <>
+                  <Minimize2 className="w-3.5 h-3.5" />
+                  <span className="hidden xl:inline">Sair do Foco</span>
+                </>
+              ) : (
+                <>
+                  <Maximize2 className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                  <span className="hidden xl:inline">Modo Foco</span>
+                </>
+              )}
+            </button>
 
             {/* Botão de Toggle da Sidebar no Desktop */}
             <button
@@ -778,25 +839,201 @@ export default function LearningPlayerClient({
               </div>
             </div>
           ) : (
-            <div className="max-w-3xl w-full mx-auto flex-1 flex flex-col space-y-6">
+            <div className={`w-full mx-auto flex-1 flex flex-col space-y-6 transition-all ${focusMode ? "max-w-4xl" : "max-w-3xl"}`}>
               {/* Cabeçalho da Aula - Limpo e Direto */}
               <div className="pb-3 border-b border-slate-100 dark:border-slate-800/80">
-                <div className="flex items-center gap-2 text-2xs text-slate-400 mb-1">
-                  <span>{currentLesson.durationMinutes} min de leitura</span>
-                  {isCurrentCompleted && (
-                    <>
-                      <span>•</span>
-                      <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
-                        <CheckCircle2 className="w-3 h-3" />
-                        Concluída
-                      </span>
-                    </>
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-2 text-2xs text-slate-400 mb-1">
+                    <span>{currentLesson.durationMinutes} min de leitura</span>
+                    {isCurrentCompleted && (
+                      <>
+                        <span>•</span>
+                        <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
+                          <CheckCircle2 className="w-3 h-3" />
+                          Concluída
+                        </span>
+                      </>
+                    )}
+                  </div>
+
+                  {focusMode && (
+                    <span className="text-2xs font-semibold px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
+                      Modo Foco Ativo
+                    </span>
                   )}
                 </div>
+
                 <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
                   {lessonTitle}
                 </h2>
+
+                {/* Abas Superiores de Estudo: Conteúdo da Aula | Caderno de Anotações | Materiais Complementares */}
+                <div className="flex items-center gap-2 pt-4 border-b border-slate-100 dark:border-slate-800/80">
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab("conteudo")}
+                    className={`inline-flex items-center gap-1.5 pb-2.5 px-3 text-xs font-bold border-b-2 transition-colors cursor-pointer ${
+                      activeTab === "conteudo"
+                        ? "border-blue-600 text-blue-600 dark:text-blue-400"
+                        : "border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
+                    }`}
+                  >
+                    <BookOpen className="w-3.5 h-3.5" />
+                    <span>Conteúdo da Aula</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab("anotacoes")}
+                    className={`inline-flex items-center gap-1.5 pb-2.5 px-3 text-xs font-bold border-b-2 transition-colors cursor-pointer ${
+                      activeTab === "anotacoes"
+                        ? "border-blue-600 text-blue-600 dark:text-blue-400"
+                        : "border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
+                    }`}
+                  >
+                    <StickyNote className="w-3.5 h-3.5 text-amber-500" />
+                    <span>Caderno de Anotações</span>
+                    {noteText && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                    )}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab("materiais")}
+                    className={`inline-flex items-center gap-1.5 pb-2.5 px-3 text-xs font-bold border-b-2 transition-colors cursor-pointer ${
+                      activeTab === "materiais"
+                        ? "border-blue-600 text-blue-600 dark:text-blue-400"
+                        : "border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
+                    }`}
+                  >
+                    <Paperclip className="w-3.5 h-3.5 text-blue-500" />
+                    <span>Materiais de Apoio</span>
+                  </button>
+                </div>
               </div>
+
+              {/* ABA 2: CADERNO DE ANOTAÇÕES */}
+              {activeTab === "anotacoes" && (
+                <div className="space-y-4 animate-in fade-in duration-200">
+                  <div className="p-4 rounded-2xl bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-900/50 flex items-start gap-3">
+                    <StickyNote className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
+                        Caderno Digital do Aluno
+                      </h4>
+                      <p className="text-2xs sm:text-xs text-slate-600 dark:text-slate-400 mt-0.5">
+                        Suas anotações são salvas automaticamente vinculadas a esta aula para consultas e revisões durante o trabalho de campo.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <textarea
+                      value={noteText}
+                      onChange={(e) => setNoteText(e.target.value)}
+                      placeholder="Escreva aqui seus pontos de atenção, dúvidas, procedimentos de campo ou termos importantes desta aula..."
+                      rows={10}
+                      className="w-full p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs sm:text-sm leading-relaxed text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-shadow"
+                    />
+
+                    <div className="flex items-center justify-between">
+                      <span className="text-2xs text-slate-400">
+                        {noteSaved ? (
+                          <span className="text-emerald-600 font-semibold flex items-center gap-1">
+                            <CheckCircle2 className="w-3.5 h-3.5" /> Anotação salva com sucesso!
+                          </span>
+                        ) : (
+                          "Clique em salvar para guardar suas anotações"
+                        )}
+                      </span>
+
+                      <button
+                        type="button"
+                        onClick={handleSaveNote}
+                        className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-colors shadow-xs cursor-pointer"
+                      >
+                        <Save className="w-3.5 h-3.5" />
+                        <span>Salvar Anotação</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* ABA 3: MATERIAIS DE APOIO E DOWNLOADS */}
+              {activeTab === "materiais" && (
+                <div className="space-y-4 animate-in fade-in duration-200">
+                  <div className="p-4 rounded-2xl bg-blue-50/60 dark:bg-blue-950/20 border border-blue-200/80 dark:border-blue-900/50 flex items-start gap-3">
+                    <Paperclip className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
+                        Documentos, Procedimentos e Materiais Complementares
+                      </h4>
+                      <p className="text-2xs sm:text-xs text-slate-600 dark:text-slate-400 mt-0.5">
+                        Arquivos técnicos, modelos de checklist e documentações regulatórias de apoio para download.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    {/* Lista de Recursos Didáticos Padrão */}
+                    <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="w-10 h-10 rounded-xl bg-orange-100 dark:bg-orange-950/60 text-orange-600 dark:text-orange-400 flex items-center justify-center shrink-0">
+                          <FileText className="w-5 h-5" />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate">
+                            Procedimento Operacional Padrão (POP-RSS3)
+                          </div>
+                          <div className="text-2xs text-slate-400">
+                            PDF Oficial • Ementa e Diretrizes Técnicas • 1.8 MB
+                          </div>
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => window.print()}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0 cursor-pointer"
+                      >
+                        <Download className="w-3.5 h-3.5 text-blue-600" />
+                        <span>Baixar / Imprimir</span>
+                      </button>
+                    </div>
+
+                    <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                          <CheckSquare className="w-5 h-5" />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate">
+                            Checklist de Inspeção e Segurança Operacional
+                          </div>
+                          <div className="text-2xs text-slate-400">
+                            Documento Demonstrativo de Auditoria • 850 KB
+                          </div>
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => window.print()}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0 cursor-pointer"
+                      >
+                        <Download className="w-3.5 h-3.5 text-emerald-600" />
+                        <span>Baixar / Imprimir</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* ABA 1: CONTEÚDO PRINCIPAL DA AULA */}
+              {activeTab === "conteudo" && (
+                <>
 
             {/* Renderizador de Conteúdo por Tipo */}
             <div className="flex-1 space-y-6">
@@ -1174,6 +1411,8 @@ export default function LearningPlayerClient({
                 </div>
               )}
             </div>
+            </>
+          )}
 
             {/* Barra Inferior de Ações e Navegação - Botão Único de Concluir */}
             <div className="pt-8 pb-6 border-t border-slate-200/80 dark:border-slate-800/80 mt-10 flex flex-col sm:flex-row items-center justify-end gap-3">

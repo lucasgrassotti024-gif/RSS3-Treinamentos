@@ -384,3 +384,29 @@ export function calculateCourseProgressMetrics(
     resumeLessonId,
   };
 }
+
+const LESSON_NOTES_KEY = "rss3_lesson_notes_v1";
+
+export function getLessonNotes(courseId: string, lessonId: string): string {
+  if (typeof window === "undefined") return "";
+  try {
+    const raw = localStorage.getItem(LESSON_NOTES_KEY);
+    if (!raw) return "";
+    const notesMap = JSON.parse(raw);
+    return notesMap[`${courseId}::${lessonId}`] || "";
+  } catch {
+    return "";
+  }
+}
+
+export function saveLessonNote(courseId: string, lessonId: string, noteText: string): void {
+  if (typeof window === "undefined") return;
+  try {
+    const raw = localStorage.getItem(LESSON_NOTES_KEY);
+    const notesMap = raw ? JSON.parse(raw) : {};
+    notesMap[`${courseId}::${lessonId}`] = noteText;
+    localStorage.setItem(LESSON_NOTES_KEY, JSON.stringify(notesMap));
+  } catch {
+    // Silencioso
+  }
+}

@@ -14,6 +14,10 @@ import {
   AlertTriangle,
   RotateCcw,
   FileCheck2,
+  Clock,
+  Timer,
+  CheckCircle2,
+  BookOpen,
 } from "lucide-react";
 
 export default function CourseExamPage() {
@@ -28,6 +32,30 @@ export default function CourseExamPage() {
   const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [issuedCert, setIssuedCert] = useState<CertificateDemonstration | null>(null);
+
+  // Temporizador da avaliação (ex: 30 minutos regressivos)
+  const estimatedSeconds = (exam?.estimatedMinutes || 25) * 60;
+  const [secondsLeft, setSecondsLeft] = useState(estimatedSeconds);
+
+  React.useEffect(() => {
+    if (submitted) return;
+    const interval = setInterval(() => {
+      setSecondsLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [submitted]);
+
+  const formatTimer = (totalSec: number) => {
+    const mins = Math.floor(totalSec / 60);
+    const secs = totalSec % 60;
+    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  };
 
   if (!course || !exam || !exam.questions || exam.questions.length === 0) {
     notFound();
@@ -110,8 +138,10 @@ export default function CourseExamPage() {
               </div>
               <div className="h-7 w-px bg-slate-200 dark:bg-slate-700" />
               <div className="text-center">
-                <p className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400">Tempo Estimado</p>
-                <p className="text-lg font-black text-slate-900 dark:text-white">{exam.estimatedMinutes}m</p>
+                <p className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400">Tempo Restante</p>
+                <p className={`text-lg font-black font-mono ${secondsLeft < 300 ? "text-red-600 animate-pulse" : "text-blue-600 dark:text-blue-400"}`}>
+                  {formatTimer(secondsLeft)}
+                </p>
               </div>
             </div>
           </div>
@@ -143,8 +173,21 @@ export default function CourseExamPage() {
                     <p className="text-xs sm:text-sm mt-0.5 opacity-90 leading-relaxed">
                       {isApproved
                         ? `Você acertou ${correctCount} de ${totalQuestions} questões (${scorePercent}% de aproveitamento), superando a nota de corte de ${passingScore}%. Seu Certificado Oficial RSS3 foi emitido e você recebeu +250 XP!`
-                        : `Você atingiu ${scorePercent}% de aproveitamento (${correctCount}/${totalQuestions} acertos). A nota mínima para aprovação é ${passingScore}%. Revise o conteúdo e tente novamente.`}
+                        : `Você atingiu ${scorePercent}% de aproveitamento (${correctCount}/${totalQuestions} acertos). A nota mínima para aprovação é ${passingScore}%. Analise as fundamentações técnicas abaixo e revise os módulos correspondentes antes de uma nova tentativa.`}
                     </p>
+
+                    {/* Recomendação de Estudo Personalizada */}
+                    {!isApproved && (
+                      <div className="mt-3 p-3 rounded-xl bg-white/70 dark:bg-slate-900/60 border border-red-200 dark:border-red-900/40 text-xs text-red-950 dark:text-red-200 space-y-1">
+                        <div className="font-bold flex items-center gap-1.5">
+                          <BookOpen className="w-3.5 h-3.5 text-red-600" />
+                          <span>Direcionamento Pedagógico para Revisão:</span>
+                        </div>
+                        <p className="text-2xs opacity-80 leading-relaxed">
+                          Recomendamos rever com especial atenção as aulas do curso que tratam dos procedimentos operacionais e critérios regulamentares destacados em vermelho abaixo.
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
 
