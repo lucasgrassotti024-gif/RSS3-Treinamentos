@@ -72,6 +72,16 @@ export function getCertificateForCourse(courseId: string): CertificateDemonstrat
 }
 
 /**
+ * Busca um certificado pelo código público de validação (ex: RSS3-XXXX-XXXX-XXXX-XXXX)
+ */
+export function getCertificateByValidationCode(code: string): CertificateDemonstration | null {
+  if (!code) return null;
+  const cleanCode = code.trim().toUpperCase();
+  const certs = getStoredCertificates();
+  return certs.find((c) => c.validationCode.toUpperCase() === cleanCode) || null;
+}
+
+/**
  * Emite formalmente um certificado para o curso concluído
  */
 export function issueCourseCertificate(

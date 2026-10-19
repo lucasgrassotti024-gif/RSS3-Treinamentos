@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { useApp } from "@/context/app-context";
 import { ShieldCheck } from "lucide-react";
 
@@ -18,7 +19,15 @@ export function Footer() {
           <span>— {t.common.companyName}</span>
         </div>
 
-        <div className="flex items-center gap-4 text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-4 text-muted-foreground">
+          <Link
+            href="/validar"
+            className="text-primary hover:underline font-semibold flex items-center gap-1"
+          >
+            <ShieldCheck className="w-3.5 h-3.5" />
+            <span>Validar Certificado</span>
+          </Link>
+          <span>•</span>
           <span>Ambiente de Demonstração Técnico</span>
           <span>•</span>
           <span>Fase 1: Fundação</span>

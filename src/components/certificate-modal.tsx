@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import Link from "next/link";
 import { CertificateDemonstration } from "@/types";
 import {
   X,
@@ -165,10 +166,16 @@ export default function CertificateModal({
                 <p className="text-3xs text-slate-500">RSS3 Treinamentos</p>
               </div>
 
-              <div className="w-16 h-16 rounded-xl bg-slate-100 border border-slate-200 flex flex-col items-center justify-center text-slate-500 p-1 shrink-0">
-                <QrCode className="w-8 h-8 text-slate-700" />
-                <span className="text-[8px] font-mono font-bold">VALIDAÇÃO</span>
-              </div>
+              <Link
+                href={`/validar?codigo=${encodeURIComponent(certificate.validationCode)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Auditar no Validador Oficial"
+                className="w-16 h-16 rounded-xl bg-slate-100 border border-slate-200 flex flex-col items-center justify-center text-slate-500 p-1 shrink-0 hover:bg-blue-50 hover:border-blue-300 transition-colors group cursor-pointer"
+              >
+                <QrCode className="w-8 h-8 text-slate-700 group-hover:text-blue-600" />
+                <span className="text-[8px] font-mono font-bold group-hover:text-blue-600">VALIDAÇÃO</span>
+              </Link>
             </div>
           </div>
         </div>
