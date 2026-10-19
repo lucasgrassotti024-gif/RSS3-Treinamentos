@@ -37,6 +37,7 @@ export function Header() {
     { href: "/", label: t.nav.home },
     { href: "/catalogo", label: t.nav.catalog },
     { href: "/dashboard", label: t.nav.myLearning },
+    { href: "/certificados", label: t.nav.certificates || "Certificados" },
   ];
 
   return (
