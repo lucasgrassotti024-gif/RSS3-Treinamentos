@@ -23,6 +23,10 @@ export function generateStaticParams() {
           });
         }
       }
+      params.push({
+        courseId: course.id,
+        lessonId: "conclusao-e-certificado",
+      });
     }
   }
 
@@ -37,10 +41,11 @@ async function LearningPlayerContainer({ params }: PageProps) {
     notFound();
   }
 
-  // Verificar se a aula existe no currículo do curso
+  // Verificar se a aula existe no currículo do curso ou se é a etapa final de conclusão
   const allLessons = (course.modules || []).flatMap((m) => m.lessons);
+  const isFinalCompletionLesson = lessonId === "conclusao-e-certificado";
   const lesson = allLessons.find((l) => l.id === lessonId);
-  if (!lesson) {
+  if (!lesson && !isFinalCompletionLesson) {
     notFound();
   }
 

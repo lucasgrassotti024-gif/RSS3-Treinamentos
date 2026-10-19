@@ -11,8 +11,11 @@ import {
   toggleLessonCompletion,
   markLessonCompleted,
   calculateCourseProgressMetrics,
+  issueCourseCertificate,
+  getCertificateForCourse,
 } from "@/lib/progress";
-import { CourseDemonstration, LessonDemonstration } from "@/types";
+import CertificateModal from "@/components/certificate-modal";
+import { CourseDemonstration, LessonDemonstration, CertificateDemonstration } from "@/types";
 import { VISUAL_ASSETS_MAP } from "@/components/illustrations/pilot-5s-assets";
 import {
   ArrowLeft,
@@ -36,6 +39,9 @@ import {
   Lock,
   PanelLeftClose,
   PanelLeft,
+  GraduationCap,
+  ExternalLink,
+  ShieldCheck,
 } from "lucide-react";
 
 interface LearningPlayerClientProps {
@@ -56,6 +62,10 @@ export default function LearningPlayerClient({
   // Sidebar recolhida no desktop para maximizar a área de estudo
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
+  // Modal de Certificado
+  const [certificateModalOpen, setCertificateModalOpen] = useState(false);
+  const [activeCertificate, setActiveCertificate] = useState<CertificateDemonstration | null>(null);
+
   // Estado interativo demonstrativo para checklist da aula (não oficial/local)
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
 
@@ -74,7 +84,7 @@ export default function LearningPlayerClient({
   
   // Buscar todas as aulas lineares para navegação anterior/próxima
   const allModules = course?.modules || [];
-  const allLessons: (LessonDemonstration & { moduleTitle: string })[] = [];
+  const allLessons: (LessonDemonstration & { moduleTitle: string; isVirtualFinal?: boolean })[] = [];
   allModules.forEach((mod) => {
     mod.lessons.forEach((les) => {
       allLessons.push({
@@ -83,6 +93,22 @@ export default function LearningPlayerClient({
       });
     });
   });
+
+  // Adicionar etapa virtual final de Conclusão e Certificado
+  const finalVirtualLesson: LessonDemonstration & { moduleTitle: string; isVirtualFinal?: boolean } = {
+    id: "conclusao-e-certificado",
+    order: 9999,
+    title: {
+      "pt-BR": "Conclusão do Treinamento & Certificado",
+      en: "Course Completion & Certificate",
+      es: "Conclusión de la Capacitación y Certificado",
+    },
+    durationMinutes: 5,
+    contentType: "activity",
+    moduleTitle: "Encerramento e Certificação",
+    isVirtualFinal: true,
+  };
+  allLessons.push(finalVirtualLesson);
 
   const currentIndex = allLessons.findIndex((l) => l.id === lessonId);
   const currentLesson = allLessons[currentIndex];
@@ -100,7 +126,7 @@ export default function LearningPlayerClient({
 
   // Registrar acesso da aula ao carregar ou trocar de aula
   useEffect(() => {
-    if (courseId && lessonId) {
+    if (courseId && lessonId && lessonId !== "conclusao-e-certificado") {
       recordLessonAccess(courseId, lessonId);
     }
   }, [courseId, lessonId]);
@@ -109,10 +135,21 @@ export default function LearningPlayerClient({
   const metrics = calculateCourseProgressMetrics(course, progressRecord);
   const isCurrentCompleted = progressRecord.completedLessonIds.includes(lessonId);
 
+  // Total de aulas reais (sem a virtual final)
+  const realLessons = allLessons.filter((l) => !l.isVirtualFinal);
+  const allRealLessonsCompleted = realLessons.length > 0 && realLessons.every((l) => progressRecord.completedLessonIds.includes(l.id));
+  
+  // Condição da Prova Final: se o curso possui avaliação final com questões, exige examPassed e nota >= 70%
+  const hasAssessment = Boolean(course?.finalAssessment && course.finalAssessment.isAvailable && course.finalAssessment.questions && course.finalAssessment.questions.length > 0);
+  const isExamPassed = hasAssessment ? Boolean(progressRecord.examPassed && (progressRecord.examScore || 0) >= 70) : true;
+  const canIssueCertificate = allRealLessonsCompleted && isExamPassed;
+
   // Handler para concluir a aula atual e avançar imediatamente para a próxima
   const handleCompleteAndAdvance = () => {
-    markLessonCompleted(courseId, lessonId);
-    setProgressRecord(getCourseProgress(courseId));
+    if (lessonId !== "conclusao-e-certificado") {
+      markLessonCompleted(courseId, lessonId);
+      setProgressRecord(getCourseProgress(courseId));
+    }
 
     if (nextLesson) {
       router.push(`/aprender/${courseId}/${nextLesson.id}`);
@@ -125,6 +162,19 @@ export default function LearningPlayerClient({
   const handleToggleCompletion = () => {
     toggleLessonCompletion(courseId, lessonId);
     setProgressRecord(getCourseProgress(courseId));
+  };
+
+  // Handler para emissão de certificado
+  const handleOpenCertificate = () => {
+    const existing = getCertificateForCourse(courseId);
+    if (existing) {
+      setActiveCertificate(existing);
+      setCertificateModalOpen(true);
+    } else if (canIssueCertificate) {
+      const issued = issueCourseCertificate(course, progressRecord.examScore || 100);
+      setActiveCertificate(issued);
+      setCertificateModalOpen(true);
+    }
   };
 
   // Se o curso ou a aula não existirem
@@ -312,7 +362,11 @@ export default function LearningPlayerClient({
                     {course.finalAssessment.isAvailable && course.finalAssessment.questions ? (
                       <Link
                         href={`/aprender/${course.id}/prova`}
-                        className="w-9 h-9 rounded-xl bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800 text-orange-600 dark:text-orange-400 flex items-center justify-center hover:bg-orange-100 transition-colors"
+                        className={`w-9 h-9 rounded-xl flex items-center justify-center transition-colors ${
+                          isExamPassed
+                            ? "bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400"
+                            : "bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800 text-orange-600 dark:text-orange-400 hover:bg-orange-100"
+                        }`}
                         title={course.finalAssessment.title[langKey] || course.finalAssessment.title["pt-BR"]}
                       >
                         <Award className="w-4 h-4" />
@@ -327,6 +381,27 @@ export default function LearningPlayerClient({
                     )}
                   </div>
                 )}
+
+                {/* Ícone da etapa final / Certificado na barra minimizada */}
+                <div className="pt-2 w-full flex flex-col items-center border-t border-slate-200 dark:border-slate-800 mt-1">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSidebarOpen(false);
+                      router.push(`/aprender/${courseId}/conclusao-e-certificado`);
+                    }}
+                    className={`w-9 h-9 rounded-xl flex items-center justify-center transition-colors cursor-pointer ${
+                      lessonId === "conclusao-e-certificado"
+                        ? "bg-blue-600 text-white shadow-sm ring-2 ring-blue-400 dark:ring-blue-500"
+                        : canIssueCertificate
+                        ? "bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-700 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100"
+                        : "bg-slate-100 dark:bg-slate-800 text-slate-400 hover:bg-slate-200"
+                    }`}
+                    title="Conclusão do Treinamento & Certificado"
+                  >
+                    <GraduationCap className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             </div>
           ) : (
@@ -415,15 +490,21 @@ export default function LearningPlayerClient({
                   <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 space-y-1.5">
                     <div className="text-3xs font-bold uppercase tracking-wider text-slate-400 px-2 flex items-center justify-between">
                       <span>{t.learning.examBadge}</span>
-                      <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Nota mínima: {course.finalAssessment.passingScorePercent}%</span>
+                      <span className={isExamPassed ? "text-emerald-600 font-semibold" : "text-amber-600 font-semibold"}>
+                        {isExamPassed ? `Aprovado (${progressRecord.examScore}%)` : `Mínimo: ${course.finalAssessment.passingScorePercent}%`}
+                      </span>
                     </div>
 
                     {course.finalAssessment.isAvailable && course.finalAssessment.questions ? (
                       <Link
                         href={`/aprender/${course.id}/prova`}
-                        className="p-2.5 rounded-lg border border-blue-200 dark:border-blue-900/60 bg-blue-50/50 dark:bg-blue-950/40 hover:bg-blue-100/60 flex items-center gap-2.5 transition-colors group cursor-pointer"
+                        className={`p-2.5 rounded-lg border flex items-center gap-2.5 transition-colors group cursor-pointer ${
+                          isExamPassed
+                            ? "border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/40 dark:bg-emerald-950/30 hover:bg-emerald-100/50"
+                            : "border-blue-200 dark:border-blue-900/60 bg-blue-50/50 dark:bg-blue-950/40 hover:bg-blue-100/60"
+                        }`}
                       >
-                        <Award className="w-4 h-4 text-orange-500 shrink-0" />
+                        <Award className={`w-4 h-4 shrink-0 ${isExamPassed ? "text-emerald-600" : "text-orange-500"}`} />
                         <div className="flex-1 min-w-0">
                           <div className="font-semibold text-xs text-blue-900 dark:text-blue-200 truncate group-hover:underline">
                             {course.finalAssessment.title[langKey] || course.finalAssessment.title["pt-BR"]}
@@ -432,7 +513,9 @@ export default function LearningPlayerClient({
                             {course.finalAssessment.questionsCount} questões • {course.finalAssessment.estimatedMinutes} min
                           </div>
                         </div>
-                        <span className="text-2xs font-bold text-blue-600 dark:text-blue-400">Ir</span>
+                        <span className="text-2xs font-bold text-blue-600 dark:text-blue-400">
+                          {isExamPassed ? "Refazer" : "Fazer"}
+                        </span>
                       </Link>
                     ) : (
                       <div className="p-2.5 rounded-lg border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 flex items-center gap-2.5">
@@ -450,6 +533,58 @@ export default function LearningPlayerClient({
                     )}
                   </div>
                 )}
+
+                {/* ETAPA FINAL: CONCLUSÃO E CERTIFICADO NO CURRÍCULO */}
+                <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 space-y-1.5">
+                  <div className="text-3xs font-bold uppercase tracking-wider text-slate-400 px-2 flex items-center justify-between">
+                    <span>Certificação</span>
+                    {canIssueCertificate ? (
+                      <span className="text-emerald-600 font-semibold flex items-center gap-1">
+                        <CheckCircle2 className="w-3 h-3" /> Liberado
+                      </span>
+                    ) : (
+                      <span className="text-amber-600 font-semibold flex items-center gap-1">
+                        <Lock className="w-3 h-3" /> Requisitos
+                      </span>
+                    )}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSidebarOpen(false);
+                      router.push(`/aprender/${courseId}/conclusao-e-certificado`);
+                    }}
+                    className={`w-full text-left p-2.5 rounded-lg border flex items-center gap-2.5 transition-colors group cursor-pointer ${
+                      lessonId === "conclusao-e-certificado"
+                        ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                        : canIssueCertificate
+                        ? "border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/50 dark:bg-emerald-950/30 hover:bg-emerald-100/60 text-emerald-900 dark:text-emerald-200"
+                        : "border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 hover:bg-slate-100/50"
+                    }`}
+                  >
+                    <GraduationCap className={`w-4 h-4 shrink-0 ${
+                      lessonId === "conclusao-e-certificado" ? "text-white" : canIssueCertificate ? "text-emerald-600 dark:text-emerald-400" : "text-slate-400"
+                    }`} />
+                    <div className="flex-1 min-w-0">
+                      <div className={`font-semibold text-xs truncate ${
+                        lessonId === "conclusao-e-certificado" ? "text-white" : ""
+                      }`}>
+                        Conclusão & Certificado
+                      </div>
+                      <div className={`text-3xs ${
+                        lessonId === "conclusao-e-certificado" ? "text-blue-100" : "text-slate-500 dark:text-slate-400"
+                      }`}>
+                        {canIssueCertificate ? "Certificado pronto para emissão" : "Conclua aulas e prova (≥70%)"}
+                      </div>
+                    </div>
+                    {canIssueCertificate ? (
+                      <CheckCircle2 className={`w-3.5 h-3.5 ${lessonId === "conclusao-e-certificado" ? "text-white" : "text-emerald-600"}`} />
+                    ) : (
+                      <Lock className="w-3.5 h-3.5 text-slate-400" />
+                    )}
+                  </button>
+                </div>
               </div>
             </>
           )}
@@ -457,25 +592,211 @@ export default function LearningPlayerClient({
 
         {/* Área Central de Conteúdo */}
         <main className="flex-1 min-w-0 flex flex-col p-4 sm:p-6 lg:p-8">
-          <div className="max-w-3xl w-full mx-auto flex-1 flex flex-col space-y-6">
-            {/* Cabeçalho da Aula - Limpo e Direto */}
-            <div className="pb-3 border-b border-slate-100 dark:border-slate-800/80">
-              <div className="flex items-center gap-2 text-2xs text-slate-400 mb-1">
-                <span>{currentLesson.durationMinutes} min de leitura</span>
-                {isCurrentCompleted && (
-                  <>
-                    <span>•</span>
-                    <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
-                      <CheckCircle2 className="w-3 h-3" />
-                      Concluída
-                    </span>
-                  </>
+          {lessonId === "conclusao-e-certificado" ? (
+            /* TELA ESPECIAL FINAL: CONCLUSÃO DO CURSO E EMISSÃO DE CERTIFICADO */
+            <div className="max-w-3xl w-full mx-auto flex-1 flex flex-col space-y-6">
+              {/* Header de Conclusão */}
+              <div className="pb-4 border-b border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
+                <div>
+                  <span className="text-2xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-md">
+                    Etapa Final
+                  </span>
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mt-1">
+                    Conclusão do Treinamento & Certificação
+                  </h2>
+                </div>
+                <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                  <GraduationCap className="w-6 h-6" />
+                </div>
+              </div>
+
+              {/* Status e Checklist de Pré-Requisitos */}
+              <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs space-y-5">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+                    Requisitos para Conclusão e Certificado
+                  </h3>
+                  <span className={`text-xs font-bold px-3 py-1 rounded-full ${
+                    canIssueCertificate
+                      ? "bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
+                      : "bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800"
+                  }`}>
+                    {canIssueCertificate ? "Requisitos Atendidos" : "Pendências Identificadas"}
+                  </span>
+                </div>
+
+                <div className="space-y-3">
+                  {/* Requisito 1: Todas as Aulas */}
+                  <div className={`p-4 rounded-xl border flex items-center justify-between gap-4 ${
+                    allRealLessonsCompleted
+                      ? "bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-900/60 text-emerald-900 dark:text-emerald-100"
+                      : "bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300"
+                  }`}>
+                    <div className="flex items-center gap-3">
+                      {allRealLessonsCompleted ? (
+                        <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                      ) : (
+                        <Circle className="w-5 h-5 text-slate-400 shrink-0" />
+                      )}
+                      <div>
+                        <div className="font-bold text-xs sm:text-sm">
+                          100% das Aulas Teóricas Concluídas
+                        </div>
+                        <div className="text-2xs text-slate-500 dark:text-slate-400 mt-0.5">
+                          {progressRecord.completedLessonIds.length} de {realLessons.length} aulas finalizadas
+                        </div>
+                      </div>
+                    </div>
+                    {!allRealLessonsCompleted && (
+                      <span className="text-2xs font-semibold text-amber-600 dark:text-amber-400">
+                        Pendente
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Requisito 2: Prova Final (se aplicável) */}
+                  {hasAssessment && (
+                    <div className={`p-4 rounded-xl border flex items-center justify-between gap-4 ${
+                      isExamPassed
+                        ? "bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-900/60 text-emerald-900 dark:text-emerald-100"
+                        : "bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300"
+                    }`}>
+                      <div className="flex items-center gap-3">
+                        {isExamPassed ? (
+                          <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                        ) : (
+                          <Circle className="w-5 h-5 text-slate-400 shrink-0" />
+                        )}
+                        <div>
+                          <div className="font-bold text-xs sm:text-sm">
+                            Avaliação Teórica Final (Aproveitamento ≥ 70%)
+                          </div>
+                          <div className="text-2xs text-slate-500 dark:text-slate-400 mt-0.5">
+                            {progressRecord.examScore !== undefined
+                              ? `Sua nota atual: ${progressRecord.examScore}% (Mínimo: 70%)`
+                              : "Prova ainda não realizada"}
+                          </div>
+                        </div>
+                      </div>
+                      <Link
+                        href={`/aprender/${course.id}/prova`}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-2xs font-bold bg-blue-600 hover:bg-blue-700 text-white transition-colors shrink-0"
+                      >
+                        <span>{isExamPassed ? "Refazer Prova" : "Fazer Avaliação"}</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </Link>
+                    </div>
+                  )}
+                </div>
+
+                {/* Card de Desfecho: Liberado vs Bloqueado */}
+                {canIssueCertificate ? (
+                  <div className="p-5 rounded-2xl bg-gradient-to-br from-emerald-500/10 via-emerald-500/5 to-transparent border border-emerald-300 dark:border-emerald-800/80 space-y-4">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-md">
+                        <Award className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+                          Parabéns! Você completou com sucesso este treinamento.
+                        </h4>
+                        <p className="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+                          Seu certificado oficial de conclusão do conteúdo teórico da RSS3 está pronto para emissão e validação com o seu nome cadastrado.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="pt-2 flex flex-col sm:flex-row items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={handleOpenCertificate}
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm transition-all shadow-md hover:shadow-lg cursor-pointer"
+                      >
+                        <ShieldCheck className="w-4 h-4" />
+                        <span>Emitir / Visualizar Certificado</span>
+                      </button>
+
+                      <Link
+                        href={`/catalogo/${courseId}`}
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs sm:text-sm font-semibold transition-colors"
+                      >
+                        <ArrowLeft className="w-4 h-4" />
+                        <span>Terminar e Voltar ao Catálogo</span>
+                      </Link>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="p-5 rounded-2xl bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-900/50 space-y-3">
+                    <div className="flex items-center gap-2 text-amber-800 dark:text-amber-300 font-bold text-xs uppercase tracking-wider">
+                      <Lock className="w-4 h-4 text-amber-600" />
+                      <span>Certificado Bloqueado</span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                      Para desbloquear o seu certificado de conclusão, você precisa concluir todas as aulas do curso e obter nota igual ou superior a 70% na avaliação final teórica.
+                    </p>
+                    <div className="pt-2 flex flex-wrap gap-2">
+                      {!allRealLessonsCompleted && realLessons[0] && (
+                        <Link
+                          href={`/aprender/${courseId}/${realLessons.find((l) => !progressRecord.completedLessonIds.includes(l.id))?.id || realLessons[0].id}`}
+                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition-colors"
+                        >
+                          <span>Continuar Aulas Pendentes</span>
+                          <ChevronRight className="w-3.5 h-3.5" />
+                        </Link>
+                      )}
+                      {hasAssessment && !isExamPassed && (
+                        <Link
+                          href={`/aprender/${course.id}/prova`}
+                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold transition-colors"
+                        >
+                          <Award className="w-3.5 h-3.5" />
+                          <span>Fazer Prova Final</span>
+                        </Link>
+                      )}
+                    </div>
+                  </div>
                 )}
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
-                {lessonTitle}
-              </h2>
+
+              {/* Botão de Terminar o Curso */}
+              <div className="pt-4 border-t border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between">
+                <Link
+                  href={`/aprender/${courseId}/${prevLesson ? prevLesson.id : ""}`}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-medium transition-colors"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                  <span>Aula Anterior</span>
+                </Link>
+
+                <Link
+                  href={`/catalogo/${courseId}`}
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold transition-all shadow-sm"
+                >
+                  <span>Terminar Curso</span>
+                  <CheckCircle2 className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
+          ) : (
+            <div className="max-w-3xl w-full mx-auto flex-1 flex flex-col space-y-6">
+              {/* Cabeçalho da Aula - Limpo e Direto */}
+              <div className="pb-3 border-b border-slate-100 dark:border-slate-800/80">
+                <div className="flex items-center gap-2 text-2xs text-slate-400 mb-1">
+                  <span>{currentLesson.durationMinutes} min de leitura</span>
+                  {isCurrentCompleted && (
+                    <>
+                      <span>•</span>
+                      <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
+                        <CheckCircle2 className="w-3 h-3" />
+                        Concluída
+                      </span>
+                    </>
+                  )}
+                </div>
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+                  {lessonTitle}
+                </h2>
+              </div>
 
             {/* Renderizador de Conteúdo por Tipo */}
             <div className="flex-1 space-y-6">
@@ -871,8 +1192,17 @@ export default function LearningPlayerClient({
               </button>
             </div>
           </div>
+          )}
         </main>
       </div>
+
+      {/* Modal de Certificado */}
+      {certificateModalOpen && (
+        <CertificateModal
+          certificate={activeCertificate}
+          onClose={() => setCertificateModalOpen(false)}
+        />
+      )}
     </div>
   );
 }

@@ -90,7 +90,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           const registered = getRegisteredUsers().find((u) => u.email === fbUser.email);
           const userDemonstration: UserDemonstration = {
             id: fbUser.uid,
-            name: fbUser.displayName || registered?.name || fbUser.email?.split("@")[0] || "Colaborador RSS3",
+            name: (registered?.name && registered.name.trim()) || fbUser.displayName || "Colaborador RSS3",
             email: fbUser.email || "",
             role: registered?.role || "student",
             roleName: registered?.roleName || {

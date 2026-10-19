@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useParams, notFound } from "next/navigation";
 import { useApp } from "@/context/app-context";
 import { DEMO_COURSES } from "@/lib/mock-data";
-import { issueCourseCertificate } from "@/lib/progress";
+import { issueCourseCertificate, recordExamResult } from "@/lib/progress";
 import { CertificateDemonstration } from "@/types";
 import CertificateModal from "@/components/certificate-modal";
 import {
@@ -286,6 +286,7 @@ export default function CourseExamPage() {
               disabled={!allAnswered}
               onClick={() => {
                 setSubmitted(true);
+                recordExamResult(course.id, scorePercent, isApproved);
                 if (isApproved && course) {
                   const cert = issueCourseCertificate(course, scorePercent);
                   setIssuedCert(cert);

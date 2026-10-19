@@ -1,5 +1,5 @@
 import { CourseDemonstration, UserProgressStore, CourseProgressRecord, CertificateDemonstration } from "@/types";
-import { awardUserXP, getActiveSessionUser, incrementUserStats } from "./auth";
+import { awardUserXP, getActiveSessionUser, incrementUserStats, getRegisteredUsers } from "./auth";
 
 const PROGRESS_STORAGE_KEY = "rss3_demo_progress_v1";
 const PROGRESS_EVENT_NAME = "rss3_demo_progress_change";
@@ -64,6 +64,14 @@ export function saveStoredCertificates(certs: CertificateDemonstration[]): void 
 }
 
 /**
+ * Retorna o certificado emitido para um curso específico, se existir
+ */
+export function getCertificateForCourse(courseId: string): CertificateDemonstration | null {
+  const certs = getStoredCertificates();
+  return certs.find((c) => c.courseId === courseId) || null;
+}
+
+/**
  * Emite formalmente um certificado para o curso concluído
  */
 export function issueCourseCertificate(
@@ -75,10 +83,26 @@ export function issueCourseCertificate(
   if (existing) return existing;
 
   const sessionUser = getActiveSessionUser();
-  const userName = sessionUser?.name || "Colaborador RSS3";
-  const userRole = sessionUser?.roleName?.["pt-BR"] || "Operador Industrial";
-  const operationalBase = sessionUser?.operationalBase || "Operação CMPC Guaíba";
-  const department = sessionUser?.department || "Operações Industriais";
+  const registeredUsers = getRegisteredUsers();
+  const matchedAccount = registeredUsers.find(
+    (u) => (sessionUser?.id && u.id === sessionUser.id) || (sessionUser?.email && u.email.toLowerCase() === sessionUser.email.toLowerCase())
+  );
+
+  // Prioriza sempre o nome completo cadastrado formalmente na conta
+  let userName = matchedAccount?.name?.trim() || sessionUser?.name?.trim() || "";
+  
+  // Se o nome parecer ser apenas a parte do email com números/underline, ou estiver vazio, busca o nome completo
+  if (!userName || userName === sessionUser?.email?.split("@")[0]) {
+    if (matchedAccount?.name && matchedAccount.name.trim()) {
+      userName = matchedAccount.name.trim();
+    } else {
+      userName = sessionUser?.name || "Colaborador RSS3";
+    }
+  }
+
+  const userRole = sessionUser?.roleName?.["pt-BR"] || matchedAccount?.roleName?.["pt-BR"] || "Operador Industrial";
+  const operationalBase = sessionUser?.operationalBase || matchedAccount?.operationalBase || "Operação CMPC Guaíba";
+  const department = sessionUser?.department || matchedAccount?.department || "Operações Industriais";
 
   // Gera código canônico com formato RSS3-XXXX-XXXX-XXXX-XXXX
   const randomHex = () => Math.random().toString(36).substring(2, 6).toUpperCase();
@@ -151,7 +175,9 @@ export function subscribeToProgress(callback: () => void): () => void {
 export function saveStoredProgress(store: UserProgressStore): void {
   if (typeof window === "undefined") return;
   try {
-    localStorage.setItem(PROGRESS_STORAGE_KEY, JSON.stringify(store));
+    cachedRaw = JSON.stringify(store);
+    cachedStore = store;
+    localStorage.setItem(PROGRESS_STORAGE_KEY, cachedRaw);
     window.dispatchEvent(new Event(PROGRESS_EVENT_NAME));
   } catch {
     // Falha silenciosa em caso de restrição de storage
@@ -217,6 +243,25 @@ export function recordLessonAccess(courseId: string, lessonId: string): void {
   };
 
   current.lastAccessedLessonId = lessonId;
+  current.lastAccessedAt = new Date().toISOString();
+  store[courseId] = current;
+  saveStoredProgress(store);
+}
+
+/**
+ * Registra o resultado da avaliação final do curso
+ */
+export function recordExamResult(courseId: string, scorePercent: number, passed: boolean): void {
+  const store = getStoredProgress();
+  const current = store[courseId] || {
+    courseId,
+    completedLessonIds: [],
+    lastAccessedLessonId: "",
+    lastAccessedAt: new Date().toISOString(),
+  };
+
+  current.examScore = Math.max(current.examScore || 0, scorePercent);
+  current.examPassed = Boolean(current.examPassed || passed);
   current.lastAccessedAt = new Date().toISOString();
   store[courseId] = current;
   saveStoredProgress(store);

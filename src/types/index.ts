@@ -182,6 +182,8 @@ export interface CourseProgressRecord {
   completedLessonIds: string[];
   lastAccessedLessonId: string;
   lastAccessedAt: string; // ISO string
+  examScore?: number;
+  examPassed?: boolean;
 }
 
 export type UserProgressStore = Record<string, CourseProgressRecord>;
