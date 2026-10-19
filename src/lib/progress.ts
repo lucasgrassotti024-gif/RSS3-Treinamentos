@@ -223,6 +223,31 @@ export function recordLessonAccess(courseId: string, lessonId: string): void {
 }
 
 /**
+ * Marca explicitamente uma aula como concluída (sem desmarcar caso já esteja concluída)
+ */
+export function markLessonCompleted(courseId: string, lessonId: string): void {
+  const store = getStoredProgress();
+  const current = store[courseId] || {
+    courseId,
+    completedLessonIds: [],
+    lastAccessedLessonId: lessonId,
+    lastAccessedAt: new Date().toISOString(),
+  };
+
+  const isCompleted = current.completedLessonIds.includes(lessonId);
+  if (!isCompleted) {
+    current.completedLessonIds.push(lessonId);
+    // Ganha 50 XP por concluir uma aula
+    awardUserXP(50);
+  }
+
+  current.lastAccessedLessonId = lessonId;
+  current.lastAccessedAt = new Date().toISOString();
+  store[courseId] = current;
+  saveStoredProgress(store);
+}
+
+/**
  * Alterna (marca/desmarca) a conclusão de uma aula
  */
 export function toggleLessonCompletion(courseId: string, lessonId: string): boolean {

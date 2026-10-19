@@ -9,6 +9,7 @@ import {
   getCourseProgress,
   recordLessonAccess,
   toggleLessonCompletion,
+  markLessonCompleted,
   calculateCourseProgressMetrics,
 } from "@/lib/progress";
 import { CourseDemonstration, LessonDemonstration } from "@/types";
@@ -107,6 +108,18 @@ export default function LearningPlayerClient({
   // Recalcular métricas
   const metrics = calculateCourseProgressMetrics(course, progressRecord);
   const isCurrentCompleted = progressRecord.completedLessonIds.includes(lessonId);
+
+  // Handler para concluir a aula atual e avançar imediatamente para a próxima
+  const handleCompleteAndAdvance = () => {
+    markLessonCompleted(courseId, lessonId);
+    setProgressRecord(getCourseProgress(courseId));
+
+    if (nextLesson) {
+      router.push(`/aprender/${courseId}/${nextLesson.id}`);
+    } else {
+      router.push(`/cursos/${courseId}`);
+    }
+  };
 
   // Handler para alternar conclusão
   const handleToggleCompletion = () => {
@@ -841,49 +854,21 @@ export default function LearningPlayerClient({
               )}
             </div>
 
-            {/* Barra Inferior de Ações e Navegação - Limpa e Discreta */}
-            <div className="pt-8 pb-4 border-t border-slate-200/80 dark:border-slate-800/80 mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
-              {/* Botão de Conclusão Demonstrativa */}
+            {/* Barra Inferior de Ações e Navegação - Botão Único de Concluir */}
+            <div className="pt-8 pb-6 border-t border-slate-200/80 dark:border-slate-800/80 mt-10 flex flex-col sm:flex-row items-center justify-end gap-3">
               <button
-                onClick={handleToggleCompletion}
-                className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-medium text-xs transition-all ${
-                  isCurrentCompleted
-                    ? "bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800"
-                    : "bg-blue-600 hover:bg-blue-700 text-white shadow-xs"
-                }`}
+                type="button"
+                onClick={handleCompleteAndAdvance}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm transition-all shadow-sm hover:shadow-md hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
               >
-                <CheckCircle2 className="w-3.5 h-3.5" />
+                <CheckCircle2 className="w-4 h-4 text-white" />
                 <span>
-                  {isCurrentCompleted
-                    ? t.learning.markIncomplete
-                    : t.learning.markCompleted}
+                  {nextLesson
+                    ? (t.learning.completeAndNextLesson || "Concluir")
+                    : (t.learning.finishCourse || "Concluir Treinamento")}
                 </span>
+                <ChevronRight className="w-4 h-4 ml-0.5 text-white/80" />
               </button>
-
-              {/* Botões Anterior / Próxima */}
-              <div className="w-full sm:w-auto flex items-center justify-between sm:justify-end gap-2.5">
-                {prevLesson ? (
-                  <Link
-                    href={`/aprender/${courseId}/${prevLesson.id}`}
-                    className="inline-flex items-center gap-1 px-3.5 py-2 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-850 text-slate-600 dark:text-slate-300 text-xs font-medium transition-colors"
-                  >
-                    <ChevronLeft className="w-3.5 h-3.5" />
-                    <span>{t.learning.previousLesson}</span>
-                  </Link>
-                ) : (
-                  <div />
-                )}
-
-                {nextLesson && (
-                  <Link
-                    href={`/aprender/${courseId}/${nextLesson.id}`}
-                    className="inline-flex items-center gap-1 px-4 py-2 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 text-xs font-medium transition-colors shadow-xs"
-                  >
-                    <span>{t.learning.nextLesson}</span>
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </Link>
-                )}
-              </div>
             </div>
           </div>
         </main>
