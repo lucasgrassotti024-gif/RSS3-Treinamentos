@@ -1,5 +1,25 @@
 import { CourseDemonstration } from "@/types";
 
+/**
+ * Modelo de dados FICTÍCIO oficial da avaliação final de Power BI & DAX:
+ * Tabelas dEquip (dimensão equipamentos) e fOS (fato ordens de serviço).
+ */
+export const PBI_EXAM_EQUIPAMENTOS = [
+  { id: "B01", nome: "Bomba Principal Caldeira", linha: "Linha 1" },
+  { id: "B02", nome: "Bomba Auxiliar Caldeira", linha: "Linha 1" },
+  { id: "B03", nome: "Compressor de Ar Industrial", linha: "Linha 2" },
+  { id: "B04", nome: "Exaustor de Gases", linha: "Linha 2" },
+];
+
+export const PBI_EXAM_ORDENS = [
+  { os: "OS-01", equipId: "B01", data: "05/01/2026", horas: 4, tipo: "Corretiva" },
+  { os: "OS-02", equipId: "B02", data: "12/01/2026", horas: 6, tipo: "Preventiva" },
+  { os: "OS-03", equipId: "B01", data: "20/01/2026", horas: 2, tipo: "Corretiva" },
+  { os: "OS-04", equipId: "B03", data: "02/02/2026", horas: 8, tipo: "Corretiva" },
+  { os: "OS-05", equipId: "B02", data: "14/02/2026", horas: 3, tipo: "Preventiva" },
+  { os: "OS-06", equipId: "B01", data: "25/02/2026", horas: 5, tipo: "Preventiva" },
+];
+
 export const powerBiCourseData: CourseDemonstration = {
   id: "c-power-bi-analytics",
   slug: "power-bi-dashboards-indicadores-industriais",
@@ -279,74 +299,72 @@ export const powerBiCourseData: CourseDemonstration = {
     scope: "course",
     passingScorePercent: 70,
     maxAttempts: 3,
-    estimatedMinutes: 25,
-    questionsCount: 5,
+    estimatedMinutes: 50,
+    questionsCount: 10,
     isAvailable: true,
     availabilityNotice: {
-      "pt-BR": "Avaliação final sobre conceitos fundamentais de Power BI, ETL com Power Query, modelagem dimensional e cálculos DAX. Nota mínima de 70% para emissão do certificado.",
-      "en": "Final examination on Power BI fundamentals, Power Query ETL, dimensional modeling, and DAX calculations. 70% passing score.",
-      "es": "Evaluación final de Power BI, Power Query, modelado relacional y fórmulas DAX. Calificación mínima de 70%.",
+      "pt-BR": "Avaliação prática de Power BI & DAX com modelo estrela demonstrativo. Utilize as tabelas dEquip e fOS fornecidas para avaliar medidas, filtros e contextos. Nota mínima de 70% para certificação teórica.",
+      "en": "Hands-on Power BI & DAX assessment using the demo star schema model. Use the provided dEquip and fOS tables to evaluate measures, filters, and contexts. 70% passing score.",
+      "es": "Evaluación práctica de Power BI y DAX con modelo estrella demostrativo. Use las tablas dEquip y fOS para evaluar medidas y contextos. 70% nota de aprobación.",
     },
     title: {
-      "pt-BR": "Avaliação Final de Competência — Power BI & Analytics Industrial",
-      "en": "Final Competency Exam — Power BI & Industrial Analytics",
-      "es": "Evaluación Final de Competencias — Power BI y Analítica Industrial",
+      "pt-BR": "Avaliação Prática — Power BI & DAX Industrial",
+      "en": "Hands-on Assessment — Industrial Power BI & DAX",
+      "es": "Evaluación Práctica — Power BI y DAX Industrial",
     },
     description: {
-      "pt-BR": "Validação de domínio em automação de ETL no Power Query, modelagem dimensional (Tabelas Fato vs Dimensão), cálculos dinâmicos com DAX e seleção de elementos visuais para painéis executivos.",
-      "en": "Validates proficiency in Power Query ETL automation, star schema modeling, DAX measure creation, and visual selection for executive dashboards.",
-      "es": "Valida competencias en ETL con Power Query, modelo relacional, medidas DAX y diseño de paneles interactivos.",
+      "pt-BR": "Cenário industrial da parada: modelo dimensional composto pela tabela dimensão dEquip (4 equipamentos) e tabela fato fOS (6 ordens de serviço, totalizando 28 horas), com medida base [Total Horas] = SUM(fOS[Horas]). Responda às questões sobre transição de contexto, funções CALCULATE, ALL, DIVIDE, TOTALYTD, iteradores e Power Query.",
+      "en": "Industrial turnaround scenario: dimensional model consisting of dimension dEquip (4 assets) and fact fOS (6 work orders, 28 hours), with base measure [Total Horas] = SUM(fOS[Horas]). Answer questions on context transition, CALCULATE, ALL, DIVIDE, TOTALYTD, iterators, and Power Query.",
+      "es": "Escenario industrial: modelo dimensional con tabla dimensión dEquip y tabla de hechos fOS (28 horas en total), con medida base [Total Horas] = SUM(fOS[Horas]).",
     },
     questions: [
       {
         id: "q-pbi-1",
         order: 1,
         question: {
-          "pt-BR": "1. Qual é a principal vantagem de utilizar o editor do Power Query para limpar e transformar dados em vez de fazer alterações manuais na planilha de Excel original?",
-          "en": "1. What is the primary benefit of using Power Query for ETL transformations rather than manually editing the original Excel file?",
-          "es": "1. ¿Cuál es la principal ventaja de usar Power Query para limpiar datos en lugar de editar manualmente la planilla original?",
+          "pt-BR": "Considerando o modelo estrela (tabela dEquip relacionada 1:* com fOS), você cria uma matriz no Power BI com o campo dEquip[Linha] nas Linhas e a medida [Total Horas] nos Valores.\n\nAo adicionar uma segmentação de dados filtrando fOS[Tipo] = \"Corretiva\", qual valor numérico é exibido na linha \"Linha 1\" da matriz?",
+          "en": "Considering the star schema model (dEquip related 1:* to fOS), you create a matrix with dEquip[Line] on Rows and measure [Total Horas] in Values.\n\nWith a slicer filtering fOS[Tipo] = \"Corretiva\", what value is displayed on the \"Linha 1\" row of the matrix?",
+          "es": "Considerando el modelo estrella (dEquip relacionada 1:* con fOS), crea una matriz con dEquip[Línea] en Filas y la medida [Total Horas] en Valores.\n\nCon una segmentación en fOS[Tipo] = \"Corretiva\", ¿qué valor se muestra en la fila \"Linha 1\"?",
         },
         options: [
           {
-            id: "opt-pbi-1-a",
-            text: {
-              "pt-BR": "Todas as etapas de tratamento (remover colunas, filtrar vazios, alterar tipos) são salvas em um fluxo automatizado que se repete sozinho sempre que a base de dados for atualizada com novas medições.",
-              "en": "All transformation steps are recorded into an automated repeatable pipeline that replays automatically whenever new data is refreshed.",
-              "es": "Todas las transformaciones se guardan en un flujo automatizado que se repite automáticamente al actualizar los datos.",
-            },
+            id: "q1-a",
+            text: { "pt-BR": "6 horas", "en": "6 hours", "es": "6 horas" },
             isCorrect: true,
             explanation: {
-              "pt-BR": "Correto! O Power Query memoriza cada ação na lista de 'Etapas Aplicadas', eliminando o retrabalho manual diário ou semanal.",
-              "en": "Correct! Power Query stores applied steps and automates the entire ingestion pipeline on future refreshes.",
-              "es": "¡Correcto! Power Query registra los pasos aplicados y los automatiza para futuras actualizaciones.",
+              "pt-BR": "Correto: a Linha 1 possui os equipamentos B01 e B02. As ordens corretivas desses equipamentos são a OS-01 (4 h na B01) e a OS-03 (2 h na B01). A soma é 4 + 2 = 6 horas.",
+              "en": "Correct: Line 1 includes B01 and B02. Corrective work orders: OS-01 (4 h) and OS-03 (2 h). Total = 6 hours.",
+              "es": "Correcto: Línea 1 incluye B01 y B02. Órdenes correctivas: OS-01 (4 h) y OS-03 (2 h). Total = 6 horas.",
             },
           },
           {
-            id: "opt-pbi-1-b",
-            text: {
-              "pt-BR": "O Power Query apaga permanentemente o arquivo de Excel do computador para liberar espaço no disco rígido.",
-              "en": "Power Query permanently deletes the underlying Excel file to save disk space.",
-              "es": "Power Query borra el archivo Excel original para liberar espacio.",
-            },
+            id: "q1-b",
+            text: { "pt-BR": "20 horas", "en": "20 hours", "es": "20 horas" },
             isCorrect: false,
             explanation: {
-              "pt-BR": "Incorreto. O Power Query lê a fonte de dados de forma não-destrutiva, preservando o arquivo original intacto.",
-              "en": "Incorrect. Power Query performs read-only, non-destructive extraction preserving source files.",
-              "es": "Incorrecto. Power Query no altera ni borra el archivo de origen.",
+              "pt-BR": "Incorreto: 20 horas é o total geral da Linha 1 sem considerar o filtro de 'Corretiva' da segmentação.",
+              "en": "Incorrect: 20 hours is the total for Line 1 without the slicer filter.",
+              "es": "Incorrecto: 20 horas es el total de la Línea 1 sin el filtro de segmentación.",
             },
           },
           {
-            id: "opt-pbi-1-c",
-            text: {
-              "pt-BR": "Ele serve unicamente para desenhar logotipos e gráficos de pizza tridimensionais.",
-              "en": "It is exclusively used to draw logos and 3D pie charts.",
-              "es": "Sirve únicamente para diseñar logos y gráficos 3D.",
-            },
+            id: "q1-c",
+            text: { "pt-BR": "14 horas", "en": "14 hours", "es": "14 horas" },
             isCorrect: false,
             explanation: {
-              "pt-BR": "Incorreto. O Power Query é o motor de ETL (Extração, Transformação e Carga) de dados do ecossistema Microsoft.",
-              "en": "Incorrect. Power Query is Microsoft's enterprise ETL engine.",
-              "es": "Incorrecto. Es un motor de transformación y preparación de datos.",
+              "pt-BR": "Incorreto: 14 horas é o total de corretivas de toda a fábrica (OS-01, OS-03 e OS-04: 4 + 2 + 8 = 14), ignorando o filtro da Linha 1.",
+              "en": "Incorrect: 14 hours is total corrective hours for the whole plant, ignoring the Line 1 row filter.",
+              "es": "Incorrecto: 14 horas es el total de correctivas de toda la planta.",
+            },
+          },
+          {
+            id: "q1-d",
+            text: { "pt-BR": "8 horas", "en": "8 hours", "es": "8 horas" },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: 8 horas é o valor das corretivas da Linha 2 (OS-04 no equipamento B03), não da Linha 1.",
+              "en": "Incorrect: 8 hours is Line 2 corrective hours (OS-04 on B03).",
+              "es": "Incorrecto: 8 horas corresponde a la Línea 2.",
             },
           },
         ],
@@ -355,51 +373,49 @@ export const powerBiCourseData: CourseDemonstration = {
         id: "q-pbi-2",
         order: 2,
         question: {
-          "pt-BR": "2. Na modelagem de dados do Power BI, qual a diferença essencial entre uma 'Tabela Fato' e uma 'Tabela Dimensão' em um ambiente operacional da RSS3?",
-          "en": "2. In Power BI data modeling, what is the core difference between a 'Fact Table' and a 'Dimension Table'?",
-          "es": "2. En el modelado de datos de Power BI, ¿cuál es la diferencia entre una 'Tabla de Hechos' (Fato) y una 'Tabla Dimensión'?",
+          "pt-BR": "Para analisar a representatividade de cada equipamento, o analista cria a seguinte medida DAX:\n% Horas = DIVIDE([Total Horas], CALCULATE([Total Horas], ALL(dEquip)))\n\nEm uma tabela visual contendo dEquip[Nome_Equipamento] nas linhas e sem outros filtros na página, qual percentual aproximado é exibido para o equipamento 'Bomba Principal Caldeira' (B01)?",
+          "en": "To analyze machine share, an analyst writes the DAX measure:\n% Horas = DIVIDE([Total Horas], CALCULATE([Total Horas], ALL(dEquip)))\n\nIn a table visual with dEquip[Nome_Equipamento] on rows and no other page filters, what approximate percentage is shown for 'Bomba Principal Caldeira' (B01)?",
+          "es": "Para analizar la representatividad, se escribe la medida DAX:\n% Horas = DIVIDE([Total Horas], CALCULATE([Total Horas], ALL(dEquip)))\n\nEn una tabla con dEquip[Nome_Equipamento] en filas, ¿qué porcentaje aproximado aparece para 'Bomba Principal Caldeira' (B01)?",
         },
         options: [
           {
-            id: "opt-pbi-2-a",
-            text: {
-              "pt-BR": "A Tabela Fato armazena os acontecimentos numéricos e históricos (ex: horas trabalhadas, m² jateados, ordens de serviço executadas), enquanto a Tabela Dimensão contém cadastros de características para filtrar e contextualizar esses fatos (ex: lista de colaboradores, lista de contratos, clientes).",
-              "en": "The Fact table stores transactional numerical events (hours logged, m² blasted, work orders), while Dimension tables store descriptive context used for slicing and filtering (personnel roster, contracts, clients).",
-              "es": "La Tabla de Hechos almacena registros numéricos y transacciones (horas, metros cuadrados, servicios), mientras que la Tabla Dimensión contiene catálogos descriptivos para filtrar (empleados, clientes, áreas).",
-            },
+            id: "q2-a",
+            text: { "pt-BR": "39,3%", "en": "39.3%", "es": "39,3%" },
             isCorrect: true,
             explanation: {
-              "pt-BR": "Correto! Esse é o princípio do modelo dimensional (Star Schema), que garante alta performance e integridade nos relacionamentos.",
-              "en": "Correct! This is the foundation of star schema dimensional modeling, driving blazing analytical speed.",
-              "es": "¡Correcto! Es el principio del modelo relacional en estrella que optimiza el cálculo.",
+              "pt-BR": "Correto: a Bomba B01 soma 11 horas (OS-01: 4 h + OS-03: 2 h + OS-06: 5 h = 11 h). O denominador com ALL(dEquip) remove o filtro de equipamento e calcula o total da fábrica (28 h). A divisão 11 / 28 resulta em ≈ 39,28% (arredondado para 39,3%).",
+              "en": "Correct: B01 totals 11 hours (4 + 2 + 5 = 11). ALL(dEquip) clears the machine filter, yielding 28 hours total. 11 / 28 ≈ 39.3%.",
+              "es": "Correcto: B01 suma 11 horas de un total de 28 h: 11 / 28 ≈ 39,3%.",
             },
           },
           {
-            id: "opt-pbi-2-b",
-            text: {
-              "pt-BR": "A Tabela Fato só pode conter textos e a Tabela Dimensão só pode conter datas futuras.",
-              "en": "The Fact table only holds text while Dimension tables only hold future dates.",
-              "es": "La Tabla Fato solo contiene texto y la Dimensión solo fechas futuras.",
-            },
+            id: "q2-b",
+            text: { "pt-BR": "100,0%", "en": "100.0%", "es": "100,0%" },
             isCorrect: false,
             explanation: {
-              "pt-BR": "Incorreto. Tabelas fato concentram valores numéricos quantitativos e chaves estrangeiras.",
-              "en": "Incorrect. Fact tables concentrate numeric measures and foreign keys.",
-              "es": "Incorrecto. Las tablas de hechos contienen métricas numéricas.",
+              "pt-BR": "Incorreto: 100% seria o resultado caso a função ALL não fosse utilizada no denominador, fazendo numerador e denominador receberem o mesmo filtro.",
+              "en": "Incorrect: 100% would result without ALL in the denominator.",
+              "es": "Incorrecto: 100% ocurriría si no se usara ALL.",
             },
           },
           {
-            id: "opt-pbi-2-c",
-            text: {
-              "pt-BR": "São tabelas idênticas e duplicadas que devem ser somadas manualmente toda vez que o painel for aberto.",
-              "en": "They are identical duplicate sheets requiring manual addition on every dashboard load.",
-              "es": "Son planillas idénticas que se deben sumar a mano cada vez.",
-            },
+            id: "q2-c",
+            text: { "pt-BR": "33,3%", "en": "33.3%", "es": "33,3%" },
             isCorrect: false,
             explanation: {
-              "pt-BR": "Incorreto. Elas cumprem funções analíticas distintas e se conectam por relacionamentos automatizados.",
-              "en": "Incorrect. They play complementary dimensional roles linked by automated relationships.",
-              "es": "Incorrecto. Tienen roles estructurales complementarios.",
+              "pt-BR": "Incorreto: 33,3% é a proporção de equipamentos com ordens (1 em 3 bombas ativas), que seria uma contagem e não soma de horas.",
+              "en": "Incorrect: 33.3% is 1 of 3 active equipment (a count ratio, not hours ratio).",
+              "es": "Incorrecto: 33,3% es proporción de conteo de máquinas, no de horas.",
+            },
+          },
+          {
+            id: "q2-d",
+            text: { "pt-BR": "25,0%", "en": "25.0%", "es": "25,0%" },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: 25% é 1 de 4 equipamentos cadastrados no total, ignorando os valores das ordens de serviço.",
+              "en": "Incorrect: 25% is 1 of 4 registered machines in dEquip.",
+              "es": "Incorrecto: 25% es 1 de 4 máquinas registradas.",
             },
           },
         ],
@@ -408,51 +424,49 @@ export const powerBiCourseData: CourseDemonstration = {
         id: "q-pbi-3",
         order: 3,
         question: {
-          "pt-BR": "3. No desenvolvimento de fórmulas com a linguagem DAX, por que é uma boa prática criar 'Medidas' em vez de criar várias 'Colunas Calculadas' na tabela de dados?",
-          "en": "3. In DAX formula authoring, why is creating 'Measures' preferred over accumulating 'Calculated Columns'?",
-          "es": "3. Al escribir fórmulas DAX, ¿por qué es mejor crear 'Medidas' en lugar de múltiples 'Columnas Calculadas'?",
+          "pt-BR": "Considere a medida DAX: Qtde Equip = COUNTROWS(dEquip).\n\nVocê monta uma matriz com dEquip[Linha] nas Linhas e aplica uma segmentação externa fOS[Tipo] = \"Corretiva\". Sabendo que o relacionamento entre dEquip e fOS possui direção de filtro ÚNICA padrão (1 → *), qual valor é exibido para a \"Linha 2\" na matriz?",
+          "en": "Consider the measure: Qtde Equip = COUNTROWS(dEquip).\n\nYou build a matrix with dEquip[Linha] on Rows and an external slicer fOS[Tipo] = \"Corretiva\". With standard SINGLE filter direction (dEquip 1 → * fOS), what value is shown for \"Linha 2\"? ",
+          "es": "Considere la medida: Qtde Equip = COUNTROWS(dEquip).\n\nEn una matriz con dEquip[Línea] en Filas y segmentación en fOS[Tipo] = \"Corretiva\", con dirección ÚNICA (dEquip 1 → * fOS), ¿qué valor aparece para \"Linha 2\"?",
         },
         options: [
           {
-            id: "opt-pbi-3-a",
-            text: {
-              "pt-BR": "As Medidas não ocupam espaço permanente no arquivo nem consomem memória RAM de armazenamento linha a linha; elas são calculadas dinamicamente sob demanda conforme os filtros que o usuário clica na tela.",
-              "en": "Measures do not consume persistent row-by-row storage in memory; they calculate on-the-fly dynamically responding to visual canvas filter context.",
-              "es": "Las Medidas no ocupan espacio de almacenamiento permanente línea por línea; se calculan en tiempo real según los filtros activos en pantalla.",
-            },
+            id: "q3-a",
+            text: { "pt-BR": "2 equipamentos", "en": "2 machines", "es": "2 equipos" },
             isCorrect: true,
             explanation: {
-              "pt-BR": "Correto! Colunas calculadas aumentam o tamanho do arquivo em disco, enquanto Medidas mantêm o modelo leve e com resposta instantânea.",
-              "en": "Correct! Calculated columns bloat file footprint, whereas measures keep models lean and responsive.",
-              "es": "¡Correcto! Las medidas optimizan el rendimiento y la memoria del modelo.",
+              "pt-BR": "Correto: na direção única padrão (1 → *), os filtros da tabela fato (fOS) NÃO sobem para filtrar a tabela dimensão (dEquip). Portanto, a segmentação de tipo é ignorada pelo COUNTROWS(dEquip), e a Linha 2 conta seus 2 equipamentos cadastrados (B03 e B04).",
+              "en": "Correct: in standard single direction, fact filters do not propagate back to dimensions. COUNTROWS(dEquip) for Linha 2 returns both B03 and B04 = 2.",
+              "es": "Correcto: con filtro en dirección única, la tabla de hechos no filtra la dimensión. Cuenta B03 y B04 = 2.",
             },
           },
           {
-            id: "opt-pbi-3-b",
-            text: {
-              "pt-BR": "Porque o Power BI não permite criar mais de duas colunas calculadas por projeto.",
-              "en": "Because Power BI limits models to at most two calculated columns.",
-              "es": "Porque Power BI solo permite crear dos columnas calculadas como máximo.",
-            },
+            id: "q3-b",
+            text: { "pt-BR": "1 equipamento", "en": "1 machine", "es": "1 equipo" },
             isCorrect: false,
             explanation: {
-              "pt-BR": "Incorreto. Não existe esse limite técnico, mas o uso excessivo de colunas degrada a performance do relatório.",
-              "en": "Incorrect. No arbitrary hard limit exists, but excessive columns degrade memory throughput.",
-              "es": "Incorrecto. No hay un límite numérico, pero afecta el rendimiento.",
+              "pt-BR": "Incorreto: 1 equipamento (apenas o compressor B03) só seria o resultado se o relacionamento estivesse configurado com filtro Cruzado Bidirecional (Ambas).",
+              "en": "Incorrect: 1 would only happen with Bidirectional filtering (Both directions).",
+              "es": "Incorrecto: 1 solo ocurriría con filtro bidireccional.",
             },
           },
           {
-            id: "opt-pbi-3-c",
-            text: {
-              "pt-BR": "Medidas só funcionam quando o computador está desconectado da tomada de energia.",
-              "en": "Measures only evaluate when laptops run on battery power.",
-              "es": "Las medidas solo funcionan con la computadora desconectada de la red eléctrica.",
-            },
+            id: "q3-c",
+            text: { "pt-BR": "0 equipamentos", "en": "0 machines", "es": "0 equipos" },
             isCorrect: false,
             explanation: {
-              "pt-BR": "Incorreto e sem fundamento técnico.",
-              "en": "Incorrect and unfounded.",
-              "es": "Incorrecto.",
+              "pt-BR": "Incorreto: a Linha 2 possui equipamentos cadastrados na dimensão e a contagem nunca zera.",
+              "en": "Incorrect: Line 2 has registered assets so count does not drop to 0.",
+              "es": "Incorrecto: la Línea 2 tiene máquinas registradas.",
+            },
+          },
+          {
+            id: "q3-d",
+            text: { "pt-BR": "4 equipamentos", "en": "4 machines", "es": "4 equipos" },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: 4 é o total de equipamentos de toda a fábrica, mas a linha da matriz restringe o contexto à Linha 2.",
+              "en": "Incorrect: 4 is the grand total for all lines.",
+              "es": "Incorrecto: 4 es el total de toda la planta.",
             },
           },
         ],
@@ -461,51 +475,65 @@ export const powerBiCourseData: CourseDemonstration = {
         id: "q-pbi-4",
         order: 4,
         question: {
-          "pt-BR": "4. Ao calcular a taxa de produtividade ou índice de conformidade com a fórmula DAX, por que se recomenda utilizar a função =DIVIDE(Numerador, Denominador) em vez da barra tradicional (Numerador / Denominador)?",
-          "en": "4. When calculating operational ratios in DAX, why is =DIVIDE(Numerator, Denominator) recommended over the forward slash operator (/)?",
-          "es": "4. Al calcular porcentajes en DAX, ¿por qué se recomienda usar =DIVIDE(Numerador, Denominador) en lugar de la barra (/)?",
+          "pt-BR": "Na tabela de equipamentos, o 'Exaustor de Gases' (B04) não possui nenhuma ordem de serviço registrada em fOS. Por esse motivo, ao criar uma tabela visual com dEquip[Nome_Equipamento] e a medida [Total Horas], a linha da Bomba D desaparece do visual.\n\nSem ativar a opção 'Mostrar itens sem dados', qual medida DAX força a exibição de todos os equipamentos cadastrados, mostrando 0 horas para aqueles sem ocorrências?",
+          "en": "In the equipment table, 'Exaustor de Gases' (B04) has no work orders in fOS. Consequently, in a visual table with dEquip[Nome_Equipamento] and [Total Horas], B04 is hidden.\n\nWithout enabling 'Show items with no data', which DAX measure forces all registered machines to display, showing 0 for those with no orders?",
+          "es": "El 'Exaustor de Gases' (B04) no tiene órdenes en fOS y no aparece en la tabla visual.\n\n¿Qué medida DAX fuerza la visualización de todos los equipos mostrando 0 para los que no tienen órdenes?",
         },
         options: [
           {
-            id: "opt-pbi-4-a",
+            id: "q4-a",
             text: {
-              "pt-BR": "A função DIVIDE trata automaticamente cenários em que o denominador é zero ou nulo, retornando um valor em branco ou alternativo sem quebrar o relatório com erros de divisão por zero (#ERROR!).",
-              "en": "The DIVIDE function automatically intercepts zero or blank denominators, returning safe blanks without breaking visual canvases with division-by-zero errors.",
-              "es": "La función DIVIDE maneja divisiones por cero o valores nulos de forma segura, evitando que los gráficos muestren mensajes de error.",
+              "pt-BR": "COALESCE([Total Horas], 0)",
+              "en": "COALESCE([Total Horas], 0)",
+              "es": "COALESCE([Total Horas], 0)",
             },
             isCorrect: true,
             explanation: {
-              "pt-BR": "Correto! A função DIVIDE é otimizada internamente pela Microsoft para evitar erros visuais em cartões e gráficos quando uma equipe ainda não registrou horas em determinada data.",
-              "en": "Correct! DIVIDE is optimized for graceful zero-denominator handling without crashes.",
-              "es": "¡Correcto! Evita que los paneles muestren errores cuando un denominador es cero.",
+              "pt-BR": "Correto: quando não há registros na fato, SUM retorna BLANK e o visual descarta a linha. A função COALESCE converte o BLANK em 0. Como a medida passa a ter um valor numérico válido, o Power BI mantém o equipamento visível na tabela.",
+              "en": "Correct: COALESCE replaces BLANK with 0. Because the measure now yields a value, the visual displays B04 with 0.",
+              "es": "Correcto: COALESCE reemplaza BLANK por 0, manteniendo la fila visible en la tabla.",
             },
           },
           {
-            id: "opt-pbi-4-b",
+            id: "q4-b",
             text: {
-              "pt-BR": "A barra tradicional só pode ser usada em computadores fabricados antes do ano 2000.",
-              "en": "The forward slash operator is only supported on legacy computers built before 2000.",
-              "es": "La barra tradicional solo funciona en computadoras antiguas.",
+              "pt-BR": "SUM(fOS[Horas])",
+              "en": "SUM(fOS[Horas])",
+              "es": "SUM(fOS[Horas])",
             },
             isCorrect: false,
             explanation: {
-              "pt-BR": "Incorreto. A barra funciona, mas gera erro quando o denominador for zero.",
-              "en": "Incorrect. The slash operator works but throws ugly errors on zero denominators.",
-              "es": "Incorrecto. La barra funciona pero produce errores si el divisor es cero.",
+              "pt-BR": "Incorreto: a função SUM por si só continua retornando BLANK para linhas sem dados.",
+              "en": "Incorrect: raw SUM continues to evaluate to BLANK.",
+              "es": "Incorrecto: SUM por sí sola sigue devolviendo BLANK.",
             },
           },
           {
-            id: "opt-pbi-4-c",
+            id: "q4-c",
             text: {
-              "pt-BR": "A função DIVIDE sempre multiplica o resultado final por 1 milhão automaticamente.",
-              "en": "DIVIDE automatically multiplies the quotient by one million.",
-              "es": "DIVIDE multiplica automáticamente el resultado por un millón.",
+              "pt-BR": "CALCULATE([Total Horas], fOS[Horas] >= 0)",
+              "en": "CALCULATE([Total Horas], fOS[Horas] >= 0)",
+              "es": "CALCULATE([Total Horas], fOS[Horas] >= 0)",
             },
             isCorrect: false,
             explanation: {
-              "pt-BR": "Incorreto. DIVIDE realiza divisão matemática exata e segura.",
-              "en": "Incorrect. DIVIDE executes standard division safely.",
-              "es": "Incorrecto. Es una división matemática controlada.",
+              "pt-BR": "Incorreto: adicionar um filtro na tabela fato restringe apenas as linhas que já existem; para B04 não há linhas e o resultado continua BLANK.",
+              "en": "Incorrect: fact filters only operate on existing rows, leaving B04 as BLANK.",
+              "es": "Incorrecto: el filtro sobre la tabla de hechos sigue dando BLANK.",
+            },
+          },
+          {
+            id: "q4-d",
+            text: {
+              "pt-BR": "IF(ISBLANK([Total Horas]), BLANK(), [Total Horas])",
+              "en": "IF(ISBLANK([Total Horas]), BLANK(), [Total Horas])",
+              "es": "IF(ISBLANK([Total Horas]), BLANK(), [Total Horas])",
+            },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: essa fórmula explicitamente devolve BLANK quando não há dados, mantendo a linha oculta.",
+              "en": "Incorrect: this formula explicitly returns BLANK.",
+              "es": "Incorrecto: esta fórmula devuelve BLANK explícitamente.",
             },
           },
         ],
@@ -514,51 +542,336 @@ export const powerBiCourseData: CourseDemonstration = {
         id: "q-pbi-5",
         order: 5,
         question: {
-          "pt-BR": "5. O que caracteriza um dashboard executivo eficiente segundo as boas práticas de visualização de dados ensinadas no curso?",
-          "en": "5. What characterizes an effective executive dashboard according to data visualization best practices?",
-          "es": "5. ¿Qué caracteriza a un panel de control ejecutivo eficaz según las buenas prácticas de visualización?",
+          "pt-BR": "O modelo inclui uma tabela de calendário contínua (dCalendario) relacionada a fOS[Data], e o analista cria a medida de acumulado no ano:\nHoras YTD = TOTALYTD([Total Horas], dCalendario[Data])\n\nEm uma matriz aberta por mês (janeiro e fevereiro de 2026), qual valor numérico é exibido na linha de 'Fevereiro/2026'?",
+          "en": "The model contains a standard date table (dCalendario) linked to fOS[Data], and an analyst writes the year-to-date measure:\nHoras YTD = TOTALYTD([Total Horas], dCalendario[Data])\n\nIn a monthly matrix, what value is shown for 'Fevereiro/2026'?",
+          "es": "El modelo tiene una tabla dCalendario continua y la medida:\nHoras YTD = TOTALYTD([Total Horas], dCalendario[Data])\n\nEn una matriz por mes, ¿qué valor aparece en la fila de 'Fevereiro/2026'?",
         },
         options: [
           {
-            id: "opt-pbi-5-a",
+            id: "q5-a",
+            text: { "pt-BR": "28 horas", "en": "28 hours", "es": "28 horas" },
+            isCorrect: true,
+            explanation: {
+              "pt-BR": "Correto: a função TOTALYTD acumula todas as datas desde 1º de janeiro até o final do mês corrente. Janeiro somou 12 horas (4 + 6 + 2 = 12 h) e Fevereiro somou 16 horas (8 + 3 + 5 = 16 h). O acumulado em fevereiro é 12 + 16 = 28 horas.",
+              "en": "Correct: TOTALYTD accumulates from Jan 1. January had 12 h (4 + 6 + 2) and February had 16 h (8 + 3 + 5). Total YTD in Feb = 12 + 16 = 28 hours.",
+              "es": "Correcto: TOTALYTD acumula desde el 1 de enero. Enero tuvo 12 h y febrero 16 h: 12 + 16 = 28 horas.",
+            },
+          },
+          {
+            id: "q5-b",
+            text: { "pt-BR": "16 horas", "en": "16 hours", "es": "16 horas" },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: 16 horas é apenas a soma pontual do mês de fevereiro, sem o acumulado do ano.",
+              "en": "Incorrect: 16 hours is February alone without YTD accumulation.",
+              "es": "Incorrecto: 16 horas es solo el mes de febrero.",
+            },
+          },
+          {
+            id: "q5-c",
+            text: { "pt-BR": "12 horas", "en": "12 hours", "es": "12 horas" },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: 12 horas é apenas o valor de janeiro.",
+              "en": "Incorrect: 12 hours is January alone.",
+              "es": "Incorrecto: 12 horas es el total de enero.",
+            },
+          },
+          {
+            id: "q5-d",
+            text: { "pt-BR": "14 horas", "en": "14 hours", "es": "14 horas" },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: 14 horas é o total de ordens corretivas, não a soma temporal.",
+              "en": "Incorrect: 14 hours is total corrective hours.",
+              "es": "Incorrecto: 14 horas es el total de correctivas.",
+            },
+          },
+        ],
+      },
+      {
+        id: "q-pbi-6",
+        order: 6,
+        question: {
+          "pt-BR": "Para comparar a evolução mensal na parada, é criada a medida de mês anterior:\nHoras Mês Anterior = CALCULATE([Total Horas], PREVIOUSMONTH(dCalendario[Data]))\n\nAo colocar essa medida em uma matriz com os meses de 2026, qual valor é exibido na linha correspondente a 'Fevereiro/2026'?",
+          "en": "To compare turnaround progress, the previous month measure is built:\nHoras Mês Anterior = CALCULATE([Total Horas], PREVIOUSMONTH(dCalendario[Data]))\n\nIn a monthly matrix, what value appears on the row for 'Fevereiro/2026'?",
+          "es": "Para comparar la evolución mensual se crea la medida:\nHoras Mês Anterior = CALCULATE([Total Horas], PREVIOUSMONTH(dCalendario[Data]))\n\n¿Qué valor aparece en la fila de 'Fevereiro/2026'?",
+        },
+        options: [
+          {
+            id: "q6-a",
+            text: { "pt-BR": "12 horas", "en": "12 hours", "es": "12 horas" },
+            isCorrect: true,
+            explanation: {
+              "pt-BR": "Correto: a função PREVIOUSMONTH desloca o contexto de filtro de fevereiro/2026 para o período completo do mês anterior (1º a 31 de janeiro de 2026). As horas ocorridas em janeiro foram 4 + 6 + 2 = 12 horas.",
+              "en": "Correct: PREVIOUSMONTH shifts the filter context from February to all of January. January hours: 4 + 6 + 2 = 12 hours.",
+              "es": "Correcto: PREVIOUSMONTH desplaza el contexto a enero. Las horas de enero fueron 4 + 6 + 2 = 12 horas.",
+            },
+          },
+          {
+            id: "q6-b",
+            text: { "pt-BR": "16 horas", "en": "16 hours", "es": "16 horas" },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: 16 horas é o valor do próprio mês de fevereiro, sem deslocamento temporal.",
+              "en": "Incorrect: 16 hours is February itself.",
+              "es": "Incorrecto: 16 horas es el propio mes de febrero.",
+            },
+          },
+          {
+            id: "q6-c",
+            text: { "pt-BR": "28 horas", "en": "28 hours", "es": "28 horas" },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: 28 horas é o total geral acumulado, não o mês anterior.",
+              "en": "Incorrect: 28 hours is the grand total.",
+              "es": "Incorrecto: 28 horas es el total acumulado.",
+            },
+          },
+          {
+            id: "q6-d",
+            text: { "pt-BR": "(em branco / BLANK)", "en": "(blank)", "es": "(en blanco / BLANK)" },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: ficaria em branco apenas na linha de janeiro (que não possui mês anterior com dados). Em fevereiro o valor de janeiro existe e vale 12.",
+              "en": "Incorrect: it would only be blank on January.",
+              "es": "Incorrecto: solo quedaría en blanco en enero.",
+            },
+          },
+        ],
+      },
+      {
+        id: "q-pbi-7",
+        order: 7,
+        question: {
+          "pt-BR": "Um coordenador deseja saber a média de horas de manutenção por equipamento e escreve a medida iteradora:\nMédia por Equipamento = AVERAGEX(VALUES(dEquip[ID_Equipamento]), [Total Horas])\n\nQual valor é exibido em um Cartão de KPI sem nenhum filtro selecionado na página?",
+          "en": "A coordinator writes an iterator measure for average maintenance hours per asset:\nMédia por Equipamento = AVERAGEX(VALUES(dEquip[ID_Equipamento]), [Total Horas])\n\nWhat value is shown in a KPI Card with no filters applied?",
+          "es": "Un coordinador escribe la medida iteradora:\nMédia por Equipamento = AVERAGEX(VALUES(dEquip[ID_Equipamento]), [Total Horas])\n\n¿Qué valor se muestra en una Tarjeta KPI sin filtros?",
+        },
+        options: [
+          {
+            id: "q7-a",
+            text: { "pt-BR": "9,33 horas", "en": "9.33 hours", "es": "9,33 horas" },
+            isCorrect: true,
+            explanation: {
+              "pt-BR": "Correto: AVERAGEX itera sobre os equipamentos. A medida [Total Horas] sofre transição de contexto para cada um: B01 = 11 h, B02 = 9 h, B03 = 8 h e B04 = BLANK. Como funções de média ignoram valores BLANK, o cálculo é (11 + 9 + 8) / 3 = 28 / 3 ≈ 9,33 horas.",
+              "en": "Correct: AVERAGEX triggers context transition per machine: B01 = 11, B02 = 9, B03 = 8, B04 = BLANK. AVERAGEX ignores BLANK, so (11 + 9 + 8) / 3 ≈ 9.33 hours.",
+              "es": "Correcto: la transición de contexto da B01=11, B02=9, B03=8, B04=BLANK. (11 + 9 + 8) / 3 ≈ 9,33 horas.",
+            },
+          },
+          {
+            id: "q7-b",
+            text: { "pt-BR": "7,00 horas", "en": "7.00 hours", "es": "7,00 horas" },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: 7,00 horas seria 28 / 4, o que só aconteceria se B04 retornasse 0 em vez de BLANK.",
+              "en": "Incorrect: 7.00 would divide by 4, treating B04 as 0 rather than BLANK.",
+              "es": "Incorrecto: 7,00 dividiría entre 4 tomando B04 como 0.",
+            },
+          },
+          {
+            id: "q7-c",
+            text: { "pt-BR": "4,67 horas", "en": "4.67 hours", "es": "4,67 horas" },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: 4,67 horas é a média por ordem de serviço (28 / 6 OS), calculada pela fórmula AVERAGE(fOS[Horas]), e não por equipamento.",
+              "en": "Incorrect: 4.67 is average per work order (28 / 6).",
+              "es": "Incorrecto: 4,67 es el promedio por orden de trabajo.",
+            },
+          },
+          {
+            id: "q7-d",
+            text: { "pt-BR": "11,00 horas", "en": "11.00 hours", "es": "11,00 horas" },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: 11,00 horas é o valor máximo individual da B01, que seria obtido com a função MAXX.",
+              "en": "Incorrect: 11.00 is the maximum individual total (MAXX).",
+              "es": "Incorrecto: 11,00 es el valor máximo (MAXX).",
+            },
+          },
+        ],
+      },
+      {
+        id: "q-pbi-8",
+        order: 8,
+        question: {
+          "pt-BR": "No Power Query, a coluna Horas de uma planilha externa foi importada com formato de texto e valores como \"4,5\" e \"2,25\". O arquivo foi gerado no Brasil, mas o Power BI Desktop está configurado no padrão Inglês (EUA).\n\nAo clicar em 'Alterar Tipo → Número Decimal', o valor \"4,5\" transformou-se em 45 e \"2,25\" em 225. O que causou esse comportamento e como resolver?",
+          "en": "In Power Query, an external column arrived with text numbers like \"4,5\" and \"2,25\". The file was created in Brazil, but Power BI Desktop is set to English (US).\n\nAfter 'Change Type → Decimal Number', \"4,5\" became 45 and \"2,25\" became 225. What happened and how to fix it?",
+          "es": "En Power Query, una columna de texto con \"4,5\" y \"2,25\" se convirtió a número decimal con configuración de EE. UU., resultando en 45 y 225. ¿Qué ocurrió y cómo resolverlo?",
+        },
+        options: [
+          {
+            id: "q8-a",
             text: {
-              "pt-BR": "Clareza visual imediata: cartões de KPIs principais destacados no topo, gráficos adequados ao tipo de análise (barras para comparação, linhas para evolução temporal), segmentadores de dados fáceis de usar e ausência de poluição visual.",
-              "en": "Immediate visual clarity: top-line KPI summary cards, fit-for-purpose charts (bars for comparison, lines for trends), intuitive slicers, and zero visual clutter.",
-              "es": "Claridad visual inmediata: tarjetas de KPIs principales en la parte superior, gráficos adecuados a la métrica, filtros intuitivos y sin sobrecarga visual.",
+              "pt-BR": "Na localidade Inglês (EUA) a vírgula é tratada como separador de milhar e descartada. A correção correta no Power Query é: Alterar Tipo → Usando a Localidade → Português (Brasil).",
+              "en": "In English (US) commas are treated as thousands separators and dropped. The fix is: Change Type → Using Locale → Portuguese (Brazil).",
+              "es": "En Inglés (EE. UU.) la coma es separador de miles y se descarta. La solución es: Cambiar tipo → Usando configuración regional → Portugués (Brasil).",
             },
             isCorrect: true,
             explanation: {
-              "pt-BR": "Correto! O objetivo de um painel de BI é permitir que um gestor tome decisões seguras e rápidas em poucos segundos de análise visual.",
-              "en": "Correct! BI dashboards exist to empower swift, confident decision-making within seconds of visual scanning.",
-              "es": "¡Correcto! Permite que los líderes tomen decisiones operativas ágiles con solo un vistazo.",
+              "pt-BR": "Exato: em localidades onde o ponto é o separador decimal oficial, a vírgula é lida como separador de agrupamento de milhar e ignorada. A conversão com localidade garante que a vírgula seja interpretada como decimal.",
+              "en": "Exact: in dot-decimal locales, commas are thousand separators. Using Locale enforces comma as decimal.",
+              "es": "Exacto: usar la configuración regional garantiza que la coma se lea como separador decimal.",
             },
           },
           {
-            id: "opt-pbi-5-b",
+            id: "q8-b",
             text: {
-              "pt-BR": "Colocar o maior número possível de cores vibrantes, fontes diferentes em cada frase e 30 gráficos piscando na mesma tela.",
-              "en": "Stuffing 30 flashing charts, mismatched fonts, and neon colors onto a single view.",
-              "es": "Llenar la pantalla con 30 gráficos de diferentes colores chillones y fuentes distintas.",
+              "pt-BR": "A coluna foi convertida para Número Inteiro, que automaticamente junta os algarismos.",
+              "en": "The column was converted to Whole Number, which concatenates digits.",
+              "es": "La columna se convirtió a Número Entero, uniendo los dígitos.",
             },
             isCorrect: false,
             explanation: {
-              "pt-BR": "Incorreto. A poluição visual confunde o usuário e prejudica a leitura dos indicadores.",
-              "en": "Incorrect. Visual clutter impedes comprehension and obscures critical operational insights.",
-              "es": "Incorrecto. La sobrecarga visual dificulta la toma de decisiones.",
+              "pt-BR": "Incorreto: número inteiro arredonda valores decimais, não remove a vírgula multiplicando o número por 10.",
+              "en": "Incorrect: Whole Number rounds values, not multiplies them by 10.",
+              "es": "Incorrecto: el entero redondea, no multiplica por 10.",
             },
           },
           {
-            id: "opt-pbi-5-c",
+            id: "q8-c",
             text: {
-              "pt-BR": "Bloquear todos os filtros para que nenhum colaborador consiga selecionar datas ou contratos diferentes.",
-              "en": "Hard-locking all filters so no user can drill down into dates or contracts.",
-              "es": "Bloquear los filtros para que nadie pueda interactuar con los datos.",
+              "pt-BR": "Haviam espaços invisíveis no texto que forçaram a multiplicação por 10.",
+              "en": "Invisible spaces in text forced multiplication by 10.",
+              "es": "Espacios invisibles en el texto forzaron la multiplicación por 10.",
             },
             isCorrect: false,
             explanation: {
-              "pt-BR": "Incorreto. A interatividade dos segmentadores e o cruzamento dinâmico de dados são os maiores diferenciais do Power BI.",
-              "en": "Incorrect. Dynamic slicers and cross-filtering are Power BI's primary competitive advantages.",
-              "es": "Incorrecto. La interactividad y los filtros dinámicos son la esencia de Power BI.",
+              "pt-BR": "Incorreto: espaços extras geram erro de conversão (Error), não distorção matemática de milhar.",
+              "en": "Incorrect: extra spaces cause conversion errors, not digit shifts.",
+              "es": "Incorrecto: los espacios generan error de conversión.",
+            },
+          },
+          {
+            id: "q8-d",
+            text: {
+              "pt-BR": "A agregação da coluna no modelo estava configurada como Soma.",
+              "en": "The column summarization was set to Sum.",
+              "es": "La agregación de la columna estaba como Suma.",
+            },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: a agregação ocorre na camada de visualização, não altera os dados transformados no Power Query.",
+              "en": "Incorrect: summarization only happens at report visual level.",
+              "es": "Incorrecto: la agregación solo afecta a los visuales.",
+            },
+          },
+        ],
+      },
+      {
+        id: "q-pbi-9",
+        order: 9,
+        question: {
+          "pt-BR": "Um usuário cria uma COLUNA CALCULADA diretamente na tabela fOS com a expressão:\nParticipação = DIVIDE(fOS[Horas], SUM(fOS[Horas]))\n\nQual é o valor retornado por essa coluna calculada na linha correspondente à ordem OS-04 (8 horas)?",
+          "en": "A user creates a CALCULATED COLUMN in fOS with:\nParticipação = DIVIDE(fOS[Horas], SUM(fOS[Horas]))\n\nWhat value is returned on the row for OS-04 (8 hours)?",
+          "es": "Se crea una COLUMNA CALCULADA en fOS con:\nParticipação = DIVIDE(fOS[Horas], SUM(fOS[Horas]))\n\n¿Qué valor devuelve en la fila de OS-04 (8 horas)?",
+        },
+        options: [
+          {
+            id: "q9-a",
+            text: { "pt-BR": "28,6%", "en": "28.6%", "es": "28,6%" },
+            isCorrect: true,
+            explanation: {
+              "pt-BR": "Correto: em colunas calculadas o contexto de linha NÃO gera transição de contexto automática em agregações simples (a menos que envolvidas por CALCULATE). Portanto, SUM(fOS[Horas]) soma a tabela inteira (28 h), resultando em 8 / 28 ≈ 28,57% (28,6%).",
+              "en": "Correct: in calculated columns raw SUM has no context transition and sums the full table (28 h). 8 / 28 ≈ 28.6%.",
+              "es": "Correcto: en columnas calculadas SUM suma toda la tabla (28 h): 8 / 28 ≈ 28,6%.",
+            },
+          },
+          {
+            id: "q9-b",
+            text: { "pt-BR": "100,0%", "en": "100.0%", "es": "100,0%" },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: 100% ocorreria caso houvesse transição de contexto com CALCULATE(SUM(...)), fazendo o denominador somar apenas a própria linha atual.",
+              "en": "Incorrect: 100% requires CALCULATE to trigger row-to-filter context transition.",
+              "es": "Incorrecto: 100% requeriría CALCULATE para transición de contexto.",
+            },
+          },
+          {
+            id: "q9-c",
+            text: { "pt-BR": "57,1%", "en": "57.1%", "es": "57,1%" },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: 57,1% seria a divisão de 8 por 14 (total apenas das corretivas), mas a fórmula não contém filtro de tipo.",
+              "en": "Incorrect: 57.1% would filter only corrective orders, which this formula does not do.",
+              "es": "Incorrecto: 57,1% solo filtraría correctivas.",
+            },
+          },
+          {
+            id: "q9-d",
+            text: { "pt-BR": "8 horas", "en": "8 hours", "es": "8 horas" },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: a fórmula divide o valor, não retorna as horas brutas.",
+              "en": "Incorrect: the formula performs a division.",
+              "es": "Incorrecto: la fórmula realiza una división.",
+            },
+          },
+        ],
+      },
+      {
+        id: "q-pbi-10",
+        order: 10,
+        question: {
+          "pt-BR": "Ao atualizar o modelo, o Power BI sugeriu cardinalidade de relacionamento Muitos-para-Muitos (*:*) entre dEquip[ID_Equipamento] e fOS[ID_Equipamento]. Ao analisar a tabela dEquip, foi descoberto que o código 'B02' foi cadastrado em duplicidade com dados idênticos.\n\nQual é o procedimento técnico correto para restabelecer a integridade do modelo estrela?",
+          "en": "Upon refresh, Power BI suggested Many-to-Many (*:*) cardinality between dEquip and fOS because 'B02' was duplicated in dEquip.\n\nWhat is the correct procedure to restore star schema integrity?",
+          "es": "Power BI sugirió cardinalidad Muchos-a-Muchos (*:*) porque 'B02' está duplicado en dEquip.\n\n¿Cuál es el procedimiento técnico correcto?",
+        },
+        options: [
+          {
+            id: "q10-a",
+            text: {
+              "pt-BR": "No Power Query, aplicar 'Remover Duplicadas' na coluna ID_Equipamento da tabela dEquip e restabelecer o relacionamento clássico Um-para-Muitos (1 → *).",
+              "en": "In Power Query, apply 'Remove Duplicates' on ID_Equipamento in dEquip and re-establish the standard One-to-Many (1 → *) relationship.",
+              "es": "En Power Query, aplicar 'Quitar Duplicados' en ID_Equipamento en dEquip y restablecer la relación Uno-a-Muchos (1 → *).",
+            },
+            isCorrect: true,
+            explanation: {
+              "pt-BR": "Correto: tabelas dimensão exigem obrigatoriamente chaves primárias únicas. A remoção da linha duplicada na etapa de ETL (Power Query) garante integridade referencial e relacionamento 1:* sem ambiguidades.",
+              "en": "Correct: dimensions strictly require unique keys. Deduplicating in Power Query ensures proper 1:* integrity.",
+              "es": "Correcto: las dimensiones exigen claves únicas en Power Query para garantizar la relación 1:*.",
+            },
+          },
+          {
+            id: "q10-b",
+            text: {
+              "pt-BR": "Manter o relacionamento Muitos-para-Muitos (*:*) e marcar a direção do filtro como Ambas.",
+              "en": "Keep Many-to-Many (*:*) and set filter direction to Both.",
+              "es": "Mantener Muchos-a-Muchos (*:*) con dirección Ambas.",
+            },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: relacionamentos *:*; aumentam a ambiguidade do modelo, degradam a performance do DAX e mascaram erros de cadastro.",
+              "en": "Incorrect: Many-to-Many masks source errors and degrades engine performance.",
+              "es": "Incorrecto: Muchos-a-Muchos degrada el rendimiento y enmascara errores.",
+            },
+          },
+          {
+            id: "q10-c",
+            text: {
+              "pt-BR": "Desativar o relacionamento e utilizar a função USERELATIONSHIP em todas as medidas do relatório.",
+              "en": "Deactivate the relationship and use USERELATIONSHIP across all measures.",
+              "es": "Desactivar la relación y usar USERELATIONSHIP en todas las medidas.",
+            },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: USERELATIONSHIP serve para ativar relacionamentos inativos alternativos, não corrige duplicações de chave na dimensão.",
+              "en": "Incorrect: USERELATIONSHIP is for role-playing dimensions, not fixing duplicate keys.",
+              "es": "Incorrecto: USERELATIONSHIP no soluciona claves duplicadas.",
+            },
+          },
+          {
+            id: "q10-d",
+            text: {
+              "pt-BR": "Alterar o tipo de dados dos dois IDs para Texto.",
+              "en": "Change both ID data types to Text.",
+              "es": "Cambiar el tipo de datos de ambos IDs a Texto.",
+            },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto: os IDs já são códigos de texto; o erro é a duplicidade do valor, não o tipo do dado.",
+              "en": "Incorrect: the issue is duplicate rows, not data type.",
+              "es": "Incorrecto: el problema es la duplicación de filas.",
             },
           },
         ],

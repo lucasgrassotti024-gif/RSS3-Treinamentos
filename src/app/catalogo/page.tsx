@@ -31,7 +31,7 @@ import {
   ArrowRight,
   Sparkles,
 } from "lucide-react";
-import { DEMO_LEARNING_PATHS, LearningPath } from "@/lib/learning-paths";
+
 
 // Componente de carrossel de fileira de cursos
 interface CourseRowProps {
@@ -338,75 +338,7 @@ export default function CatalogPage() {
       {/* RENDERIZAÇÃO EM FILEIRAS POR TIPO (3 CARDS POR FILEIRA COM SCROLL HORIZONTAL) */}
       {selectedTypeFilter === "all" && searchTerm === "" ? (
         <div className="space-y-12">
-          {/* SEÇÃO DESTACADA: TRILHAS DE FORMAÇÃO POR FUNÇÃO OPERACIONAL */}
-          <section className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-950/60 text-orange-600 dark:text-orange-400 flex items-center justify-center">
-                  <Compass className="w-4 h-4" />
-                </div>
-                <div>
-                  <h2 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white uppercase tracking-wider">
-                    Trilhas de Aprendizagem & Formação
-                  </h2>
-                  <p className="text-2xs text-slate-500 dark:text-slate-400">
-                    Programas estruturados de qualificação por cargo e área operacional na RSS3 & CMPC
-                  </p>
-                </div>
-              </div>
-              <span className="text-2xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 hidden sm:inline">
-                {DEMO_LEARNING_PATHS.length} Trilhas Estruturadas
-              </span>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {DEMO_LEARNING_PATHS.map((path) => (
-                <div
-                  key={path.id}
-                  className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-4 group hover:border-blue-500/50"
-                >
-                  <div className="space-y-2.5">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300">
-                        {path.badgeCode}
-                      </span>
-                      <span className="text-3xs text-slate-400 flex items-center gap-1">
-                        <Clock className="w-3 h-3 text-orange-500" />
-                        {path.estimatedTotalHours}h total
-                      </span>
-                    </div>
-
-                    <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      {path.title[locale]}
-                    </h3>
-
-                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2">
-                      {path.description[locale]}
-                    </p>
-
-                    <div className="pt-1 text-2xs font-medium text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
-                      <strong className="text-slate-800 dark:text-slate-200 block text-3xs uppercase tracking-wider mb-0.5">Público-Alvo:</strong>
-                      <span>{path.roleTarget[locale]}</span>
-                    </div>
-                  </div>
-
-                  <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-                    <span className="text-2xs font-semibold text-slate-500">
-                      {path.courseIds.length} Cursos Integrados
-                    </span>
-
-                    <Link
-                      href={`/catalogo/${path.courseIds[0]}`}
-                      className="inline-flex items-center gap-1 font-bold text-blue-600 dark:text-blue-400 group-hover:underline text-2xs"
-                    >
-                      <span>Iniciar Trilha</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
 
           {/* FILEIRAS DE CURSOS INDIVIDUAIS */}
           {categoryRows.map((catDef) => {

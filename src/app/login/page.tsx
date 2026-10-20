@@ -15,8 +15,6 @@ import {
   User,
   CheckCircle,
   AlertCircle,
-  Building2,
-  HardHat,
 } from "lucide-react";
 
 export default function LoginPage() {
@@ -27,8 +25,6 @@ export default function LoginPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [operationalBase, setOperationalBase] = useState("Operação CMPC Guaíba");
-  const [department, setDepartment] = useState("Operações de Hidrojateamento");
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -75,8 +71,6 @@ export default function LoginPage() {
             id: fbRes.user.uid,
             name: name.trim(),
             email: cleanEmail,
-            operationalBase,
-            department,
           });
 
           if (localUser.user) {
@@ -95,8 +89,6 @@ export default function LoginPage() {
           name: name.trim(),
           email: cleanEmail,
           password,
-          operationalBase,
-          department,
         });
 
         if (!result.success || !result.user) {
@@ -294,43 +286,7 @@ export default function LoginPage() {
             />
           </div>
 
-          {mode === "register" && (
-            <>
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                  <Building2 className="w-3.5 h-3.5 text-slate-400" />
-                  <span>Frente Operacional / Base</span>
-                </label>
-                <select
-                  value={operationalBase}
-                  onChange={(e) => setOperationalBase(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-orange-500 transition-all"
-                >
-                  <option value="Operação CMPC Guaíba">Operação CMPC Guaíba</option>
-                  <option value="Sede Corporativa RSS3">Sede Corporativa RSS3</option>
-                  <option value="Frente de Parada Industrial">Frente de Parada Industrial</option>
-                  <option value="Operações Externas">Operações Externas</option>
-                </select>
-              </div>
 
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                  <HardHat className="w-3.5 h-3.5 text-slate-400" />
-                  <span>Área de Atuação</span>
-                </label>
-                <select
-                  value={department}
-                  onChange={(e) => setDepartment(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-orange-500 transition-all"
-                >
-                  <option value="Operações de Hidrojateamento">Operações de Hidrojateamento</option>
-                  <option value="Pintura e Tratamento de Superfícies">Pintura e Tratamento de Superfícies</option>
-                  <option value="Andaimes e Acesso Seguro">Andaimes e Acesso Seguro</option>
-                  <option value="Segurança do Trabalho e Qualidade">Segurança do Trabalho e Qualidade</option>
-                </select>
-              </div>
-            </>
-          )}
 
           <div className="pt-2">
             <button

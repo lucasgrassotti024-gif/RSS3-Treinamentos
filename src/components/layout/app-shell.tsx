@@ -19,6 +19,7 @@ import {
   Globe,
   User,
   LogOut,
+  Trophy,
 } from "lucide-react";
 
 interface AppShellProps {
@@ -87,6 +88,11 @@ export function AppShell({ children }: AppShellProps) {
       href: "/dashboard",
       label: t.nav.myLearning,
       icon: LayoutDashboard,
+    },
+    {
+      href: "/desafios",
+      label: (t.nav as Record<string, string>).challenges || "Desafios & Provas",
+      icon: Trophy,
     },
   ];
 

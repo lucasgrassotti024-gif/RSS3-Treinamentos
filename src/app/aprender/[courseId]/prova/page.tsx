@@ -8,6 +8,7 @@ import { DEMO_COURSES } from "@/lib/mock-data";
 import { issueCourseCertificate, recordExamResult } from "@/lib/progress";
 import { CertificateDemonstration } from "@/types";
 import CertificateModal from "@/components/certificate-modal";
+import { CourseReferenceTables } from "@/components/course-reference-tables";
 import {
   Award,
   ArrowLeft,
@@ -224,6 +225,9 @@ export default function CourseExamPage() {
             </div>
           )}
         </div>
+
+        {/* Tabelas de Referência Oficiais (Excel, Power BI) */}
+        <CourseReferenceTables courseId={courseId} />
 
         {/* Lista de Questões */}
         <div className="space-y-6">
