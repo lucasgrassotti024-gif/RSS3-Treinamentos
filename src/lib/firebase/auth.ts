@@ -7,7 +7,7 @@ import {
   User as FirebaseUser,
   onAuthStateChanged,
 } from "firebase/auth";
-import { auth, isFirebaseConfigured } from "./client";
+import { auth, getFirebaseAuth, isFirebaseConfigured } from "./client";
 import { UserDemonstration } from "@/types";
 
 export interface FirebaseAuthResult {
@@ -48,7 +48,8 @@ export function mapFirebaseUserToDemonstration(
  * Realiza login utilizando Firebase Authentication
  */
 export async function firebaseLogin(email: string, password: string): Promise<FirebaseAuthResult> {
-  if (!isFirebaseConfigured || !auth) {
+  const firebaseAuth = getFirebaseAuth() || auth;
+  if (!isFirebaseConfigured || !firebaseAuth) {
     return {
       success: false,
       error: "Firebase Authentication não está configurado com as variáveis de ambiente.",
@@ -56,7 +57,7 @@ export async function firebaseLogin(email: string, password: string): Promise<Fi
   }
 
   try {
-    const cred = await signInWithEmailAndPassword(auth, email.trim(), password);
+    const cred = await signInWithEmailAndPassword(firebaseAuth, email.trim(), password);
     return { success: true, user: cred.user };
   } catch (err: unknown) {
     const error = err as { code?: string; message?: string };
@@ -88,7 +89,8 @@ export async function firebaseRegister(
   password: string,
   displayName?: string
 ): Promise<FirebaseAuthResult> {
-  if (!isFirebaseConfigured || !auth) {
+  const firebaseAuth = getFirebaseAuth() || auth;
+  if (!isFirebaseConfigured || !firebaseAuth) {
     return {
       success: false,
       error: "Firebase Authentication não está configurado com as variáveis de ambiente.",
@@ -96,7 +98,7 @@ export async function firebaseRegister(
   }
 
   try {
-    const cred = await createUserWithEmailAndPassword(auth, email.trim(), password);
+    const cred = await createUserWithEmailAndPassword(firebaseAuth, email.trim(), password);
     if (displayName && displayName.trim()) {
       try {
         await updateProfile(cred.user, { displayName: displayName.trim() });
@@ -129,7 +131,8 @@ export async function firebaseRegister(
  * Envia e-mail de recuperação de senha pelo Firebase Authentication
  */
 export async function firebaseSendPasswordReset(email: string): Promise<{ success: boolean; error?: string }> {
-  if (!isFirebaseConfigured || !auth) {
+  const firebaseAuth = getFirebaseAuth() || auth;
+  if (!isFirebaseConfigured || !firebaseAuth) {
     return {
       success: false,
       error: "Firebase Authentication não está configurado com as variáveis de ambiente.",
@@ -137,7 +140,7 @@ export async function firebaseSendPasswordReset(email: string): Promise<{ succes
   }
 
   try {
-    await sendPasswordResetEmail(auth, email.trim());
+    await sendPasswordResetEmail(firebaseAuth, email.trim());
     return { success: true };
   } catch (err: unknown) {
     const error = err as { code?: string; message?: string };
@@ -157,8 +160,9 @@ export async function firebaseSendPasswordReset(email: string): Promise<{ succes
  * Realiza logout do Firebase
  */
 export async function firebaseLogout(): Promise<void> {
-  if (isFirebaseConfigured && auth) {
-    await firebaseSignOut(auth);
+  const firebaseAuth = getFirebaseAuth() || auth;
+  if (isFirebaseConfigured && firebaseAuth) {
+    await firebaseSignOut(firebaseAuth);
   }
 }
 

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useApp } from "@/context/app-context";
 import { firebaseSendPasswordReset } from "@/lib/firebase/auth";
+import { isFirebaseConfigured } from "@/lib/firebase/client";
 import { Mail, ArrowLeft, CheckCircle2, AlertCircle } from "lucide-react";
 
 export default function RecoverPasswordPage() {
@@ -18,7 +19,7 @@ export default function RecoverPasswordPage() {
     setErrorMessage(null);
     setLoading(true);
 
-    const cleanEmail = email.trim();
+    const cleanEmail = email.trim().toLowerCase();
     if (!cleanEmail || !cleanEmail.includes("@")) {
       setErrorMessage("Por favor, informe um endereço de e-mail válido.");
       setLoading(false);
@@ -26,12 +27,19 @@ export default function RecoverPasswordPage() {
     }
 
     try {
-      const result = await firebaseSendPasswordReset(cleanEmail);
-      if (!result.success) {
-        setErrorMessage(result.error || "Não foi possível enviar o e-mail de recuperação.");
+      if (isFirebaseConfigured) {
+        const result = await firebaseSendPasswordReset(cleanEmail);
+        if (!result.success) {
+          setErrorMessage(result.error || "Não foi possível enviar o e-mail de recuperação.");
+          setLoading(false);
+          return;
+        }
+        setSubmitted(true);
         setLoading(false);
         return;
       }
+
+      // Modo demonstrativo local / offline
       setSubmitted(true);
       setLoading(false);
     } catch {

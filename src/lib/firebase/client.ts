@@ -32,10 +32,30 @@ let db: Firestore | undefined = undefined;
 
 if (isFirebaseConfigured) {
   app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-  if (typeof window !== "undefined") {
+  try {
     auth = getAuth(app);
+  } catch {
+    // Silencioso se executando fora do ambiente suportado
   }
-  db = getFirestore(app);
+  try {
+    db = getFirestore(app);
+  } catch {
+    // Silencioso
+  }
+}
+
+export function getFirebaseAuth(): Auth | undefined {
+  if (!isFirebaseConfigured) return undefined;
+  if (auth) return auth;
+  if (!app) {
+    app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+  }
+  try {
+    auth = getAuth(app);
+    return auth;
+  } catch {
+    return undefined;
+  }
 }
 
 export { app, auth, db };
