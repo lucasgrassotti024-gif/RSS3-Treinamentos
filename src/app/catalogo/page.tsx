@@ -29,8 +29,8 @@ import {
   RotateCcw,
   Compass,
   ArrowRight,
-  Sparkles,
 } from "lucide-react";
+import { FM2SCourseCard } from "@/components/fm2s-course-card";
 
 
 // Componente de carrossel de fileira de cursos
@@ -123,7 +123,7 @@ function CourseRow({ categoryDef, courses, favorites, locale }: CourseRowProps) 
   );
 }
 
-// Card Compacto Inspirado no Layout Horizontal FM2S/Streaming
+// Card no Padrão Oficial FM2S / MBAs da RSS3
 interface CompactCardProps {
   course: CourseDemonstration;
   isFav: boolean;
@@ -132,96 +132,13 @@ interface CompactCardProps {
 
 function CompactCourseCard({ course, isFav, locale }: CompactCardProps) {
   return (
-    <Link
-      href={`/catalogo/${course.id}`}
-      className="group flex flex-col h-full rounded-xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/90 hover:border-blue-500/60 dark:hover:border-blue-400/60 hover:shadow-md transition-all duration-200 overflow-hidden relative"
-    >
-      {/* Imagem / Capa Compacta (Proporção 16:9 mais baixa) */}
-      <div className="relative aspect-16/9 w-full bg-slate-950 overflow-hidden">
-        {course.coverImage ? (
-          <Image
-            src={course.coverImage}
-            alt={course.title[locale]}
-            fill
-            className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
-            sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 33vw"
-          />
-        ) : (
-          <div className={`w-full h-full bg-gradient-to-r ${course.thumbnailGradient}`} />
-        )}
-
-        {/* Gradiente sutil inferior */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/20 pointer-events-none" />
-
-        {/* Badge do Código / Sigla */}
-        <div className="absolute top-2 left-2 flex items-center gap-1 z-10">
-          {course.badgeCode && (
-            <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-black/75 backdrop-blur-md text-white border border-white/10 tracking-wider">
-              {course.badgeCode}
-            </span>
-          )}
-          {course.isMandatory && (
-            <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-orange-600 text-white shadow-xs">
-              NR Obrigatória
-            </span>
-          )}
-        </div>
-
-        {/* Botão Favoritar na imagem */}
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            toggleFavoriteCourse(course.id);
-          }}
-          title={isFav ? "Remover dos favoritos" : "Adicionar aos favoritos"}
-          className={`absolute top-2 right-2 p-1.5 rounded-lg backdrop-blur-md transition-all active:scale-90 z-20 cursor-pointer ${
-            isFav
-              ? "bg-amber-500 text-white shadow-xs"
-              : "bg-black/50 text-white/70 hover:text-white hover:bg-black/75"
-          }`}
-        >
-          <Star className={`w-3.5 h-3.5 ${isFav ? "fill-white" : ""}`} />
-        </button>
-
-        {/* Carga Horária e Aulas no canto inferior */}
-        <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-white text-[11px] font-semibold z-10 pointer-events-none">
-          <span className="flex items-center gap-1 bg-black/60 backdrop-blur-xs px-2 py-0.5 rounded">
-            <Clock className="w-3 h-3 text-orange-400" />
-            {course.workloadHours}h
-          </span>
-          <span className="bg-black/60 backdrop-blur-xs px-2 py-0.5 rounded text-[10px] text-slate-200">
-            {course.lessonsCount} aulas
-          </span>
-        </div>
-      </div>
-
-      {/* Conteúdo do Card: Título direto, sem parágrafos longos */}
-      <div className="p-3.5 flex flex-col justify-between flex-1 space-y-2">
-        <h3 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 leading-snug line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-          {course.title[locale]}
-        </h3>
-
-        {/* Badges de Categorias Múltiplas */}
-        {course.categories && course.categories.length > 0 && (
-          <div className="flex flex-wrap gap-1 pt-0.5">
-            {course.categories.slice(0, 2).map((catId) => {
-              const catDef = COURSE_TAXONOMY_TYPES.find((ct) => ct.id === catId);
-              if (!catDef) return null;
-              return (
-                <span
-                  key={catId}
-                  className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${catDef.badgeBg} ${catDef.badgeText}`}
-                >
-                  {catDef.label[locale].split(" ")[0]}
-                </span>
-              );
-            })}
-          </div>
-        )}
-      </div>
-    </Link>
+    <FM2SCourseCard
+      course={course}
+      isFav={isFav}
+      locale={locale}
+      actionUrl={`/catalogo/${course.id}`}
+      actionLabel="Acessar"
+    />
   );
 }
 

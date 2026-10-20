@@ -360,6 +360,7 @@ export const COURSE_STUDY_GUIDES: Record<string, {
 
 export interface UnifiedCourseExamTrack {
   courseId: string;
+  course: CourseDemonstration;
   slug: string;
   badgeCode: string;
   title: {
@@ -440,6 +441,7 @@ export function getAllCourseExamTracks(): UnifiedCourseExamTrack[] {
 
     return {
       courseId: course.id,
+      course,
       slug: course.slug,
       badgeCode: course.badgeCode || "RSS3",
       title: course.title,
