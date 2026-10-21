@@ -228,6 +228,46 @@ export default function DesafiosPage() {
             {/* Tabelas de Apoio Oficial (para cursos que requerem análise de dados: Excel, Power BI) */}
             <CourseReferenceTables courseId={selectedTrack.courseId} />
 
+            {/* Navegador Rápido de Questões Respondidas (Sticky Question Tracker) */}
+            <div className="sticky top-16 z-20 p-3 sm:p-4 rounded-xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-md">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-2.5">
+                <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
+                  Progresso das Respostas:{" "}
+                  <strong className="text-blue-600 dark:text-blue-400">
+                    {Object.keys(userAnswers).length} de {selectedTrack.questions.length} Respondidas
+                  </strong>
+                </span>
+                <span className="text-[11px] text-slate-400">
+                  Clique no número para rolar direto até a questão
+                </span>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                {selectedTrack.questions.map((q, qIndex) => {
+                  const isAnswered = !!userAnswers[q.id];
+                  return (
+                    <button
+                      key={q.id}
+                      type="button"
+                      onClick={() => {
+                        const el = document.getElementById(`questao-${q.id}`);
+                        if (el) {
+                          el.scrollIntoView({ behavior: "smooth", block: "center" });
+                        }
+                      }}
+                      className={`w-8 h-8 rounded-lg text-xs font-bold flex items-center justify-center transition-all cursor-pointer ${
+                        isAnswered
+                          ? "bg-emerald-600 text-white shadow-xs scale-105"
+                          : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200/80 dark:border-slate-700/80"
+                      }`}
+                    >
+                      {qIndex + 1}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* Questões em Formato de História / Situação Prática */}
             <div className="space-y-6">
               {selectedTrack.questions.map((q, idx) => {
@@ -236,7 +276,8 @@ export default function DesafiosPage() {
                 return (
                   <div
                     key={q.id}
-                    className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6"
+                    id={`questao-${q.id}`}
+                    className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-28"
                   >
                     {/* Cabeçalho da Questão */}
                     <div className="space-y-3">

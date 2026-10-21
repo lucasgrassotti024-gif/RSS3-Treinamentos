@@ -31,6 +31,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { FM2SCourseCard } from "@/components/fm2s-course-card";
+import { ResumeLearningBanner } from "@/components/resume-learning-banner";
 
 
 // Componente de carrossel de fileira de cursos
@@ -251,6 +252,9 @@ export default function CatalogPage() {
           )}
         </div>
       </div>
+
+      {/* Banner de Retomada Inteligente do Treinamento mais recente */}
+      <ResumeLearningBanner locale={locale} />
 
       {/* RENDERIZAÇÃO EM FILEIRAS POR TIPO (3 CARDS POR FILEIRA COM SCROLL HORIZONTAL) */}
       {selectedTypeFilter === "all" && searchTerm === "" ? (

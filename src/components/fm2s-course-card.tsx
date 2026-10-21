@@ -334,7 +334,32 @@ export function FM2SCourseCard({
   showFavoriteButton = true,
 }: FM2SCourseCardProps) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const popoverRef = React.useRef<HTMLDivElement>(null);
   const theme = getCourseVisualTheme(course.id);
+
+  // Fecha o popover ao clicar fora ou apertar Escape
+  React.useEffect(() => {
+    if (!dropdownOpen) return;
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (popoverRef.current && !popoverRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [dropdownOpen]);
 
   // Calcula progresso dinâmico do usuário no curso
   const userProgress = getCourseProgress(course.id);
@@ -448,7 +473,7 @@ export function FM2SCourseCard({
           )}
 
           {/* Botão Conteúdo / Dropdown */}
-          <div className="relative">
+          <div ref={popoverRef} className="relative">
             <button
               type="button"
               onClick={() => setDropdownOpen((prev) => !prev)}

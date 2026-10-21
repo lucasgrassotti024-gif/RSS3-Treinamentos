@@ -122,17 +122,17 @@ export function AppShell({ children }: AppShellProps) {
         `}
       >
         {/* Topo da Sidebar: Logo & Botão de Recolher */}
-        <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-          <Link
-            href="/"
-            onClick={() => setMobileOpen(false)}
-            className="flex items-center gap-3 overflow-hidden group"
-          >
-            <div className="w-10 h-10 rounded-xl bg-blue-900 dark:bg-blue-600 flex items-center justify-center text-white shadow-sm shrink-0 group-hover:scale-105 transition-transform">
-              <GraduationCap className="w-6 h-6 text-orange-400" />
-            </div>
+        <div className={`p-4 border-b border-slate-200 dark:border-slate-800 flex items-center ${collapsed ? "justify-center" : "justify-between"}`}>
+          {(!collapsed || mobileOpen) && (
+            <Link
+              href="/"
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center gap-3 overflow-hidden group min-w-0"
+            >
+              <div className="w-10 h-10 rounded-xl bg-blue-900 dark:bg-blue-600 flex items-center justify-center text-white shadow-sm shrink-0 group-hover:scale-105 transition-transform">
+                <GraduationCap className="w-6 h-6 text-orange-400" />
+              </div>
 
-            {(!collapsed || mobileOpen) && (
               <div className="flex flex-col min-w-0">
                 <div className="flex items-center gap-1">
                   <span className="font-extrabold text-base tracking-tight text-blue-950 dark:text-white">
@@ -146,13 +146,13 @@ export function AppShell({ children }: AppShellProps) {
                   Soluções Industriais
                 </span>
               </div>
-            )}
-          </Link>
+            </Link>
+          )}
 
           {/* Botão para diminuir / expandir no desktop (visível no topo) */}
           <button
             onClick={() => setCollapsed(!collapsed)}
-            className="hidden lg:flex p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0"
+            className="hidden lg:flex p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0"
             title={collapsed ? "Expandir menu lateral" : "Diminuir menu lateral"}
             aria-label={collapsed ? "Expandir menu lateral" : "Diminuir menu lateral"}
           >
@@ -190,28 +190,36 @@ export function AppShell({ children }: AppShellProps) {
                     : pathname.startsWith(item.href);
 
                 return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMobileOpen(false)}
-                    title={collapsed ? item.label : undefined}
-                    className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all ${
-                      isActive
-                        ? "bg-blue-50 dark:bg-blue-950/50 text-blue-900 dark:text-blue-300 shadow-xs border border-blue-200/80 dark:border-blue-900/60"
-                        : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"
-                    }`}
-                  >
-                    <Icon
-                      className={`w-5 h-5 shrink-0 ${
+                  <div key={item.href} className="relative group/nav">
+                    <Link
+                      href={item.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                         isActive
-                          ? "text-blue-600 dark:text-blue-400"
-                          : "text-slate-400 group-hover:text-slate-600"
-                      }`}
-                    />
-                    {(!collapsed || mobileOpen) && (
-                      <span className="truncate">{item.label}</span>
+                          ? "bg-blue-50 dark:bg-blue-950/50 text-blue-900 dark:text-blue-300 shadow-xs border border-blue-200/80 dark:border-blue-900/60"
+                          : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"
+                      } ${collapsed ? "justify-center" : ""}`}
+                    >
+                      <Icon
+                        className={`w-5 h-5 shrink-0 ${
+                          isActive
+                            ? "text-blue-600 dark:text-blue-400"
+                            : "text-slate-400 group-hover/nav:text-slate-600 dark:group-hover/nav:text-slate-200"
+                        }`}
+                      />
+                      {(!collapsed || mobileOpen) && (
+                        <span className="truncate">{item.label}</span>
+                      )}
+                    </Link>
+
+                    {/* Tooltip Flutuante Lateral no Modo Recolhido */}
+                    {collapsed && !mobileOpen && (
+                      <div className="absolute left-full top-1/2 -translate-y-1/2 ml-3 px-3 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-semibold whitespace-nowrap opacity-0 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-x-1 transition-all duration-200 shadow-xl border border-slate-700 z-50">
+                        {item.label}
+                        <div className="absolute top-1/2 -translate-y-1/2 -left-1 w-2 h-2 bg-slate-900 rotate-45 border-l border-b border-slate-700" />
+                      </div>
                     )}
-                  </Link>
+                  </div>
                 );
               })}
             </nav>

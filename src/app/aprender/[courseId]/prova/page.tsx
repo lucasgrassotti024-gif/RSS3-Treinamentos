@@ -229,6 +229,46 @@ export default function CourseExamPage() {
         {/* Tabelas de Referência Oficiais (Excel, Power BI) */}
         <CourseReferenceTables courseId={courseId} />
 
+        {/* Navegador Rápido de Questões Respondidas (Sticky Question Tracker) */}
+        <div className="sticky top-16 z-20 p-3 sm:p-4 rounded-xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-md">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-2.5">
+            <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
+              Progresso das Respostas:{" "}
+              <strong className="text-blue-600 dark:text-blue-400">
+                {Object.keys(userAnswers).length} de {exam.questions.length} Respondidas
+              </strong>
+            </span>
+            <span className="text-[11px] text-slate-400">
+              Clique no número para ir direto até a questão
+            </span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+            {exam.questions.map((q, qIndex) => {
+              const isAnswered = !!userAnswers[q.id];
+              return (
+                <button
+                  key={q.id}
+                  type="button"
+                  onClick={() => {
+                    const el = document.getElementById(`prova-q-${q.id}`);
+                    if (el) {
+                      el.scrollIntoView({ behavior: "smooth", block: "center" });
+                    }
+                  }}
+                  className={`w-8 h-8 rounded-lg text-xs font-bold flex items-center justify-center transition-all cursor-pointer ${
+                    isAnswered
+                      ? "bg-emerald-600 text-white shadow-xs scale-105"
+                      : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200/80 dark:border-slate-700/80"
+                  }`}
+                >
+                  {qIndex + 1}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         {/* Lista de Questões */}
         <div className="space-y-6">
           {exam.questions.map((question, qIdx) => {
@@ -238,7 +278,8 @@ export default function CourseExamPage() {
             return (
               <div
                 key={question.id}
-                className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-7 shadow-xs space-y-4"
+                id={`prova-q-${question.id}`}
+                className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-7 shadow-xs space-y-4 scroll-mt-28"
               >
                 <div className="flex items-start gap-3">
                   <span className="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
