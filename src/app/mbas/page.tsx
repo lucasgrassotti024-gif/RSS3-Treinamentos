@@ -1,13 +1,24 @@
 "use client";
-
 import React from "react";
 import Link from "next/link";
 import { useApp } from "@/context/app-context";
-import { DEMO_MBAS } from "@/lib/mock-data";
+import { DEMO_MBAS, DEMO_COURSES } from "@/lib/mock-data";
+import {
+  subscribeToProgress,
+  getStoredProgress,
+  getServerProgressSnapshot,
+  calculateCourseProgressMetrics,
+} from "@/lib/progress";
 import { GraduationCap, BookOpen, Clock } from "lucide-react";
 
 export default function MbasPage() {
   const { locale } = useApp();
+
+  const progressStore = React.useSyncExternalStore(
+    subscribeToProgress,
+    getStoredProgress,
+    getServerProgressSnapshot
+  );
 
   return (
     <div className="flex-1 bg-slate-50 dark:bg-slate-950 min-h-screen">
@@ -31,8 +42,22 @@ export default function MbasPage() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {DEMO_MBAS.map((mba) => {
-            // Em ambiente demonstrativo / piloto de teste, calculamos progresso inicial
-            const progressPercent = 0;
+            // Calcula o progresso real agregado das etapas do MBA
+            const coursesWithProgress = mba.courses.filter((c) => !!c.courseId);
+            let totalPercent = 0;
+            if (coursesWithProgress.length > 0) {
+              coursesWithProgress.forEach((item) => {
+                const targetCourse = DEMO_COURSES.find((dc) => dc.id === item.courseId);
+                if (targetCourse) {
+                  const p = progressStore[targetCourse.id];
+                  const m = calculateCourseProgressMetrics(targetCourse, p);
+                  totalPercent += m.progressPercent;
+                }
+              });
+            }
+            const progressPercent = coursesWithProgress.length > 0
+              ? Math.round(totalPercent / mba.courses.length)
+              : 0;
 
             return (
               <div

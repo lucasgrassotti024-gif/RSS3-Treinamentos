@@ -16,6 +16,7 @@ import {
 } from "@/lib/progress";
 import { CertificateDemonstration } from "@/types";
 import CertificateModal from "@/components/certificate-modal";
+import { FM2SCourseCard } from "@/components/fm2s-course-card";
 import {
   Trophy,
   Flame,
@@ -26,6 +27,9 @@ import {
   ShieldAlert,
   PlayCircle,
   FileCheck,
+  Calendar,
+  Copy,
+  Check,
 } from "lucide-react";
 
 export default function DashboardPage() {
@@ -55,6 +59,13 @@ export default function DashboardPage() {
     getServerCertificatesSnapshot
   );
   const [selectedCert, setSelectedCert] = useState<CertificateDemonstration | null>(null);
+  const [copiedCode, setCopiedCode] = useState<string | null>(null);
+
+  const handleCopyCode = (code: string) => {
+    navigator.clipboard.writeText(code);
+    setCopiedCode(code);
+    setTimeout(() => setCopiedCode(null), 2500);
+  };
 
   // Encontrar o curso com interação mais recente ou usar o primeiro curso da lista
   let featuredCourse = DEMO_COURSES[0];
@@ -82,6 +93,32 @@ export default function DashboardPage() {
     }
   }
 
+  // Métricas dinâmicas em tempo real calculadas do estado real do colaborador
+  const { inProgressCount, completedCount, dynamicXP } = React.useMemo(() => {
+    let inProg = 0;
+    let comp = 0;
+    let earnedXP = 0;
+
+    DEMO_COURSES.forEach((c) => {
+      const p = progressStore[c.id];
+      const m = calculateCourseProgressMetrics(c, p);
+      if (m.isFullyCompleted) {
+        comp++;
+        earnedXP += 300;
+      } else if (m.completedCount > 0 || p?.lastAccessedLessonId) {
+        inProg++;
+        earnedXP += m.completedCount * 30;
+      }
+    });
+
+    const certBonus = certificates.length * 250;
+    return {
+      inProgressCount: inProg,
+      completedCount: comp,
+      dynamicXP: (currentUser?.currentXP || 100) + earnedXP + certBonus,
+    };
+  }, [progressStore, certificates, currentUser]);
+
   const metrics = calculateCourseProgressMetrics(featuredCourse, featuredProgress);
 
   return (
@@ -91,7 +128,7 @@ export default function DashboardPage() {
         <div className="space-y-2 relative z-10">
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-orange-500/20 border border-orange-500/30 text-orange-400 text-xs font-bold">
             <Trophy className="w-3.5 h-3.5" />
-            <span>{t.dashboard.statsLevel} {user.level} • {user.currentXP} XP</span>
+            <span>{t.dashboard.statsLevel} {user.level} • {dynamicXP} XP</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
             {t.dashboard.welcome.replace("{name}", user.name)}
@@ -119,8 +156,8 @@ export default function DashboardPage() {
             <span className="text-xs font-semibold">{t.dashboard.statsXP}</span>
             <Flame className="w-4 h-4 text-orange-500" />
           </div>
-          <div className="text-2xl font-black text-foreground">{user.currentXP}</div>
-          <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">+150 XP esta semana</p>
+          <div className="text-2xl font-black text-foreground">{dynamicXP}</div>
+          <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">Pontuação acumulada</p>
         </div>
 
         <div className="p-5 rounded-xl border border-border bg-card shadow-xs space-y-1">
@@ -128,7 +165,7 @@ export default function DashboardPage() {
             <span className="text-xs font-semibold">{t.dashboard.statsInProgress}</span>
             <PlayCircle className="w-4 h-4 text-blue-500" />
           </div>
-          <div className="text-2xl font-black text-foreground">{user.inProgressCoursesCount}</div>
+          <div className="text-2xl font-black text-foreground">{inProgressCount}</div>
           <p className="text-[11px] text-muted-foreground">Treinamentos ativos</p>
         </div>
 
@@ -137,7 +174,7 @@ export default function DashboardPage() {
             <span className="text-xs font-semibold">{t.dashboard.statsCompleted}</span>
             <CheckCircle2 className="w-4 h-4 text-emerald-500" />
           </div>
-          <div className="text-2xl font-black text-foreground">{user.completedCoursesCount}</div>
+          <div className="text-2xl font-black text-foreground">{completedCount}</div>
           <p className="text-[11px] text-muted-foreground">Cursos finalizados</p>
         </div>
 
@@ -146,7 +183,7 @@ export default function DashboardPage() {
             <span className="text-xs font-semibold">{t.dashboard.statsCertificates}</span>
             <Award className="w-4 h-4 text-amber-500" />
           </div>
-          <div className="text-2xl font-black text-foreground">{user.certificatesCount}</div>
+          <div className="text-2xl font-black text-foreground">{certificates.length}</div>
           <p className="text-[11px] text-muted-foreground">Emitidos e auditáveis</p>
         </div>
       </div>
@@ -214,18 +251,18 @@ export default function DashboardPage() {
           </h2>
 
           <div className="space-y-3">
-            {DEMO_COURSES.slice(0, 2).map((course) => (
+            {DEMO_COURSES.filter((c) => c.isMandatory).slice(0, 3).map((course) => (
               <div
                 key={course.id}
                 className="p-4 rounded-xl border border-border bg-card hover:border-blue-900/40 transition-colors flex items-center justify-between gap-4"
               >
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-orange-100 dark:bg-orange-950/60 text-orange-700 dark:text-orange-400">
-                      Obrigatório
+                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-orange-100 dark:bg-orange-950/60 text-orange-700 dark:text-orange-400">
+                      NR Obrigatória
                     </span>
                     <span className="text-xs text-muted-foreground">
-                      {course.workloadHours}h • {course.schoolName[locale]}
+                      {course.workloadHours}h • {course.badgeCode || "RSS3"}
                     </span>
                   </div>
                   <h4 className="font-bold text-sm text-foreground line-clamp-1">
@@ -234,7 +271,7 @@ export default function DashboardPage() {
                 </div>
                 <Link
                   href={`/catalogo/${course.id}`}
-                  className="px-3 py-1.5 rounded-md border text-xs font-semibold text-foreground hover:bg-secondary transition-colors shrink-0"
+                  className="px-3.5 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:opacity-90 transition-opacity shrink-0"
                 >
                   Acessar
                 </Link>
@@ -257,40 +294,59 @@ export default function DashboardPage() {
 
             <div className="space-y-2.5">
               {certificates.length > 0 ? (
-                certificates.map((cert) => (
-                  <div
-                    key={cert.id}
-                    className="p-4 rounded-xl border border-border bg-secondary/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs hover:border-emerald-500/50 transition-colors"
-                  >
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/70 px-2 py-0.5 rounded">
-                          Emitido para {cert.userName}
-                        </span>
-                        <span className="text-muted-foreground">•</span>
-                        <span className="text-[11px] text-muted-foreground">
-                          {new Date(cert.issuedAt).toLocaleDateString("pt-BR")}
-                        </span>
-                      </div>
-                      <div className="font-bold text-sm text-foreground">
-                        {cert.courseTitle["pt-BR"]}
-                      </div>
-                      <div className="text-[11px] text-muted-foreground font-mono">
-                        Código: {cert.validationCode} • Carga Horária: {cert.workloadHours}h
-                      </div>
-                    </div>
+                certificates.map((cert) => {
+                  const issuedDate = new Date(cert.issuedAt);
+                  const validUntil = new Date(new Date(cert.issuedAt).setFullYear(issuedDate.getFullYear() + 2));
+                  const isCopied = copiedCode === cert.validationCode;
 
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => setSelectedCert(cert)}
-                        className="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-colors flex items-center gap-1.5 shadow-xs cursor-pointer"
-                      >
-                        <Award className="w-3.5 h-3.5" />
-                        <span>Visualizar Certificado</span>
-                      </button>
+                  return (
+                    <div
+                      key={cert.id}
+                      className="p-4 rounded-xl border border-border bg-secondary/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs hover:border-emerald-500/50 transition-colors"
+                    >
+                      <div className="space-y-1 flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/70 px-2 py-0.5 rounded">
+                            {cert.userName}
+                          </span>
+                          <span className="text-muted-foreground">•</span>
+                          <span className="text-[11px] text-muted-foreground">
+                            Emitido: {issuedDate.toLocaleDateString("pt-BR")}
+                          </span>
+                          <span className="text-muted-foreground">•</span>
+                          <span className="text-[11px] font-semibold text-amber-600 dark:text-amber-400">
+                            Reciclagem até: {validUntil.toLocaleDateString("pt-BR")}
+                          </span>
+                        </div>
+                        <div className="font-bold text-sm text-foreground truncate">
+                          {cert.courseTitle["pt-BR"]}
+                        </div>
+                        <div className="text-[11px] text-muted-foreground font-mono flex items-center gap-2">
+                          <span>Código: {cert.validationCode}</span>
+                          <button
+                            type="button"
+                            onClick={() => handleCopyCode(cert.validationCode)}
+                            className="inline-flex items-center gap-1 text-[10px] text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+                            title="Copiar código para validação"
+                          >
+                            {isCopied ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
+                            <span>{isCopied ? "Copiado!" : "Copiar"}</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 shrink-0">
+                        <button
+                          onClick={() => setSelectedCert(cert)}
+                          className="px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-colors flex items-center gap-1.5 shadow-xs cursor-pointer"
+                        >
+                          <Award className="w-3.5 h-3.5" />
+                          <span>Abrir Certificado</span>
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                ))
+                  );
+                })
               ) : metrics.isFullyCompleted ? (
                 <div className="p-5 text-center space-y-3 border border-emerald-500/30 rounded-xl bg-emerald-50/20 dark:bg-emerald-950/20">
                   <p className="text-xs font-bold text-foreground">

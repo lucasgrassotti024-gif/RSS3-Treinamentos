@@ -4,7 +4,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useParams, notFound } from "next/navigation";
 import { useApp } from "@/context/app-context";
-import { DEMO_MBAS } from "@/lib/mock-data";
+import { DEMO_MBAS, DEMO_COURSES } from "@/lib/mock-data";
+import {
+  subscribeToProgress,
+  getStoredProgress,
+  getServerProgressSnapshot,
+  calculateCourseProgressMetrics,
+} from "@/lib/progress";
 import {
   GraduationCap,
   ArrowLeft,
@@ -38,6 +44,12 @@ export default function MbaDetailPage() {
       [courseId]: !prev[courseId],
     }));
   };
+
+  const progressStore = React.useSyncExternalStore(
+    subscribeToProgress,
+    getStoredProgress,
+    getServerProgressSnapshot
+  );
 
   return (
     <div className="flex-1 bg-slate-100/60 dark:bg-slate-950 min-h-screen">
@@ -86,13 +98,20 @@ export default function MbaDetailPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {mba.courses.map((item, index) => {
             const isDropdownOpen = !!openDropdowns[item.id];
-            // Se for o curso real de hidrojato, podemos direcionar para a rota real de aprendizado
-            const courseTargetUrl = item.courseId
-              ? `/aprender/${item.courseId}`
-              : `#`;
+            
+            // Verifica progresso real se o curso estiver no catálogo
+            const targetCourse = item.courseId ? DEMO_COURSES.find((c) => c.id === item.courseId) : null;
+            let progressPercent = 0;
+            let courseTargetUrl = item.courseId ? `/catalogo/${item.courseId}` : `#`;
 
-            // Progresso individual do curso do MBA (fictício/inicial 0%)
-            const progressPercent = 0;
+            if (targetCourse) {
+              const p = progressStore[targetCourse.id];
+              const m = calculateCourseProgressMetrics(targetCourse, p);
+              progressPercent = m.progressPercent;
+              if (m.resumeLessonId) {
+                courseTargetUrl = `/aprender/${targetCourse.id}/${m.resumeLessonId}`;
+              }
+            }
 
             return (
               <div

@@ -380,8 +380,36 @@ export function AppShell({ children }: AppShellProps) {
           </div>
         </header>
 
-        {/* Páginas do Sistema */}
-        <main className="flex-1 flex flex-col min-w-0">{children}</main>
+        {/* Páginas do Sistema (com espaçamento inferior no mobile para a bottom bar) */}
+        <main className="flex-1 flex flex-col min-w-0 pb-16 lg:pb-0">{children}</main>
+
+        {/* Barra de Navegação Inferior Fixa para Mobile (Experiência estilo App) */}
+        <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-2 py-1.5 flex items-center justify-around shadow-lg">
+          {navItems.slice(0, 5).map((item) => {
+            const Icon = item.icon;
+            const isActive =
+              item.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(item.href);
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all ${
+                  isActive
+                    ? "text-blue-600 dark:text-blue-400 font-bold"
+                    : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+                }`}
+              >
+                <Icon className={`w-5 h-5 ${isActive ? "scale-110" : ""}`} />
+                <span className="text-[10px] mt-0.5 tracking-tight truncate max-w-[64px]">
+                  {item.label}
+                </span>
+              </Link>
+            );
+          })}
+        </nav>
       </div>
     </div>
   );

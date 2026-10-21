@@ -139,9 +139,15 @@ export default function CertificateModal({
               </div>
             </div>
 
-            {/* Aviso Obrigatório de Conformidade Regulatória (AGENTS.md) */}
-            <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-3xs sm:text-2xs text-left max-w-2xl mx-auto leading-relaxed">
-              <strong>Aviso de Conformidade Regulatória (NRs):</strong> Este certificado comprova a conclusão da etapa teórica e domínio dos procedimentos operacionais da disciplina. Habilitações operacionais formais para trabalho de alto risco (ex: NR-35, NR-33, NR-10) exigem complementação prática presencial validada por instrutor credenciado e ASO vigente.
+            {/* Aviso Obrigatório de Conformidade Regulatória e Validade de Reciclagem (AGENTS.md) */}
+            <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-3xs sm:text-2xs text-left max-w-2xl mx-auto leading-relaxed space-y-1">
+              <div>
+                <strong>Aviso de Conformidade Regulatória (NRs):</strong> Este certificado comprova a conclusão da etapa teórica e domínio dos procedimentos operacionais da disciplina. Habilitações operacionais formais para trabalho de alto risco (ex: NR-35, NR-33, NR-10) exigem complementação prática presencial validada por instrutor credenciado e ASO vigente.
+              </div>
+              <div className="text-[11px] font-semibold text-amber-800 pt-1 border-t border-amber-200/80 flex items-center justify-between">
+                <span>Prazo Recomendado de Reciclagem Periódica: <strong>Bienal (24 Meses)</strong></span>
+                <span>Validade Teórica Sugerida: <strong>{new Date(new Date(certificate.issuedAt).setFullYear(new Date(certificate.issuedAt).getFullYear() + 2)).toLocaleDateString("pt-BR")}</strong></span>
+              </div>
             </div>
           </div>
 
