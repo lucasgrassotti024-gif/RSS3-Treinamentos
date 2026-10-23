@@ -30,7 +30,17 @@ import {
   Sparkles,
   ArrowRight,
   PlayCircle,
+  DownloadCloud,
+  Check,
+  FileDown,
 } from "lucide-react";
+import FieldGuideModal from "@/components/field-guide-modal";
+import {
+  isCourseSavedOffline,
+  saveCourseForOffline,
+  removeCourseFromOffline,
+  subscribeToOfflineCourses,
+} from "@/lib/offline-manager";
 
 const CONTENT_ICON: Record<ContentType, React.ElementType> = {
   video: Video,
@@ -87,6 +97,30 @@ export default function CourseDetailsClient({ courseId }: { courseId: string }) 
       {}
     );
     setOpenModules(allClosed);
+  };
+
+  // Estado para controlar abertura do Guia de Bolso / POP de Campo
+  const [fieldGuideOpen, setFieldGuideOpen] = useState(false);
+
+  // Sincronização reativa do status offline
+  const isSavedOffline = React.useSyncExternalStore(
+    subscribeToOfflineCourses,
+    () => isCourseSavedOffline(courseId),
+    () => false
+  );
+
+  const [savingOffline, setSavingOffline] = useState(false);
+
+  const handleToggleOfflineSave = () => {
+    setSavingOffline(true);
+    setTimeout(() => {
+      if (isSavedOffline) {
+        removeCourseFromOffline(courseId);
+      } else {
+        saveCourseForOffline(course);
+      }
+      setSavingOffline(false);
+    }, 400);
   };
 
   return (
@@ -203,29 +237,64 @@ export default function CourseDetailsClient({ courseId }: { courseId: string }) 
           </div>
         </div>
 
-        {/* Ação Principal */}
-        <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
-          {(() => {
-            const firstLessonId = course.modules?.[0]?.lessons?.[0]?.id ?? "";
-            const targetLessonId = metrics.resumeLessonId || firstLessonId;
-            return targetLessonId ? (
-              <Link
-                href={`/aprender/${courseId}/${targetLessonId}`}
-                className="w-full sm:w-auto px-6 py-3 rounded-lg bg-blue-900 hover:bg-blue-800 text-white font-semibold text-xs transition-colors shadow-sm flex items-center justify-center gap-2"
-              >
-                <PlayCircle className="w-4 h-4" />
-                <span>Entrar</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            ) : (
-              <button
-                disabled
-                className="w-full sm:w-auto px-6 py-3 rounded-lg bg-slate-400 text-white font-semibold text-xs cursor-not-allowed flex items-center justify-center gap-2"
-              >
-                <span>Entrar</span>
-              </button>
-            );
-          })()}
+        {/* Ação Principal e Barra de Acesso Offline */}
+        <div className="pt-2 flex flex-col md:flex-row md:items-center justify-between gap-4 border-t border-border mt-4">
+          <div className="flex flex-wrap items-center gap-3">
+            {(() => {
+              const firstLessonId = course.modules?.[0]?.lessons?.[0]?.id ?? "";
+              const targetLessonId = metrics.resumeLessonId || firstLessonId;
+              return targetLessonId ? (
+                <Link
+                  href={`/aprender/${courseId}/${targetLessonId}`}
+                  className="px-6 py-3 rounded-xl bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs transition-colors shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <PlayCircle className="w-4 h-4" />
+                  <span>{metrics.completedCount > 0 ? "Continuar Treinamento" : "Iniciar Treinamento"}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              ) : (
+                <button
+                  disabled
+                  className="px-6 py-3 rounded-xl bg-slate-400 text-white font-semibold text-xs cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  <span>Entrar</span>
+                </button>
+              );
+            })()}
+
+            {/* Botão de Salvar Curso Offline */}
+            <button
+              type="button"
+              onClick={handleToggleOfflineSave}
+              disabled={savingOffline}
+              className={`px-4 py-3 rounded-xl text-xs font-bold transition-all flex items-center gap-2 border cursor-pointer ${
+                isSavedOffline
+                  ? "bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800 hover:bg-rose-50 hover:text-rose-600 hover:border-rose-300"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-blue-600"
+              }`}
+              title={isSavedOffline ? "Clique para remover da memória offline" : "Salvar todo o conteúdo deste curso para leitura sem internet"}
+            >
+              {savingOffline ? (
+                <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+              ) : isSavedOffline ? (
+                <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              ) : (
+                <DownloadCloud className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              )}
+              <span>{isSavedOffline ? "Disponível Offline" : "Salvar Offline"}</span>
+            </button>
+
+            {/* Botão de Abrir Guia Técnico / POP de Bolso para Campo */}
+            <button
+              type="button"
+              onClick={() => setFieldGuideOpen(true)}
+              className="px-4 py-3 rounded-xl bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800 hover:bg-orange-100 dark:hover:bg-orange-900/60 text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer shadow-2xs"
+              title="Visualizar e exportar o Procedimento Operacional / Guia de Bolso formatado para campo em PDF"
+            >
+              <FileDown className="w-4 h-4 text-orange-600" />
+              <span>Guia de Campo (POP / PDF)</span>
+            </button>
+          </div>
 
           <div className="flex flex-col sm:items-end text-xs text-muted-foreground">
             <span>{t.courseDetails.inProgressWarning}</span>
@@ -496,6 +565,15 @@ export default function CourseDetailsClient({ courseId }: { courseId: string }) 
           </div>
         )}
       </div>
+
+      {/* Modal do Guia de Bolso / POP Técnico de Campo */}
+      {fieldGuideOpen && (
+        <FieldGuideModal
+          course={course}
+          locale={locale}
+          onClose={() => setFieldGuideOpen(false)}
+        />
+      )}
     </div>
   );
 }

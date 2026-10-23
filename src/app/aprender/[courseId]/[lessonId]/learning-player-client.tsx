@@ -17,6 +17,13 @@ import {
   saveLessonNote,
 } from "@/lib/progress";
 import CertificateModal from "@/components/certificate-modal";
+import FieldGuideModal from "@/components/field-guide-modal";
+import {
+  isCourseSavedOffline,
+  saveCourseForOffline,
+  removeCourseFromOffline,
+  subscribeToOfflineCourses,
+} from "@/lib/offline-manager";
 import { CourseDemonstration, LessonDemonstration, CertificateDemonstration, LessonAttachment } from "@/types";
 import { VISUAL_ASSETS_MAP } from "@/components/illustrations/pilot-5s-assets";
 import {
@@ -51,6 +58,9 @@ import {
   Download,
   BookOpen,
   Save,
+  FileDown,
+  DownloadCloud,
+  Check,
 } from "lucide-react";
 
 interface LearningPlayerClientProps {
@@ -80,6 +90,17 @@ export default function LearningPlayerClient({
 
   // Aba ativa na aula: 'conteudo' | 'anotacoes' | 'materiais'
   const [activeTab, setActiveTab] = useState<"conteudo" | "anotacoes" | "materiais">("conteudo");
+
+  // Modal do Guia de Bolso / POP
+  const [fieldGuideOpen, setFieldGuideOpen] = useState(false);
+
+  // Sincronização offline reativa
+  const isSavedOffline = React.useSyncExternalStore(
+    subscribeToOfflineCourses,
+    () => isCourseSavedOffline(courseId),
+    () => false
+  );
+  const [savingOffline, setSavingOffline] = useState(false);
 
   // Anotações pessoais do aluno nesta aula
   const [noteText, setNoteText] = useState("");
@@ -273,6 +294,45 @@ export default function LearningPlayerClient({
                 />
               </div>
             </div>
+
+            {/* Botão de Acesso Offline na Aula */}
+            <button
+              onClick={() => {
+                setSavingOffline(true);
+                setTimeout(() => {
+                  if (isSavedOffline) {
+                    removeCourseFromOffline(courseId);
+                  } else {
+                    saveCourseForOffline(course);
+                  }
+                  setSavingOffline(false);
+                }, 300);
+              }}
+              disabled={savingOffline}
+              className={`hidden md:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-semibold transition-colors cursor-pointer ${
+                isSavedOffline
+                  ? "bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800"
+                  : "border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+              }`}
+              title={isSavedOffline ? "Curso disponível na memória do navegador" : "Salvar todo o treinamento para consultar sem internet"}
+            >
+              {isSavedOffline ? (
+                <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              ) : (
+                <DownloadCloud className="w-3.5 h-3.5 text-blue-600" />
+              )}
+              <span className="hidden xl:inline">{isSavedOffline ? "Salvo Offline" : "Salvar Offline"}</span>
+            </button>
+
+            {/* Botão de Visualização / Impressão de Guia POP de Campo */}
+            <button
+              onClick={() => setFieldGuideOpen(true)}
+              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-orange-200 dark:border-orange-800 bg-orange-50/60 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 hover:bg-orange-100 text-xs font-semibold transition-colors cursor-pointer"
+              title="Abrir Procedimento Operacional / Guia de Campo em PDF"
+            >
+              <FileDown className="w-3.5 h-3.5 text-orange-600" />
+              <span className="hidden xl:inline">Guia POP (PDF)</span>
+            </button>
 
             {/* Botão Modo Foco / Modo Teatro */}
             <button
@@ -1440,6 +1500,15 @@ export default function LearningPlayerClient({
         <CertificateModal
           certificate={activeCertificate}
           onClose={() => setCertificateModalOpen(false)}
+        />
+      )}
+
+      {/* Modal do Guia Técnico de Campo / POP de Bolso */}
+      {fieldGuideOpen && (
+        <FieldGuideModal
+          course={course}
+          locale={locale}
+          onClose={() => setFieldGuideOpen(false)}
         />
       )}
     </div>

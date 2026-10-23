@@ -30,9 +30,11 @@ import {
   Briefcase,
   Users,
   CheckSquare,
+  Check,
 } from "lucide-react";
 import { toggleFavoriteCourse } from "@/lib/favorites";
 import { getCourseProgress, calculateCourseProgressMetrics } from "@/lib/progress";
+import { isCourseSavedOffline, subscribeToOfflineCourses } from "@/lib/offline-manager";
 
 interface FM2SCourseCardProps {
   course: CourseDemonstration;
@@ -366,6 +368,13 @@ export function FM2SCourseCard({
   const metrics = calculateCourseProgressMetrics(course, userProgress);
   const progressPercent = metrics.progressPercent;
 
+  // Verifica se o curso foi salvo offline
+  const isSavedOffline = React.useSyncExternalStore(
+    subscribeToOfflineCourses,
+    () => isCourseSavedOffline(course.id),
+    () => false
+  );
+
   const targetLink = actionUrl || `/catalogo/${course.id}`;
 
   return (
@@ -391,20 +400,32 @@ export function FM2SCourseCard({
                 {stepNumber ? `ETAPA ${stepNumber}` : theme.themeLabel}
               </span>
 
-              {showFavoriteButton && (
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    toggleFavoriteCourse(course.id);
-                  }}
-                  title={isFav ? "Remover dos favoritos" : "Adicionar aos favoritos"}
-                  className="p-1 rounded text-slate-400 hover:text-amber-500 transition-colors shrink-0"
-                >
-                  <Star className={`w-3.5 h-3.5 ${isFav ? "fill-amber-500 text-amber-500" : ""}`} />
-                </button>
-              )}
+              <div className="flex items-center gap-1">
+                {isSavedOffline && (
+                  <span
+                    className="p-1 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[9px] font-bold flex items-center gap-0.5 border border-emerald-500/30"
+                    title="Disponível para estudo offline"
+                  >
+                    <Check className="w-2.5 h-2.5" />
+                    <span>OFF</span>
+                  </span>
+                )}
+
+                {showFavoriteButton && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      toggleFavoriteCourse(course.id);
+                    }}
+                    title={isFav ? "Remover dos favoritos" : "Adicionar aos favoritos"}
+                    className="p-1 rounded text-slate-400 hover:text-amber-500 transition-colors shrink-0"
+                  >
+                    <Star className={`w-3.5 h-3.5 ${isFav ? "fill-amber-500 text-amber-500" : ""}`} />
+                  </button>
+                )}
+              </div>
             </div>
 
             <h3 className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 leading-snug line-clamp-3">

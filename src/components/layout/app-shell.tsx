@@ -20,6 +20,9 @@ import {
   User,
   LogOut,
   Trophy,
+  Wifi,
+  WifiOff,
+  DownloadCloud,
 } from "lucide-react";
 
 interface AppShellProps {
@@ -58,6 +61,21 @@ export function AppShell({ children }: AppShellProps) {
   const rawCollapsed = useSyncExternalStore(subscribeSidebar, getSidebarSnapshot, getServerSidebarSnapshot);
   const collapsed = mounted ? rawCollapsed : false;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isOnline, setIsOnline] = useState(true);
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsOnline(navigator.onLine);
+      const handleOnline = () => setIsOnline(true);
+      const handleOffline = () => setIsOnline(false);
+      window.addEventListener("online", handleOnline);
+      window.addEventListener("offline", handleOffline);
+      return () => {
+        window.removeEventListener("online", handleOnline);
+        window.removeEventListener("offline", handleOffline);
+      };
+    }
+  }, []);
 
   const setCollapsed = (val: boolean) => {
     try {
@@ -318,8 +336,34 @@ export function AppShell({ children }: AppShellProps) {
             </div>
           </div>
 
-          {/* Lado Direito da Topbar: Idioma, Tema e Perfil */}
+          {/* Lado Direito da Topbar: Status de Rede, Idioma, Tema e Perfil */}
           <div className="flex items-center gap-2 sm:gap-3">
+            {/* Indicador de Status Online / Modo Offline */}
+            <div
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-2xs font-bold border transition-colors ${
+                isOnline
+                  ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800"
+                  : "bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-300 dark:border-amber-700 animate-pulse"
+              }`}
+              title={
+                isOnline
+                  ? "Conexão ativa com o servidor"
+                  : "Modo Offline ativo: consulte os cursos e guias salvos localmente"
+              }
+            >
+              {isOnline ? (
+                <>
+                  <Wifi className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+                  <span className="hidden sm:inline">Online</span>
+                </>
+              ) : (
+                <>
+                  <WifiOff className="w-3 h-3 text-amber-600 dark:text-amber-400" />
+                  <span>Modo Offline</span>
+                </>
+              )}
+            </div>
+
             {/* Alternador de Idioma */}
             <div className="flex items-center rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-800/40 p-0.5">
               <Globe className="w-3.5 h-3.5 ml-2 text-slate-400 shrink-0 hidden sm:block" />
