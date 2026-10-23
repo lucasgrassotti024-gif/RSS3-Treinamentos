@@ -6,9 +6,20 @@ import { AppShell } from "@/components/layout/app-shell";
 import { Footer } from "@/components/layout/footer";
 
 export const metadata: Metadata = {
-  title: "RSS3 Treinamentos — Plataforma Corporativa de Capacitação Industrial",
+  title: {
+    default: "RSS3 Treinamentos",
+    template: "%s | RSS3 Treinamentos",
+  },
   description:
     "Plataforma de treinamentos técnicos industriais, gestão de riscos operacionais e matriz de competências da RSS3 Soluções Industriais LTDA.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+  },
 };
 
 export default function RootLayout({
