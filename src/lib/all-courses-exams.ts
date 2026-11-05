@@ -1,5 +1,6 @@
 import { DEMO_COURSES } from "./mock-data";
 import { CourseDemonstration } from "@/types";
+import { TECHNICAL_CHALLENGE_TRACKS } from "./challenges-data";
 
 export interface ChannelRecommendation {
   name: string;
@@ -439,6 +440,54 @@ export function getAllCourseExamTracks(): UnifiedCourseExamTrack[] {
       category = "pericia";
     }
 
+    // Busca questões de desafios narrativos vinculadas a este curso
+    const challengeQuestionsForCourse: {
+      id: string;
+      order: number;
+      question: {
+        "pt-BR": string;
+        en: string;
+        es: string;
+      };
+      options: {
+        id: string;
+        text: {
+          "pt-BR": string;
+          en: string;
+          es: string;
+        };
+        isCorrect: boolean;
+        explanation: {
+          "pt-BR": string;
+          en: string;
+          es: string;
+        };
+      }[];
+    }[] = [];
+
+    TECHNICAL_CHALLENGE_TRACKS.forEach((track) => {
+      track.questions.forEach((q) => {
+        if (q.relatedCourse?.courseId === course.id) {
+          challengeQuestionsForCourse.push({
+            id: q.id,
+            order: 0,
+            question: {
+              "pt-BR": `[DESAFIO PRÁTICO DE CAMPO] ${q.title["pt-BR"]}\n\n${q.storyNarrative["pt-BR"]}\n\n👉 PERGUNTA: ${q.questionPrompt["pt-BR"]}`,
+              en: `[PRACTICAL FIELD CHALLENGE] ${q.title.en}\n\n${q.storyNarrative.en}\n\n👉 QUESTION: ${q.questionPrompt.en}`,
+              es: `[DESAFÍO PRÁCTICO DE CAMPO] ${q.title.es}\n\n${q.storyNarrative.es}\n\n👉 PREGUNTA: ${q.questionPrompt.es}`,
+            },
+            options: q.options,
+          });
+        }
+      });
+    });
+
+    const baseQuestions = course.finalAssessment?.questions ? [...course.finalAssessment.questions] : [];
+    const combinedQuestions = [...challengeQuestionsForCourse, ...baseQuestions].map((q, idx) => ({
+      ...q,
+      order: idx + 1,
+    }));
+
     return {
       courseId: course.id,
       course,
@@ -454,9 +503,9 @@ export function getAllCourseExamTracks(): UnifiedCourseExamTrack[] {
       summary: guide.themeOverview,
       channels: guide.channels,
       searchTerms: guide.searchTerms,
-      questionsCount: course.finalAssessment?.questions ? course.finalAssessment.questions.length : 10,
+      questionsCount: combinedQuestions.length,
       passingScore: course.finalAssessment?.passingScorePercent || 70,
-      questions: course.finalAssessment?.questions ? course.finalAssessment.questions : [],
+      questions: combinedQuestions,
     };
   });
 }

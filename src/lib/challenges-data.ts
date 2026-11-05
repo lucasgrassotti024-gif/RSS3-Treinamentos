@@ -770,4 +770,640 @@ export const TECHNICAL_CHALLENGE_TRACKS: TechnicalChallengeTrack[] = [
       },
     ],
   },
+
+  // 5. HIDROJATEAMENTO & ULTRA-ALTA PRESSÃO (Física de Jato, Golpe de Aríete e Segurança)
+  {
+    id: "desafio-hidrojato-uap",
+    slug: "desafio-hidrojato-uap-seguranca-pressao",
+    badgeCode: "HIDRO-UAP",
+    thumbnailGradient: "from-cyan-700 via-blue-800 to-slate-950",
+    coverImage: "/images/courses/hidrojato.jpg",
+    schoolName: {
+      "pt-BR": "Hidrojateamento & Hidrovácuo",
+      "en": "Hydroblasting & Vacuum Operations",
+      "es": "Hidrojet e Hidrovacío",
+    },
+    title: {
+      "pt-BR": "Desafio Prático: Física do Golpe de Aríete e Zona de Exclusão em 2.800 Bar",
+      "en": "Hands-on Challenge: Water Hammer Dynamics & 2,800 Bar Exclusion Zone Sizing",
+      "es": "Desafío Práctico: Golpe de Ariete y Zona de Exclusión en 2.800 Bar",
+    },
+    category: "mecanica",
+    difficulty: "Especialista",
+    workloadMinutes: 45,
+    summary: {
+      "pt-BR": "Casos reais de operação com bicos rotativos a 40.000 PSI, cálculo da força de recuo na lança, dissipação de energia e resposta a vazamentos em conexões.",
+      "en": "Field scenarios with 40,000 PSI rotating nozzles, thrust reaction force on hand lance, kinetic dissipation, and whip check failure prevention.",
+      "es": "Casos reales de operación a 40.000 PSI, fuerza de reacción de lanza, disipación de energía e inspección de mangueras.",
+    },
+    prerequisites: {
+      "pt-BR": "Recomenda-se pesquisar os padrões da WJTA (WaterJet Technology Association) e cálculo de força de reação da lança.",
+      "en": "Recommended research: WJTA safety guidelines and lance reaction force physics.",
+      "es": "Se recomienda investigar directrices WJTA y cálculo de fuerza de empuje en lanzas.",
+    },
+    questions: [
+      {
+        id: "q-hidro-story-1",
+        order: 1,
+        title: {
+          "pt-BR": "O Mistério do Coice Violento na Lança Manual a 2.500 Bar",
+          "en": "The Mystery of Severe Reaction Thrust on Handheld Lance at 2,500 Bar",
+          "es": "El Misterio del Retroceso Violento en Lanza Manual a 2.500 Bar",
+        },
+        storyNarrative: {
+          "pt-BR": "Durante a limpeza de feixes tubulares de trocadores de calor na parada de fábrica, um operador de hidrojato utilizava uma lança manual com pressão regulada em 2.500 bar (36.250 PSI) e vazão de 28 L/min.\n\nSubitamente, ao fechar o gatilho da pistola sem acionamento suave da válvula de alívio 'dump valve', a linha sofreu uma sobrepressão momentânea com forte solavanco. O operador quase perdeu o controle da lança devido à força súbita de reação.\n\nNa inspeção imediata pelo encarregado, constatou-se que a equipe havia instalado um bico com orifício menor que o especificado no projeto da bomba, elevando a perda de carga, e o cabo anti-chicoteamento (whip check) da mangueira não estava laçado com a folga correta.",
+          "en": "During heat exchanger bundle cleaning during a turnaround, a hydroblasting tech operated a manual lance at 2,500 bar (36,250 PSI) with a 28 L/min flow rate.\n\nSuddenly, when releasing the dump trigger abruptly, hydraulic water hammer spiked line pressure. The operator nearly lost physical grip from sudden reactionary thrust. Inspection revealed an undersized nozzle orifice installed and an improperly tensioned whip check.",
+          "es": "Durante la limpieza de intercambiadores de calor en una parada de planta, un operador utilizaba lanza manual a 2.500 bar y 28 L/min. Al soltar el gatillo bruscamente, el golpe de ariete sacudió la línea. La inspección reveló boquillas con orificios más pequeños que los requeridos y cable antisuciedad mal instalado.",
+        },
+        questionPrompt: {
+          "pt-BR": "Qual é a física que governa a força de reação da lança manual e quais são os dois dispositivos mandatórios de segurança para evitar acidentes fatais com chicoteamento e sobrepressão?",
+          "en": "What physical formula governs lance thrust reaction and which two mandatory safety devices prevent fatal whip and overpressure accidents?",
+          "es": "¿Qué física gobierna la fuerza de empuje de la lanza y cuáles son los dos dispositivos obligatorios para evitar accidentes por latigazo?",
+        },
+        recommendedChannels: [
+          {
+            name: "WJTA (WaterJet Technology Association)",
+            url: "https://www.youtube.com/@WaterjetTechnology",
+            description: {
+              "pt-BR": "Autoridade mundial em procedimentos operacionais seguros de hidrojateamento de ultra-alta pressão.",
+              "en": "Global authority on ultra-high pressure waterjetting safety standards.",
+              "es": "Autoridad mundial en seguridad de hidrojet de ultra alta presión.",
+            },
+          },
+          {
+            name: "Fundacentro Oficial",
+            url: "https://www.youtube.com/@FundacentroOficial",
+            description: {
+              "pt-BR": "Diretrizes brasileiras sobre isolamento de frentes de trabalho com fluidos hiperpressurizados.",
+              "en": "Brazilian occupational guidelines for high-pressure fluid containment.",
+              "es": "Guías técnicas de seguridad en fluidos a alta presión.",
+            },
+          },
+        ],
+        searchTips: {
+          "pt-BR": [
+            "Pesquise: 'Fórmula de cálculo de força de reação da lança hidrojato'",
+            "Pesquise: 'WJTA whip check and burst disc safety guidelines'",
+            "Lembre-se: A força de reação contínua para operador manual não deve ultrapassar os limites normativos ergométricos (aprox. 250 N) sem suporte mecânico.",
+          ],
+          "en": [
+            "Search: 'Hydroblasting lance reaction force formula WJTA'",
+            "Search: 'Whip check cable installation and burst disc ratings'",
+          ],
+          "es": [
+            "Buscar: 'Fuerza de reacción lanza hidrojet cálculo'",
+            "Buscar: 'Whip check cable manguera alta presión'",
+          ],
+        },
+        options: [
+          {
+            id: "opt-hidro-1-a",
+            text: {
+              "pt-BR": "A força de reação é função direta da raiz da pressão e da vazão (F ≈ 0,052 × Q × √P); os itens mandatórios são o cabo de segurança tipo 'whip check' em todas as emendas de mangueira e a válvula de alívio automático tipo 'dump valve' com disco de ruptura calibrado no manifold da bomba.",
+              "en": "Reaction thrust is proportional to flow and square root of pressure (F ≈ 0.052 × Q × √P); mandatory items are whip check safety stockings on every coupling and automated dump valves with calibrated rupture discs.",
+              "es": "La fuerza de empuje depende del caudal y raíz de presión; los elementos obligatorios son el cable anti-latigazo (whip check) en acoples y válvula dump con disco de ruptura.",
+            },
+            isCorrect: true,
+            explanation: {
+              "pt-BR": "Correto! Pela WJTA e normas da RSS3, o operador suporta no máximo 250 N em lança manual. Mangueiras pressurizadas a 2.500 bar acumulam tremenda energia elástica; sem whip check, o desacoplamento degola ou perfura o operador instantaneamente.",
+              "en": "Correct! WJTA limits manual hand lance thrust to 250 N. Whip checks and calibrated rupture discs prevent catastrophic hose whip and pipe rupture.",
+              "es": "¡Correcto! El cable whip check y la válvula dump son vitales para evitar latigazos mortales en 2.500 bar.",
+            },
+          },
+          {
+            id: "opt-hidro-1-b",
+            text: {
+              "pt-BR": "A força de reação independe da vazão de água e pode ser eliminada se o operador amarrar a lança ao próprio cinto de segurança com uma corda de sisal.",
+              "en": "Reaction force ignores flow rate and can be nullified by tying the lance directly to the operator's harness.",
+              "es": "La fuerza de retroceso se elimina atando la lanza al arnés del operador.",
+            },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Absurdo e fatal. Amarrar a lança de hidrojato ao corpo do trabalhador causa mutilação ou morte imediata em caso de perda de controle.",
+              "en": "Extremely dangerous. Never lash a live high-pressure gun to human personnel.",
+              "es": "Inaceptable y fatal.",
+            },
+          },
+          {
+            id: "opt-hidro-1-c",
+            text: {
+              "pt-BR": "Em pressões acima de 2.000 bar não ocorrem golpes de aríete porque a água se torna compressível e absorve todo o impacto como uma mola.",
+              "en": "Water becomes compressible above 2,000 bar, acting as a soft spring that cancels shockwaves.",
+              "es": "A más de 2.000 bar el agua amortigua sola los impactos.",
+            },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto. A água possui baixa compressibilidade e a propagação da onda de choque acústico-hidráulica em tubulações rígidas pode multiplicar o pico de pressão por mais de 2 vezes, rompendo conexões.",
+              "en": "Incorrect. Hydraulic shockwaves travel at over 1,400 m/s in water, doubling transient peak pressure.",
+              "es": "Incorrecto. La onda de choque hidráulica puede duplicar la presión de pico.",
+            },
+          },
+          {
+            id: "opt-hidro-1-d",
+            text: {
+              "pt-BR": "O cabo anti-chicoteamento só é exigido caso a mangueira apresente arames rompidos visíveis na capa de borracha.",
+              "en": "Whip checks are only required if wire braids are already snapped and protruding.",
+              "es": "El whip check solo se coloca si la manguera está rota.",
+            },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto. O whip check é mandatório em 100% das conexões pressurizadas, mesmo em mangueiras novas e recém-testadas.",
+              "en": "Incorrect. Whip checks are strictly mandatory on 100% of joints regardless of age.",
+              "es": "Incorrecto. Es obligatorio en todas las uniones siempre.",
+            },
+          },
+        ],
+        relatedCourse: {
+          courseId: "c-hidrojato-seguranca",
+          courseName: {
+            "pt-BR": "Segurança em Operações de Hidrojateamento e Hidrovácuo",
+            "en": "Safety in Hydroblasting & Vacuum Operations",
+            "es": "Seguridad en Hidrojet e Hidrovacío",
+          },
+          whyStudy: {
+            "pt-BR": "No curso detalhamos a inspeção de mangueiras com teste hidrostático anual, montagem correta de whip checks e a vestimenta de proteção balística de Dyneema.",
+            "en": "Covers hydrostatic hose integrity testing, whip check rigging, and Dyneema ballistic armor.",
+            "es": "Aprende inspección de mangueras, instalación de whip checks y EPP balístico de Dyneema.",
+          },
+        },
+      },
+    ],
+  },
+
+  // 6. PINTURA INDUSTRIAL & CORROSÃO (Ponto de Orvalho, EPS/EPC e Perfil de Rugosidade)
+  {
+    id: "desafio-pintura-anticorrosao",
+    slug: "desafio-pintura-industrial-corrosao-qualidade",
+    badgeCode: "PINT-QUAL",
+    thumbnailGradient: "from-orange-600 via-amber-700 to-slate-950",
+    coverImage: "/images/courses/pintura.jpg",
+    schoolName: {
+      "pt-BR": "Pintura Industrial & Tratamento de Superfície",
+      "en": "Industrial Painting & Surface Treatment",
+      "es": "Pintura Industrial y Tratamiento de Superficies",
+    },
+    title: {
+      "pt-BR": "Desafio Prático: Controle Climatológico, Ponto de Orvalho e Rendimento Teórico",
+      "en": "Hands-on Challenge: Climatology Control, Dew Point Delta & Theoretical Paint Yield",
+      "es": "Desafío Práctico: Control Climatológico, Punto de Rocío y Rendimiento Teórico",
+    },
+    category: "mecanica",
+    difficulty: "Avançado",
+    workloadMinutes: 45,
+    summary: {
+      "pt-BR": "Cálculo real de temperatura de substrato vs. ponto de orvalho, relação entre EPS (película seca) e EPU (película úmida) e prevenção de bolhas e desplacamento.",
+      "en": "Substrate temperature vs. dew point delta, WFT/DFT film thickness relations, and blistering/delamination root cause analysis.",
+      "es": "Cálculo de punto de rocío y temperatura de chapa, espesor de película húmeda (EPU) a seca (EPS) y adherencia.",
+    },
+    prerequisites: {
+      "pt-BR": "Recomenda-se pesquisar a regra de ouro dos 3°C acima do ponto de orvalho (ISO 8502-4) e fórmulas de cálculo de espessura de película.",
+      "en": "Recommended research: ISO 8502-4 3°C delta rule and WFT/DFT thickness mathematics.",
+      "es": "Se recomienda investigar norma ISO 8502-4 regla de 3°C sobre punto de rocío y cálculo de película.",
+    },
+    questions: [
+      {
+        id: "q-pint-story-1",
+        order: 1,
+        title: {
+          "pt-BR": "A Pintura Que Desplacou no Costado do Tanque de Celulose",
+          "en": "The Paint Delamination on the Pulp Storage Vessel Shell",
+          "es": "El Desprendimiento de Pintura en el Tanque de Celulosa",
+        },
+        storyNarrative: {
+          "pt-BR": "Durante a pintura externa de um grande tanque de estocagem de licor em fábrica de celulose, o inspetor de pintura contratado pela RSS3 suspendeu a aplicação de tinta epóxi poliamida às 06h30 da manhã.\n\nO psicrômetro e o termômetro de contato com o aço registraram:\n- Temperatura do Ar: 18°C\n- Umidade Relativa do Ar: 84%\n- Ponto de Orvalho (calculado pela carta psicrométrica): 15,2°C\n- Temperatura da Chapa de Aço (substrato): 17,0°C\n\nO mestre de obras reclamou da paralisação, afirmando que a chapa estava seca ao toque e que o atraso geraria penalidades na parada geral.",
+          "en": "During external epoxy coating of a pulp liquor vessel during a plant turnaround, the certified coating inspector halted spraying at 06:30 AM.\n\nReadings showed: Air Temp = 18°C; RH = 84%; Dew Point = 15.2°C; Steel Substrate Temp = 17.0°C. The site foreman complained that the plate felt dry to the touch.",
+          "es": "Durante la aplicación de pintura epóxica en un tanque de celulosa, el inspector detuvo el pintado a las 06:30 AM con datos: Temp Aire = 18°C; Humedad = 84%; Punto de Rocío = 15,2°C; Temp de Chapa = 17,0°C. El capataz alegó que el metal parecía seco.",
+        },
+        questionPrompt: {
+          "pt-BR": "A decisão técnica do inspetor de pintura está correta conforme as normas internacionais (ISO 8502-4 / SSPC) e qual é o cálculo para aplicar uma Película Seca (EPS) de 150 µm com tinta de 75% de sólidos por volume?",
+          "en": "Is the inspector's decision correct per international standards (ISO 8502-4/SSPC) and what wet film thickness (WFT) must be sprayed to achieve 150 µm DFT with 75% volume solids paint?",
+          "es": "¿Es correcta la interrupción según ISO 8502-4 y qué espesor húmedo (EPU) debe medirse para lograr 150 µm secos con pintura de 75% de sólidos en volumen?",
+        },
+        recommendedChannels: [
+          {
+            name: "AMPP (Association for Materials Protection and Performance)",
+            url: "https://www.youtube.com/@AMPPorg",
+            description: {
+              "pt-BR": "Maior associação mundial de controle de corrosão e inspeção de revestimentos (fusão NACE e SSPC).",
+              "en": "Global authority on corrosion mitigation and protective coatings.",
+              "es": "Máxima referencia mundial en inspección de recubrimientos protectores.",
+            },
+          },
+          {
+            name: "ABRACO (Associação Brasileira de Corrosão)",
+            url: "https://www.youtube.com",
+            description: {
+              "pt-BR": "Normas brasileiras para qualificação de inspetores de pintura e ensaios de campo.",
+              "en": "Brazilian corrosion institute technical literature and certification standards.",
+              "es": "Normativa brasileña de inspección de recubrimientos industriales.",
+            },
+          },
+        ],
+        searchTips: {
+          "pt-BR": [
+            "Pesquise: 'Temperatura de substrato 3 graus acima do ponto de orvalho ISO 8502-4'",
+            "Pesquise: 'Como calcular espessura de película úmida EPU a partir da EPS e sólidos por volume'",
+            "Fórmula básica: EPU = EPS / (% Sólidos por Volume / 100).",
+          ],
+          "en": [
+            "Search: 'Substrate temperature 3C above dew point rule coating'",
+            "Search: 'Calculate WFT from DFT and percent volume solids'",
+          ],
+          "es": [
+            "Buscar: 'Temperatura de sustrato 3 grados sobre punto de rocío'",
+            "Buscar: 'Cálculo de espesor húmedo EPU a partir de EPS'",
+          ],
+        },
+        options: [
+          {
+            id: "opt-pint-1-a",
+            text: {
+              "pt-BR": "Sim, a interrupção foi 100% correta. O substrato (17°C) estava a apenas 1,8°C acima do ponto de orvalho (15,2°C), violando o delta mínimo mandatório de +3,0°C, o que causa condensação microscópica e desplacamento precoce; a EPU necessária para atingir EPS de 150 µm é: EPU = 150 / 0,75 = 200 µm.",
+              "en": "Yes, interruption was 100% correct. Substrate (17°C) was only 1.8°C above dew point (15.2°C), breaching the mandatory +3°C safety buffer and risking microscopic condensation; required WFT = 150 / 0.75 = 200 µm.",
+              "es": "Sí, la interrupción fue totalmente correcta. La chapa (17°C) estaba solo 1,8°C sobre el rocío (15,2°C), violando el delta mínimo obligatorio de +3,0°C; el espesor húmedo requerido es EPU = 150 / 0,75 = 200 µm.",
+            },
+            isCorrect: true,
+            explanation: {
+              "pt-BR": "Perfeito! A norma ISO 8502-4 e as especificações da RSS3 exigem que a temperatura da chapa esteja no mínimo 3°C ACIMA do ponto de orvalho (15,2 + 3 = 18,2°C mínima permitida). Como estava em 17,0°C, haveria condensação invisível de água sob a tinta, causando empolamento e perda de aderência. E o cálculo de filme úmido é: EPU = EPS / %SV = 150 / 0,75 = 200 µm.",
+              "en": "Correct! ISO 8502-4 demands substrate temperature be at least 3°C above dew point (15.2 + 3 = 18.2°C min required). The required WFT is 150 / 0.75 = 200 µm.",
+              "es": "¡Correcto! Cumple estrictamente la regla de 3°C sobre punto de rocío y la fórmula EPU = EPS / %SV.",
+            },
+          },
+          {
+            id: "opt-pint-1-b",
+            text: {
+              "pt-BR": "Não, o inspetor errou gravemente porque bastava passar um pano seco com tíner na chapa e pintar normalmente, e a EPU deveria ser de 50 µm.",
+              "en": "No, inspector erred because wiping with thinner towel is sufficient, and required WFT is 50 µm.",
+              "es": "No, bastaba con pasar un trapo con diluyente y pintar.",
+            },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto. O ar continua depositando moléculas de umidade em frações de segundo enquanto a chapa estiver fria.",
+              "en": "Incorrect. Moisture condenses dynamically while thermal delta remains violated.",
+              "es": "Incorrecto. La humedad sigue condensando mientras no haya delta térmico.",
+            },
+          },
+          {
+            id: "opt-pint-1-c",
+            text: {
+              "pt-BR": "O ponto de orvalho só importa em ambientes com umidade acima de 98% e a EPU deve ser o dobro da EPS independente da fórmula química.",
+              "en": "Dew point only matters above 98% RH and WFT is always 2x DFT.",
+              "es": "El punto de rocío solo importa sobre 98% de humedad.",
+            },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto. A condensação ocorre sempre que o aço atinge a temperatura de orvalho, independente do percentual isolado de umidade.",
+              "en": "Incorrect. Condensation is thermodynamically governed by temperature convergence.",
+              "es": "Incorrecto.",
+            },
+          },
+          {
+            id: "opt-pint-1-d",
+            text: {
+              "pt-BR": "A tinta epóxi tolera ser aplicada sobre água líquida sem afetar a aderência por possuir cura catalítica.",
+              "en": "Epoxy coatings adhere perfectly over liquid water pools due to catalytic cure.",
+              "es": "El epóxico cura perfectamente sobre agua líquida.",
+            },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto. A água líquida rompe a ligação intermolecular do polímero com o aço, gerando desplacamento generalizado.",
+              "en": "Incorrect. Liquid water prevents polymer wetting and bond formation on steel.",
+              "es": "Incorrecto. La humedad arruina la adherencia epóxica.",
+            },
+          },
+        ],
+        relatedCourse: {
+          courseId: "c-pintura-industrial-completo",
+          courseName: {
+            "pt-BR": "Pintura Industrial e Tratamento de Superfície Anticorrosivo",
+            "en": "Industrial Painting & Protective Coating Technology",
+            "es": "Pintura Industrial y Tratamiento de Superficies",
+          },
+          whyStudy: {
+            "pt-BR": "No curso ensinamos como operar o medidor de película úmida pente, calibrador magnético de EPS, rugosímetro de agulha e psicrômetro digital.",
+            "en": "Teaches wet film comb gauges, magnetic DFT elcometers, surface profile gauges, and digital hygrometers.",
+            "es": "Aprende a usar medidores de película húmeda, espesor seco magnético y psicrómetros.",
+          },
+        },
+      },
+    ],
+  },
+
+  // 7. MOVIMENTAÇÃO DE CARGAS & RIGGING (NR-11 - Ângulo de Lingas e Triângulo de Estabilidade)
+  {
+    id: "desafio-rigging-nr11",
+    slug: "desafio-rigging-movimentacao-nr11-cargas",
+    badgeCode: "RIG-NR11",
+    thumbnailGradient: "from-amber-700 via-orange-800 to-slate-950",
+    coverImage: "/images/courses/nr11.jpg",
+    schoolName: {
+      "pt-BR": "Segurança do Trabalho e Movimentação Industrial",
+      "en": "Occupational Safety & Material Handling",
+      "es": "Seguridad Laboral y Manejo de Cargas",
+    },
+    title: {
+      "pt-BR": "Desafio Prático: Física do Ângulo em Lingas de Rigging e Triângulo da Empilhadeira",
+      "en": "Hands-on Challenge: Rigging Sling Angle Vectors & Forklift Stability Triangle",
+      "es": "Desafío Práctico: Tensión Vectorial en Eslingas y Triángulo de Estabilidad",
+    },
+    category: "seguranca",
+    difficulty: "Especialista",
+    workloadMinutes: 45,
+    summary: {
+      "pt-BR": "Cálculo real de multiplicação de carga em cintas com ângulo aberto de içamento, estabilidade de empilhadeiras em rampas e inspeção de descarte de cabos.",
+      "en": "Real math on sling tension multiplication under shallow lift angles, forklift stability dynamics on ramps, and wire rope discard criteria.",
+      "es": "Cálculo de sobretensión en eslingas por ángulo abierto, estabilidad de autoelevadores en rampas y descarte de cables.",
+    },
+    prerequisites: {
+      "pt-BR": "Recomenda-se pesquisar os fatores de ângulo em amarração de cargas (1/sen θ) e a geometria do triângulo de estabilidade da empilhadeira.",
+      "en": "Recommended research: Rigging sling tension angle factor (1/sin θ) and forklift stability triangle physics.",
+      "es": "Se recomienda investigar factor de ángulo en eslingas (1/sen θ) y triángulo de estabilidad.",
+    },
+    questions: [
+      {
+        id: "q-nr11-story-1",
+        order: 1,
+        title: {
+          "pt-BR": "A Armadilha do Ângulo Aberto no Içamento do Redutor de 8 Toneladas",
+          "en": "The Open Angle Trap Hoisting an 8-Tonne Gearbox",
+          "es": "La Trampa del Ángulo Abierto al Izar un Reductor de 8 Toneladas",
+        },
+        storyNarrative: {
+          "pt-BR": "No pátio mecânico da fábrica, a equipe de manutenção precisava içar um redutor de engrenagens de 8.000 kg (8 toneladas) utilizando uma ponte rolante.\n\nO rigger utilizou duas cintas sintéticas tubulares, cada uma com Capacidade Máxima de Carga (CMT) nominal de 5 toneladas (5.000 kgf) em tração vertical pura.\n\nPor falta de espaço vertical abaixo do gancho da ponte, o rigger usou cintas curtas, fazendo com que o ângulo formado entre cada perna da cinta e a linha horizontal da carga ficasse em apenas 30 graus (ou 120 graus entre as duas pernas).\n\nO líder de equipe da RSS3 viu a manobra prestes a iniciar e mandou abortar imediatamente o içamento antes que o operador levantasse o redutor do chão.",
+          "en": "In the heavy mechanical yard, riggers prepared to hoist an 8,000 kg gearbox using an overhead crane.\n\nThe rigger used two synthetic slings, each with 5,000 kgf Working Load Limit (WLL) in vertical pull.\n\nDue to low overhead hook clearance, short slings forced a shallow 30° horizontal sling angle (120° included angle between legs). The RSS3 site supervisor spotted the setup and ordered an immediate stop.",
+          "es": "En el patio de mantenimiento, el equipo debía izar un reductor de 8.000 kg con puente grúa. El estrobador usó 2 eslingas de 5.000 kgf nominales cada una con ángulo de 30° respecto a la horizontal. El supervisor ordenó abortar la maniobra.",
+        },
+        questionPrompt: {
+          "pt-BR": "Qual foi a tensão exata que atuaria em cada uma das cintas de 5 toneladas se o içamento tivesse ocorrido a 30 graus, e por que a manobra causaria o rompimento catastrófico da amarração?",
+          "en": "What exact tension would act on each 5-tonne sling at a 30° angle, and why would this cause catastrophic rigging failure?",
+          "es": "¿Qué tensión exacta actuaría sobre cada eslinga de 5 toneladas a 30° y por qué se habría producido una rotura catastrófica?",
+        },
+        recommendedChannels: [
+          {
+            name: "The Crosby Group Rigging (YouTube)",
+            url: "https://www.youtube.com/@TheCrosbyGroup",
+            description: {
+              "pt-BR": "Referência global em cálculo de cargas em lingas, manilhas e engenharia de rigging.",
+              "en": "World leader in rigging math, sling angle tension multipliers, and shackle safety.",
+              "es": "Referencia mundial en cálculo de estrobos y seguridad en izajes.",
+            },
+          },
+          {
+            name: "Fundacentro / NR-11",
+            url: "https://www.youtube.com/@FundacentroOficial",
+            description: {
+              "pt-BR": "Vídeos técnicos sobre segurança na movimentação industrial e prevenção de acidentes graves.",
+              "en": "Brazilian occupational guidelines on heavy material handling and overhead cranes.",
+              "es": "Instrucciones de seguridad en maniobras con cargas suspendidas.",
+            },
+          },
+        ],
+        searchTips: {
+          "pt-BR": [
+            "Pesquise: 'Cálculo de tensão em lingas de 2 pernas conforme ângulo'",
+            "Pesquise: 'Fator de ângulo de içamento 30 graus multiplica por dois'",
+            "Fórmula: Tensão por perna = (Carga Total / 2) / sen(ângulo horizontal) = 4.000 / sen(30°).",
+          ],
+          "en": [
+            "Search: 'Sling tension formula angle factor 2 leg lift'",
+            "Search: 'Crosby sling angle tension chart 30 degrees'",
+          ],
+          "es": [
+            "Buscar: 'Tensión en eslingas factor de ángulo 30 grados'",
+            "Buscar: 'Cálculo de carga en estrobos según ángulo horizontal'",
+          ],
+        },
+        options: [
+          {
+            id: "opt-rig-1-a",
+            text: {
+              "pt-BR": "A tensão em cada cinta seria de 8.000 kgf (8 toneladas), pois em um ângulo de 30° o fator multiplicador é 2,0 (4.000 kg / sen(30°) = 8.000 kgf); como cada cinta suporta apenas 5.000 kgf, a sobrecarga seria de 160%, causando o rompimento das cintas e queda da carga.",
+              "en": "Tension per sling would reach 8,000 kgf (8 tonnes) because at 30° the tension factor is 2.0 (4,000 kg / sin(30°) = 8,000 kgf); since each sling is rated for 5,000 kgf, they would suffer 160% overload and snap.",
+              "es": "La tensión en cada eslinga sería de 8.000 kgf (factor 2,0 a 30°: 4.000 / sen(30°) = 8.000 kgf); con eslingas de 5.000 kgf la sobrecarga sería del 160% provocando rotura y caída libre de la carga.",
+            },
+            isCorrect: true,
+            explanation: {
+              "pt-BR": "Cálculo exato de física de rigging! Carga dividida por 2 pernas = 4.000 kgf. No ângulo de 30° com a horizontal, sen(30°) = 0,5. A tensão resultante em cada cinta é 4.000 / 0,5 = 8.000 kgf! As cintas de 5 t estariam trabalhando com 160% de sobrecarga violenta.",
+              "en": "Correct! Physics math: 4,000 kgf / sin(30°) = 8,000 kgf per leg. Rating was 5,000 kgf, meaning a fatal 160% overload.",
+              "es": "¡Cálculo exacto! A 30° la tensión se duplica: 4.000 / sen(30°) = 8.000 kgf por eslinga, superando con creces los 5.000 kgf nominales.",
+            },
+          },
+          {
+            id: "opt-rig-1-b",
+            text: {
+              "pt-BR": "A tensão seria de apenas 2.000 kgf em cada cinta, pois o ângulo aberto alivia o peso e distribui a gravidade para as laterais.",
+              "en": "Tension drops to 2,000 kgf per leg because wider angles spread gravity away sideways.",
+              "es": "La tensión baja a 2.000 kgf porque el ángulo abierto alivia el peso.",
+            },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto e perigoso! Quanto menor o ângulo com a horizontal, MAIOR é a componente horizontal de força de tração nas pernas.",
+              "en": "Fatal misconception. Flatter horizontal angles dramatically amplify tension toward infinity.",
+              "es": "Incorrecto y peligroso. Menor ángulo horizontal implica mayor tensión.",
+            },
+          },
+          {
+            id: "opt-rig-1-c",
+            text: {
+              "pt-BR": "O peso ficaria exatamente em 4.000 kgf em cada perna independente do ângulo, pois o redutor não mudou de massa física.",
+              "en": "Weight remains locked at 4,000 kgf per sling regardless of angle since mass didn't change.",
+              "es": "La tensión es siempre 4.000 kgf sin importar el ángulo.",
+            },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto. A decomposição vetorial de forças em sistemas estáticos demonstra que lingas inclinadas recebem carga muito superior à massa dividida.",
+              "en": "Incorrect. Vector static equilibrium proves angular load amplification.",
+              "es": "Incorrecto. Ignora la descomposición vectorial de fuerzas.",
+            },
+          },
+          {
+            id: "opt-rig-1-d",
+            text: {
+              "pt-BR": "Cintas sintéticas têm elasticidade infinita e por isso nunca se rompem com cargas estáticas abaixo de 20 toneladas.",
+              "en": "Synthetic slings possess infinite elongation and never snap under 20 tonnes.",
+              "es": "Las eslingas sintéticas no se rompen por tener elasticidad infinita.",
+            },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto e absurdo. Cintas sintéticas de poliéster rompem bruscamente ao atingir seu ponto de ruptura sob sobretensão.",
+              "en": "Incorrect. Overloaded synthetic slings snap violently with lethal whiplash.",
+              "es": "Incorrecto.",
+            },
+          },
+        ],
+        relatedCourse: {
+          courseId: "c-nr11-transporte-movimentacao-materiais",
+          courseName: {
+            "pt-BR": "NR-11: Transporte, Movimentação, Armazenagem e Manuseio de Materiais",
+            "en": "NR-11: Transportation, Handling, Storage, and Material Management",
+            "es": "NR-11: Transporte, Manipulación, Almacenamiento y Manejo de Materiales",
+          },
+          whyStudy: {
+            "pt-BR": "No Módulo 2 ensinamos o cálculo de ângulos em eslingas, dimensionamento de manilhas e confecção de Planos de Rigging simplificados.",
+            "en": "Covers sling angle math, shackle selection, and rigging plan preparation.",
+            "es": "Aprende cálculo de eslingas, uso de grilletes y elaboración de planos de izaje.",
+          },
+        },
+      },
+    ],
+  },
+
+  // 8. PERÍCIA JUDICIAL & HIGIENE OCUPACIONAL (Art. 195 CLT, NHOs e Impugnação de Laudos)
+  {
+    id: "desafio-pericia-judicial",
+    slug: "desafio-pericia-judicial-insalubridade-laudos",
+    badgeCode: "PERIC-JUD",
+    thumbnailGradient: "from-blue-900 via-indigo-950 to-slate-950",
+    coverImage: "/images/courses/pericia.jpg",
+    schoolName: {
+      "pt-BR": "Segurança do Trabalho e Equipamentos de Proteção",
+      "en": "Occupational Safety & Personal Protective Equipment",
+      "es": "Seguridad Laboral y Equipos de Protección",
+    },
+    title: {
+      "pt-BR": "Desafio Prático: Perícia Trabalhista de Ruído (NHO-01), Calor e Súmula 289 TST",
+      "en": "Hands-on Challenge: Labor Forensic Noise Assessment (NHO-01), Heat & Precedents",
+      "es": "Desafío Práctico: Peritaje Laboral de Ruido (NHO-01), Calor y Jurisprudencia",
+    },
+    category: "pericia",
+    difficulty: "Especialista",
+    workloadMinutes: 45,
+    summary: {
+      "pt-BR": "Quesitos periciais estratégicos, divergência entre dose de ruído q=3 (NHO-01) vs q=5 (NR-15) e impugnação de laudos periciais judiciais.",
+      "en": "Strategic interrogatories, noise exchange rate divergence (q=3 vs q=5), and rebuttal of flawed court expert reports.",
+      "es": "Formulación de cuestionarios periciales, discrepancia q=3 vs q=5 en ruido e impugnación de peritajes.",
+    },
+    prerequisites: {
+      "pt-BR": "Recomenda-se pesquisar o Art. 195 da CLT, Súmula 289 do TST sobre uso efetivo de EPI e a fórmula do Nível de Exposição Normalizado (NEN) da NHO-01.",
+      "en": "Recommended research: CLT Art. 195, TST Precedent 289 on PPE efficacy, and Fundacentro NHO-01 math.",
+      "es": "Se recomienda investigar Art. 195 de la CLT, jurisprudencia de EPP y NHO-01 de Fundacentro.",
+    },
+    questions: [
+      {
+        id: "q-peric-story-1",
+        order: 1,
+        title: {
+          "pt-BR": "A Batalha do Decibelímetro: A Impugnação do Laudo Pericial de Ruído",
+          "en": "The Battle of the Dosimeter: Rebutting a Flawed Court Expert Noise Report",
+          "es": "La Batalla del Dosímetro: Impugnación del Peritaje Judicial de Ruido",
+        },
+        storyNarrative: {
+          "pt-BR": "Um ex-operador de hidrojateamento moveu uma reclamação trabalhista contra a empresa pleiteando adicional de insalubridade em grau médio (20%) por ruído excessivo durante 3 anos de contrato.\n\nNa diligência pericial judicial determinada pela Vara do Trabalho, o perito judicial realizou uma medição pontual de 15 minutos com um decibelímetro comum (medidor pontual instantâneo) enquanto o hidrojato estava na pressão máxima ao lado do motor diesel, registrando 94 dB(A). No laudo pericial, concluiu pela insalubridade total do período, desconsiderando a ficha de EPI juntada aos autos que comprovava o fornecimento de protetor auricular tipo concha com NRRsf de 22 dB devidamente higienizado e com treinamento comprovado.\n\nComo assistente técnico da empresa, você precisa redigir a manifestação técnica e os quesitos de impugnação ao laudo.",
+          "en": "A former hydroblasting tech sued for 20% medium-grade hazard pay alleging noise overexposure for 3 years.\n\nDuring court inspection, the court expert measured for only 15 minutes with a handheld sound level meter next to the diesel pump at peak pressure, logging 94 dB(A). The expert concluded for hazard pay, discarding company PPE records proving delivery of earmuffs with 22 dB NRRsf rating with documented fit testing.",
+          "es": "Un ex-operador de hidrojet demandó insalubridad por ruido excesivo. El perito midió solo 15 minutos en el punto más ruidoso registrando 94 dB(A) y otorgó insalubridad ignorando la entrega comprobada de protectores auditivos de copa con NRRsf de 22 dB.",
+        },
+        questionPrompt: {
+          "pt-BR": "Quais são os fundamentos técnicos e legais exatos (NHO-01 da Fundacentro, NR-15 Anexo 1 e Súmula 289 do TST) para anular a conclusão do perito judicial?",
+          "en": "What exact legal and technical grounds (Fundacentro NHO-01, NR-15 Annex 1, and TST Precedent 289) dismantle the court expert's conclusion?",
+          "es": "¿Cuáles son los fundamentos técnicos y jurídicos exactos para impugnar el dictamen del perito judicial?",
+        },
+        recommendedChannels: [
+          {
+            name: "Fundacentro Oficial (NHOs)",
+            url: "https://www.youtube.com/@FundacentroOficial",
+            description: {
+              "pt-BR": "Vídeos explicativos sobre dosimetria contínua durante a jornada e cálculo do NEN.",
+              "en": "Full shift noise dosimetry and Normalized Exposure Level (NEN) tutorials.",
+              "es": "Normas de Higiene Ocupacional y dosimetría de ruido durante la jornada.",
+            },
+          },
+          {
+            name: "Perícia Sem Segredo",
+            url: "https://www.youtube.com",
+            description: {
+              "pt-BR": "Canal especializado em redação de laudos periciais trabalhistas e impugnações fundamentadas.",
+              "en": "Channel focused on labor court forensic expertise and technical interrogatories.",
+              "es": "Canal de peritajes judiciales laborales y defensa técnica.",
+            },
+          },
+        ],
+        searchTips: {
+          "pt-BR": [
+            "Pesquise: 'Como impugnar laudo pericial de ruído medição pontual decibelímetro'",
+            "Pesquise: 'NHO-01 tempo de amostragem representativo da jornada completa'",
+            "Pesquise: 'Súmula 289 TST eficácia do EPI descaracteriza a insalubridade'",
+          ],
+          "en": [
+            "Search: 'Rebutting handheld instantaneous noise measurements in labor court'",
+            "Search: 'Fundacentro NHO-01 full shift representativeness dosimetry'",
+          ],
+          "es": [
+            "Buscar: 'Impugnación de peritaje de ruido medición puntual'",
+            "Buscar: 'Eficacia del protector auditivo elimina insalubridad'",
+          ],
+        },
+        options: [
+          {
+            id: "opt-peric-1-a",
+            text: {
+              "pt-BR": "1) Vício metodológico: medição instantânea de 15 minutos viola a NHO-01 e o Anexo 1 da NR-15, que exigem dosimetria contínua representativa dos ciclos da jornada (o hidrojato opera de forma intermitente); 2) Eficácia do EPI: com 94 dB(A) e atenuação NRRsf de 22 dB, o ruído efetivo que atingiu o tímpano do operador foi de apenas 72 dB(A), abaixo do limite de tolerância de 85 dB(A); 3) Súmula 289 do TST: o fornecimento do EPI eficaz acompanhado de fiscalização e treinamento neutraliza juridicamente a insalubridade.",
+              "en": "1) Methodological flaw: 15-minute spot check violates NHO-01 and NR-15 which mandate full-shift representative dosimetry for intermittent processes; 2) PPE Efficacy: With 94 dB(A) ambient and 22 dB NRRsf muffs, ear canal dose drops to 72 dB(A), well below 85 dB(A) ceiling; 3) TST Precedent 289: certified, trained, and inspected PPE use legally eliminates statutory hazard pay.",
+              "es": "1) Vicio de método: medición puntual de 15 min viola la NHO-01 y la NR-15 (el hidrojet opera intermitente); 2) Eficacia de EPP: atenuación NRRsf de 22 dB reduce los 94 dB(A) a 72 dB(A) en oído (por debajo de 85 dB(A)); 3) Jurisprudencia TST 289: el uso efectivo del EPP neutraliza la insalubridad.",
+            },
+            isCorrect: true,
+            explanation: {
+              "pt-BR": "Defesa perfeita e impecável! Em perícia judicial trabalhista, a medição instantânea não reflete a Dose Diária Normalizada (NEN) de acordo com a NHO-01. Além disso, demonstrando a entrega, fiscalização e cálculo de atenuação NRRsf do protetor auricular com respaldo na Súmula 289 do TST, o pleito de insalubridade é 100% improcedente.",
+              "en": "Spot-on defense! Short instantaneous readings fail NHO-01 dose standards, and proved PPE attenuation below 85 dB(A) defeats unhealthiness pay under TST Precedent 289.",
+              "es": "¡Defensa impecable! Muestreo de 15 min no representa la dosis de jornada y la atenuación del EPP desvirtúa la insalubridad.",
+            },
+          },
+          {
+            id: "opt-peric-1-b",
+            text: {
+              "pt-BR": "O perito tem fé pública absoluta e a empresa não pode contestar suas conclusões, restando apenas aceitar a condenação e pagar os retroativos.",
+              "en": "The court expert holds absolute public authority that can never be disputed by defendants.",
+              "es": "El perito tiene fe pública absoluta y la empresa debe pagar.",
+            },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto. O juiz não está adstrito ao laudo do perito (Art. 479 do CPC), cabendo impugnação técnica e ampla produção de prova pelo assistente técnico.",
+              "en": "Incorrect. CPC Art. 479 allows judges to dismiss flawed expert opinions when technical assistants provide solid counter-evidence.",
+              "es": "Incorrecto. El informe pericial no vincula obligatoriamente al tribunal.",
+            },
+          },
+          {
+            id: "opt-peric-1-c",
+            text: {
+              "pt-BR": "Protetores auriculares nunca atenuam ruído acima de 80 dB(A), sendo proibidos de constar como argumento de defesa trabalhista.",
+              "en": "Hearing protectors never attenuate sounds above 80 dB(A) and are prohibited in court.",
+              "es": "Los tapones o copas auditivas nunca atenúan el ruido.",
+            },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto. EPIs com CA válido emitido pelo Ministério do Trabalho têm atenuação acústica laboratorial certificada pela ABNT NBR 16076.",
+              "en": "Incorrect. CA-certified hearing protection is legally validated by statutory lab standards.",
+              "es": "Incorrecto. Certificados por normas técnicas oficiales.",
+            },
+          },
+          {
+            id: "opt-peric-1-d",
+            text: {
+              "pt-BR": "A insalubridade de ruído é calculada exclusivamente pelo número de máquinas paradas na fábrica e não pelo nível de pressão sonora.",
+              "en": "Noise unhealthiness is measured by machine quantity, not sound pressure level.",
+              "es": "Se calcula por cantidad de máquinas, no por decibelios.",
+            },
+            isCorrect: false,
+            explanation: {
+              "pt-BR": "Incorreto. A avaliação de ruído é estritamente quantitativa expressa em dB(A) e dose percentual conforme o Anexo 1 da NR-15.",
+              "en": "Incorrect. Statutory noise evaluations are strictly quantitative in dB(A).",
+              "es": "Incorrecto. Se mide cuantitativamente en dB(A).",
+            },
+          },
+        ],
+        relatedCourse: {
+          courseId: "c-pericia-judicial-trabalhista",
+          courseName: {
+            "pt-BR": "Perícia Judicial Trabalhista: Insalubridade, Periculosidade e Laudos Técnicos",
+            "en": "Labor Judicial Expertise: Hazardousness, Unhealthiness, and Technical Reports",
+            "es": "Peritaje Judicial Laboral: Insalubridad, Peligrosidad e Informes Técnicos",
+          },
+          whyStudy: {
+            "pt-BR": "No Módulo 3 ensinamos como estruturar quesitos prévios e suplementares e fundamentar peças de impugnação de laudos periciais com sucesso.",
+            "en": "Teaches formulating strategic court questions and drafting rock-solid expert report rebuttals.",
+            "es": "Aprende a formular cuestionarios y fundamentar impugnaciones técnicas de peritajes.",
+          },
+        },
+      },
+    ],
+  },
 ];
