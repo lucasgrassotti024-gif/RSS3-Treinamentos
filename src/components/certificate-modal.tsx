@@ -1,16 +1,20 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { CertificateDemonstration } from "@/types";
 import {
   X,
   Printer,
+  Download,
+  Loader2,
   ShieldCheck,
   CheckCircle2,
   Clock,
   QrCode,
 } from "lucide-react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 interface CertificateModalProps {
   certificate: CertificateDemonstration | null;
@@ -22,11 +26,65 @@ export default function CertificateModal({
   onClose,
 }: CertificateModalProps) {
   const printRef = useRef<HTMLDivElement>(null);
+  const [downloading, setDownloading] = useState(false);
 
   if (!certificate) return null;
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const handleDownloadPdf = async () => {
+    if (!printRef.current || downloading) return;
+    try {
+      setDownloading(true);
+
+      const element = printRef.current;
+      const canvas = await html2canvas(element, {
+        scale: 2, // Alta resolução (retina/print)
+        useCORS: true,
+        logging: false,
+        backgroundColor: "#ffffff",
+      });
+
+      const imgData = canvas.toDataURL("image/png");
+      // Formato A4 em modo Paisagem (Landscape): 297mm x 210mm
+      const pdf = new jsPDF({
+        orientation: "landscape",
+        unit: "mm",
+        format: "a4",
+      });
+
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+
+      // Ajusta as dimensões mantendo a proporção exata
+      const canvasRatio = canvas.height / canvas.width;
+      let renderWidth = pdfWidth;
+      let renderHeight = pdfWidth * canvasRatio;
+
+      if (renderHeight > pdfHeight) {
+        renderHeight = pdfHeight;
+        renderWidth = pdfHeight / canvasRatio;
+      }
+
+      const posX = (pdfWidth - renderWidth) / 2;
+      const posY = (pdfHeight - renderHeight) / 2;
+
+      pdf.addImage(imgData, "PNG", posX, posY, renderWidth, renderHeight);
+      
+      const safeTitle = (certificate.courseTitle["pt-BR"] || "Certificado")
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "-")
+        .replace(/-+/g, "-");
+      pdf.save(`certificado-rss3-${safeTitle}-${certificate.validationCode.substring(0, 14)}.pdf`);
+    } catch (err) {
+      console.error("Erro ao gerar PDF:", err);
+      // Fallback gracioso para a impressão nativa caso o browser bloqueie
+      window.print();
+    } finally {
+      setDownloading(false);
+    }
   };
 
   const formattedDate = new Date(certificate.issuedAt).toLocaleDateString("pt-BR", {
@@ -40,11 +98,23 @@ export default function CertificateModal({
       {/* Botões Flutuantes de Ação (Ocultos na impressão) */}
       <div className="fixed top-4 right-4 z-50 flex items-center gap-2 print:hidden">
         <button
+          onClick={handleDownloadPdf}
+          disabled={downloading}
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 disabled:opacity-60 text-white text-xs font-bold shadow-lg transition-colors cursor-pointer"
+        >
+          {downloading ? (
+            <Loader2 className="w-4 h-4 animate-spin" />
+          ) : (
+            <Download className="w-4 h-4" />
+          )}
+          <span>{downloading ? "Gerando PDF..." : "Baixar PDF (.pdf)"}</span>
+        </button>
+        <button
           onClick={handlePrint}
           className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-lg transition-colors cursor-pointer"
         >
           <Printer className="w-4 h-4" />
-          <span>Imprimir / Salvar PDF</span>
+          <span>Imprimir</span>
         </button>
         <button
           onClick={onClose}
