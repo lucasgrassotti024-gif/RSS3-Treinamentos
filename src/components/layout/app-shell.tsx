@@ -22,8 +22,9 @@ import {
   Trophy,
   Wifi,
   WifiOff,
-  DownloadCloud,
+  Bot,
 } from "lucide-react";
+import { DemoBanner } from "@/components/layout/demo-banner";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -111,6 +112,11 @@ export function AppShell({ children }: AppShellProps) {
       href: "/desafios",
       label: (t.nav as Record<string, string>).challenges || "Desafios & Provas",
       icon: Trophy,
+    },
+    {
+      href: "/ia",
+      label: (t.nav as Record<string, string>).aiAssistant || "Copiloto IA",
+      icon: Bot,
     },
   ];
 
@@ -303,6 +309,9 @@ export function AppShell({ children }: AppShellProps) {
 
       {/* Conteúdo Principal com Barra Superior (Topbar) */}
       <div className="flex-1 flex flex-col min-w-0">
+        {/* Banner Regulamentar Obrigatório de Demonstração */}
+        <DemoBanner />
+
         {/* Topbar Corporativa Superior Fixa */}
         <header className="sticky top-0 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
           {/* Lado Esquerdo da Topbar */}
@@ -429,7 +438,7 @@ export function AppShell({ children }: AppShellProps) {
 
         {/* Barra de Navegação Inferior Fixa para Mobile (Experiência estilo App) */}
         <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-2 py-1.5 flex items-center justify-around shadow-lg">
-          {navItems.slice(0, 5).map((item) => {
+          {navItems.map((item) => {
             const Icon = item.icon;
             const isActive =
               item.href === "/"
