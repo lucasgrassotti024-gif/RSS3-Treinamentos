@@ -100,7 +100,7 @@ export function getSavedOfflinePackages(): OfflinePackageMeta[] {
     const raw = localStorage.getItem(OFFLINE_COURSES_KEY);
     if (!raw) return [];
     const store = JSON.parse(raw);
-    return Object.values(store).map((item: any) => item.meta);
+    return Object.values(store).map((item) => (item as { meta: OfflinePackageMeta }).meta);
   } catch {
     return [];
   }

@@ -171,7 +171,7 @@ export default function CatalogPage() {
 
       const matchesType =
         selectedTypeFilter === "all" ||
-        (course.categories && course.categories.includes(selectedTypeFilter as any));
+        (course.categories && course.categories.some((cat) => cat === selectedTypeFilter));
 
       return matchesSearch && matchesType;
     });
@@ -264,7 +264,7 @@ export default function CatalogPage() {
           {/* FILEIRAS DE CURSOS INDIVIDUAIS */}
           {categoryRows.map((catDef) => {
             const coursesInCat = DEMO_COURSES.filter(
-              (c) => c.categories && c.categories.includes(catDef.id as any)
+              (c) => c.categories && c.categories.some((cat) => cat === catDef.id)
             );
             return (
               <CourseRow

@@ -86,7 +86,7 @@ export default function HomePage() {
   const showcaseCourses = useMemo(() => {
     if (selectedHomeTab === "all") return DEMO_COURSES;
     return DEMO_COURSES.filter(
-      (c) => c.categories && c.categories.includes(selectedHomeTab as any)
+      (c) => c.categories && c.categories.some((cat) => cat === selectedHomeTab)
     );
   }, [selectedHomeTab]);
 

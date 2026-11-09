@@ -161,6 +161,57 @@ Conforme as diretrizes corporativas da RSS3, os módulos online cobrem a formaç
       { label: "Curso de NR-12 e Máquinas", href: "/catalogo" },
     ],
   },
+  {
+    keywords: ["hidrojato", "hidrojateamento", "alta pressao", "bico", "pistola", "mangueira", "retrocesso"],
+    response: `O **Hidrojateamento de Alta e Ultra-Alta Pressão** é uma das atividades de maior criticidade operacional na RSS3:
+
+**Diretrizes de Segurança Inegociáveis:**
+1. **Zona de Exclusão:** Demarcar e isolar todo o raio de ação com fita zebrada e cones de advertência. Proibida a presença de terceiros não envolvidos.
+2. **Dispositivo de Desarme Rápido (Dump Valve):** A pistola de hidrojato deve possuir sistema homem-morto em perfeito funcionamento para despressurização imediata caso o operador solte o gatilho.
+3. **EPIs Específicos para Hidrojato:** Macacão com trama de kevlar/aramida de alta densidade, botina com biqueira e protetor metatarsal de aço, viseira facial conjugada com óculos e protetor auditivo.
+4. **Verificação de Mangueiras e Conexões:** Uso obrigatório de cabos de segurança anti-chicoteamento (*whipchecks*) em todas as emendas de mangueiras.`,
+    suggestedActions: [
+      { label: "Curso de Hidrojato e Alta Pressão", href: "/catalogo" },
+      { label: "Ver Desafios Práticos", href: "/desafios" },
+    ],
+  },
+  {
+    keywords: ["pintura", "industrial", "jateamento", "abrasivo", "revestimento", "corrosao", "espessura"],
+    response: `Na **Pintura e Revestimento Industrial**, o controle de qualidade e a segurança química são fundamentais:
+
+**Etapas Cruciais:**
+1. **Preparo de Superfície:** Tratamento com hidrojateamento ou jateamento abrasivo para obtenção de perfil de rugosidade e grau de limpeza (Sa 2½ ou Sa 3).
+2. **Condições Ambientais (Ponto de Orvalho):** A aplicação nunca deve ser feita se a temperatura da chapa estiver a menos de 3°C acima do ponto de orvalho ou com umidade relativa superior a 85%.
+3. **Controle de Espessura:** Medição de película úmida (EPU) durante a aplicação e película seca (EPS) após a cura com medidor magnético calibrado.
+4. **Proteção Respiratória:** Uso obrigatório de respirador com linha de ar mandado ou filtros específicos para vapores orgânicos em ambientes fechados.`,
+    suggestedActions: [
+      { label: "Curso de Pintura Industrial", href: "/catalogo" },
+    ],
+  },
+  {
+    keywords: ["apr", "analise preliminar de risco", "permissao", "pt", "risco", "acidente", "perigo"],
+    response: `A **Análise Preliminar de Risco (APR)** é a ferramenta preventiva obrigatória antes do início de qualquer tarefa em frentes de trabalho:
+
+**Passo a Passo na RSS3:**
+1. **Passo a Passo da Tarefa:** Decompor a atividade em etapas cronológicas simples.
+2. **Identificação dos Perigos:** Listar fontes de energia, riscos de queda, projeção de partículas, ruído e produtos químicos.
+3. **Medidas de Controle (Hierarquia de Riscos):** Eliminação > Substituição > Controles de Engenharia > Medidas Administrativas > EPIs.
+4. **Assinatura e Alinhamento:** Toda a equipe participante da frente deve ser informada e assinar a APR antes da liberação do serviço pela contratante/CMPC.`,
+    suggestedActions: [
+      { label: "Explorar Desafios de APR", href: "/desafios" },
+    ],
+  },
+  {
+    keywords: ["epi", "epis", "cinto", "capacete", "bota", "oculos", "luva", "mascara"],
+    response: `Os **Equipamentos de Proteção Individual (EPIs)** são a última barreira de proteção do trabalhador:
+
+• **Inspeção Diária:** Antes de colocar o cinto tipo paraquedista ou talabarte, verifique se há desfiamento nas costuras, deformações em mosquetões ou oxidação.
+• **Certificado de Aprovação (CA):** Nenhum EPI pode ser utilizado sem CA válido emitido pelo Ministério do Trabalho.
+• **Substituição Imediata:** EPIs que sofreram impacto de retenção de queda devem ser descartados e retirados de circulação imediatamente.`,
+    suggestedActions: [
+      { label: "Ver Cursos de Segurança", href: "/catalogo" },
+    ],
+  },
 ];
 
 export function getLocalAIResponse(userText: string): {
