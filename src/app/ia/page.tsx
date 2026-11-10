@@ -14,8 +14,14 @@ import {
   ArrowRight,
   ShieldCheck,
   ChevronLeft,
+  BookOpen,
+  GraduationCap,
+  Trophy,
+  Award,
 } from "lucide-react";
-import { AIMessage, AI_QUICK_PROMPTS, getLocalAIResponse } from "@/lib/ai-assistant-data";
+import { AIMessage, AICardAttachment, getLocalAIResponse } from "@/lib/ai-assistant-data";
+import { DEMO_COURSES, DEMO_MBAS } from "@/lib/mock-data";
+import { getStoredCertificates } from "@/lib/progress";
 
 interface ChatSession {
   id: string;
@@ -157,6 +163,107 @@ export default function AssistantPage() {
     if (!textToSend) setInputValue("");
     setIsLoading(true);
 
+    // Detecção inteligente de cards para anexar na resposta
+    const detectAttachments = (replyText: string, queryText: string): AICardAttachment[] => {
+      const attachments: AICardAttachment[] = [];
+      const combined = `${queryText} ${replyText}`.toLowerCase();
+
+      // 1. Detecção de Certificados (só exibe se o usuário tiver certificados emitidos no sistema!)
+      if (
+        combined.includes("certificado") ||
+        combined.includes("diploma") ||
+        combined.includes("conclusao") ||
+        combined.includes("minhas conquistas")
+      ) {
+        const userCerts = getStoredCertificates();
+        if (userCerts.length > 0) {
+          userCerts.slice(0, 2).forEach((c) => {
+            attachments.push({
+              type: "certificate",
+              id: c.id,
+              title: `Certificado: ${c.courseTitle["pt-BR"] || "Curso Técnico"}`,
+              description: `Código Canônico: ${c.validationCode}`,
+              badge: "Emitido & Válido",
+              href: "/certificados",
+              meta: `Carga: ${c.workloadHours}h`,
+            });
+          });
+        }
+      }
+
+      // 2. Detecção de Cursos
+      DEMO_COURSES.forEach((course) => {
+        const titlePt = (course.title["pt-BR"] || "").toLowerCase();
+        const slug = course.slug.toLowerCase();
+        if (
+          combined.includes(course.id.toLowerCase()) ||
+          (titlePt.length > 5 && combined.includes(titlePt)) ||
+          (slug.length > 5 && combined.includes(slug)) ||
+          (course.id.includes("nr12") && (combined.includes("nr-12") || combined.includes("nr 12") || combined.includes("loto"))) ||
+          (course.id.includes("nr11") && (combined.includes("nr-11") || combined.includes("nr 11") || combined.includes("ponte rolante"))) ||
+          (course.id.includes("nr20") && (combined.includes("nr-20") || combined.includes("nr 20") || combined.includes("inflamaveis"))) ||
+          (course.id.includes("excel") && combined.includes("excel")) ||
+          (course.id.includes("power-bi") && (combined.includes("power bi") || combined.includes("powerbi"))) ||
+          (course.id.includes("pcm") && combined.includes("pcm")) ||
+          (course.id.includes("hidrojato") && combined.includes("hidrojato")) ||
+          (course.id.includes("pintura") && combined.includes("pintura"))
+        ) {
+          if (!attachments.some((a) => a.id === course.id) && attachments.length < 3) {
+            attachments.push({
+              type: "course",
+              id: course.id,
+              title: course.title["pt-BR"],
+              description: course.description["pt-BR"],
+              badge: `${course.workloadHours} horas`,
+              href: `/catalogo/${course.id}`,
+              meta: `${course.modulesCount} módulos • ${course.lessonsCount} aulas`,
+            });
+          }
+        }
+      });
+
+      // 3. Detecção de MBAs
+      DEMO_MBAS.forEach((mba) => {
+        const titlePt = (mba.title["pt-BR"] || "").toLowerCase();
+        if (combined.includes("mba") || combined.includes(titlePt)) {
+          if (!attachments.some((a) => a.id === mba.id) && attachments.length < 3) {
+            attachments.push({
+              type: "mba",
+              id: mba.id,
+              title: mba.title["pt-BR"],
+              description: mba.subtitle ? mba.subtitle["pt-BR"] : "Formação Técnica Integrada",
+              badge: "Formação Executiva",
+              href: `/mbas/${mba.slug || mba.id}`,
+              meta: `${mba.totalHours} horas • Trilha Integrada`,
+            });
+          }
+        }
+      });
+
+      // 4. Detecção de Desafios / Provas
+      if (
+        combined.includes("prova") ||
+        combined.includes("desafio") ||
+        combined.includes("simulado") ||
+        combined.includes("teste") ||
+        combined.includes("avaliacao")
+      ) {
+        if (!attachments.some((a) => a.type === "exam") && attachments.length < 3) {
+          attachments.push({
+            type: "exam",
+            id: "desafios-provas-geral",
+            title: "Central de Desafios & Provas Industriais",
+            description: "Simulados práticos com cenários reais de campo para testar seus conhecimentos.",
+            badge: "Simulados & Prática",
+            href: "/desafios",
+            meta: "Pontuação XP & Ranking",
+          });
+        }
+      }
+
+      return attachments;
+    };
+
     try {
       const res = await fetch("/api/ai-chat", {
         method: "POST",
@@ -166,12 +273,14 @@ export default function AssistantPage() {
 
       if (res.ok) {
         const data = await res.json();
+        const attachments = detectAttachments(data.reply, text);
         const aiMsg: AIMessage = {
           id: `ai-${Math.random().toString(36).slice(2, 9)}`,
           sender: "assistant",
           text: data.reply,
           timestamp: timeLabel,
           suggestedActions: data.suggestedActions,
+          attachments,
         };
 
         setSessions((prev) =>
@@ -184,12 +293,14 @@ export default function AssistantPage() {
       }
     } catch {
       const localResult = getLocalAIResponse(text);
+      const attachments = detectAttachments(localResult.text, text);
       const aiMsg: AIMessage = {
         id: `ai-${Math.random().toString(36).slice(2, 9)}`,
         sender: "assistant",
         text: localResult.text,
         timestamp: timeLabel,
         suggestedActions: localResult.suggestedActions,
+        attachments,
       };
 
       setSessions((prev) =>
@@ -402,6 +513,80 @@ export default function AssistantPage() {
                     }`}
                   >
                     <div className="whitespace-pre-wrap break-words">{msg.text}</div>
+
+                    {/* Cards Interativos Anexados (Cursos, MBAs, Provas e Certificados) */}
+                    {msg.attachments && msg.attachments.length > 0 && (
+                      <div className="mt-3.5 pt-3 border-t border-slate-100 dark:border-slate-800 space-y-2">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+                          Sugestões Diretas da Plataforma
+                        </span>
+                        <div className="grid grid-cols-1 gap-2">
+                          {msg.attachments.map((att) => {
+                            const isCert = att.type === "certificate";
+                            const isMba = att.type === "mba";
+                            const isExam = att.type === "exam";
+
+                            return (
+                              <Link
+                                key={att.id}
+                                href={att.href}
+                                className={`flex items-center justify-between gap-3 p-3 rounded-xl border transition-all group ${
+                                  isCert
+                                    ? "bg-amber-500/5 hover:bg-amber-500/10 border-amber-300 dark:border-amber-800/60"
+                                    : isMba
+                                    ? "bg-purple-500/5 hover:bg-purple-500/10 border-purple-300 dark:border-purple-800/60"
+                                    : isExam
+                                    ? "bg-emerald-500/5 hover:bg-emerald-500/10 border-emerald-300 dark:border-emerald-800/60"
+                                    : "bg-blue-500/5 hover:bg-blue-500/10 border-blue-200 dark:border-blue-800/60"
+                                }`}
+                              >
+                                <div className="flex items-center gap-3 min-w-0">
+                                  <div
+                                    className={`p-2 rounded-lg shrink-0 ${
+                                      isCert
+                                        ? "bg-amber-500/20 text-amber-600 dark:text-amber-400"
+                                        : isMba
+                                        ? "bg-purple-500/20 text-purple-600 dark:text-purple-400"
+                                        : isExam
+                                        ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"
+                                        : "bg-blue-500/20 text-blue-600 dark:text-blue-400"
+                                    }`}
+                                  >
+                                    {isCert && <Award className="w-4 h-4" />}
+                                    {isMba && <GraduationCap className="w-4 h-4" />}
+                                    {isExam && <Trophy className="w-4 h-4" />}
+                                    {!isCert && !isMba && !isExam && <BookOpen className="w-4 h-4" />}
+                                  </div>
+                                  <div className="min-w-0">
+                                    <div className="flex items-center gap-2">
+                                      <h3 className="text-xs font-bold text-slate-800 dark:text-slate-100 truncate group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                                        {att.title}
+                                      </h3>
+                                      {att.badge && (
+                                        <span className="text-[10px] px-1.5 py-0.5 rounded-full font-bold bg-slate-200/60 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0">
+                                          {att.badge}
+                                        </span>
+                                      )}
+                                    </div>
+                                    {att.description && (
+                                      <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
+                                        {att.description}
+                                      </p>
+                                    )}
+                                    {att.meta && (
+                                      <span className="text-[10px] text-slate-400 dark:text-slate-500 block mt-0.5">
+                                        {att.meta}
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                                <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all shrink-0" />
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
 
                     {/* Ações / Atalhos Rápidos sugeridos */}
                     {msg.suggestedActions && msg.suggestedActions.length > 0 && (

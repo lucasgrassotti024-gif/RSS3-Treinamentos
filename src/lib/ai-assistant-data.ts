@@ -1,3 +1,13 @@
+export interface AICardAttachment {
+  type: "course" | "mba" | "exam" | "certificate";
+  id: string;
+  title: string;
+  description?: string;
+  badge?: string;
+  href: string;
+  meta?: string;
+}
+
 export interface AIMessage {
   id: string;
   sender: "user" | "assistant" | "system";
@@ -8,6 +18,7 @@ export interface AIMessage {
     href?: string;
     query?: string;
   }[];
+  attachments?: AICardAttachment[];
   topic?: "platform" | "safety" | "courses" | "general";
 }
 
