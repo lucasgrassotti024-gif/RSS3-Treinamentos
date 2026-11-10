@@ -260,18 +260,15 @@ export function getLocalAIResponse(userText: string): {
 
   // Resposta padrão caso nenhuma palavra-chave específica seja encontrada
   return {
-    text: `Olá! Sou o **Copiloto RSS3**, assistente inteligente de capacitação técnica e apoio operacional da RSS3 Soluções Industriais.
+    text: `Opa! Tudo bem? 😊 Sou o **Copiloto RSS3**, seu parceiro aqui na plataforma! 👷‍♂️✨
 
-Posso esclarecer dúvidas sobre:
-• **Normas Regulamentadoras:** Procedimentos de NR-35 (Altura), NR-33 (Confinados), NR-12 (Máquinas/LOTO) e NR-10 (Elétrica).
-• **Funcionamento da Plataforma:** Como iniciar cursos, salvar módulos offline, acompanhar seu progresso e validar certificados teóricos.
-• **Práticas de Campo e Metodologias:** Diretrizes de 5S, manutenção preventiva/corretiva e segurança operacional.
+Pode falar comigo de boa! Se quiser ajuda com algum treinamento, dúvidas sobre normas de segurança (tipo NR-35, NR-33, NR-12), como funcionam as provas ou até como emitir seus certificados, é só mandar aqui!
 
-Selecione um dos atalhos rápidos ou digite sua pergunta específica!`,
+Como posso te dar uma força hoje? 🚀`,
     suggestedActions: [
-      { label: "Ver Cursos Disponíveis", href: "/catalogo" },
-      { label: "Como Funciona a Validação?", href: "/validar" },
-      { label: "Ir para Meus Desafios", href: "/desafios" },
+      { label: "Ver Cursos", href: "/catalogo" },
+      { label: "Como Funciona o MBA?", href: "/mbas" },
+      { label: "Ir para Desafios & Provas", href: "/desafios" },
     ],
     topic: "general",
   };

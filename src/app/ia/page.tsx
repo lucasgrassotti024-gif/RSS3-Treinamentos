@@ -265,10 +265,16 @@ export default function AssistantPage() {
     };
 
     try {
+      // Enviamos as últimas 6 mensagens como contexto para o Gemini ter memória da conversa!
+      const recentHistory = activeSession.messages.slice(-6).map((m) => ({
+        role: m.sender === "user" ? "user" : "assistant",
+        text: m.text,
+      }));
+
       const res = await fetch("/api/ai-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text }),
+        body: JSON.stringify({ message: text, history: recentHistory }),
       });
 
       if (res.ok) {
