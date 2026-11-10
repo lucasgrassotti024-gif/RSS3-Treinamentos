@@ -32,21 +32,7 @@ function createInitialSession(): ChatSession {
     id: `session-${Date.now()}`,
     title: "Nova Conversa",
     createdAt: new Date().toLocaleDateString("pt-BR", { day: "2-digit", month: "short" }),
-    messages: [
-      {
-        id: "msg-welcome",
-        sender: "assistant",
-        text: `Olá! Sou o **Copiloto RSS3**, sua Inteligência Artificial integrada para tirar dúvidas e apoiar nos treinamentos.
-
-Em que posso te ajudar hoje?`,
-        timestamp: "Agora",
-        suggestedActions: [
-          { label: "O que é LOTO na NR-12?", query: "O que é Lockout/Tagout (LOTO) e por que é fundamental na NR-12?" },
-          { label: "Normas de Espaço Confinado (NR-33)", query: "Quais os requisitos obrigatórios para entrada em Espaço Confinado segundo a NR-33?" },
-          { label: "Como emitir Certificados?", query: "Como funcionam os certificados na plataforma?" },
-        ],
-      },
-    ],
+    messages: [],
   };
 }
 
@@ -334,8 +320,64 @@ export default function AssistantPage() {
         </div>
 
         {/* Feed de Mensagens Centralizado */}
-        <div className="flex-1 overflow-y-auto px-4 py-6">
-          <div className="max-w-3xl mx-auto space-y-6">
+        <div className="flex-1 overflow-y-auto px-4 py-6 flex flex-col justify-between">
+          <div className="max-w-3xl w-full mx-auto space-y-6 flex-1 flex flex-col justify-center">
+            {(!activeSession?.messages || activeSession.messages.length === 0) && (
+              <div className="text-center py-12 my-auto animate-fade-in">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-orange-500 p-0.5 mx-auto mb-4 shadow-md">
+                  <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                    <Bot className="w-6 h-6 text-orange-400" />
+                  </div>
+                </div>
+
+                <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">
+                  Tire sua dúvida
+                </h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
+                  Pergunte qualquer coisa sobre treinamentos, normas industriais ou rotinas da plataforma.
+                </p>
+
+                {/* Sugestões Rápidas Minimalistas */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-8 max-w-xl mx-auto">
+                  <button
+                    onClick={() => handleSendMessage("O que é LOTO na NR-12 e como aplicar?")}
+                    className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 hover:border-blue-500 dark:hover:border-blue-500 text-left transition-all group cursor-pointer shadow-2xs"
+                  >
+                    <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 group-hover:text-blue-500 block">
+                      Lockout/Tagout (LOTO)
+                    </span>
+                    <span className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">
+                      Procedimentos da NR-12
+                    </span>
+                  </button>
+
+                  <button
+                    onClick={() => handleSendMessage("Quais os requisitos obrigatórios para entrada em Espaço Confinado pela NR-33?")}
+                    className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 hover:border-blue-500 dark:hover:border-blue-500 text-left transition-all group cursor-pointer shadow-2xs"
+                  >
+                    <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 group-hover:text-blue-500 block">
+                      Espaço Confinado
+                    </span>
+                    <span className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">
+                      Diretrizes da NR-33 e PET
+                    </span>
+                  </button>
+
+                  <button
+                    onClick={() => handleSendMessage("Como funciona a emissão e validação de certificados?")}
+                    className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 hover:border-blue-500 dark:hover:border-blue-500 text-left transition-all group cursor-pointer shadow-2xs"
+                  >
+                    <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 group-hover:text-blue-500 block">
+                      Certificados
+                    </span>
+                    <span className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">
+                      Emissão e validação pública
+                    </span>
+                  </button>
+                </div>
+              </div>
+            )}
+
             {activeSession?.messages.map((msg) => {
               const isUser = msg.sender === "user";
 
