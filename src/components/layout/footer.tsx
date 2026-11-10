@@ -2,11 +2,18 @@
 
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useApp } from "@/context/app-context";
 import { ShieldCheck } from "lucide-react";
 
 export function Footer() {
   const { t } = useApp();
+  const pathname = usePathname();
+
+  // Na página da IA, mantemos o layout imersivo estilo ChatGPT/Claude (sem footer ocupando espaço)
+  if (pathname === "/ia") {
+    return null;
+  }
 
   return (
     <footer className="border-t bg-card text-muted-foreground mt-auto">
