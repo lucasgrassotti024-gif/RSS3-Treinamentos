@@ -25,7 +25,7 @@ Suas diretrizes fundamentais:
 3. Ressalte sempre que os treinamentos online cobrem a base teórica; a habilitação prática regulamentada exige treinamento presencial e validação de SST.
 4. Responda em português claro, organizado com tópicos e formatação Markdown concisa.`;
 
-        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`;
+        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${geminiApiKey}`;
 
         const geminiRes = await fetch(geminiUrl, {
           method: "POST",
