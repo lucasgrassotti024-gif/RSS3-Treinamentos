@@ -133,6 +133,7 @@ export default function AssistantPage() {
     const text = (textToSend || inputValue).trim();
     if (!text || isLoading || !activeSession) return;
 
+    const currentSessionId = activeSession.id;
     const timeLabel = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
     const userMsgId = `user-${Math.random().toString(36).slice(2, 9)}`;
 
@@ -291,13 +292,16 @@ export default function AssistantPage() {
 
         setSessions((prev) =>
           prev.map((s) =>
-            s.id === activeSession.id ? { ...s, messages: [...s.messages, aiMsg] } : s
+            s.id === currentSessionId ? { ...s, messages: [...s.messages, aiMsg] } : s
           )
         );
       } else {
-        throw new Error("Erro na API");
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || `Erro HTTP ${res.status}`);
       }
-    } catch {
+    } catch (err: unknown) {
+      console.error("Falha ao comunicar com a IA:", err);
+      // Se a chamada de rede falhar, utiliza a resposta local amigável
       const localResult = getLocalAIResponse(text);
       const attachments = detectAttachments(localResult.text, text);
       const aiMsg: AIMessage = {
@@ -311,7 +315,7 @@ export default function AssistantPage() {
 
       setSessions((prev) =>
         prev.map((s) =>
-          s.id === activeSession.id ? { ...s, messages: [...s.messages, aiMsg] } : s
+          s.id === currentSessionId ? { ...s, messages: [...s.messages, aiMsg] } : s
         )
       );
     } finally {
