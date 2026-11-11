@@ -35,6 +35,7 @@ interface ChatSession {
 
 const STORAGE_KEY = "rss3_ai_chat_sessions";
 const ACTIVE_SESSION_KEY = "rss3_ai_active_session_id";
+const MEMORY_NOTES_KEY = "rss3_ai_user_memory_notes";
 
 function createInitialSession(defaultTitle = "Nova Conversa"): ChatSession {
   return {
@@ -49,6 +50,7 @@ export default function AssistantPage() {
   const { t, locale, setLocale } = useApp();
   const [sessions, setSessions] = useState<ChatSession[]>([]);
   const [activeSessionId, setActiveSessionId] = useState<string>("");
+  const [memoryNotes, setMemoryNotes] = useState<string[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -80,9 +82,14 @@ export default function AssistantPage() {
     },
   };
 
-  // Carrega histórico do localStorage no client
+  // Carrega histórico e notas de memória do localStorage no client
   useEffect(() => {
     try {
+      const storedNotes = localStorage.getItem(MEMORY_NOTES_KEY);
+      if (storedNotes) {
+        setMemoryNotes(JSON.parse(storedNotes));
+      }
+
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parsed: ChatSession[] = JSON.parse(stored);
@@ -102,6 +109,17 @@ export default function AssistantPage() {
     setSessions([initial]);
     setActiveSessionId(initial.id);
   }, []);
+
+  // Salva notas de aprendizado permanente
+  useEffect(() => {
+    if (memoryNotes.length > 0) {
+      try {
+        localStorage.setItem(MEMORY_NOTES_KEY, JSON.stringify(memoryNotes));
+      } catch {
+        // storage restrito
+      }
+    }
+  }, [memoryNotes]);
 
   // Salva no localStorage quando mudar
   useEffect(() => {
@@ -296,8 +314,8 @@ export default function AssistantPage() {
     };
 
     try {
-      // Enviamos as últimas 6 mensagens como contexto para o Gemini ter memória da conversa!
-      const recentHistory = activeSession.messages.slice(-6).map((m) => ({
+      // Enviamos as últimas 16 mensagens como contexto para o Gemini ter memória contínua e lembrar de tudo na conversa!
+      const recentHistory = activeSession.messages.slice(-16).map((m) => ({
         role: m.sender === "user" ? "user" : "assistant",
         text: m.text,
       }));
@@ -305,19 +323,92 @@ export default function AssistantPage() {
       const res = await fetch("/api/ai-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text, history: recentHistory, locale }),
+        body: JSON.stringify({ message: text, history: recentHistory, locale, memoryNotes }),
       });
 
       if (res.ok) {
         const data = await res.json();
         const attachments = detectAttachments(data.reply, text);
+
+        // Se a IA enviou pedidos explícitos de cards [CARD: tipo:id]
+        if (Array.isArray(data.cardRequests)) {
+          data.cardRequests.forEach((req: { type: string; id: string }) => {
+            const reqType = req.type.toLowerCase();
+            const reqId = req.id.toLowerCase();
+
+            if (reqType === "curso" || reqType === "course") {
+              const foundCourse = DEMO_COURSES.find(
+                (c) => c.id.toLowerCase() === reqId || c.slug.toLowerCase() === reqId
+              );
+              if (foundCourse && !attachments.some((a) => a.id === foundCourse.id)) {
+                attachments.unshift({
+                  type: "course",
+                  id: foundCourse.id,
+                  title: foundCourse.title[locale] || foundCourse.title["pt-BR"],
+                  description: foundCourse.description[locale] || foundCourse.description["pt-BR"],
+                  badge: `${foundCourse.workloadHours} horas`,
+                  href: `/catalogo/${foundCourse.id}`,
+                  meta: `${foundCourse.modulesCount} módulos • ${foundCourse.lessonsCount} aulas`,
+                });
+              }
+            } else if (reqType === "mba") {
+              const foundMba = DEMO_MBAS.find(
+                (m) => m.id.toLowerCase() === reqId || (m.slug && m.slug.toLowerCase() === reqId)
+              );
+              if (foundMba && !attachments.some((a) => a.id === foundMba.id)) {
+                attachments.unshift({
+                  type: "mba",
+                  id: foundMba.id,
+                  title: foundMba.title[locale] || foundMba.title["pt-BR"],
+                  description: foundMba.subtitle ? foundMba.subtitle[locale] || foundMba.subtitle["pt-BR"] : "Formação Técnica Integrada",
+                  badge: "Formação Executiva",
+                  href: `/mbas/${foundMba.slug || foundMba.id}`,
+                  meta: `${foundMba.totalHours} horas • Trilha Integrada`,
+                });
+              }
+            } else if (reqType === "certificado" || reqType === "certificate") {
+              if (!attachments.some((a) => a.type === "certificate")) {
+                attachments.unshift({
+                  type: "certificate",
+                  id: "meus-certificados",
+                  title: "Meus Certificados",
+                  description: "Consulte, baixe e valide seus certificados com código canônico.",
+                  badge: "Autenticação em 2 Camadas",
+                  href: "/certificados",
+                  meta: "Download em PDF de alta qualidade",
+                });
+              }
+            } else if (reqType === "prova" || reqType === "desafio" || reqType === "exam") {
+              if (!attachments.some((a) => a.type === "exam")) {
+                attachments.unshift({
+                  type: "exam",
+                  id: "central-desafios",
+                  title: "Desafios & Provas Práticas",
+                  description: "Simulados interativos de segurança e operação com pontuação XP.",
+                  badge: "Prática & Ranking",
+                  href: "/desafios",
+                  meta: "Cenários reais de campo",
+                });
+              }
+            }
+          });
+        }
+
+        // Se a IA aprendeu um novo fato sobre o usuário, salva permanentemente
+        if (data.learnedFact && typeof data.learnedFact === "string") {
+          setMemoryNotes((prev) => {
+            if (prev.includes(data.learnedFact)) return prev;
+            return [...prev, data.learnedFact].slice(-25); // Mantém até 25 fatos relevantes
+          });
+        }
+
         const aiMsg: AIMessage = {
           id: `ai-${Math.random().toString(36).slice(2, 9)}`,
           sender: "assistant",
           text: data.reply,
           timestamp: timeLabel,
           suggestedActions: data.suggestedActions,
-          attachments,
+          attachments: attachments.slice(0, 3), // Limite harmônico de até 3 cards
         };
 
         setSessions((prev) =>
@@ -574,6 +665,52 @@ export default function AssistantPage() {
                     }`}
                   >
                     <div className="whitespace-pre-wrap break-words">{msg.text}</div>
+
+                    {/* Cards Interativos Anexados pela IA (Cursos, MBAs, Certificados, Provas) */}
+                    {!isUser && msg.attachments && msg.attachments.length > 0 && (
+                      <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800/80 space-y-2">
+                        {msg.attachments.map((card) => (
+                          <Link
+                            key={card.id}
+                            href={card.href}
+                            className="flex items-center justify-between p-3 rounded-xl border border-blue-500/30 bg-blue-50/50 dark:bg-blue-950/20 hover:bg-blue-100/50 dark:hover:bg-blue-900/30 transition-all group"
+                          >
+                            <div className="flex items-center gap-3 min-w-0">
+                              <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                                {card.type === "course" && <BookOpen className="w-4 h-4" />}
+                                {card.type === "mba" && <GraduationCap className="w-4 h-4" />}
+                                {card.type === "certificate" && <Award className="w-4 h-4" />}
+                                {card.type === "exam" && <Trophy className="w-4 h-4" />}
+                              </div>
+                              <div className="min-w-0">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-xs font-bold text-slate-900 dark:text-slate-100 truncate group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                                    {card.title}
+                                  </span>
+                                  {card.badge && (
+                                    <span className="text-[10px] px-1.5 py-0.5 rounded-md font-semibold bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 shrink-0">
+                                      {card.badge}
+                                    </span>
+                                  )}
+                                </div>
+                                {card.description && (
+                                  <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
+                                    {card.description}
+                                  </p>
+                                )}
+                                {card.meta && (
+                                  <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5 font-medium">
+                                    {card.meta}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+
+                            <ArrowRight className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 ml-2 group-hover:translate-x-0.5 transition-transform" />
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               );
