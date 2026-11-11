@@ -18,10 +18,13 @@ import {
   GraduationCap,
   Trophy,
   Award,
+  Globe,
 } from "lucide-react";
 import { AIMessage, AICardAttachment, getLocalAIResponse } from "@/lib/ai-assistant-data";
 import { DEMO_COURSES, DEMO_MBAS } from "@/lib/mock-data";
 import { getStoredCertificates } from "@/lib/progress";
+import { useApp } from "@/context/app-context";
+import { Locale } from "@/types";
 
 interface ChatSession {
   id: string;
@@ -33,22 +36,49 @@ interface ChatSession {
 const STORAGE_KEY = "rss3_ai_chat_sessions";
 const ACTIVE_SESSION_KEY = "rss3_ai_active_session_id";
 
-function createInitialSession(): ChatSession {
+function createInitialSession(defaultTitle = "Nova Conversa"): ChatSession {
   return {
     id: `session-${Date.now()}`,
-    title: "Nova Conversa",
+    title: defaultTitle,
     createdAt: new Date().toLocaleDateString("pt-BR", { day: "2-digit", month: "short" }),
     messages: [],
   };
 }
 
 export default function AssistantPage() {
+  const { t, locale, setLocale } = useApp();
   const [sessions, setSessions] = useState<ChatSession[]>([]);
   const [activeSessionId, setActiveSessionId] = useState<string>("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Fallbacks de i18n seguros para aiChat
+  const aiT = t.aiChat || {
+    title: "Copiloto IA",
+    newChat: "Nova Conversa",
+    newShort: "Nova",
+    history: "Histórico",
+    emptyStateTitle: "Tire sua dúvida",
+    emptyStateSubtitle: "Pergunte qualquer coisa sobre treinamentos, normas industriais ou rotinas da plataforma.",
+    inputPlaceholder: "Envie uma mensagem para o Copiloto RSS3...",
+    backToSite: "Voltar ao Site",
+    statusOnline: "Online",
+    thinking: "Pensando...",
+    footerDisclaimer: "Copiloto RSS3 • Verifique informações operacionais críticas nas normas técnicas e procedimentos formais.",
+    prompts: {
+      lotoTitle: "Lockout/Tagout (LOTO)",
+      lotoDesc: "Procedimentos da NR-12",
+      lotoQuery: "O que é LOTO na NR-12 e como aplicar?",
+      confinedTitle: "Espaço Confinado",
+      confinedDesc: "Diretrizes da NR-33 e PET",
+      confinedQuery: "Quais os requisitos obrigatórios para entrada em Espaço Confinado pela NR-33?",
+      certTitle: "Certificados",
+      certDesc: "Emissão e validação pública",
+      certQuery: "Como funciona a emissão e validação de certificados?",
+    },
+  };
 
   // Carrega histórico do localStorage no client
   useEffect(() => {
@@ -275,7 +305,7 @@ export default function AssistantPage() {
       const res = await fetch("/api/ai-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text, history: recentHistory }),
+        body: JSON.stringify({ message: text, history: recentHistory, locale }),
       });
 
       if (res.ok) {
@@ -350,7 +380,7 @@ export default function AssistantPage() {
             className="flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-xs transition-colors cursor-pointer"
           >
             <Plus className="w-4 h-4" />
-            <span>Nova Conversa</span>
+            <span>{aiT.newChat}</span>
           </button>
 
           <button
@@ -364,7 +394,7 @@ export default function AssistantPage() {
         {/* Lista de Conversas Anteriores */}
         <div className="flex-1 overflow-y-auto p-2 space-y-1">
           <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">
-            Histórico
+            {aiT.history}
           </div>
           {sessions.map((s) => {
             const isActive = s.id === activeSessionId;
@@ -388,7 +418,7 @@ export default function AssistantPage() {
 
                 <button
                   onClick={(e) => handleDeleteSession(s.id, e)}
-                  title="Excluir conversa"
+                  title="Excluir"
                   className="opacity-0 group-hover:opacity-100 p-1 hover:text-rose-500 rounded-md transition-opacity cursor-pointer shrink-0"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
@@ -405,39 +435,60 @@ export default function AssistantPage() {
             className="flex items-center gap-1.5 hover:text-slate-700 dark:hover:text-slate-200 transition-colors"
           >
             <ChevronLeft className="w-3.5 h-3.5" />
-            <span>Voltar ao Site</span>
+            <span>{aiT.backToSite}</span>
           </Link>
           <span className="text-[10px] text-emerald-500 flex items-center gap-1 font-semibold">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            Gemini Online
+            {aiT.statusOnline}
           </span>
         </div>
       </aside>
 
       {/* Área Principal de Conversa (Design Limpo e Focado) */}
       <div className="flex-1 flex flex-col min-w-0 h-full relative">
-        {/* Barra Superior Discreta */}
+        {/* Barra Superior Discreta com Seletor de Idioma e Nova Conversa */}
         <div className="h-11 px-4 border-b border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between bg-white/60 dark:bg-slate-900/60 backdrop-blur-xs">
           <div className="flex items-center gap-2">
             <button
               onClick={() => setSidebarOpen(true)}
               className="md:hidden p-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-              title="Abrir histórico de conversas"
+              title="Menu"
             >
               <Menu className="w-4 h-4" />
             </button>
-            <span className="text-xs font-bold text-slate-800 dark:text-slate-200 truncate max-w-[200px] sm:max-w-md">
-              {activeSession?.title || "Conversa"}
+            <span className="text-xs font-bold text-slate-800 dark:text-slate-200 truncate max-w-[140px] sm:max-w-md">
+              {activeSession?.title || aiT.title}
             </span>
           </div>
 
-          <button
-            onClick={handleNewChat}
-            className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
-          >
-            <Plus className="w-3.5 h-3.5" />
-            <span>Nova</span>
-          </button>
+          <div className="flex items-center gap-2.5">
+            {/* Seletor Rápido de Idioma (PT / EN / ES) */}
+            <div className="flex items-center rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-100/70 dark:bg-slate-800/60 p-0.5">
+              <Globe className="w-3 h-3 ml-1.5 mr-1 text-slate-400 shrink-0 hidden sm:block" />
+              {(["pt-BR", "en", "es"] as Locale[]).map((loc) => (
+                <button
+                  key={loc}
+                  onClick={() => setLocale(loc)}
+                  className={`px-2 py-0.5 text-[11px] font-semibold rounded-md transition-all cursor-pointer ${
+                    locale === loc
+                      ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-2xs"
+                      : "text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
+                  }`}
+                  title={loc}
+                >
+                  {loc === "pt-BR" ? "PT" : loc.toUpperCase()}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={handleNewChat}
+              className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 cursor-pointer"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              <span>{aiT.newShort}</span>
+            </button>
+          </div>
         </div>
 
         {/* Feed de Mensagens Centralizado */}
@@ -452,47 +503,47 @@ export default function AssistantPage() {
                 </div>
 
                 <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">
-                  Tire sua dúvida
+                  {aiT.emptyStateTitle}
                 </h2>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
-                  Pergunte qualquer coisa sobre treinamentos, normas industriais ou rotinas da plataforma.
+                  {aiT.emptyStateSubtitle}
                 </p>
 
-                {/* Sugestões Rápidas Minimalistas */}
+                {/* Sugestões Rápidas Minimalistas com Tradução Dinâmica */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-8 max-w-xl mx-auto">
                   <button
-                    onClick={() => handleSendMessage("O que é LOTO na NR-12 e como aplicar?")}
+                    onClick={() => handleSendMessage(aiT.prompts.lotoQuery)}
                     className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 hover:border-blue-500 dark:hover:border-blue-500 text-left transition-all group cursor-pointer shadow-2xs"
                   >
                     <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 group-hover:text-blue-500 block">
-                      Lockout/Tagout (LOTO)
+                      {aiT.prompts.lotoTitle}
                     </span>
                     <span className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">
-                      Procedimentos da NR-12
+                      {aiT.prompts.lotoDesc}
                     </span>
                   </button>
 
                   <button
-                    onClick={() => handleSendMessage("Quais os requisitos obrigatórios para entrada em Espaço Confinado pela NR-33?")}
+                    onClick={() => handleSendMessage(aiT.prompts.confinedQuery)}
                     className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 hover:border-blue-500 dark:hover:border-blue-500 text-left transition-all group cursor-pointer shadow-2xs"
                   >
                     <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 group-hover:text-blue-500 block">
-                      Espaço Confinado
+                      {aiT.prompts.confinedTitle}
                     </span>
                     <span className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">
-                      Diretrizes da NR-33 e PET
+                      {aiT.prompts.confinedDesc}
                     </span>
                   </button>
 
                   <button
-                    onClick={() => handleSendMessage("Como funciona a emissão e validação de certificados?")}
+                    onClick={() => handleSendMessage(aiT.prompts.certQuery)}
                     className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 hover:border-blue-500 dark:hover:border-blue-500 text-left transition-all group cursor-pointer shadow-2xs"
                   >
                     <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 group-hover:text-blue-500 block">
-                      Certificados
+                      {aiT.prompts.certTitle}
                     </span>
                     <span className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">
-                      Emissão e validação pública
+                      {aiT.prompts.certDesc}
                     </span>
                   </button>
                 </div>
@@ -538,7 +589,7 @@ export default function AssistantPage() {
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-bounce" />
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-bounce [animation-delay:0.2s]" />
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-bounce [animation-delay:0.4s]" />
-                  <span className="ml-1">Pensando...</span>
+                  <span className="ml-1">{aiT.thinking}</span>
                 </div>
               </div>
             )}
@@ -560,7 +611,7 @@ export default function AssistantPage() {
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Envie uma mensagem para o Copiloto RSS3..."
+              placeholder={aiT.inputPlaceholder}
               disabled={isLoading}
               className="flex-1 bg-transparent px-4 py-3.5 text-sm outline-hidden text-slate-900 dark:text-slate-100 placeholder-slate-400 disabled:opacity-50"
             />
@@ -569,14 +620,14 @@ export default function AssistantPage() {
               type="submit"
               disabled={!inputValue.trim() || isLoading}
               className="mr-2 p-2 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:bg-slate-200 dark:disabled:bg-slate-800 text-white disabled:text-slate-400 transition-colors cursor-pointer disabled:cursor-not-allowed"
-              title="Enviar mensagem"
+              title="Enviar"
             >
               <Send className="w-4 h-4" />
             </button>
           </form>
 
           <p className="max-w-3xl mx-auto text-center text-[10px] text-slate-400 mt-2">
-            Copiloto RSS3 powered by Gemini • Verifique informações operacionais críticas nas normas técnicas e procedimentos formais.
+            {aiT.footerDisclaimer}
           </p>
         </div>
       </div>
