@@ -77,22 +77,17 @@ export const AI_QUICK_PROMPTS: QuickPrompt[] = [
 
 interface KnowledgeSnippet {
   keywords: string[];
-  response: string;
+  responses: string[];
   suggestedActions?: { label: string; href?: string; query?: string }[];
 }
 
 export const AI_KNOWLEDGE_BASE: KnowledgeSnippet[] = [
   {
     keywords: ["certificado", "certificados", "diploma", "validação", "validar", "hash", "autenticidade"],
-    response: `Na **RSS3 Treinamentos**, todo certificado emitido comprova a **Conclusão de Conteúdo Teórico**.
-
-Principais características do nosso sistema de certificação:
-1. **Identificador Canônico:** Cada certificado recebe um código exclusivo no formato \`RSS3-XXXX-XXXX-XXXX-XXXX-XXXX\`.
-2. **Validação Pública Auditável:** Qualquer gestor ou auditor pode validar a autenticidade através da página [/validar](/validar).
-3. **Criptografia e Imutabilidade:** O documento utiliza integridade via \`dataHash\` (SHA-256 do payload do certificado) e assinatura segura.
-4. **Distinção Regulatória Obrigatória:** Para atividades regulamentadas (NR-35, NR-33, NR-10, etc.), o certificado EAD atesta a carga horária teórica. A habilitação formal e operacional exige obrigatoriamente o treinamento prático presencial com instrutor credenciado e ASO vigente.
-
-Você pode consultar e baixar seus certificados em PDF a qualquer momento na aba **Certificados**.`,
+    responses: [
+      "Assim que você conclui as aulas teóricas de um curso, seu certificado fica disponível automaticamente na aba **Certificados**. Ele tem validação digital auditável com código exclusivo. Lembrando que em NRs regulamentadas, a habilitação de campo exige também o treinamento prático presencial com o instrutor!",
+      "Você pode consultar e baixar seus certificados em PDF direto na aba **Certificados** do menu superior! Eles contam com verificação pública e código criptografado seguro. Precisa de ajuda com algum curso específico?",
+    ],
     suggestedActions: [
       { label: "Ver Meus Certificados", href: "/certificados" },
       { label: "Validar Autenticidade", href: "/validar" },
@@ -100,15 +95,10 @@ Você pode consultar e baixar seus certificados em PDF a qualquer momento na aba
   },
   {
     keywords: ["nr", "norma", "regulamentadora", "nr-35", "nr 35", "nr-33", "nr 33", "nr-10", "nr 10", "nr-12", "nr 12", "altura", "confinado", "eletricidade", "máquinas", "prática", "presencial", "habilitação"],
-    response: `As **Normas Regulamentadoras (NRs)** são mandatórias para a garantia de integridade física e operacional nas frentes industriais da RSS3:
-
-• **NR-35 (Trabalho em Altura):** Aborda planejamento de resgate, inspeção de EPIs (cinto tipo paraquedista, talabartes), fatores de queda e linhas de vida.
-• **NR-33 (Espaços Confinados):** Foco em medição atmosférica prévia, emissão da Permissão de Entrada e Trabalho (PET), ventilação contínua e vigia treinado.
-• **NR-12 (Segurança em Máquinas e Equipamentos):** Princípios de intertravamento, paradas de emergência e procedimentos rígidos de Lockout/Tagout (LOTO).
-• **NR-10 (Segurança em Instalações Elétricas):** Desenergização, testes de ausência de tensão, aterramento temporário e sinalização de impedimento.
-
-⚠️ **Aviso de Conformidade Legal:**
-Conforme as diretrizes corporativas da RSS3, os módulos online cobrem a formação teórica e preparação conceitual. A aptidão para operação em campo requer a etapa prática presencial validada pela equipe de SST e instrutor credenciado.`,
+    responses: [
+      "As Normas Regulamentadoras são a base de tudo na segurança industrial: NR-35 cuida de trabalho em altura, NR-33 de espaços confinados, NR-12 de máquinas e bloqueios, e NR-10 de parte elétrica. Aqui na plataforma você faz toda a formação teórica e, para atuar na prática em campo, realiza o treinamento prático com os instrutores e ASO vigente. Qual NR você precisa aprender hoje?",
+      "Trabalhamos forte com as principais NRs (NR-35, NR-33, NR-10, NR-12, NR-20). O conteúdo teórico online te prepara com excelência, e a validação prática presencial garante a conformidade operacional de campo. Quer que eu te indique um curso específico de segurança?",
+    ],
     suggestedActions: [
       { label: "Explorar Cursos de NRs", href: "/catalogo" },
       { label: "Consultar Desafios Técnicos", href: "/desafios" },
@@ -116,12 +106,9 @@ Conforme as diretrizes corporativas da RSS3, os módulos online cobrem a formaç
   },
   {
     keywords: ["offline", "sem internet", "área", "campo", "sinal", "baixar", "salvar"],
-    response: `A plataforma **RSS3 Treinamentos** foi projetada com arquitetura **Offline-First** para atender colaboradores que atuam em áreas industriais remotas ou frentes com sinal oscilante de internet.
-
-**Como funciona:**
-1. Na visualização de qualquer curso ou guia técnico, você pode salvar o conteúdo para consulta local.
-2. Os dados de progresso e questionários concluídos em modo offline são salvos localmente e sincronizados de forma transparente assim que a conexão de rede for restabelecida.
-3. No cabeçalho da plataforma, você sempre pode conferir o indicador de status em tempo real (**Online** ou **Modo Offline**).`,
+    responses: [
+      "A plataforma funciona muito bem no campo sem internet! Você pode abrir e salvar os guias técnicos ou cursos, e mesmo que o sinal caia, seu progresso fica salvo no aparelho e sincroniza sozinho assim que a rede voltar. Bem prático pra quem tá na frente de serviço!",
+    ],
     suggestedActions: [
       { label: "Ir para Catálogo", href: "/catalogo" },
       { label: "Ver Meu Painel", href: "/dashboard" },
@@ -129,111 +116,144 @@ Conforme as diretrizes corporativas da RSS3, os módulos online cobrem a formaç
   },
   {
     keywords: ["5s", "senso", "seiri", "seiton", "seiso", "seiketsu", "shitsuke", "organização", "qualidade", "lean"],
-    response: `O **Programa 5S** é um dos pilares de disciplina operacional e excelência industrial da RSS3:
-
-1. **Seiri (Utilização / Descarte):** Separar o que é estritamente necessário para a operação do que é supérfluo, eliminando ferramentas e peças obsoletas da área.
-2. **Seiton (Ordenação):** "Um lugar para cada coisa, cada coisa em seu lugar". Identificação clara, demarcações de piso e acesso ergonômico.
-3. **Seiso (Limpeza):** Limpar como forma de inspecionar. Detectar vazamentos, folgas, trincas ou desgastes precoces durante a limpeza das instalações.
-4. **Seiketsu (Padronização e Saúde):** Criar rotinas visuais, check-lists e manter as condições de segurança e higiene padronizadas para toda a equipe.
-5. **Shitsuke (Autodisciplina):** Manter os padrões continuamente através de auditorias de 5S, respeito mútuo e compromisso diário.`,
+    responses: [
+      "O 5S é a chave da organização: descartar o que não presta, colocar cada coisa no seu lugar demarcado, manter a área limpa inspecionando ferramentas, padronizar as regras visuais e manter a disciplina contínua todo dia. Quer dicas de como aplicar na sua bancada ou oficina?",
+    ],
     suggestedActions: [
       { label: "Acessar Curso de 5S", href: "/catalogo" },
       { label: "Testar no Módulo de Desafios", href: "/desafios" },
     ],
   },
   {
-    keywords: ["como usar", "navegar", "funciona", "site", "plataforma", "painel", "cursos", "mbas", "login", "começar"],
-    response: `Bem-vindo ao **RSS3 Treinamentos**! Aqui está um guia rápido das principais áreas do portal:
-
-• **Início:** Visão geral da plataforma, destaques de cursos e métricas corporativas.
-• **Cursos (Catálogo):** Grade completa de capacitação dividida em Normas Regulamentadoras, Conhecimento Operacional, Gestão e Qualidade.
-• **MBAs & Formações:** Trilhas integradas de especialização profissional de longa duração.
-• **Meu Painel (Dashboard):** Seu progresso pessoal, horas acumuladas, cursos em andamento e pontuação XP.
-• **Desafios & Provas:** Simulados práticos com cenários reais da rotina industrial para testar seus conhecimentos.
-• **Certificados:** Emissão, download em PDF de alta qualidade e validação de autenticidade.`,
-    suggestedActions: [
-      { label: "Explorar Catálogo", href: "/catalogo" },
-      { label: "Acessar Meu Painel", href: "/dashboard" },
+    keywords: ["como usar", "navegar", "funciona o site", "onde clico", "como comeco", "primeiro acesso", "o que fazer"],
+    responses: [
+      "Opa! Mexer aqui é bem tranquilo. Você pode ir em **Cursos** para ver todas as aulas disponíveis, no **Meu Painel** para acompanhar suas horas e progresso, e em **Desafios** para treinar com simulados. Se concluir os módulos teóricos, seus certificados ficam salvos na aba **Certificados**. O que você tá querendo fazer primeiro?",
+      "É bem simples! O menu principal te leva para tudo: nos **Cursos** você escolhe o que quer aprender, no **Meu Painel** vê seu progresso e notas, e na aba **Certificados** você baixa seus comprovantes assim que terminar as matérias. Tem alguma área que você queira achar agora?",
     ],
   },
   {
-    keywords: ["loto", "bloqueio", "etiquetagem", "energia zero", "lockout", "tagout", "segurança"],
-    response: `O procedimento de **LOTO (Lockout / Tagout)** é mandatório antes de qualquer manutenção ou intervenção mecânica/elétrica:
-
-**Etapas do Bloqueio Seguro:**
-1. **Preparação:** Identificar todas as fontes de energia (elétrica, pneumática, hidráulica, mecânica e residual).
-2. **Notificação:** Comunicar a todos os colaboradores da área operacional sobre o desligamento.
-3. **Desligamento Seguro:** Desligar o equipamento através dos controles normais de operação.
-4. **Isolamento de Energia:** Atuar nos dispositivos primários de isolamento (chaves seccionadoras, disjuntores, válvulas).
-5. **Aplicação do Bloqueio e Etiqueta:** Cada profissional de manutenção deve afixar seu próprio cadeado individual e etiqueta de identificação.
-6. **Alívio de Energia Residual:** Purgar linhas de ar comprimido, aliviar pressão hidráulica e descarregar capacitores.
-7. **Verificação de Energia Zero:** Tentar religar o equipamento nos controles normais para comprovar que a máquina não parte.`,
-    suggestedActions: [
-      { label: "Curso de NR-12 e Máquinas", href: "/catalogo" },
+    keywords: ["oi", "ola", "eai", "opa", "fala", "salve", "hey", "hello"],
+    responses: [
+      "Fala aí! Tudo na paz? Como posso te ajudar hoje?",
+      "Opa! Tudo bem por aí? No que posso te dar uma força agora?",
+      "Olá! Tudo tranquilo? Me conta, o que você tá precisando hoje?",
+      "E aí, beleza? Estou por aqui! Pode mandar sua dúvida ou o que quiser trocar de ideia.",
     ],
   },
   {
-    keywords: ["hidrojato", "hidrojateamento", "alta pressao", "bico", "pistola", "mangueira", "retrocesso"],
-    response: `O **Hidrojateamento de Alta e Ultra-Alta Pressão** é uma das atividades de maior criticidade operacional na RSS3:
-
-**Diretrizes de Segurança Inegociáveis:**
-1. **Zona de Exclusão:** Demarcar e isolar todo o raio de ação com fita zebrada e cones de advertência. Proibida a presença de terceiros não envolvidos.
-2. **Dispositivo de Desarme Rápido (Dump Valve):** A pistola de hidrojato deve possuir sistema homem-morto em perfeito funcionamento para despressurização imediata caso o operador solte o gatilho.
-3. **EPIs Específicos para Hidrojato:** Macacão com trama de kevlar/aramida de alta densidade, botina com biqueira e protetor metatarsal de aço, viseira facial conjugada com óculos e protetor auditivo.
-4. **Verificação de Mangueiras e Conexões:** Uso obrigatório de cabos de segurança anti-chicoteamento (*whipchecks*) em todas as emendas de mangueiras.`,
-    suggestedActions: [
-      { label: "Curso de Hidrojato e Alta Pressão", href: "/catalogo" },
-      { label: "Ver Desafios Práticos", href: "/desafios" },
+    keywords: ["tudo bem", "como vai", "tudo bom", "como voce esta", "beleza"],
+    responses: [
+      "Tudo ótimo por aqui, e com você? Espero que o dia esteja sendo produtivo! No que posso te ajudar hoje?",
+      "Comigo tá tudo certo! Pronto pra te ajudar nos estudos ou tirar qualquer dúvida. E por aí, tudo bem?",
+      "100%! Valeu por perguntar. Como posso te dar uma mão hoje?",
     ],
   },
   {
-    keywords: ["pintura", "industrial", "jateamento", "abrasivo", "revestimento", "corrosao", "espessura"],
-    response: `Na **Pintura e Revestimento Industrial**, o controle de qualidade e a segurança química são fundamentais:
-
-**Etapas Cruciais:**
-1. **Preparo de Superfície:** Tratamento com hidrojateamento ou jateamento abrasivo para obtenção de perfil de rugosidade e grau de limpeza (Sa 2½ ou Sa 3).
-2. **Condições Ambientais (Ponto de Orvalho):** A aplicação nunca deve ser feita se a temperatura da chapa estiver a menos de 3°C acima do ponto de orvalho ou com umidade relativa superior a 85%.
-3. **Controle de Espessura:** Medição de película úmida (EPU) durante a aplicação e película seca (EPS) após a cura com medidor magnético calibrado.
-4. **Proteção Respiratória:** Uso obrigatório de respirador com linha de ar mandado ou filtros específicos para vapores orgânicos em ambientes fechados.`,
-    suggestedActions: [
-      { label: "Curso de Pintura Industrial", href: "/catalogo" },
+    keywords: ["bom dia"],
+    responses: [
+      "Bom dia! Tudo bem? Como posso te ajudar hoje?",
+      "Bom dia! Tudo certo por aí? Quer saber ou tirar dúvida sobre algo?",
+      "Bom dia! Tudo na paz? Em que posso te dar uma mão hoje?",
     ],
   },
   {
-    keywords: ["apr", "analise preliminar de risco", "permissao", "pt", "risco", "acidente", "perigo"],
-    response: `A **Análise Preliminar de Risco (APR)** é a ferramenta preventiva obrigatória antes do início de qualquer tarefa em frentes de trabalho:
-
-**Passo a Passo na RSS3:**
-1. **Passo a Passo da Tarefa:** Decompor a atividade em etapas cronológicas simples.
-2. **Identificação dos Perigos:** Listar fontes de energia, riscos de queda, projeção de partículas, ruído e produtos químicos.
-3. **Medidas de Controle (Hierarquia de Riscos):** Eliminação > Substituição > Controles de Engenharia > Medidas Administrativas > EPIs.
-4. **Assinatura e Alinhamento:** Toda a equipe participante da frente deve ser informada e assinar a APR antes da liberação do serviço pela contratante/CMPC.`,
-    suggestedActions: [
-      { label: "Explorar Desafios de APR", href: "/desafios" },
+    keywords: ["boa tarde"],
+    responses: [
+      "Boa tarde! Tudo bem? Como posso te ajudar hoje?",
+      "Boa tarde! Tudo tranquilo por aí? Em que posso te dar uma força?",
     ],
   },
   {
-    keywords: ["epi", "epis", "cinto", "capacete", "bota", "oculos", "luva", "mascara"],
-    response: `Os **Equipamentos de Proteção Individual (EPIs)** são a última barreira de proteção do trabalhador:
-
-• **Inspeção Diária:** Antes de colocar o cinto tipo paraquedista ou talabarte, verifique se há desfiamento nas costuras, deformações em mosquetões ou oxidação.
-• **Certificado de Aprovação (CA):** Nenhum EPI pode ser utilizado sem CA válido emitido pelo Ministério do Trabalho.
-• **Substituição Imediata:** EPIs que sofreram impacto de retenção de queda devem ser descartados e retirados de circulação imediatamente.`,
-    suggestedActions: [
-      { label: "Ver Cursos de Segurança", href: "/catalogo" },
+    keywords: ["boa noite"],
+    responses: [
+      "Boa noite! Tudo bem? Precisa de ajuda com alguma coisa hoje?",
+      "Boa noite! Tudo tranquilo? Quer saber sobre algo em que eu possa ajudar?",
+    ],
+  },
+  {
+    keywords: ["obrigado", "valeu", "vlw", "obrigada", "agradecido", "tks", "thanks", "gracias"],
+    responses: [
+      "Imagina, tamo junto! Se precisar de mais alguma coisa, só mandar aqui! 👊",
+      "Por nada! Qualquer outra dúvida é só chamar. Bons estudos e bom trabalho! 🚀",
+      "De nada! Fico feliz em ajudar. Se pintar qualquer dúvida, estou por aqui! 😊",
+    ],
+  },
+  {
+    keywords: ["loto", "bloqueio", "etiquetagem", "energia zero", "lockout", "tagout"],
+    responses: [
+      "O LOTO (Lockout/Tagout) é aquele procedimento vital da NR-12: antes de mexer na máquina, você desliga, isola a energia (disjuntor ou válvula), põe seu cadeado individual e sua etiqueta, alivia qualquer pressão ou carga residual e testa se ela realmente não liga (energia zero). Nunca mexa sem seu cadeado próprio!",
+      "Bloqueio e etiquetagem é segurança máxima! A regra de ouro é: cada profissional com seu próprio cadeado físico e etiqueta com foto/nome, garantindo energia zero antes de colocar a mão em qualquer equipamento mecânico ou elétrico.",
+    ],
+  },
+  {
+    keywords: ["espaco confinado", "confinado", "nr33", "nr-33", "pet", "vigia", "gas", "oxigenio"],
+    responses: [
+      "Espaço Confinado (NR-33) é assunto sério: só se entra com a PET (Permissão de Entrada e Trabalho) assinada, medição contínua dos gases (oxigênio, inflamabilidade e tóxicos), ventilação ligada e o vigia posicionado do lado de fora o tempo inteiro. Jamais entre sem autorização formal!",
+      "Na NR-33 não tem jeitinho: vigia dedicado do lado de fora, teste atmosférico aprovado, PET emitida e equipe de resgate de prontidão. A segurança de quem entra depende 100% desse rigor.",
+    ],
+  },
+  {
+    keywords: ["altura", "nr35", "nr-35", "cinto", "talabarte", "queda", "ancoragem"],
+    responses: [
+      "Trabalho em Altura (NR-35) vale a partir de 2 metros de desnível com risco de queda. Cinto tipo paraquedista inspecionado, talabarte duplo ou trava-quedas ancorado em ponto seguro e aprovado, e a APR assinada pela equipe. Se sentir qualquer insegurança no equipamento, interrompa a subida!",
+      "Na altura, cada detalhe importa: conferir costuras do cinto, travas dos mosquetões e ponto de ancoragem antes de subir. E lembre: para atuar em campo precisa do treinamento prático presencial e ASO em dia!",
+    ],
+  },
+  {
+    keywords: ["hidrojato", "hidrojateamento", "alta pressao", "bico", "pistola"],
+    responses: [
+      "Hidrojato de alta pressão exige respeito total: isolamento da área com cones e fita, mangueiras presas com cabos de segurança (whipcheck) contra chicoteamento, válvula de alívio rápido (dump valve) na pistola e EPI de kevlar reforçado com botina de biqueira de aço. Segurança em primeiro lugar sempre!",
+    ],
+  },
+  {
+    keywords: ["pintura", "industrial", "jateamento", "rugosidade", "tinta", "orvalho"],
+    responses: [
+      "Na pintura industrial, além dos EPIs para vapores químicos, tem o cuidado técnico: preparar o metal (grau Sa 2½ ou Sa 3), respeitar o ponto de orvalho (a chapa deve estar pelo menos 3°C acima) e medir as espessuras úmida e seca da película. O que você gostaria de saber com mais detalhe?",
+    ],
+  },
+  {
+    keywords: ["5s", "senso", "seiri", "seiton", "seiso", "seiketsu", "shitsuke"],
+    responses: [
+      "O 5S transforma o dia a dia na indústria: 1. Descartar o que não usa; 2. Organizar cada coisa no seu lugar demarcado; 3. Limpar inspecionando máquinas; 4. Padronizar as regras visuais; 5. Manter a disciplina contínua. Quer ajuda para aplicar em algum setor específico?",
+    ],
+  },
+  {
+    keywords: ["apr", "analise preliminar", "permissao de trabalho", "pt", "risco"],
+    responses: [
+      "A APR é o escudo da equipe antes da tarefa: você divide a atividade em etapas, prevê o que pode dar errado (energia, queda, ruído, químicos), define as barreiras de proteção e todo mundo que vai atuar assina e se alinha junto antes de começar.",
+    ],
+  },
+  {
+    keywords: ["certificado", "diploma", "como emitir", "onde vejo meu certificado"],
+    responses: [
+      "Assim que você conclui as aulas teóricas de um curso, seu certificado fica disponível automaticamente na aba **Certificados**. Você pode baixar o PDF oficial com código canônico de validação e QR Code. Quer que eu te oriente sobre algum curso específico?",
+      "Seus certificados teóricos ficam salvos na área **Certificados** do menu. Eles possuem validação digital auditável com código único. Lembrando que em NRs práticas, a habilitação de campo depende do treino presencial com o instrutor!",
+    ],
+  },
+  {
+    keywords: ["quem e voce", "quem e tu", "o que voce faz", "o que vc faz", "seu nome", "copiloto"],
+    responses: [
+      "Sou o Copiloto da RSS3 Treinamentos! Estou aqui pra tirar suas dúvidas sobre a plataforma, explicar normas de segurança, trocar uma ideia sobre sua rotina industrial ou te dar dicas de cursos e carreira. Pode perguntar à vontade!",
+    ],
+  },
+  {
+    keywords: ["ajuda", "socorro", "me ajuda", "duvida"],
+    responses: [
+      "Claro, manda aqui! O que tá pegando? Pode ser dúvida sobre um curso, uma norma técnica ou qualquer funcionalidade do site que eu te ajudo agora mesmo.",
+      "Com certeza! Me conta qual é a sua dúvida ou no que você tá com dificuldade que a gente resolve junto.",
     ],
   },
 ];
 
-export function getLocalAIResponse(userText: string): {
+export function getLocalAIResponse(userText: string, locale: "pt-BR" | "en" | "es" = "pt-BR"): {
   text: string;
   suggestedActions?: { label: string; href?: string; query?: string }[];
   topic?: "platform" | "safety" | "courses" | "general";
 } {
   const normalized = userText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-  // Busca melhor correspondência na base de conhecimento
-  let bestMatch: KnowledgeSnippet | null = null;
+  // Busca melhor correspondência na base de conhecimento local
+  let bestMatch: (typeof AI_KNOWLEDGE_BASE)[0] | null = null;
   let maxScore = 0;
 
   for (const item of AI_KNOWLEDGE_BASE) {
@@ -241,7 +261,7 @@ export function getLocalAIResponse(userText: string): {
     for (const kw of item.keywords) {
       const normKw = kw.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       if (normalized.includes(normKw)) {
-        score += normKw.length > 4 ? 2 : 1;
+        score += normKw.length > 3 ? 3 : 1;
       }
     }
     if (score > maxScore) {
@@ -250,26 +270,54 @@ export function getLocalAIResponse(userText: string): {
     }
   }
 
-  if (bestMatch && maxScore > 0) {
+  if (bestMatch && maxScore > 0 && bestMatch.responses.length > 0) {
+    // Escolhe aleatoriamente uma resposta entre as opções disponíveis para ter variedade!
+    const randomIndex = Math.floor(Math.random() * bestMatch.responses.length);
+    const chosenResponse = bestMatch.responses[randomIndex];
+
     return {
-      text: bestMatch.response,
-      suggestedActions: bestMatch.suggestedActions,
-      topic: "safety",
+      text: chosenResponse,
+      suggestedActions: [
+        { label: "Ver Cursos", href: "/catalogo" },
+        { label: "Meu Painel", href: "/dashboard" },
+      ],
+      topic: "general",
     };
   }
 
-  // Resposta padrão caso nenhuma palavra-chave específica seja encontrada
+  // Respostas de fallback naturais e variadas
+  const naturalFallbacksPt = [
+    "Fala aí! Entendi o que você disse. Como posso te dar uma mão com isso hoje? Se quiser explorar cursos, tirar dúvidas de segurança ou ver seu progresso, só falar!",
+    "Opa, estou por aqui! Me conta mais sobre o que você precisa. Posso te ajudar com treinamentos, normas industriais, certificados ou o que você quiser saber.",
+    "Beleza! Estou à disposição. Pode mandar sua dúvida de boa, seja sobre segurança no trabalho, rotina de campo ou como usar a plataforma.",
+    "Legal! Como posso te ajudar a resolver isso hoje? Fique à vontade pra perguntar qualquer coisa!",
+  ];
+
+  const naturalFallbacksEn = [
+    "Hey there! I got your message. How can I give you a hand today? Feel free to ask anything about safety regulations, courses, or your progress!",
+    "Hello! I'm here to help. Tell me a bit more about what you're looking for, and we'll figure it out together.",
+    "Hey! Anything you need regarding training, platform features or safety guidelines, just let me know!",
+  ];
+
+  const naturalFallbacksEs = [
+    "¡Hola! Te entiendo perfectamente. ¿En qué te puedo dar una mano hoy? Si necesitas ayuda con cursos, normas de seguridad o certificados, ¡aquí estoy!",
+    "¡Buenas! Estoy a tu disposición. Cuéntame con confianza qué duda tienes y lo resolvemos juntos.",
+    "¡Hola! Cualquier consulta sobre capacitaciones, seguridad industrial o la plataforma, dime y con gusto te ayudo.",
+  ];
+
+  const fallbacks =
+    locale === "en" ? naturalFallbacksEn : locale === "es" ? naturalFallbacksEs : naturalFallbacksPt;
+
+  const chosen = fallbacks[Math.floor(Math.random() * fallbacks.length)];
+
   return {
-    text: `Opa! Tudo bem? 😊 Sou o **Copiloto RSS3**, seu parceiro aqui na plataforma! 👷‍♂️✨
-
-Pode falar comigo de boa! Se quiser ajuda com algum treinamento, dúvidas sobre normas de segurança (tipo NR-35, NR-33, NR-12), como funcionam as provas ou até como emitir seus certificados, é só mandar aqui!
-
-Como posso te dar uma força hoje? 🚀`,
+    text: chosen,
     suggestedActions: [
       { label: "Ver Cursos", href: "/catalogo" },
-      { label: "Como Funciona o MBA?", href: "/mbas" },
-      { label: "Ir para Desafios & Provas", href: "/desafios" },
+      { label: "Meu Painel", href: "/dashboard" },
+      { label: "Desafios & Provas", href: "/desafios" },
     ],
     topic: "general",
   };
 }
+
