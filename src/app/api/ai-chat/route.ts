@@ -136,6 +136,30 @@ PERSONALIDADE:
           }),
         });
 
+        if (geminiRes.status === 429) {
+          // Pequena espera e retry em caso de pico momentâneo de requisição
+          await new Promise((r) => setTimeout(r, 1500));
+          const retryRes = await fetch(geminiUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              system_instruction: { parts: [{ text: systemPrompt }] },
+              contents: contentsPayload,
+              generationConfig: { temperature: 0.95, topP: 0.95, maxOutputTokens: 1200 },
+            }),
+          });
+          if (retryRes.ok) {
+            const retryData = await retryRes.json();
+            const retryCandidate = retryData?.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (retryCandidate) {
+              return NextResponse.json({
+                reply: retryCandidate,
+                source: "gemini-live",
+              });
+            }
+          }
+        }
+
         if (geminiRes.ok) {
           const geminiData = await geminiRes.json();
           let candidateText =
@@ -165,9 +189,11 @@ PERSONALIDADE:
               source: "gemini-live",
             });
           }
+        } else {
+          console.error("Gemini API retornou status:", geminiRes.status, await geminiRes.text().catch(() => ""));
         }
-      } catch {
-        // Fallback para o motor local caso a requisição externa falhe
+      } catch (err) {
+        console.error("Erro na chamada Gemini:", err);
       }
     }
 
